@@ -16,16 +16,22 @@ Django Codemod
      :target: https://pyup.io/repos/github/browniebroke/django-codemod/
      :alt: Updates
 
-Codemod to help upgrading to newer versions of Django
+Codemod to help upgrading to newer versions of Django.
 
 * Free software: MIT license
 * Documentation: https://django-codemod.readthedocs.io.
 
-
 Features
 --------
 
-* TODO
+This is based on `libCST <https://libcst.readthedocs.io/en/latest/index.html>`_
+and implements codemods for it. This is currently very limited but the aim is
+to add more for helping with upcoming deprecations.
+
+Currently implemented:
+
+* ``django_codemod.codemods.django_40.ForceTextToStrCommand``: migrate deprecated
+  ``focre_str()`` function to ``force_str()``.
 
 Credits
 -------
