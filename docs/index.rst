@@ -11,7 +11,7 @@ Welcome to Django Codemod's documentation!
    modules
    contributing
    authors
-   history
+   changelog
 
 Indices and tables
 ==================
