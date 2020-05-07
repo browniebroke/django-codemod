@@ -1,7 +1,7 @@
 """Main module."""
 from typing import Union
 
-from libcst import RemovalSentinel, Call, BaseExpression, Name
+from libcst import matchers as m, RemovalSentinel, Call, BaseExpression, Name
 from libcst._nodes.statement import Import, ImportFrom, BaseSmallStatement, ImportAlias
 from libcst.codemod import VisitorBasedCodemodCommand
 
@@ -44,6 +44,6 @@ class ForceTextToStrCommand(VisitorBasedCodemodCommand):
         return super().leave_ImportFrom(original_node, updated_node)
 
     def leave_Call(self, original_node: Call, updated_node: Call) -> BaseExpression:
-        if getattr(updated_node.func, "value", None) == "force_text":
+        if m.matches(updated_node, m.Call(func=m.Name("force_text"))):
             return Call(args=updated_node.args, func=Name("force_str"))
         return super().leave_Call(original_node, updated_node)
