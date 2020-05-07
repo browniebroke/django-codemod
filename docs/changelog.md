@@ -6,6 +6,7 @@
 
 ### 🐛 Bug Fixes:
 
+- Fix bug for immediately invoked anonymous functions [\#6](https://github.com/browniebroke/django-codemod/pull/6) ([browniebroke](https://github.com/browniebroke))
 - Fix ForceTextToStrCommand when other imports are present in the file [\#2](https://github.com/browniebroke/django-codemod/pull/2) ([browniebroke](https://github.com/browniebroke))
 
 ## [v0.1.0](https://github.com/browniebroke/django-codemod/tree/v0.1.0) (2020-05-06)
