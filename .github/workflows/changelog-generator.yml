@@ -25,7 +25,6 @@ jobs:
         pullRequests: true
         prWoLabels: false
         compareLink: true
-        excludeTags: 0.2.2,0.2.3,1.1.1,1.1.2
         excludeLabels: tests,automation,nochangelog
         output: docs/changelog.md
         breakingLabel: '### ⚠️ Breaking Changes:'
