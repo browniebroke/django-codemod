@@ -1,0 +1,2 @@
+# add a label to pull requests, default is not set
+label_prs: nochangelog
