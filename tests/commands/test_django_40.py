@@ -1,6 +1,6 @@
 from libcst.codemod import CodemodTest
 
-from django_codemod.codemods.django_40 import ForceTextToStrCommand
+from django_codemod.commands.django_40 import ForceTextToStrCommand
 
 
 class TestForceTextToStrCommand(CodemodTest):

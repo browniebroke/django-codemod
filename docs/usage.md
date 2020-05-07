@@ -17,7 +17,7 @@ Should work nicely with [libCST codemods](https://libcst.readthedocs.io/en/lates
    ```yaml
    # .libcst.codemod.yaml
    modules:
-   - 'django_codemod.codemods'
+   - 'django_codemod.commands'
    ```
 
 3. Run libCST with the command from `django-codemod` that you want to apply:
