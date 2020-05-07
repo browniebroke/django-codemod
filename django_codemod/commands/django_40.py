@@ -62,3 +62,11 @@ class ForceTextToStrCommand(BaseFuncRename):
                 ),
             ),
         )
+
+
+class SmartTextToStrCommand(ForceTextToStrCommand):
+    """Help resolve deprecation of django.utils.encoding.smart_text."""
+
+    DESCRIPTION: str = "Replaces smart_text() by smart_str()."
+    old_name = "smart_text"
+    new_name = "smart_str"

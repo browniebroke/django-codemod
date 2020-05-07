@@ -31,7 +31,10 @@ to add more for helping with upcoming deprecations.
 Currently implemented:
 
 * ``django_codemod.commands.django_40.ForceTextToStrCommand``: migrate deprecated
-  ``focre_str()`` function to ``force_str()``.
+  ``force_str()`` function to ``force_str()``.
+
+* ``django_codemod.commands.django_40.SmartTextToStrCommand``: migrate deprecated
+  ``smart_str()`` function to ``smart_str()``.
 
 Credits
 -------
