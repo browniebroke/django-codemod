@@ -10,9 +10,15 @@ class TestForceTextToStrCommand(CodemodTest):
     def test_noop(self) -> None:
         """Test when nothing should change."""
         before = """
+            from django import conf
+            from django.utils import encoding
+
             foo = force_str("bar")
         """
         after = """
+            from django import conf
+            from django.utils import encoding
+
             foo = force_str("bar")
         """
 
