@@ -44,6 +44,6 @@ class ForceTextToStrCommand(VisitorBasedCodemodCommand):
         return super().leave_ImportFrom(original_node, updated_node)
 
     def leave_Call(self, original_node: Call, updated_node: Call) -> BaseExpression:
-        if updated_node.func.value == "force_text":
+        if getattr(updated_node.func, "value", None) == "force_text":
             return Call(args=updated_node.args, func=Name("force_str"))
         return super().leave_Call(original_node, updated_node)
