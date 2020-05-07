@@ -1,5 +1,13 @@
 # Changelog
 
+## [Unreleased](https://github.com/browniebroke/django-codemod/tree/HEAD)
+
+[Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.1.0...HEAD)
+
+### 🐛 Bug Fixes:
+
+- Fix ForceTextToStrCommand when other imports are present in the file [\#2](https://github.com/browniebroke/django-codemod/pull/2) ([browniebroke](https://github.com/browniebroke))
+
 ## [v0.1.0](https://github.com/browniebroke/django-codemod/tree/v0.1.0) (2020-05-06)
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/16b2adf8dd1ea78a4e118a7b84f874e84aa495bc...v0.1.0)
