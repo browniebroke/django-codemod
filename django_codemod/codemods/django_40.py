@@ -20,26 +20,27 @@ class ForceTextToStrCommand(VisitorBasedCodemodCommand):
     ) -> Union[BaseSmallStatement, RemovalSentinel]:
         if updated_node.module and len(updated_node.module.children) == 3:
             tops, _, last = updated_node.module.children
-            top, _, middle = tops.children
-            if (
-                top.value == "django"
-                and middle.value == "utils"
-                and last.value == "encoding"
-            ):
-                new_names = []
-                new_import_missing = True
-                new_import_alias = None
-                for import_alias in original_node.names:
-                    if import_alias.evaluated_name == "force_text":
-                        new_import_alias = ImportAlias(name=Name("force_str"))
-                    else:
-                        if import_alias.evaluated_name == "force_str":
-                            new_import_missing = False
-                        new_names.append(import_alias)
-                if new_import_missing and new_import_alias is not None:
-                    new_names.append(new_import_alias)
-                new_names = list(sorted(new_names, key=lambda n: n.evaluated_name))
-                return ImportFrom(module=updated_node.module, names=new_names)
+            if len(tops.children) == 3:
+                top, _, middle = tops.children
+                if (
+                    top.value == "django"
+                    and middle.value == "utils"
+                    and last.value == "encoding"
+                ):
+                    new_names = []
+                    new_import_missing = True
+                    new_import_alias = None
+                    for import_alias in original_node.names:
+                        if import_alias.evaluated_name == "force_text":
+                            new_import_alias = ImportAlias(name=Name("force_str"))
+                        else:
+                            if import_alias.evaluated_name == "force_str":
+                                new_import_missing = False
+                            new_names.append(import_alias)
+                    if new_import_missing and new_import_alias is not None:
+                        new_names.append(new_import_alias)
+                    new_names = list(sorted(new_names, key=lambda n: n.evaluated_name))
+                    return ImportFrom(module=updated_node.module, names=new_names)
         return super().leave_ImportFrom(original_node, updated_node)
 
     def leave_Call(self, original_node: Call, updated_node: Call) -> BaseExpression:
