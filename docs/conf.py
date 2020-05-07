@@ -34,7 +34,8 @@ import django_codemod  # noqa E402
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = [
     "sphinx.ext.autodoc",
-    "sphinx.ext.viewcode" "recommonmark",
+    "sphinx.ext.viewcode",
+    "recommonmark",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
