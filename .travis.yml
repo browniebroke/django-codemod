@@ -18,9 +18,9 @@ script: tox
 # https://travis-ci.com/github/browniebroke/django-codemod/settings
 deploy:
   provider: pypi
+  edge: true
   distributions: sdist bdist_wheel
   user: Bruno.Alla
-  user: "__token__"
   on:
     tags: true
     repo: browniebroke/django-codemod
