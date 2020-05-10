@@ -1,4 +1,9 @@
-"""Module to update CDjango 4.0 deprecations."""
+"""
+Module to fix things removed in Django 4.0.
+
+This is expected to cover most of the things listed in this section:
+https://docs.djangoproject.com/en/3.0/internals/deprecation/#deprecation-removed-in-4-0
+"""
 from abc import ABC
 from typing import Union
 
@@ -44,7 +49,7 @@ class BaseFuncRename(VisitorBasedCodemodCommand, ABC):
 
 
 class ForceTextToForceStrCommand(BaseFuncRename):
-    """Help resolve deprecation of django.utils.encoding.force_text."""
+    """Resolve deprecation of django.utils.encoding.force_text."""
 
     DESCRIPTION: str = "Replaces force_text() by force_str()."
     old_name = "force_text"
@@ -65,7 +70,7 @@ class ForceTextToForceStrCommand(BaseFuncRename):
 
 
 class SmartTextToForceStrCommand(ForceTextToForceStrCommand):
-    """Help resolve deprecation of django.utils.encoding.smart_text."""
+    """Resolve deprecation of django.utils.encoding.smart_text."""
 
     DESCRIPTION: str = "Replaces smart_text() by smart_str()."
     old_name = "smart_text"
@@ -73,7 +78,7 @@ class SmartTextToForceStrCommand(ForceTextToForceStrCommand):
 
 
 class UGetTextToGetTextCommand(BaseFuncRename):
-    """Help resolve deprecation of django.utils.translation.ugettext."""
+    """Resolve deprecation of django.utils.translation.ugettext."""
 
     DESCRIPTION: str = "Replaces ugettext() by gettext()."
     old_name = "ugettext"
@@ -94,7 +99,7 @@ class UGetTextToGetTextCommand(BaseFuncRename):
 
 
 class UGetTextLazyToGetTextLazyCommand(UGetTextToGetTextCommand):
-    """Help resolve deprecation of django.utils.translation.ugettext_lazy."""
+    """Resolve deprecation of django.utils.translation.ugettext_lazy."""
 
     DESCRIPTION: str = "Replaces ugettext_lazy() by gettext_lazy()."
     old_name = "ugettext_lazy"
@@ -102,7 +107,7 @@ class UGetTextLazyToGetTextLazyCommand(UGetTextToGetTextCommand):
 
 
 class UGetTextNoopToGetTextNoopCommand(UGetTextToGetTextCommand):
-    """Help resolve deprecation of django.utils.translation.ugettext_noop."""
+    """Resolve deprecation of django.utils.translation.ugettext_noop."""
 
     DESCRIPTION: str = "Replaces ugettext_noop() by gettext_noop()."
     old_name = "ugettext_noop"
@@ -110,7 +115,7 @@ class UGetTextNoopToGetTextNoopCommand(UGetTextToGetTextCommand):
 
 
 class UNGetTextToNGetTextCommand(UGetTextToGetTextCommand):
-    """Help resolve deprecation of django.utils.translation.ungettext."""
+    """Resolve deprecation of django.utils.translation.ungettext."""
 
     DESCRIPTION: str = "Replaces ungettext() by ngettext()."
     old_name = "ungettext"
@@ -118,7 +123,7 @@ class UNGetTextToNGetTextCommand(UGetTextToGetTextCommand):
 
 
 class UNGetTextLazyToNGetTextLazyCommand(UGetTextToGetTextCommand):
-    """Help resolve deprecation of django.utils.translation.ungettext_lazy."""
+    """Resolve deprecation of django.utils.translation.ungettext_lazy."""
 
     DESCRIPTION: str = "Replaces ungettext_lazy() by ngettext_lazy()."
     old_name = "ungettext_lazy"

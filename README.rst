@@ -51,6 +51,8 @@ Currently implemented:
 * ``django_codemod.commands.django_40.UNGetTextLazyToNGetTextLazyCommand``: migrate deprecated
   ``ungettext_lazy()`` function to ``ngettext_lazy()``.
 
+Not finding what you need? I'm open to contributions, please send me a pull request.
+
 Credits
 -------
 
