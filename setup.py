@@ -7,7 +7,7 @@ from setuptools import setup, find_packages
 with open("README.rst") as readme_file:
     readme = readme_file.read()
 
-requirements = ["Click>=7.0", "libcst"]
+requirements = ["libcst"]
 
 setup_requirements = ["pytest-runner"]
 
@@ -28,7 +28,6 @@ setup(
         "Programming Language :: Python :: 3.8",
     ],
     description="Codemod to help upgrading to newer versions of Django",
-    entry_points={"console_scripts": ["django_codemod=django_codemod.cli:main"]},
     install_requires=requirements,
     license="MIT license",
     long_description=readme,
