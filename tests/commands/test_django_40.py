@@ -6,6 +6,7 @@ from django_codemod.commands.django_40 import (
     UGetTextToGetTextCommand,
     UGetTextLazyToGetTextLazyCommand,
     UGetTextNoopToGetTextNoopCommand,
+    UNGetTextToNGetTextCommand,
 )
 
 
@@ -275,5 +276,55 @@ class TestUGetTextNoopToGetTextNoopCommand(CodemodTest):
             from django.utils.translation import gettext_noop
 
             result = gettext_noop(content)
+        """
+        self.assertCodemod(before, after)
+
+
+class TestUNGetTextToNGetTextCommand(CodemodTest):
+
+    TRANSFORM = UNGetTextToNGetTextCommand
+
+    def test_noop(self) -> None:
+        """Test when nothing should change."""
+        before = """
+            from django import conf
+            from django.utils import translation
+
+            foo = ngettext("bar", "bars", count)
+        """
+        after = """
+            from django import conf
+            from django.utils import translation
+
+            foo = ngettext("bar", "bars", count)
+        """
+
+        self.assertCodemod(before, after)
+
+    def test_simple_substitution(self) -> None:
+        """Check simple use case."""
+        before = """
+            from django.utils.translation import ungettext
+
+            result = ungettext(content, plural_content, count)
+        """
+        after = """
+            from django.utils.translation import ngettext
+
+            result = ngettext(content, plural_content, count)
+        """
+        self.assertCodemod(before, after)
+
+    def test_already_imported_substitution(self) -> None:
+        """Test case where ngettext is already in the imports."""
+        before = """
+            from django.utils.translation import ungettext, ngettext
+
+            result = ungettext(content, plural_content, count)
+        """
+        after = """
+            from django.utils.translation import ngettext
+
+            result = ngettext(content, plural_content, count)
         """
         self.assertCodemod(before, after)

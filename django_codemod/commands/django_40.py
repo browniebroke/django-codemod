@@ -107,3 +107,11 @@ class UGetTextNoopToGetTextNoopCommand(UGetTextToGetTextCommand):
     DESCRIPTION: str = "Replaces ugettext_noop() by gettext_noop()."
     old_name = "ugettext_noop"
     new_name = "gettext_noop"
+
+
+class UNGetTextToNGetTextCommand(UGetTextToGetTextCommand):
+    """Help resolve deprecation of django.utils.translation.ungettext."""
+
+    DESCRIPTION: str = "Replaces ungettext() by ngettext()."
+    old_name = "ungettext"
+    new_name = "ngettext"
