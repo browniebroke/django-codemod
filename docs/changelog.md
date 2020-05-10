@@ -1,21 +1,43 @@
 # Changelog
 
+## [v0.2.1](https://github.com/browniebroke/django-codemod/tree/v0.2.1) (2020-05-10)
+
+[Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.2.0...v0.2.1)
+
+### 🚀 Enhancements:
+
+- Migrate package metadata to declarative syntax [\#19](https://github.com/browniebroke/django-codemod/pull/19) ([browniebroke](https://github.com/browniebroke))
+
+## [v0.2.0](https://github.com/browniebroke/django-codemod/tree/v0.2.0) (2020-05-10)
+
+[Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.1.1...v0.2.0)
+
+### ⚠️ Breaking Changes:
+
+- Rename commands to reflect the functions they work with [\#13](https://github.com/browniebroke/django-codemod/pull/13) ([browniebroke](https://github.com/browniebroke))
+- Rename module and extract logic out into a base command [\#9](https://github.com/browniebroke/django-codemod/pull/9) ([browniebroke](https://github.com/browniebroke))
+
+### 🚀 Enhancements:
+
+- Support resolving django.utils.translation.ungettext\_lazy deprecation [\#17](https://github.com/browniebroke/django-codemod/pull/17) ([browniebroke](https://github.com/browniebroke))
+- Support resolving django.utils.translation.ungettext deprecation [\#16](https://github.com/browniebroke/django-codemod/pull/16) ([browniebroke](https://github.com/browniebroke))
+- Support resolving django.utils.translation.ugettext\_noop deprecation [\#15](https://github.com/browniebroke/django-codemod/pull/15) ([browniebroke](https://github.com/browniebroke))
+- Support resolving django.utils.translation.ugettext\_lazy deprecation [\#14](https://github.com/browniebroke/django-codemod/pull/14) ([browniebroke](https://github.com/browniebroke))
+- Support resolving django.utils.translation.ugettext deprecation [\#12](https://github.com/browniebroke/django-codemod/pull/12) ([browniebroke](https://github.com/browniebroke))
+- Support smart\_text deprecation, replace by smart\_str [\#10](https://github.com/browniebroke/django-codemod/pull/10) ([browniebroke](https://github.com/browniebroke))
+- Refactor checks to use matchers [\#8](https://github.com/browniebroke/django-codemod/pull/8) ([browniebroke](https://github.com/browniebroke))
+
+### 🗑 Removals:
+
+- Remove unused entry point [\#18](https://github.com/browniebroke/django-codemod/pull/18) ([browniebroke](https://github.com/browniebroke))
+
 ## [v0.1.1](https://github.com/browniebroke/django-codemod/tree/v0.1.1) (2020-05-07)
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.1.0...v0.1.1)
 
-### 🐛 Bug Fixes:
-
-- Fix bug for immediately invoked anonymous functions [\#6](https://github.com/browniebroke/django-codemod/pull/6) ([browniebroke](https://github.com/browniebroke))
-- Fix ForceTextToStrCommand when other imports are present in the file [\#2](https://github.com/browniebroke/django-codemod/pull/2) ([browniebroke](https://github.com/browniebroke))
-
 ## [v0.1.0](https://github.com/browniebroke/django-codemod/tree/v0.1.0) (2020-05-06)
 
-[Full Changelog](https://github.com/browniebroke/django-codemod/compare/16b2adf8dd1ea78a4e118a7b84f874e84aa495bc...v0.1.0)
-
-### 🚀 Enhancements:
-
-- Codemod to replace `force\_text` by `force\_str` [\#1](https://github.com/browniebroke/django-codemod/pull/1) ([browniebroke](https://github.com/browniebroke))
+[Full Changelog](https://github.com/browniebroke/django-codemod/compare/fc638d793736530009a48e5782c015ca5daafa86...v0.1.0)
 
 
 
