@@ -1,5 +1,13 @@
 # Changelog
 
+## [Unreleased](https://github.com/browniebroke/django-codemod/tree/HEAD)
+
+[Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.3.0...HEAD)
+
+### 🚀 Enhancements:
+
+- Resolve deprecation for django.shortcuts.render\_to\_response\(\) [\#25](https://github.com/browniebroke/django-codemod/pull/25) ([browniebroke](https://github.com/browniebroke))
+
 ## [v0.3.0](https://github.com/browniebroke/django-codemod/tree/v0.3.0) (2020-05-10)
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.2.1...v0.3.0)
