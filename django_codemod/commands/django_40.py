@@ -115,3 +115,11 @@ class UNGetTextToNGetTextCommand(UGetTextToGetTextCommand):
     DESCRIPTION: str = "Replaces ungettext() by ngettext()."
     old_name = "ungettext"
     new_name = "ngettext"
+
+
+class UNGetTextLazyToNGetTextLazyCommand(UGetTextToGetTextCommand):
+    """Help resolve deprecation of django.utils.translation.ungettext_lazy."""
+
+    DESCRIPTION: str = "Replaces ungettext_lazy() by ngettext_lazy()."
+    old_name = "ungettext_lazy"
+    new_name = "ngettext_lazy"

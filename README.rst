@@ -48,6 +48,9 @@ Currently implemented:
 * ``django_codemod.commands.django_40.UNGetTextToNGetTextCommand``: migrate deprecated
   ``ungettext()`` function to ``ngettext()``.
 
+* ``django_codemod.commands.django_40.UNGetTextLazyToNGetTextLazyCommand``: migrate deprecated
+  ``ungettext_lazy()`` function to ``ngettext_lazy()``.
+
 Credits
 -------
 

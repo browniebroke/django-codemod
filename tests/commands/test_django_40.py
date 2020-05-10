@@ -7,6 +7,7 @@ from django_codemod.commands.django_40 import (
     UGetTextLazyToGetTextLazyCommand,
     UGetTextNoopToGetTextNoopCommand,
     UNGetTextToNGetTextCommand,
+    UNGetTextLazyToNGetTextLazyCommand,
 )
 
 
@@ -326,5 +327,55 @@ class TestUNGetTextToNGetTextCommand(CodemodTest):
             from django.utils.translation import ngettext
 
             result = ngettext(content, plural_content, count)
+        """
+        self.assertCodemod(before, after)
+
+
+class TestUNGetTextLazyToNGetTextLazyCommand(CodemodTest):
+
+    TRANSFORM = UNGetTextLazyToNGetTextLazyCommand
+
+    def test_noop(self) -> None:
+        """Test when nothing should change."""
+        before = """
+            from django import conf
+            from django.utils import translation
+
+            foo = ngettext_lazy("bar", "bars", count)
+        """
+        after = """
+            from django import conf
+            from django.utils import translation
+
+            foo = ngettext_lazy("bar", "bars", count)
+        """
+
+        self.assertCodemod(before, after)
+
+    def test_simple_substitution(self) -> None:
+        """Check simple use case."""
+        before = """
+            from django.utils.translation import ungettext_lazy
+
+            result = ungettext_lazy(content, plural_content, count)
+        """
+        after = """
+            from django.utils.translation import ngettext_lazy
+
+            result = ngettext_lazy(content, plural_content, count)
+        """
+        self.assertCodemod(before, after)
+
+    def test_already_imported_substitution(self) -> None:
+        """Test case where ngettext_lazy is already in the imports."""
+        before = """
+            from django.utils.translation import ungettext_lazy, ngettext_lazy
+
+            result = ungettext_lazy(content, plural_content, count)
+        """
+        after = """
+            from django.utils.translation import ngettext_lazy
+
+            result = ngettext_lazy(content, plural_content, count)
         """
         self.assertCodemod(before, after)
