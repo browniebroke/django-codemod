@@ -17,26 +17,42 @@ This is based on
 implements codemods for it. This is currently very limited but the aim
 is to add more for helping with upcoming deprecations.
 
-Currently implemented:
+Currently implemented codemodders are listed below and grouped
+by the version of Django where deprecations are removed.
 
--   `django_codemod.commands.django_40.ForceTextToForceStrCommand`:
-    migrate deprecated `force_text()` function to `force_str()`.
--   `django_codemod.commands.django_40.SmartTextToForceStrCommand`:
-    migrate deprecated `smart_text()` function to `smart_str()`.
--   `django_codemod.commands.django_40.UGetTextToGetTextCommand`:
-    migrate deprecated `ugettext()` function to `gettext()`.
--   `django_codemod.commands.django_40.UGetTextLazyToGetTextLazyCommand`:
-    migrate deprecated `ugettext_lazy()` function to `gettext_lazy()`.
--   `django_codemod.commands.django_40.UGetTextNoopToGetTextNoopCommand`:
-    migrate deprecated `ugettext_noop()` function to `gettext_noop()`.
--   `django_codemod.commands.django_40.UNGetTextToNGetTextCommand`:
-    migrate deprecated `ungettext()` function to `ngettext()`.
--   `django_codemod.commands.django_40.UNGetTextLazyToNGetTextLazyCommand`:
-    migrate deprecated `ungettext_lazy()` function to `ngettext_lazy()`.
+Not finding what you need? I'm open to contributions,
+please send me a pull request.
 
-Not finding what you need? I\'m open to contributions, please send me a
-pull request.
+### Django 4.0
 
+All these are in the module `django_codemod.commands.django_40`:
+
+-   `ForceTextToForceStrCommand`: migrate deprecated `force_text()` function to `force_str()`.
+-   `SmartTextToForceStrCommand`: migrate deprecated `smart_text()` function to `smart_str()`.
+-   `UGetTextToGetTextCommand`: migrate deprecated `ugettext()` function to `gettext()`.
+-   `UGetTextLazyToGetTextLazyCommand`: migrate deprecated `ugettext_lazy()` function to `gettext_lazy()`.
+-   `UGetTextNoopToGetTextNoopCommand`: migrate deprecated `ugettext_noop()` function to `gettext_noop()`.
+-   `UNGetTextToNGetTextCommand`: migrate deprecated `ungettext()` function to `ngettext()`.
+-   `UNGetTextLazyToNGetTextLazyCommand`: migrate deprecated `ungettext_lazy()` function to `ngettext_lazy()`.
+-   `URLToRePathCommand`: migrate deprecated `url()` function to `re_path()`.
+
+### Django 3.2
+
+All these are in the module `django_codemod.commands.django_32`:
+
+Nothing these yet!
+
+### Django 3.1
+
+All these are in the module `django_codemod.commands.django_31`:
+
+Nothing these yet!
+
+### Django 3.0
+
+All these are in the module `django_codemod.commands.django_30`:
+
+Nothing these yet!
 
 ## Contributors ✨
 
