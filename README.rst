@@ -42,6 +42,9 @@ Currently implemented:
 * ``django_codemod.commands.django_40.UGetTextLazyToGetTextLazyCommand``: migrate deprecated
   ``ugettext_lazy()`` function to ``gettext_lazy()``.
 
+* ``django_codemod.commands.django_40.UGetTextNoopToGetTextNoopCommand``: migrate deprecated
+  ``ugettext_noop()`` function to ``gettext_noop()``.
+
 Credits
 -------
 
