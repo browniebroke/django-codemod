@@ -31,10 +31,10 @@ to add more for helping with upcoming deprecations.
 Currently implemented:
 
 * ``django_codemod.commands.django_40.ForceTextToForceStrCommand``: migrate deprecated
-  ``force_str()`` function to ``force_str()``.
+  ``force_text()`` function to ``force_str()``.
 
 * ``django_codemod.commands.django_40.SmartTextToForceStrCommand``: migrate deprecated
-  ``smart_str()`` function to ``smart_str()``.
+  ``smart_text()`` function to ``smart_str()``.
 
 * ``django_codemod.commands.django_40.UGetTextToGetTextCommand``: migrate deprecated
   ``ugettext()`` function to ``gettext()``.
