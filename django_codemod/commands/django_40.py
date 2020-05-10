@@ -2,7 +2,7 @@
 Module to fix things removed in Django 4.0.
 
 This is expected to cover most of the things listed in this section:
-https://docs.djangoproject.com/en/3.0/internals/deprecation/#deprecation-removed-in-4-0
+https://docs.djangoproject.com/en/stable/internals/deprecation/#deprecation-removed-in-4-0
 """
 from abc import ABC
 from typing import Union
