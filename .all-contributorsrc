@@ -20,6 +20,15 @@
         "bug",
         "doc"
       ]
+    },
+    {
+      "login": "adamchainz",
+      "name": "Adam Johnson",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/857609?v=4",
+      "profile": "https://adamj.eu/",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7
