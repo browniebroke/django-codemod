@@ -55,10 +55,10 @@ class ForceTextToForceStrCommand(BaseFuncRename):
             node,
             m.ImportFrom(
                 module=m.Attribute(
-                    attr=m.Name("encoding"),
                     value=m.Attribute(
                         value=m.Name("django"), attr=m.Name(value="utils")
                     ),
+                    attr=m.Name("encoding"),
                 ),
             ),
         )
@@ -84,10 +84,10 @@ class UGetTextToGetTextCommand(BaseFuncRename):
             node,
             m.ImportFrom(
                 module=m.Attribute(
-                    attr=m.Name("translation"),
                     value=m.Attribute(
                         value=m.Name("django"), attr=m.Name(value="utils")
                     ),
+                    attr=m.Name("translation"),
                 ),
             ),
         )
