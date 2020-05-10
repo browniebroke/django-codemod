@@ -5,6 +5,7 @@ from django_codemod.commands.django_40 import (
     SmartTextToForceStrCommand,
     UGetTextToGetTextCommand,
     UGetTextLazyToGetTextLazyCommand,
+    UGetTextNoopToGetTextNoopCommand,
 )
 
 
@@ -43,7 +44,7 @@ class TestForceTextToForceStrCommand(CodemodTest):
         """
         self.assertCodemod(before, after)
 
-    def test_str_already_imported_substitution(self) -> None:
+    def test_already_imported_substitution(self) -> None:
         """Test case where force_str is already in the imports."""
         before = """
             from django.utils.encoding import force_text, force_str
@@ -113,7 +114,7 @@ class TestSmartTextToForceStrCommand(CodemodTest):
         """
         self.assertCodemod(before, after)
 
-    def test_str_already_imported_substitution(self) -> None:
+    def test_already_imported_substitution(self) -> None:
         """Test case where smart_str is already in the imports."""
         before = """
             from django.utils.encoding import smart_text, smart_str
@@ -163,7 +164,7 @@ class TestUGetTextToGetTextCommand(CodemodTest):
         """
         self.assertCodemod(before, after)
 
-    def test_str_already_imported_substitution(self) -> None:
+    def test_already_imported_substitution(self) -> None:
         """Test case where gettext is already in the imports."""
         before = """
             from django.utils.translation import ugettext, gettext
@@ -213,7 +214,7 @@ class TestUGetTextLazyToGetTextLazyCommand(CodemodTest):
         """
         self.assertCodemod(before, after)
 
-    def test_str_already_imported_substitution(self) -> None:
+    def test_already_imported_substitution(self) -> None:
         """Test case where gettext_lazy is already in the imports."""
         before = """
             from django.utils.translation import ugettext_lazy, gettext_lazy
@@ -224,5 +225,55 @@ class TestUGetTextLazyToGetTextLazyCommand(CodemodTest):
             from django.utils.translation import gettext_lazy
 
             result = gettext_lazy(content)
+        """
+        self.assertCodemod(before, after)
+
+
+class TestUGetTextNoopToGetTextNoopCommand(CodemodTest):
+
+    TRANSFORM = UGetTextNoopToGetTextNoopCommand
+
+    def test_noop(self) -> None:
+        """Test when nothing should change."""
+        before = """
+            from django import conf
+            from django.utils import translation
+
+            foo = gettext_noop("bar")
+        """
+        after = """
+            from django import conf
+            from django.utils import translation
+
+            foo = gettext_noop("bar")
+        """
+
+        self.assertCodemod(before, after)
+
+    def test_simple_substitution(self) -> None:
+        """Check simple use case."""
+        before = """
+            from django.utils.translation import ugettext_noop
+
+            result = ugettext_noop(content)
+        """
+        after = """
+            from django.utils.translation import gettext_noop
+
+            result = gettext_noop(content)
+        """
+        self.assertCodemod(before, after)
+
+    def test_already_imported_substitution(self) -> None:
+        """Test case where gettext_noop is already in the imports."""
+        before = """
+            from django.utils.translation import ugettext_noop, gettext_noop
+
+            result = ugettext_noop(content)
+        """
+        after = """
+            from django.utils.translation import gettext_noop
+
+            result = gettext_noop(content)
         """
         self.assertCodemod(before, after)

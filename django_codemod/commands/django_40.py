@@ -99,3 +99,11 @@ class UGetTextLazyToGetTextLazyCommand(UGetTextToGetTextCommand):
     DESCRIPTION: str = "Replaces ugettext_lazy() by gettext_lazy()."
     old_name = "ugettext_lazy"
     new_name = "gettext_lazy"
+
+
+class UGetTextNoopToGetTextNoopCommand(UGetTextToGetTextCommand):
+    """Help resolve deprecation of django.utils.translation.ugettext_noop."""
+
+    DESCRIPTION: str = "Replaces ugettext_noop() by gettext_noop()."
+    old_name = "ugettext_noop"
+    new_name = "gettext_noop"
