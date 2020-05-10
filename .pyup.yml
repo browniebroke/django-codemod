@@ -1,2 +1,7 @@
 # add a label to pull requests, default is not set
 label_prs: nochangelog
+requirements:
+  - requirements-dev.txt
+  - docs/requirements.txt
+  - setup.cfg:
+      update: False
