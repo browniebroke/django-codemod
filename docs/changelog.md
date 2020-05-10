@@ -4,6 +4,10 @@
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.2.1...HEAD)
 
+### 🚀 Enhancements:
+
+- Support resolving django.conf.urls.url\(\) deprecation [\#22](https://github.com/browniebroke/django-codemod/pull/22) ([browniebroke](https://github.com/browniebroke))
+
 ### 📖 Documentation updates:
 
 - Fix some refs in README [\#21](https://github.com/browniebroke/django-codemod/pull/21) ([adamchainz](https://github.com/adamchainz))
