@@ -45,6 +45,9 @@ Currently implemented:
 * ``django_codemod.commands.django_40.UGetTextNoopToGetTextNoopCommand``: migrate deprecated
   ``ugettext_noop()`` function to ``gettext_noop()``.
 
+* ``django_codemod.commands.django_40.UNGetTextToNGetTextCommand``: migrate deprecated
+  ``ungettext()`` function to ``ngettext()``.
+
 Credits
 -------
 
