@@ -27,14 +27,14 @@ please send me a pull request.
 
 All these are in the module `django_codemod.commands.django_40`:
 
--   `ForceTextToForceStrCommand`: migrate deprecated `force_text()` function to `force_str()`.
--   `SmartTextToForceStrCommand`: migrate deprecated `smart_text()` function to `smart_str()`.
--   `UGetTextToGetTextCommand`: migrate deprecated `ugettext()` function to `gettext()`.
--   `UGetTextLazyToGetTextLazyCommand`: migrate deprecated `ugettext_lazy()` function to `gettext_lazy()`.
--   `UGetTextNoopToGetTextNoopCommand`: migrate deprecated `ugettext_noop()` function to `gettext_noop()`.
--   `UNGetTextToNGetTextCommand`: migrate deprecated `ungettext()` function to `ngettext()`.
--   `UNGetTextLazyToNGetTextLazyCommand`: migrate deprecated `ungettext_lazy()` function to `ngettext_lazy()`.
--   `URLToRePathCommand`: migrate deprecated `url()` function to `re_path()`.
+- `ForceTextToForceStrCommand`: migrate deprecated `force_text()` function to `force_str()`.
+- `SmartTextToForceStrCommand`: migrate deprecated `smart_text()` function to `smart_str()`.
+- `UGetTextToGetTextCommand`: migrate deprecated `ugettext()` function to `gettext()`.
+- `UGetTextLazyToGetTextLazyCommand`: migrate deprecated `ugettext_lazy()` function to `gettext_lazy()`.
+- `UGetTextNoopToGetTextNoopCommand`: migrate deprecated `ugettext_noop()` function to `gettext_noop()`.
+- `UNGetTextToNGetTextCommand`: migrate deprecated `ungettext()` function to `ngettext()`.
+- `UNGetTextLazyToNGetTextLazyCommand`: migrate deprecated `ungettext_lazy()` function to `ngettext_lazy()`.
+- `URLToRePathCommand`: migrate deprecated `url()` function to `re_path()`.
 
 ### Django 3.2
 
@@ -52,7 +52,7 @@ Nothing these yet!
 
 All these are in the module `django_codemod.commands.django_30`:
 
-Nothing these yet!
+- `RenderToResponseToRenderCommand`: migrate deprecated `render_to_response()` function to `render()`.
 
 ## Contributors ✨
 
