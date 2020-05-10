@@ -4,6 +4,7 @@ from django_codemod.commands.django_40 import (
     ForceTextToForceStrCommand,
     SmartTextToForceStrCommand,
     UGetTextToGetTextCommand,
+    UGetTextLazyToGetTextLazyCommand,
 )
 
 
@@ -173,5 +174,55 @@ class TestUGetTextToGetTextCommand(CodemodTest):
             from django.utils.translation import gettext
 
             result = gettext(content)
+        """
+        self.assertCodemod(before, after)
+
+
+class TestUGetTextLazyToGetTextLazyCommand(CodemodTest):
+
+    TRANSFORM = UGetTextLazyToGetTextLazyCommand
+
+    def test_noop(self) -> None:
+        """Test when nothing should change."""
+        before = """
+            from django import conf
+            from django.utils import translation
+
+            foo = gettext_lazy("bar")
+        """
+        after = """
+            from django import conf
+            from django.utils import translation
+
+            foo = gettext_lazy("bar")
+        """
+
+        self.assertCodemod(before, after)
+
+    def test_simple_substitution(self) -> None:
+        """Check simple use case."""
+        before = """
+            from django.utils.translation import ugettext_lazy
+
+            result = ugettext_lazy(content)
+        """
+        after = """
+            from django.utils.translation import gettext_lazy
+
+            result = gettext_lazy(content)
+        """
+        self.assertCodemod(before, after)
+
+    def test_str_already_imported_substitution(self) -> None:
+        """Test case where gettext_lazy is already in the imports."""
+        before = """
+            from django.utils.translation import ugettext_lazy, gettext_lazy
+
+            result = ugettext_lazy(content)
+        """
+        after = """
+            from django.utils.translation import gettext_lazy
+
+            result = gettext_lazy(content)
         """
         self.assertCodemod(before, after)

@@ -39,6 +39,9 @@ Currently implemented:
 * ``django_codemod.commands.django_40.UGetTextToGetTextCommand``: migrate deprecated
   ``ugettext()`` function to ``gettext()``.
 
+* ``django_codemod.commands.django_40.UGetTextLazyToGetTextLazyCommand``: migrate deprecated
+  ``ugettext_lazy()`` function to ``gettext_lazy()``.
+
 Credits
 -------
 
