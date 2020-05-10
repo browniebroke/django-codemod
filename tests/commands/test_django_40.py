@@ -1,15 +1,15 @@
 from libcst.codemod import CodemodTest
 
 from django_codemod.commands.django_40 import (
-    ForceTextToStrCommand,
-    SmartTextToStrCommand,
+    ForceTextToForceStrCommand,
+    SmartTextToForceStrCommand,
     UGetTextToGetTextCommand,
 )
 
 
-class TestForceTextToStrCommand(CodemodTest):
+class TestForceTextToForceStrCommand(CodemodTest):
 
-    TRANSFORM = ForceTextToStrCommand
+    TRANSFORM = ForceTextToForceStrCommand
 
     def test_noop(self) -> None:
         """Test when nothing should change."""
@@ -77,9 +77,9 @@ class TestForceTextToStrCommand(CodemodTest):
         self.assertCodemod(before, after)
 
 
-class TestSmartTextToStrCommand(CodemodTest):
+class TestSmartTextToForceStrCommand(CodemodTest):
 
-    TRANSFORM = SmartTextToStrCommand
+    TRANSFORM = SmartTextToForceStrCommand
 
     def test_noop(self) -> None:
         """Test when nothing should change."""

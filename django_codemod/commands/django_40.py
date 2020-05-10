@@ -43,7 +43,7 @@ class BaseFuncRename(VisitorBasedCodemodCommand, ABC):
         return super().leave_Call(original_node, updated_node)
 
 
-class ForceTextToStrCommand(BaseFuncRename):
+class ForceTextToForceStrCommand(BaseFuncRename):
     """Help resolve deprecation of django.utils.encoding.force_text."""
 
     DESCRIPTION: str = "Replaces force_text() by force_str()."
@@ -64,7 +64,7 @@ class ForceTextToStrCommand(BaseFuncRename):
         )
 
 
-class SmartTextToStrCommand(ForceTextToStrCommand):
+class SmartTextToForceStrCommand(ForceTextToForceStrCommand):
     """Help resolve deprecation of django.utils.encoding.smart_text."""
 
     DESCRIPTION: str = "Replaces smart_text() by smart_str()."
