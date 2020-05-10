@@ -36,6 +36,9 @@ Currently implemented:
 * ``django_codemod.commands.django_40.SmartTextToStrCommand``: migrate deprecated
   ``smart_str()`` function to ``smart_str()``.
 
+* ``django_codemod.commands.django_40.UGetTextToGetTextCommand``: migrate deprecated
+  ``ugettext()`` function to ``gettext()``.
+
 Credits
 -------
 

@@ -70,3 +70,24 @@ class SmartTextToStrCommand(ForceTextToStrCommand):
     DESCRIPTION: str = "Replaces smart_text() by smart_str()."
     old_name = "smart_text"
     new_name = "smart_str"
+
+
+class UGetTextToGetTextCommand(BaseFuncRename):
+    """Help resolve deprecation of django.utils.translation.ugettext."""
+
+    DESCRIPTION: str = "Replaces ugettext() by gettext()."
+    old_name = "ugettext"
+    new_name = "gettext"
+
+    def _test_import_from(self, node: ImportFrom) -> bool:
+        return m.matches(
+            node,
+            m.ImportFrom(
+                module=m.Attribute(
+                    attr=m.Name("translation"),
+                    value=m.Attribute(
+                        value=m.Name("django"), attr=m.Name(value="utils")
+                    ),
+                ),
+            ),
+        )
