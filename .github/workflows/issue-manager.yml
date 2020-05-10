@@ -1,0 +1,12 @@
+on:
+  schedule:
+  - cron: "0 0 * * *"
+
+jobs:
+  issue-manager:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: tiangolo/issue-manager@master
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        config: '{"answered": {}}'
