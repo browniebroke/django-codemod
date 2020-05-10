@@ -126,26 +126,6 @@ class TestSmartTextToForceStrCommand(CodemodTest):
         """
         self.assertCodemod(before, after)
 
-    def test_call_no_value(self) -> None:
-        """Regression test for function call without name."""
-        before = """
-            factory()()
-        """
-        after = """
-            factory()()
-        """
-        self.assertCodemod(before, after)
-
-    def test_lambda_no_value(self) -> None:
-        """Regression test for lambda call without name."""
-        before = """
-            (lambda x: x)(something)
-        """
-        after = """
-            (lambda x: x)(something)
-        """
-        self.assertCodemod(before, after)
-
 
 class TestUGetTextToGetTextCommand(CodemodTest):
 
