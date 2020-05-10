@@ -91,3 +91,11 @@ class UGetTextToGetTextCommand(BaseFuncRename):
                 ),
             ),
         )
+
+
+class UGetTextLazyToGetTextLazyCommand(UGetTextToGetTextCommand):
+    """Help resolve deprecation of django.utils.translation.ugettext_lazy."""
+
+    DESCRIPTION: str = "Replaces ugettext_lazy() by gettext_lazy()."
+    old_name = "ugettext_lazy"
+    new_name = "gettext_lazy"
