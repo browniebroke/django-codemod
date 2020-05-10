@@ -13,7 +13,8 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v2.5.0
     hooks:
-      - id: trailing-whitespace
+      # disabled due to bump2commit compatibility
+      # - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-yaml
       - id: check-json
