@@ -106,6 +106,8 @@ class UNGetTextLazyToNGetTextLazyCommand(UGetTextToGetTextCommand):
 class URLToRePathCommand(VisitorBasedCodemodCommand):
     """Resolve deprecation of django.conf.urls.url."""
 
+    DESCRIPTION: str = "Replaces url() by re_path()."
+
     def _test_import_from(self, node: ImportFrom) -> bool:
         return m.matches(
             node,
