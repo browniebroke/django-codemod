@@ -7,7 +7,7 @@ name: Changelog Generator
 on:
   release:
     types:
-      - created
+      - published
 
 jobs:
   generate_changelog_file:
