@@ -1,5 +1,5 @@
 Welcome to Django Codemod's documentation!
-======================================
+==========================================
 
 Collections of libCST codemodder to help upgrades to newer versions of Django.
 
@@ -9,7 +9,7 @@ Collections of libCST codemodder to help upgrades to newer versions of Django.
 
    installation
    usage
-   modules
+   codemods
    contributing
    changelog
 
