@@ -25,82 +25,56 @@ class ForceTextToForceStrCommand(BaseSimpleFuncRename):
     """Resolve deprecation of django.utils.encoding.force_text."""
 
     DESCRIPTION: str = "Replaces force_text() by force_str()."
-    old_name = "force_text"
-    new_name = "force_str"
-
-    def _test_import_from(self, node: ImportFrom) -> bool:
-        return m.matches(
-            node,
-            m.ImportFrom(
-                module=m.Attribute(
-                    value=m.Attribute(
-                        value=m.Name("django"), attr=m.Name(value="utils")
-                    ),
-                    attr=m.Name("encoding"),
-                ),
-            ),
-        )
+    rename_from = "django.utils.encoding.force_text"
+    rename_to = "django.utils.encoding.force_str"
 
 
-class SmartTextToForceStrCommand(ForceTextToForceStrCommand):
+class SmartTextToForceStrCommand(BaseSimpleFuncRename):
     """Resolve deprecation of django.utils.encoding.smart_text."""
 
     DESCRIPTION: str = "Replaces smart_text() by smart_str()."
-    old_name = "smart_text"
-    new_name = "smart_str"
+    rename_from = "django.utils.encoding.smart_text"
+    rename_to = "django.utils.encoding.smart_str"
 
 
 class UGetTextToGetTextCommand(BaseSimpleFuncRename):
     """Resolve deprecation of django.utils.translation.ugettext."""
 
     DESCRIPTION: str = "Replaces ugettext() by gettext()."
-    old_name = "ugettext"
-    new_name = "gettext"
-
-    def _test_import_from(self, node: ImportFrom) -> bool:
-        return m.matches(
-            node,
-            m.ImportFrom(
-                module=m.Attribute(
-                    value=m.Attribute(
-                        value=m.Name("django"), attr=m.Name(value="utils")
-                    ),
-                    attr=m.Name("translation"),
-                ),
-            ),
-        )
+    rename_from = "django.utils.translation.ugettext"
+    rename_to = "django.utils.translation.gettext"
 
 
-class UGetTextLazyToGetTextLazyCommand(UGetTextToGetTextCommand):
+class UGetTextLazyToGetTextLazyCommand(BaseSimpleFuncRename):
     """Resolve deprecation of django.utils.translation.ugettext_lazy."""
 
     DESCRIPTION: str = "Replaces ugettext_lazy() by gettext_lazy()."
-    old_name = "ugettext_lazy"
-    new_name = "gettext_lazy"
+    rename_from = "django.utils.translation.ugettext_lazy"
+    rename_to = "django.utils.translation.gettext_lazy"
 
 
-class UGetTextNoopToGetTextNoopCommand(UGetTextToGetTextCommand):
+class UGetTextNoopToGetTextNoopCommand(BaseSimpleFuncRename):
     """Resolve deprecation of django.utils.translation.ugettext_noop."""
 
     DESCRIPTION: str = "Replaces ugettext_noop() by gettext_noop()."
-    old_name = "ugettext_noop"
-    new_name = "gettext_noop"
+    rename_from = "django.utils.translation.ugettext_noop"
+    rename_to = "django.utils.translation.gettext_noop"
 
 
-class UNGetTextToNGetTextCommand(UGetTextToGetTextCommand):
+class UNGetTextToNGetTextCommand(BaseSimpleFuncRename):
     """Resolve deprecation of django.utils.translation.ungettext."""
 
     DESCRIPTION: str = "Replaces ungettext() by ngettext()."
-    old_name = "ungettext"
-    new_name = "ngettext"
+    rename_from = "django.utils.translation.ungettext"
+    rename_to = "django.utils.translation.ngettext"
 
 
-class UNGetTextLazyToNGetTextLazyCommand(UGetTextToGetTextCommand):
+class UNGetTextLazyToNGetTextLazyCommand(BaseSimpleFuncRename):
     """Resolve deprecation of django.utils.translation.ungettext_lazy."""
 
     DESCRIPTION: str = "Replaces ungettext_lazy() by ngettext_lazy()."
-    old_name = "ungettext_lazy"
-    new_name = "ngettext_lazy"
+    rename_from = "django.utils.translation.ungettext_lazy"
+    rename_to = "django.utils.translation.ngettext_lazy"
 
 
 class URLToRePathCommand(VisitorBasedCodemodCommand):

@@ -8,15 +8,35 @@ from libcst._nodes.statement import ImportFrom, BaseSmallStatement, ImportAlias
 from libcst.codemod import VisitorBasedCodemodCommand
 
 
+def module_matcher(import_parts):
+    *values, attr = import_parts
+    if len(values) > 1:
+        value = module_matcher(values)
+    elif len(values) == 1:
+        value = m.Name(values[0])
+    else:
+        value = None
+    return m.Attribute(value=value, attr=m.Name(attr))
+
+
 class BaseSimpleFuncRename(VisitorBasedCodemodCommand, ABC):
     """Base class to help rename a simple function."""
 
-    old_name: str
-    new_name: str
+    rename_from: str
+    rename_to: str
+
+    @property
+    def old_name(self):
+        return self.rename_from.split(".")[-1]
+
+    @property
+    def new_name(self):
+        return self.rename_to.split(".")[-1]
 
     def _test_import_from(self, node: ImportFrom) -> bool:
         """Check if 'import from' should be updated."""
-        raise NotImplementedError()
+        import_parts = self.rename_from.split(".")[:-1]
+        return m.matches(node, m.ImportFrom(module=module_matcher(import_parts)))
 
     def leave_ImportFrom(
         self, original_node: ImportFrom, updated_node: ImportFrom
