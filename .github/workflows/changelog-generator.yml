@@ -27,13 +27,15 @@ jobs:
         prWoLabels: false
         compareLink: true
         excludeLabels: tests,automation,nochangelog
-        output: docs/changelog.md
         breakingLabel: '### ⚠️ Breaking Changes:'
         deprecatedLabel: '### 🚨 Deprecated:'
         enhancementLabel: '### 🚀 Enhancements:'
         bugsLabel: '### 🐛 Bug Fixes:'
         removedLabel: '### 🗑 Removals:'
         addSections: '{"documentation":{"prefix":"### 📖 Documentation updates:","labels":["documentation"]}}'
+
+    - name: Copy changelog in documentation
+      run: cp CHANGELOG.md docs/changelog.md
 
     - name: Commit changes
       run: |
