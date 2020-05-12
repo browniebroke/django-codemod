@@ -3,9 +3,17 @@
 from abc import ABC
 from typing import Union
 
-from libcst import matchers as m, RemovalSentinel, Call, BaseExpression, Name
-from libcst._nodes.statement import ImportFrom, BaseSmallStatement, ImportAlias
+from libcst import (
+    matchers as m,
+    RemovalSentinel,
+    Call,
+    BaseExpression,
+    Name,
+    RemoveFromParent,
+)
+from libcst._nodes.statement import ImportFrom, BaseSmallStatement
 from libcst.codemod import VisitorBasedCodemodCommand
+from libcst.codemod.visitors import AddImportsVisitor
 
 
 def module_matcher(import_parts):
@@ -30,30 +38,37 @@ class BaseSimpleFuncRename(VisitorBasedCodemodCommand, ABC):
         return self.rename_from.split(".")[-1]
 
     @property
+    def old_module_parts(self):
+        return self.rename_from.split(".")[:-1]
+
+    @property
     def new_name(self):
         return self.rename_to.split(".")[-1]
 
+    @property
+    def new_module_parts(self):
+        return self.rename_to.split(".")[:-1]
+
     def _test_import_from(self, node: ImportFrom) -> bool:
         """Check if 'import from' should be updated."""
-        import_parts = self.rename_from.split(".")[:-1]
-        return m.matches(node, m.ImportFrom(module=module_matcher(import_parts)))
+        return m.matches(
+            node, m.ImportFrom(module=module_matcher(self.old_module_parts))
+        )
 
     def leave_ImportFrom(
         self, original_node: ImportFrom, updated_node: ImportFrom
     ) -> Union[BaseSmallStatement, RemovalSentinel]:
         if self._test_import_from(updated_node):
             new_names = []
-            new_import_missing = True
-            new_import_alias = None
             for import_alias in original_node.names:
                 if import_alias.evaluated_name == self.old_name:
-                    new_import_alias = ImportAlias(name=Name(self.new_name))
+                    AddImportsVisitor.add_needed_import(
+                        self.context, ".".join(self.new_module_parts), self.new_name,
+                    )
                 else:
-                    if import_alias.evaluated_name == self.new_name:
-                        new_import_missing = False
                     new_names.append(import_alias)
-            if new_import_missing and new_import_alias is not None:
-                new_names.append(new_import_alias)
+            if not new_names:
+                return RemoveFromParent()
             new_names = list(sorted(new_names, key=lambda n: n.evaluated_name))
             return ImportFrom(module=updated_node.module, names=new_names)
         return super().leave_ImportFrom(original_node, updated_node)
