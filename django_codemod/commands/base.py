@@ -1,7 +1,7 @@
 """Module to implement base functionality."""
 
 from abc import ABC
-from typing import Union
+from typing import Union, Sequence
 
 from libcst import (
     matchers as m,
@@ -10,6 +10,7 @@ from libcst import (
     BaseExpression,
     Name,
     RemoveFromParent,
+    Arg,
 )
 from libcst._nodes.statement import ImportFrom, BaseSmallStatement
 from libcst.codemod import VisitorBasedCodemodCommand
@@ -75,5 +76,9 @@ class BaseSimpleFuncRename(VisitorBasedCodemodCommand, ABC):
 
     def leave_Call(self, original_node: Call, updated_node: Call) -> BaseExpression:
         if m.matches(updated_node, m.Call(func=m.Name(self.old_name))):
-            return Call(args=updated_node.args, func=Name(self.new_name))
+            updated_args = self.update_call_args(updated_node)
+            return Call(args=updated_args, func=Name(self.new_name))
         return super().leave_Call(original_node, updated_node)
+
+    def update_call_args(self, node: Call) -> Sequence[Arg]:
+        return node.args
