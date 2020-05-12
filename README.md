@@ -12,47 +12,23 @@ Collections of libCST codemodder to help upgrades to newer versions of Django.
 
 ## Features
 
-This is based on
-[libCST](https://libcst.readthedocs.io/en/latest/index.html) and
-implements codemods for it. This is currently very limited but the aim
-is to add more for helping with upcoming deprecations.
+This is based on [libCST](https://libcst.readthedocs.io/en/latest/index.html) and implements codemods for it. This is currently very limited but the aim is to add more for helping with upcoming deprecations.
 
-Currently implemented codemodders are listed below and grouped
-by the version of Django where deprecations are removed.
+Currently implemented codemodders are listed below and grouped by the version of Django where deprecations are removed.
 
-Not finding what you need? I'm open to contributions,
-please send me a pull request.
+Not finding what you need? I'm open to contributions, please send me a pull request.
 
-### Django 4.0
+### Example of use
 
-All these are in the module `django_codemod.commands.django_40`:
+For example, replace the deprecated `url()` function by the newer `re_path()` introduced in Django 2.0 as follows by running the appropriate codemodder:
 
-- `ForceTextToForceStrCommand`: migrate deprecated `force_text()` function to `force_str()`.
-- `SmartTextToForceStrCommand`: migrate deprecated `smart_text()` function to `smart_str()`.
-- `UGetTextToGetTextCommand`: migrate deprecated `ugettext()` function to `gettext()`.
-- `UGetTextLazyToGetTextLazyCommand`: migrate deprecated `ugettext_lazy()` function to `gettext_lazy()`.
-- `UGetTextNoopToGetTextNoopCommand`: migrate deprecated `ugettext_noop()` function to `gettext_noop()`.
-- `UNGetTextToNGetTextCommand`: migrate deprecated `ungettext()` function to `ngettext()`.
-- `UNGetTextLazyToNGetTextLazyCommand`: migrate deprecated `ungettext_lazy()` function to `ngettext_lazy()`.
-- `URLToRePathCommand`: migrate deprecated `url()` function to `re_path()`.
+```bash
+python3 -m libcst.tool codemod django_40.URLToRePathCommand .
+```
 
-### Django 3.2
+Will go through all the files under your local directory `.` and apply the code modifications to update imports and function calls.
 
-All these are in the module `django_codemod.commands.django_32`:
-
-Nothing these yet!
-
-### Django 3.1
-
-All these are in the module `django_codemod.commands.django_31`:
-
-Nothing these yet!
-
-### Django 3.0
-
-All these are in the module `django_codemod.commands.django_30`:
-
-- `RenderToResponseToRenderCommand`: migrate deprecated `render_to_response()` function to `render()`.
+Check out the [documentation](https://django-codemod.readthedocs.io) for more detail on usage and the full list of codemodders.
 
 ## Contributors ✨
 
