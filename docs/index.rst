@@ -4,8 +4,8 @@ Welcome to Django Codemod's documentation!
 Collections of libCST codemodder to help upgrades to newer versions of Django.
 
 .. toctree::
+   :caption: User Guide
    :maxdepth: 2
-   :caption: Installation & Usage
 
    installation
    usage
