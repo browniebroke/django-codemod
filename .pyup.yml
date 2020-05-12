@@ -3,5 +3,6 @@ label_prs: nochangelog
 requirements:
   - requirements-dev.txt
   - docs/requirements.txt
+      pin: False
   - setup.cfg:
       update: False
