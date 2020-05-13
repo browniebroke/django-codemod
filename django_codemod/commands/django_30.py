@@ -1,13 +1,10 @@
 # This is expected to cover most of the things listed in this section:
 # https://docs.djangoproject.com/en/dev/internals/deprecation/#deprecation-removed-in-3-0
-from typing import Sequence
-
-from libcst import Call, Name, Arg
-
-from django_codemod.commands.base import BaseSimpleFuncRename
+from .base import BaseCodemodCommand
+from ..visitors.django_30 import RenderToResponseToRenderTransformer
 
 
-class RenderToResponseToRenderCommand(BaseSimpleFuncRename):
+class RenderToResponseToRenderCommand(BaseCodemodCommand):
     """
     Resolve deprecation of ``django.shortcuts.render_to_response``.
 
@@ -16,8 +13,4 @@ class RenderToResponseToRenderCommand(BaseSimpleFuncRename):
     """
 
     DESCRIPTION: str = "Replaces render_to_response() by render()."
-    rename_from = "django.shortcuts.render_to_response"
-    rename_to = "django.shortcuts.render"
-
-    def update_call_args(self, node: Call) -> Sequence[Arg]:
-        return (Arg(value=Name("None")), *node.args)
+    transformers = [RenderToResponseToRenderTransformer]
