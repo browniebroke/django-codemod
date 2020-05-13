@@ -1,67 +1,69 @@
 # This is expected to cover most of the things listed in this section:
 # https://docs.djangoproject.com/en/dev/internals/deprecation/#deprecation-removed-in-4-0
-from django_codemod.commands.base import BaseSimpleFuncRename
+from .base import BaseCodemodCommand
+from ..visitors.django_40 import (
+    ForceTextToForceStrTransformer,
+    SmartTextToForceStrTransformer,
+    UGetTextLazyToGetTextLazyTransformer,
+    UGetTextNoopToGetTextNoopTransformer,
+    UGetTextToGetTextTransformer,
+    UNGetTextLazyToNGetTextLazyTransformer,
+    UNGetTextToNGetTextTransformer,
+    URLToRePathTransformer,
+)
 
 
-class ForceTextToForceStrCommand(BaseSimpleFuncRename):
+class ForceTextToForceStrCommand(BaseCodemodCommand):
     """Resolve deprecation of ``django.utils.encoding.force_text``."""
 
     DESCRIPTION: str = "Replaces force_text() by force_str()."
-    rename_from = "django.utils.encoding.force_text"
-    rename_to = "django.utils.encoding.force_str"
+    transformers = [ForceTextToForceStrTransformer]
 
 
-class SmartTextToForceStrCommand(BaseSimpleFuncRename):
+class SmartTextToForceStrCommand(BaseCodemodCommand):
     """Resolve deprecation of ``django.utils.encoding.smart_text``."""
 
     DESCRIPTION: str = "Replaces smart_text() by smart_str()."
-    rename_from = "django.utils.encoding.smart_text"
-    rename_to = "django.utils.encoding.smart_str"
+    transformers = [SmartTextToForceStrTransformer]
 
 
-class UGetTextToGetTextCommand(BaseSimpleFuncRename):
+class UGetTextToGetTextCommand(BaseCodemodCommand):
     """Resolve deprecation of ``django.utils.translation.ugettext``."""
 
     DESCRIPTION: str = "Replaces ugettext() by gettext()."
-    rename_from = "django.utils.translation.ugettext"
-    rename_to = "django.utils.translation.gettext"
+    transformers = [UGetTextToGetTextTransformer]
 
 
-class UGetTextLazyToGetTextLazyCommand(BaseSimpleFuncRename):
+class UGetTextLazyToGetTextLazyCommand(BaseCodemodCommand):
     """Resolve deprecation of ``django.utils.translation.ugettext_lazy``."""
 
     DESCRIPTION: str = "Replaces ugettext_lazy() by gettext_lazy()."
-    rename_from = "django.utils.translation.ugettext_lazy"
-    rename_to = "django.utils.translation.gettext_lazy"
+    transformers = [UGetTextLazyToGetTextLazyTransformer]
 
 
-class UGetTextNoopToGetTextNoopCommand(BaseSimpleFuncRename):
+class UGetTextNoopToGetTextNoopCommand(BaseCodemodCommand):
     """Resolve deprecation of ``django.utils.translation.ugettext_noop``."""
 
     DESCRIPTION: str = "Replaces ugettext_noop() by gettext_noop()."
-    rename_from = "django.utils.translation.ugettext_noop"
-    rename_to = "django.utils.translation.gettext_noop"
+    transformers = [UGetTextNoopToGetTextNoopTransformer]
 
 
-class UNGetTextToNGetTextCommand(BaseSimpleFuncRename):
+class UNGetTextToNGetTextCommand(BaseCodemodCommand):
     """Resolve deprecation of ``django.utils.translation.ungettext``."""
 
     DESCRIPTION: str = "Replaces ungettext() by ngettext()."
-    rename_from = "django.utils.translation.ungettext"
-    rename_to = "django.utils.translation.ngettext"
+    transformers = [UNGetTextToNGetTextTransformer]
 
 
-class UNGetTextLazyToNGetTextLazyCommand(BaseSimpleFuncRename):
+class UNGetTextLazyToNGetTextLazyCommand(BaseCodemodCommand):
     """Resolve deprecation of ``django.utils.translation.ungettext_lazy``."""
 
     DESCRIPTION: str = "Replaces ungettext_lazy() by ngettext_lazy()."
-    rename_from = "django.utils.translation.ungettext_lazy"
-    rename_to = "django.utils.translation.ngettext_lazy"
+    transformers = [UNGetTextLazyToNGetTextLazyTransformer]
 
 
-class URLToRePathCommand(BaseSimpleFuncRename):
+class URLToRePathCommand(BaseCodemodCommand):
     """Resolve deprecation of ``django.conf.urls.url``."""
 
     DESCRIPTION: str = "Replaces url() by re_path()."
-    rename_from = "django.conf.urls.url"
-    rename_to = "django.urls.re_path"
+    transformers = [URLToRePathTransformer]
