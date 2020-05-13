@@ -67,3 +67,32 @@ class URLToRePathCommand(BaseCodemodCommand):
 
     DESCRIPTION: str = "Replaces url() by re_path()."
     transformers = [URLToRePathTransformer]
+
+
+class Django40Command(BaseCodemodCommand):
+    """
+    Resolve deprecations for removals in Django 4.0.
+
+    Combines all the other commands in this module, to fix these deprecations:
+
+    - ``django.utils.encoding.force_text``
+    - ``django.utils.encoding.smart_text``
+    - ``django.utils.translation.ugettext``
+    - ``django.utils.translation.ugettext_lazy``
+    - ``django.utils.translation.ugettext_noop``
+    - ``django.utils.translation.ungettext``
+    - ``django.utils.translation.ungettext_lazy``
+    - ``django.conf.urls.url``
+    """
+
+    DESCRIPTION: str = "Resolve deprecations of things removed in Django 4.0"
+    transformers = [
+        ForceTextToForceStrTransformer,
+        SmartTextToForceStrTransformer,
+        UGetTextLazyToGetTextLazyTransformer,
+        UGetTextNoopToGetTextNoopTransformer,
+        UGetTextToGetTextTransformer,
+        UNGetTextLazyToNGetTextLazyTransformer,
+        UNGetTextToNGetTextTransformer,
+        URLToRePathTransformer,
+    ]

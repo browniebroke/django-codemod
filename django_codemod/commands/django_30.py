@@ -14,3 +14,18 @@ class RenderToResponseToRenderCommand(BaseCodemodCommand):
 
     DESCRIPTION: str = "Replaces render_to_response() by render()."
     transformers = [RenderToResponseToRenderTransformer]
+
+
+class Django30Command(BaseCodemodCommand):
+    """
+    Resolve deprecations for removals in Django 3.0.
+
+    Combines all the other commands in this module, to fix these deprecations:
+
+    - ``django.shortcuts.render_to_response``
+    """
+
+    DESCRIPTION: str = "Resolve deprecations for removals in Django 3.0."
+    transformers = [
+        RenderToResponseToRenderTransformer,
+    ]
