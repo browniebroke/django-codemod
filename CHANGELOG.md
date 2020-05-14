@@ -1,5 +1,19 @@
 # Changelog
 
+## [Unreleased](https://github.com/browniebroke/django-codemod/tree/HEAD)
+
+[Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.5.0...HEAD)
+
+### 🐛 Bug Fixes:
+
+- Fix commands non-findable by libCST [\#44](https://github.com/browniebroke/django-codemod/pull/44) ([browniebroke](https://github.com/browniebroke))
+- Fix bug with trailing comma when removed import is the last one [\#39](https://github.com/browniebroke/django-codemod/pull/39) ([browniebroke](https://github.com/browniebroke))
+- Fix bug with lost alias when 'import as' is used [\#38](https://github.com/browniebroke/django-codemod/pull/38) ([browniebroke](https://github.com/browniebroke))
+
+### 🗑 Removals:
+
+- Remove commands to fix single deprecations [\#43](https://github.com/browniebroke/django-codemod/pull/43) ([browniebroke](https://github.com/browniebroke))
+
 ## [v0.5.0](https://github.com/browniebroke/django-codemod/tree/v0.5.0) (2020-05-13)
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.4.0...v0.5.0)
