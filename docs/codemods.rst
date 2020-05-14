@@ -6,13 +6,10 @@ If everything is setup properly, the list of Django Codemods should appear when 
 bash::
 
     > python3 -m libcst.tool list
-    django_30.RenderToResponseToRenderCommand - Replaces render_to_response() by render().
-    django_40.ForceTextToForceStrCommand - Replaces force_text() by force_str().
-    django_40.SmartTextToForceStrCommand - Replaces smart_text() by smart_str().
-    ...
+    django_30.Django30Command - Resolve deprecations for removals in Django 3.0.
+    django_40.Django40Command - Resolve deprecations for removals in Django 4.0.
 
-
-Codemodders are organised by the version of Django where a feature is removed. Django has a `deprecation timeline page`_ listing all its deprecations by version.
+Codemodders are organised following the Django `deprecation timeline page`_, listing all its deprecations by version.
 
 For instance, to fix a deprecation listed in the 4.0 section, the corresponding codemodder would be found under ``django_40``.
 
