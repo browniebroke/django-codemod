@@ -2,6 +2,7 @@
 
 [![image](https://img.shields.io/pypi/v/django-codemod.svg)](https://pypi.python.org/pypi/django-codemod)
 [![image](https://img.shields.io/travis/browniebroke/django-codemod.svg)](https://travis-ci.com/browniebroke/django-codemod)
+[![Test](https://github.com/browniebroke/django-codemod/workflows/Test/badge.svg)](https://github.com/browniebroke/django-codemod/actions?query=workflow%3ATest)
 [![Documentation Status](https://readthedocs.org/projects/django-codemod/badge/?version=latest)](https://django-codemod.readthedocs.io/en/latest/?badge=latest)
 [![Updates](https://pyup.io/repos/github/browniebroke/django-codemod/shield.svg)](https://pyup.io/repos/github/browniebroke/django-codemod/)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
