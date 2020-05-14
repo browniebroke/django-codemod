@@ -4,6 +4,10 @@
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.5.0...HEAD)
 
+### 🚀 Enhancements:
+
+- Add the `obj` argument to `InlineModelAdmin.has\_add\_permission\(\)` [\#45](https://github.com/browniebroke/django-codemod/pull/45) ([browniebroke](https://github.com/browniebroke))
+
 ### 🐛 Bug Fixes:
 
 - Fix commands non-findable by libCST [\#44](https://github.com/browniebroke/django-codemod/pull/44) ([browniebroke](https://github.com/browniebroke))
