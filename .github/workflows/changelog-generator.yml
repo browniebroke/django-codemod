@@ -5,9 +5,8 @@
 name: Changelog Generator
 
 on:
-  release:
-    types:
-      - published
+  push:
+    branches: [ master ]
 
 jobs:
   generate_changelog_file:
