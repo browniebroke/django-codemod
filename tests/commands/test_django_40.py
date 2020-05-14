@@ -168,6 +168,20 @@ class TestUGetTextToGetTextCommand(CodemodTest):
         """
         self.assertCodemod(before, after)
 
+    def test_import_with_alias(self) -> None:
+        """Check case with a common alias."""
+        before = """
+            from django.utils.translation import ugettext as _
+
+            result = _(content)
+        """
+        after = """
+            from django.utils.translation import gettext as _
+
+            result = _(content)
+        """
+        self.assertCodemod(before, after)
+
     def test_already_imported_substitution(self) -> None:
         """Test case where gettext is already in the imports."""
         before = """
@@ -365,6 +379,20 @@ class TestUNGetTextLazyToNGetTextLazyCommand(CodemodTest):
             from django.utils.translation import ngettext_lazy
 
             result = ngettext_lazy(content, plural_content, count)
+        """
+        self.assertCodemod(before, after)
+
+    def test_import_as_alias(self) -> None:
+        """Check with a common import alias."""
+        before = """
+            from django.utils.translation import ungettext_lazy as _
+
+            result = _(content, plural_content, count)
+        """
+        after = """
+            from django.utils.translation import ngettext_lazy as _
+
+            result = _(content, plural_content, count)
         """
         self.assertCodemod(before, after)
 
