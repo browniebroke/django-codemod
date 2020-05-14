@@ -11,6 +11,7 @@ from libcst import (
     Name,
     RemoveFromParent,
     Arg,
+    MaybeSentinel,
 )
 from libcst._nodes.statement import ImportFrom, BaseSmallStatement
 from libcst.codemod import ContextAwareTransformer
@@ -61,7 +62,7 @@ class BaseSimpleFuncRenameTransformer(ContextAwareTransformer, ABC):
     ) -> Union[BaseSmallStatement, RemovalSentinel]:
         if self._test_import_from(updated_node):
             new_names = []
-            for import_alias in original_node.names:
+            for import_alias in updated_node.names:
                 if import_alias.evaluated_name == self.old_name:
                     as_name = (
                         import_alias.asname.name.value if import_alias.asname else None
@@ -76,8 +77,13 @@ class BaseSimpleFuncRenameTransformer(ContextAwareTransformer, ABC):
                     new_names.append(import_alias)
             if not new_names:
                 return RemoveFromParent()
-            new_names = list(sorted(new_names, key=lambda n: n.evaluated_name))
-            return ImportFrom(module=updated_node.module, names=new_names)
+            # sort imports
+            new_names = sorted(new_names, key=lambda n: n.evaluated_name)
+            # remove any trailing commas
+            last_name = new_names[-1]
+            if last_name.comma != MaybeSentinel.DEFAULT:
+                new_names[-1] = last_name.with_changes(comma=MaybeSentinel.DEFAULT)
+            return updated_node.with_changes(names=new_names)
         return super().leave_ImportFrom(original_node, updated_node)
 
     def leave_Call(self, original_node: Call, updated_node: Call) -> BaseExpression:
