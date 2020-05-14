@@ -1,4 +1,7 @@
-from django_codemod.visitors.django_30 import RenderToResponseToRenderTransformer
+from django_codemod.visitors.django_30 import (
+    RenderToResponseToRenderTransformer,
+    InlineHasAddPermissionsTransformer,
+)
 from .base import BaseVisitorTest
 
 
@@ -46,5 +49,118 @@ class TestRenderToResponseToRenderTransformer(BaseVisitorTest):
             from django.shortcuts import get_object_or_404, render
 
             result = render(None, "index.html", context={})
+        """
+        self.assertCodemod(before, after)
+
+
+class TestInlineHasAddPermissionsTransformer(BaseVisitorTest):
+
+    transformer = InlineHasAddPermissionsTransformer
+
+    def test_noop(self) -> None:
+        """Test no modification when base class doesn't match."""
+        before = """
+            class MyAdmin(admin.ModelAdmin):
+
+                def has_add_permission(self, request):
+                    return False
+        """
+        after = """
+            class MyAdmin(admin.ModelAdmin):
+
+                def has_add_permission(self, request):
+                    return False
+        """
+        self.assertCodemod(before, after)
+
+    def test_tabular_inline(self) -> None:
+        """Test modification when base class is admin.TabularInline."""
+        before = """
+            class MyInlineInline(TabularInline):
+
+                def has_add_permission(self, request):
+                    return False
+        """
+        after = """
+            class MyInlineInline(TabularInline):
+
+                def has_add_permission(self, request, obj = None):
+                    return False
+        """
+        self.assertCodemod(before, after)
+
+    def test_admin_tabular_inline(self) -> None:
+        """Test modification when base class is admin.TabularInline."""
+        before = """
+            class MyInlineInline(admin.TabularInline):
+
+                def has_add_permission(self, request):
+                    return False
+        """
+        after = """
+            class MyInlineInline(admin.TabularInline):
+
+                def has_add_permission(self, request, obj = None):
+                    return False
+        """
+        self.assertCodemod(before, after)
+
+    def test_stacked_inline(self) -> None:
+        """Test modification when base class is StackedInline."""
+        before = """
+            class MyInlineInline(StackedInline):
+
+                def has_add_permission(self, request):
+                    return False
+        """
+        after = """
+            class MyInlineInline(StackedInline):
+
+                def has_add_permission(self, request, obj = None):
+                    return False
+        """
+        self.assertCodemod(before, after)
+
+    def test_admin_stacked_inline(self) -> None:
+        """Test modification when base class is admin.StackedInline."""
+        before = """
+            class MyInlineInline(admin.StackedInline):
+
+                def has_add_permission(self, request):
+                    return False
+        """
+        after = """
+            class MyInlineInline(admin.StackedInline):
+
+                def has_add_permission(self, request, obj = None):
+                    return False
+        """
+        self.assertCodemod(before, after)
+
+    def test_context_cleared(self) -> None:
+        """Test that context is cleared and doesn't leak to other classes."""
+        before = """
+            class MyInlineInline(admin.TabularInline):
+
+                def has_add_permission(self, request):
+                    return False
+
+
+            class MyAdmin(admin.ModelAdmin):
+
+                def has_add_permission(self, request):
+                    return False
+        """
+        after = """
+            class MyInlineInline(admin.TabularInline):
+
+                def has_add_permission(self, request, obj = None):
+                    return False
+
+
+            class MyAdmin(admin.ModelAdmin):
+
+                def has_add_permission(self, request):
+                    return False
         """
         self.assertCodemod(before, after)

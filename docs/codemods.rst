@@ -26,7 +26,7 @@ This command should fix things `removed in Django 3.0`_.
 Django 4.0
 ----------
 
-These command should fix things `removed in Django 4.0`_.
+This command should fix things `removed in Django 4.0`_.
 
 .. _removed in Django 4.0: https://docs.djangoproject.com/en/dev/internals/deprecation/#deprecation-removed-in-4-0
 

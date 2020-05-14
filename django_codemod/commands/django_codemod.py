@@ -1,5 +1,8 @@
 from .base import BaseCodemodCommand
-from ..visitors.django_30 import RenderToResponseToRenderTransformer
+from ..visitors.django_30 import (
+    RenderToResponseToRenderTransformer,
+    InlineHasAddPermissionsTransformer,
+)
 from ..visitors.django_40 import (
     ForceTextToForceStrTransformer,
     SmartTextToForceStrTransformer,
@@ -14,24 +17,23 @@ from ..visitors.django_40 import (
 
 class Django30Command(BaseCodemodCommand):
     """
-    Resolve deprecations for removals in Django 3.0.
+    Resolve following deprecations:
 
-    Combines all the other commands in this module, to fix these deprecations:
-
-    - ``django.shortcuts.render_to_response``
+    - Replaces ``render_to_response()`` by ``render()`` and add ``request=None``
+      as the first argument of ``render()``.
+    - Add the ``obj`` argument to ``InlineModelAdmin.has_add_permission()``.
     """
 
     DESCRIPTION: str = "Resolve deprecations for removals in Django 3.0."
     transformers = [
         RenderToResponseToRenderTransformer,
+        InlineHasAddPermissionsTransformer,
     ]
 
 
 class Django40Command(BaseCodemodCommand):
     """
-    Resolve deprecations for removals in Django 4.0.
-
-    Combines all the other commands in this module, to fix these deprecations:
+    Resolve following deprecations:
 
     - ``django.utils.encoding.force_text``
     - ``django.utils.encoding.smart_text``
