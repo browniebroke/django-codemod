@@ -1,6 +1,6 @@
 from libcst.codemod import CodemodTest
 
-from django_codemod.commands.base import BaseCodemodCommand
+from django_codemod.commands import BaseCodemodCommand
 
 
 class BaseVisitorTest(CodemodTest):

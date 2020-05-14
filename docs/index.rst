@@ -12,8 +12,8 @@ Collections of libCST codemodder to help upgrades to newer versions of Django.
    codemods
 
 .. toctree::
-    :caption: Project Info
-    :maxdepth: 2
+   :caption: Project Info
+   :maxdepth: 2
 
    contributing
    changelog

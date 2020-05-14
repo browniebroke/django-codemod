@@ -21,10 +21,10 @@ Not finding what you need? I'm open to contributions, please send me a pull requ
 
 ### Example of use
 
-For example, replace the deprecated `url()` function by the newer `re_path()` introduced in Django 2.0 as follows by running the appropriate codemodder:
+For example, to fix deprecations removed in Django 4.0:
 
 ```bash
-python3 -m libcst.tool codemod django_40.URLToRePathCommand .
+python3 -m libcst.tool codemod Django40Command .
 ```
 
 Will go through all the files under your local directory `.` and apply the code modifications to update imports and function calls.
