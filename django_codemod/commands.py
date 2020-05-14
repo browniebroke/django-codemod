@@ -1,7 +1,11 @@
-# This is expected to cover most of the things listed in this section:
-# https://docs.djangoproject.com/en/dev/internals/deprecation/#deprecation-removed-in-4-0
-from .base import BaseCodemodCommand
-from ..visitors.django_40 import (
+from abc import ABC
+from typing import List
+
+import libcst as cst
+from libcst.codemod import VisitorBasedCodemodCommand, ContextAwareTransformer
+
+from .visitors.django_30 import RenderToResponseToRenderTransformer
+from .visitors.django_40 import (
     ForceTextToForceStrTransformer,
     SmartTextToForceStrTransformer,
     UGetTextLazyToGetTextLazyTransformer,
@@ -11,6 +15,33 @@ from ..visitors.django_40 import (
     UNGetTextToNGetTextTransformer,
     URLToRePathTransformer,
 )
+
+
+class BaseCodemodCommand(VisitorBasedCodemodCommand, ABC):
+    """Base class for our commands."""
+
+    transformers: List[ContextAwareTransformer]
+
+    def transform_module_impl(self, tree: cst.Module) -> cst.Module:
+        for transform in self.transformers:
+            inst = transform(self.context)
+            tree = inst.transform_module(tree)
+        return tree
+
+
+class Django30Command(BaseCodemodCommand):
+    """
+    Resolve deprecations for removals in Django 3.0.
+
+    Combines all the other commands in this module, to fix these deprecations:
+
+    - ``django.shortcuts.render_to_response``
+    """
+
+    DESCRIPTION: str = "Resolve deprecations for removals in Django 3.0."
+    transformers = [
+        RenderToResponseToRenderTransformer,
+    ]
 
 
 class Django40Command(BaseCodemodCommand):

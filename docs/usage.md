@@ -25,7 +25,7 @@ Should work nicely with [libCST codemods](https://libcst.readthedocs.io/en/lates
 3. Run libCST with the command from `django-codemod` that you want to apply:
 
    ```bash
-   > python3 -m libcst.tool codemod django_40.Django40Command .
+   > python3 -m libcst.tool codemod Django40Command .
    ```
 
    This will apply to code modifications for all the code under `.` **in place**.

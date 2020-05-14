@@ -24,7 +24,7 @@ Not finding what you need? I'm open to contributions, please send me a pull requ
 For example, to fix deprecations removed in Django 4.0:
 
 ```bash
-python3 -m libcst.tool codemod django_40.Django40Command .
+python3 -m libcst.tool codemod Django40Command .
 ```
 
 Will go through all the files under your local directory `.` and apply the code modifications to update imports and function calls.

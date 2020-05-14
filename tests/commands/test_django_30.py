@@ -1,6 +1,6 @@
 from libcst.codemod import CodemodTest
 
-from django_codemod.commands.django_30 import Django30Command
+from django_codemod.commands import Django30Command
 
 
 class TestDjango30Command(CodemodTest):
