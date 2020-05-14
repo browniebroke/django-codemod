@@ -63,8 +63,14 @@ class BaseSimpleFuncRenameTransformer(ContextAwareTransformer, ABC):
             new_names = []
             for import_alias in original_node.names:
                 if import_alias.evaluated_name == self.old_name:
+                    as_name = (
+                        import_alias.asname.name.value if import_alias.asname else None
+                    )
                     AddImportsVisitor.add_needed_import(
-                        self.context, ".".join(self.new_module_parts), self.new_name,
+                        context=self.context,
+                        module=".".join(self.new_module_parts),
+                        obj=self.new_name,
+                        asname=as_name,
                     )
                 else:
                     new_names.append(import_alias)
