@@ -1,11 +1,6 @@
-from abc import ABC
-from typing import List
-
-import libcst as cst
-from libcst.codemod import VisitorBasedCodemodCommand, ContextAwareTransformer
-
-from .visitors.django_30 import RenderToResponseToRenderTransformer
-from .visitors.django_40 import (
+from .base import BaseCodemodCommand
+from ..visitors.django_30 import RenderToResponseToRenderTransformer
+from ..visitors.django_40 import (
     ForceTextToForceStrTransformer,
     SmartTextToForceStrTransformer,
     UGetTextLazyToGetTextLazyTransformer,
@@ -15,18 +10,6 @@ from .visitors.django_40 import (
     UNGetTextToNGetTextTransformer,
     URLToRePathTransformer,
 )
-
-
-class BaseCodemodCommand(VisitorBasedCodemodCommand, ABC):
-    """Base class for our commands."""
-
-    transformers: List[ContextAwareTransformer]
-
-    def transform_module_impl(self, tree: cst.Module) -> cst.Module:
-        for transform in self.transformers:
-            inst = transform(self.context)
-            tree = inst.transform_module(tree)
-        return tree
 
 
 class Django30Command(BaseCodemodCommand):
