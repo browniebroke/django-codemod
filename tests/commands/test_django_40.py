@@ -82,6 +82,20 @@ class TestForceTextToForceStrCommand(CodemodTest):
         """
         self.assertCodemod(before, after)
 
+    def test_extra_trailing_comma_when_last(self) -> None:
+        """Extra trailing comma when removed import is the last one."""
+        before = """
+            from django.utils.encoding import force_str, force_text
+
+            result = force_text(content)
+        """
+        after = """
+            from django.utils.encoding import force_str
+
+            result = force_str(content)
+        """
+        self.assertCodemod(before, after)
+
 
 class TestSmartTextToForceStrCommand(CodemodTest):
 
