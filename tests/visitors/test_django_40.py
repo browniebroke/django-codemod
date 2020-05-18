@@ -1,13 +1,14 @@
 from django_codemod.visitors.django_40 import (
     ForceTextToForceStrTransformer,
     SmartTextToForceStrTransformer,
-    UGetTextToGetTextTransformer,
     UGetTextLazyToGetTextLazyTransformer,
     UGetTextNoopToGetTextNoopTransformer,
-    UNGetTextToNGetTextTransformer,
+    UGetTextToGetTextTransformer,
     UNGetTextLazyToNGetTextLazyTransformer,
+    UNGetTextToNGetTextTransformer,
     URLToRePathTransformer,
 )
+
 from .base import BaseVisitorTest
 
 

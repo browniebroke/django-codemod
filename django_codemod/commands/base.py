@@ -2,7 +2,7 @@ from abc import ABC
 from typing import List
 
 import libcst as cst
-from libcst.codemod import VisitorBasedCodemodCommand, ContextAwareTransformer
+from libcst.codemod import ContextAwareTransformer, VisitorBasedCodemodCommand
 
 
 class BaseCodemodCommand(VisitorBasedCodemodCommand, ABC):

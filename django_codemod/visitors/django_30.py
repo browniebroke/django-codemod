@@ -3,16 +3,16 @@
 from typing import Sequence, Union
 
 from libcst import (
-    Call,
-    Name,
     Arg,
-    RemovalSentinel,
-    matchers as m,
-    ClassDef,
     BaseStatement,
+    Call,
+    ClassDef,
     FunctionDef,
+    Name,
     Param,
+    RemovalSentinel,
 )
+from libcst import matchers as m
 from libcst.codemod import ContextAwareTransformer
 
 from .base import BaseSimpleFuncRenameTransformer
