@@ -1,3 +1,5 @@
+from parameterized import parameterized
+
 from django_codemod.visitors.django_30 import (
     RenderToResponseToRenderTransformer,
     InlineHasAddPermissionsTransformer,
@@ -57,8 +59,8 @@ class TestInlineHasAddPermissionsTransformer(BaseVisitorTest):
 
     transformer = InlineHasAddPermissionsTransformer
 
-    def test_noop(self) -> None:
-        """Test no modification when base class doesn't match."""
+    def test_model_admin_base_class(self) -> None:
+        """Doesn't modify if base class doesn't match."""
         before = """
             class MyAdmin(admin.ModelAdmin):
 
@@ -73,64 +75,88 @@ class TestInlineHasAddPermissionsTransformer(BaseVisitorTest):
         """
         self.assertCodemod(before, after)
 
-    def test_tabular_inline(self) -> None:
-        """Test modification when base class is admin.TabularInline."""
+    def test_no_base_class(self) -> None:
+        """Doesn't modify if there is no base class."""
         before = """
-            class MyInlineInline(TabularInline):
+            class MyCustomStuff:
 
                 def has_add_permission(self, request):
                     return False
         """
         after = """
-            class MyInlineInline(TabularInline):
+            class MyCustomStuff:
+
+                def has_add_permission(self, request):
+                    return False
+        """
+        self.assertCodemod(before, after)
+
+    @parameterized.expand(
+        [
+            "TabularInline",
+            "admin.TabularInline",
+            "StackedInline",
+            "admin.StackedInline",
+        ],
+    )
+    def test_simple_substitution(self, base_class) -> None:
+        """Modification with a valid base class."""
+        before = f"""
+            class MyInlineInline({base_class}):
+
+                def has_add_permission(self, request):
+                    return False
+        """
+        after = f"""
+            class MyInlineInline({base_class}):
 
                 def has_add_permission(self, request, obj = None):
                     return False
         """
         self.assertCodemod(before, after)
 
-    def test_admin_tabular_inline(self) -> None:
-        """Test modification when base class is admin.TabularInline."""
-        before = """
-            class MyInlineInline(admin.TabularInline):
+    @parameterized.expand(
+        [
+            "TabularInline",
+            "admin.TabularInline",
+            "StackedInline",
+            "admin.StackedInline",
+        ],
+    )
+    def test_multiple_base_classes_last(self, base_class) -> None:
+        """Modification with multiple base classes, valid last."""
+        before = f"""
+            class MyInlineInline(InlineMixin, {base_class}):
 
                 def has_add_permission(self, request):
                     return False
         """
-        after = """
-            class MyInlineInline(admin.TabularInline):
+        after = f"""
+            class MyInlineInline(InlineMixin, {base_class}):
 
                 def has_add_permission(self, request, obj = None):
                     return False
         """
         self.assertCodemod(before, after)
 
-    def test_stacked_inline(self) -> None:
-        """Test modification when base class is StackedInline."""
-        before = """
-            class MyInlineInline(StackedInline):
+    @parameterized.expand(
+        [
+            "TabularInline",
+            "admin.TabularInline",
+            "StackedInline",
+            "admin.StackedInline",
+        ],
+    )
+    def test_multiple_base_classes_first(self, base_class) -> None:
+        """Modification with multiple base classes, valid first."""
+        before = f"""
+            class MyInlineInline({base_class}, OtherBase):
 
                 def has_add_permission(self, request):
                     return False
         """
-        after = """
-            class MyInlineInline(StackedInline):
-
-                def has_add_permission(self, request, obj = None):
-                    return False
-        """
-        self.assertCodemod(before, after)
-
-    def test_admin_stacked_inline(self) -> None:
-        """Test modification when base class is admin.StackedInline."""
-        before = """
-            class MyInlineInline(admin.StackedInline):
-
-                def has_add_permission(self, request):
-                    return False
-        """
-        after = """
-            class MyInlineInline(admin.StackedInline):
+        after = f"""
+            class MyInlineInline({base_class}, OtherBase):
 
                 def has_add_permission(self, request, obj = None):
                     return False

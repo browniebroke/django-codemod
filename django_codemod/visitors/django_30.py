@@ -37,30 +37,17 @@ class InlineHasAddPermissionsTransformer(ContextAwareTransformer):
     """Add the ``obj`` argument to ``InlineModelAdmin.has_add_permission()``."""
 
     context_key = "InlineHasAddPermissionsTransformer"
+    base_cls_matcher = m.OneOf(
+        m.Arg(m.Attribute(value=m.Name("admin"), attr=m.Name("TabularInline"))),
+        m.Arg(m.Name("TabularInline")),
+        m.Arg(m.Attribute(value=m.Name("admin"), attr=m.Name("StackedInline"))),
+        m.Arg(m.Name("StackedInline")),
+    )
 
     def visit_ClassDef_bases(self, node: ClassDef) -> None:
-        if m.matches(
-            node,
-            m.ClassDef(
-                bases=(
-                    m.OneOf(
-                        m.Arg(
-                            m.Attribute(
-                                value=m.Name("admin"), attr=m.Name("TabularInline")
-                            )
-                        ),
-                        m.Arg(m.Name("TabularInline")),
-                        m.Arg(
-                            m.Attribute(
-                                value=m.Name("admin"), attr=m.Name("StackedInline")
-                            )
-                        ),
-                        m.Arg(m.Name("StackedInline")),
-                    ),
-                )
-            ),
-        ):
-            self.context.scratch[self.context_key] = True
+        for base_cls in node.bases:
+            if m.matches(base_cls, self.base_cls_matcher):
+                self.context.scratch[self.context_key] = True
         super().visit_ClassDef_bases(node)
 
     def leave_ClassDef(
