@@ -10,6 +10,7 @@
 
 ### 🐛 Bug Fixes:
 
+- Fix InlineModelAdmin transformer with multiple base classes [\#46](https://github.com/browniebroke/django-codemod/pull/46) ([browniebroke](https://github.com/browniebroke))
 - Fix commands non-findable by libCST [\#44](https://github.com/browniebroke/django-codemod/pull/44) ([browniebroke](https://github.com/browniebroke))
 - Fix bug with trailing comma when removed import is the last one [\#39](https://github.com/browniebroke/django-codemod/pull/39) ([browniebroke](https://github.com/browniebroke))
 - Fix bug with lost alias when 'import as' is used [\#38](https://github.com/browniebroke/django-codemod/pull/38) ([browniebroke](https://github.com/browniebroke))
@@ -44,18 +45,11 @@
 
 - Add missing description for URLToRePathCommand [\#28](https://github.com/browniebroke/django-codemod/pull/28) ([browniebroke](https://github.com/browniebroke))
 - Document how to list all available codemodders [\#27](https://github.com/browniebroke/django-codemod/pull/27) ([browniebroke](https://github.com/browniebroke))
+- Fix some refs in README [\#21](https://github.com/browniebroke/django-codemod/pull/21) ([adamchainz](https://github.com/adamchainz))
 
 ## [v0.3.0](https://github.com/browniebroke/django-codemod/tree/v0.3.0) (2020-05-10)
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.2.1...v0.3.0)
-
-### 🚀 Enhancements:
-
-- Support resolving django.conf.urls.url\(\) deprecation [\#22](https://github.com/browniebroke/django-codemod/pull/22) ([browniebroke](https://github.com/browniebroke))
-
-### 📖 Documentation updates:
-
-- Fix some refs in README [\#21](https://github.com/browniebroke/django-codemod/pull/21) ([adamchainz](https://github.com/adamchainz))
 
 ## [v0.2.1](https://github.com/browniebroke/django-codemod/tree/v0.2.1) (2020-05-10)
 
@@ -76,6 +70,7 @@
 
 ### 🚀 Enhancements:
 
+- Support resolving django.conf.urls.url\(\) deprecation [\#22](https://github.com/browniebroke/django-codemod/pull/22) ([browniebroke](https://github.com/browniebroke))
 - Support resolving django.utils.translation.ungettext\_lazy deprecation [\#17](https://github.com/browniebroke/django-codemod/pull/17) ([browniebroke](https://github.com/browniebroke))
 - Support resolving django.utils.translation.ungettext deprecation [\#16](https://github.com/browniebroke/django-codemod/pull/16) ([browniebroke](https://github.com/browniebroke))
 - Support resolving django.utils.translation.ugettext\_noop deprecation [\#15](https://github.com/browniebroke/django-codemod/pull/15) ([browniebroke](https://github.com/browniebroke))
