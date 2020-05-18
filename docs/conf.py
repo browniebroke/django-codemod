@@ -20,9 +20,10 @@
 import os
 import sys
 
+import django_codemod  # noqa E402
+
 sys.path.insert(0, os.path.abspath(".."))
 
-import django_codemod  # noqa E402
 
 # -- General configuration ---------------------------------------------
 

@@ -1,9 +1,10 @@
 from parameterized import parameterized
 
 from django_codemod.visitors.django_30 import (
-    RenderToResponseToRenderTransformer,
     InlineHasAddPermissionsTransformer,
+    RenderToResponseToRenderTransformer,
 )
+
 from .base import BaseVisitorTest
 
 
