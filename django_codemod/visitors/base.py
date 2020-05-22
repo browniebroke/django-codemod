@@ -72,6 +72,7 @@ class BaseSimpleFuncRenameTransformer(ContextAwareTransformer, ABC):
                         obj=self.new_name,
                         asname=as_name,
                     )
+                    self.context.scratch[self.rename_from] = not import_alias.asname
                 else:
                     new_names.append(import_alias)
             if not new_names:
@@ -85,8 +86,14 @@ class BaseSimpleFuncRenameTransformer(ContextAwareTransformer, ABC):
             return updated_node.with_changes(names=new_names)
         return super().leave_ImportFrom(original_node, updated_node)
 
+    @property
+    def _is_context_right(self):
+        return self.context.scratch.get(self.rename_from, False)
+
     def leave_Call(self, original_node: Call, updated_node: Call) -> BaseExpression:
-        if m.matches(updated_node, m.Call(func=m.Name(self.old_name))):
+        if self._is_context_right and m.matches(
+            updated_node, m.Call(func=m.Name(self.old_name))
+        ):
             updated_args = self.update_call_args(updated_node)
             return Call(args=updated_args, func=Name(self.new_name))
         return super().leave_Call(original_node, updated_node)

@@ -28,6 +28,7 @@ class TestSimpleFuncRenameTransformer(BaseVisitorTest):
         self.assertCodemod(before, after)
 
     def test_already_imported(self) -> None:
+        """Function to modify is already imported with an alias."""
         before = """
             from django.dummy.module import func, better_func
 
@@ -41,6 +42,7 @@ class TestSimpleFuncRenameTransformer(BaseVisitorTest):
         self.assertCodemod(before, after)
 
     def test_import_with_alias(self) -> None:
+        """Function to modify is imported with an alias."""
         before = """
             from django.dummy.module import func as aliased_func
 
@@ -50,6 +52,38 @@ class TestSimpleFuncRenameTransformer(BaseVisitorTest):
             from django.dummy.module import better_func as aliased_func
 
             result = aliased_func()
+        """
+        self.assertCodemod(before, after)
+
+    def test_same_name_function(self) -> None:
+        """Should not be fooled by a function bearing the same name."""
+        before = """
+            from utils.helpers import func
+
+            result = func()
+        """
+        after = """
+            from utils.helpers import func
+
+            result = func()
+        """
+        self.assertCodemod(before, after)
+
+    def test_same_name_with_alias_import_function(self) -> None:
+        """Imported with alias and other function with the same name."""
+        before = """
+            from django.dummy.module import func as aliased_func
+            from utils.helpers import func
+
+            result = func()
+            aliased_func()
+        """
+        after = """
+            from utils.helpers import func
+            from django.dummy.module import better_func as aliased_func
+
+            result = func()
+            aliased_func()
         """
         self.assertCodemod(before, after)
 
