@@ -82,7 +82,6 @@
 - Support resolving django.utils.translation.ugettext\_noop deprecation [\#15](https://github.com/browniebroke/django-codemod/pull/15) ([browniebroke](https://github.com/browniebroke))
 - Support resolving django.utils.translation.ugettext\_lazy deprecation [\#14](https://github.com/browniebroke/django-codemod/pull/14) ([browniebroke](https://github.com/browniebroke))
 - Support resolving django.utils.translation.ugettext deprecation [\#12](https://github.com/browniebroke/django-codemod/pull/12) ([browniebroke](https://github.com/browniebroke))
-- Support smart\_text deprecation, replace by smart\_str [\#10](https://github.com/browniebroke/django-codemod/pull/10) ([browniebroke](https://github.com/browniebroke))
 - Refactor checks to use matchers [\#8](https://github.com/browniebroke/django-codemod/pull/8) ([browniebroke](https://github.com/browniebroke))
 
 ### 🗑 Removals:
