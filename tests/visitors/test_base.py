@@ -69,6 +69,24 @@ class TestSimpleFuncRenameTransformer(BaseVisitorTest):
         """
         self.assertCodemod(before, after)
 
+    def test_same_name_with_alias_import_function(self) -> None:
+        """Imported with alias and other function with the same name."""
+        before = """
+            from django.dummy.module import func as aliased_func
+            from utils.helpers import func
+
+            result = func()
+            aliased_func()
+        """
+        after = """
+            from utils.helpers import func
+            from django.dummy.module import better_func as aliased_func
+
+            result = func()
+            aliased_func()
+        """
+        self.assertCodemod(before, after)
+
     def test_extra_trailing_comma_when_last(self) -> None:
         """Extra trailing comma when removed import is the last one."""
         before = """
