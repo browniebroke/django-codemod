@@ -1,5 +1,21 @@
 # Changelog
 
+## [Unreleased](https://github.com/browniebroke/django-codemod/tree/HEAD)
+
+[Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.6.0...HEAD)
+
+### 🚀 Enhancements:
+
+- Add a djcodemod CLI [\#55](https://github.com/browniebroke/django-codemod/pull/55) ([browniebroke](https://github.com/browniebroke))
+
+### 🐛 Bug Fixes:
+
+- Make sure the function to rename is imported before renaming [\#54](https://github.com/browniebroke/django-codemod/pull/54) ([browniebroke](https://github.com/browniebroke))
+
+### 📖 Documentation updates:
+
+- Updates README.me with proper travis badge [\#50](https://github.com/browniebroke/django-codemod/pull/50) ([sobolevn](https://github.com/sobolevn))
+
 ## [v0.6.0](https://github.com/browniebroke/django-codemod/tree/v0.6.0) (2020-05-22)
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.5.0...v0.6.0)
