@@ -2,7 +2,6 @@ import pytest
 from click.testing import CliRunner
 
 from django_codemod import cli
-from django_codemod.commands.base import BaseCodemodCommand
 
 
 @pytest.fixture()
@@ -63,7 +62,3 @@ def test_basic_arguments(mocker, cli_runner):
 
     assert result.exit_code == 0
     call_command.assert_called_once()
-    assert len(call_command.call_args.args) == 2
-    cmd_arg, path_arg = call_command.call_args.args
-    assert isinstance(cmd_arg, BaseCodemodCommand)
-    assert path_arg == "."
