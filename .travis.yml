@@ -11,16 +11,3 @@ install: pip install -U tox-travis
 
 # Command to run tests, e.g. python setup.py test
 script: tox
-
-jobs:
-  include:
-    - stage: deploy
-      python: 3.8
-      script: skip
-      deploy:
-        provider: pypi
-        distributions: sdist bdist_wheel
-        user: "__token__"
-        on:
-          tags: true
-          repo: browniebroke/django-codemod
