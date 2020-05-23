@@ -11,9 +11,15 @@
 
 A tool to automatically upgrade Django projects to newer version of the framework by fixing deprecations.
 
+## Installation
+
+Install this via pip (or your favourite installer):
+
+`pip install django-codemod`
+
 ## Usage
 
-For example, to fix deprecations removed in Django 4.0:
+To fix deprecations removed in Django 4.0:
 
 ```bash
 djcodemod --removed-in 4.0 .
