@@ -24,19 +24,41 @@ class VersionParamType(click.ParamType):
     )
 
     def convert(self, value, param, ctx):
+        """Parse version to keep only major an minor digits."""
         try:
-            values_parts = tuple(int(v) for v in value.split("."))
-            if len(values_parts) < 2:
-                self.fail(
-                    f"{value!r}: missing version parts. {self.example}", param, ctx,
-                )
-            return values_parts
+            return self._parse_unsafe(value, param, ctx)
         except TypeError:
             self.fail(
-                f"{value!r}: unable to parse version. {self.example}", param, ctx,
+                f"{value!r} unable to parse version. {self.example}", param, ctx,
             )
         except ValueError:
-            self.fail(f"{value!r}: is not a valid version. {self.example}", param, ctx)
+            self.fail(f"{value!r} is not a valid version. {self.example}", param, ctx)
+
+    def _parse_unsafe(self, value, param, ctx):
+        """Parse version and validate it's a supported one."""
+        parsed_version = self._split_digits(value, param, ctx)
+        if parsed_version not in VERSIONS_MODIFIERS.keys():
+            supported_versions = ", ".join(
+                ".".join(str(version_part) for version_part in version_tuple)
+                for version_tuple in VERSIONS_MODIFIERS.keys()
+            )
+            self.fail(
+                f"{value!r} is not supported. "
+                f"Versions supported: {supported_versions}",
+                param,
+                ctx,
+            )
+        return parsed_version
+
+    def _split_digits(self, value, param, ctx):
+        """Split version into 2-tuple of digits, ignoring patch digit."""
+        values_parts = tuple(int(v) for v in value.split("."))
+        if len(values_parts) < 2:
+            self.fail(
+                f"{value!r} missing version parts. {self.example}", param, ctx,
+            )
+        major, minor, *patches = values_parts
+        return (major, minor)
 
 
 DJANGO_VERSION = VersionParamType()
@@ -68,16 +90,7 @@ def djcodemod(django_, path):
     """
     if django_ is None:
         raise click.BadArgumentUsage("Django version is required")
-    major, minor, *patch = django_
-    try:
-        codemod_modules_list = [VERSIONS_MODIFIERS[(major, minor)]]
-    except KeyError:
-        supported_versions = ", ".join(str(v) for v in VERSIONS_MODIFIERS.keys())
-        raise click.BadArgumentUsage(
-            f"{django_} version isn't supported at this stage. "
-            f"Versions supported: {supported_versions}"
-        )
-
+    codemod_modules_list = [VERSIONS_MODIFIERS[django_]]
     command_instance = build_command(codemod_modules_list)
     call_command(command_instance, path)
 
