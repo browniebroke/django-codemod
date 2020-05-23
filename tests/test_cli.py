@@ -15,8 +15,15 @@ def test_missing_argument(cli_runner):
     result = cli_runner.invoke(cli.djcodemod)
 
     assert result.exit_code == 2
-    assert "djcodemod" in result.output
     assert 'Error: Missing argument "PATH"' in result.output
+
+
+def test_missing_option(cli_runner):
+    """Should explain missing option."""
+    result = cli_runner.invoke(cli.djcodemod, ["."])
+
+    assert result.exit_code == 2
+    assert 'Error: Missing option "--removed-in".' in result.output
 
 
 def test_help(cli_runner):
@@ -29,21 +36,21 @@ def test_help(cli_runner):
 
 
 def test_missing_version_parts(cli_runner):
-    result = cli_runner.invoke(cli.djcodemod, ["--django", "3", "."])
+    result = cli_runner.invoke(cli.djcodemod, ["--removed-in", "3", "."])
 
     assert result.exit_code == 2
     assert "missing version parts." in result.output
 
 
 def test_non_supported_version(cli_runner):
-    result = cli_runner.invoke(cli.djcodemod, ["--django", "1.0", "."])
+    result = cli_runner.invoke(cli.djcodemod, ["--removed-in", "1.0", "."])
 
     assert result.exit_code == 2
     assert "'1.0' is not supported. Versions supported:" in result.output
 
 
 def test_invalid_version(cli_runner):
-    result = cli_runner.invoke(cli.djcodemod, ["--django", "not.a.version", "."])
+    result = cli_runner.invoke(cli.djcodemod, ["--removed-in", "not.a.version", "."])
 
     assert result.exit_code == 2
     assert "'not.a.version' is not a valid version" in result.output
@@ -52,7 +59,7 @@ def test_invalid_version(cli_runner):
 def test_basic_arguments(mocker, cli_runner):
     call_command = mocker.patch("django_codemod.cli.call_command")
 
-    result = cli_runner.invoke(cli.djcodemod, ["--django", "3.0", "."])
+    result = cli_runner.invoke(cli.djcodemod, ["--removed-in", "3.0", "."])
 
     assert result.exit_code == 0
     call_command.assert_called_once()

@@ -74,23 +74,20 @@ VERSIONS_MODIFIERS = {
 @click.command()
 @click.argument("path")
 @click.option(
-    "--django",
-    "django_",
+    "--removed-in",
+    "removed_in",
     help="The version of Django to fix deprecations for.",
     type=DJANGO_VERSION,
+    required=True,
 )
-def djcodemod(django_, path):
+def djcodemod(removed_in, path):
     """
     Automatically fixes deprecations removed Django deprecations.
 
     This command takes the path to target as argument and a version of
-    Django to fix deprecations for. This will fix deprecations removed
-    in the given version of Django as opposed to the version where they
-    have been deprecated.
+    Django where a previously deprecated feature is removed.
     """
-    if django_ is None:
-        raise click.BadArgumentUsage("Django version is required")
-    codemod_modules_list = [VERSIONS_MODIFIERS[django_]]
+    codemod_modules_list = [VERSIONS_MODIFIERS[removed_in]]
     command_instance = build_command(codemod_modules_list)
     call_command(command_instance, path)
 
