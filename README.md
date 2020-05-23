@@ -9,27 +9,33 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-Collections of libCST codemodder to help upgrades to newer versions of Django.
+A tool to help upgrade Django projects to newer version of the framework by automatically fixing deprecations.
 
-## Features
+## Installation
+
+Install this via pip (or your favourite installer):
+
+`pip install django-codemod`
+
+## Usage
+
+To fix deprecations removed in Django 4.0:
+
+```bash
+djcodemod --removed-in 4.0 .
+```
+
+This will go through all the files under your local directory, under `.` and apply code modifications to help upgrading to Django 4.0.
+
+Check out the [documentation](https://django-codemod.readthedocs.io) for more detail on usage and the full list of codemodders.
+
+## How it works
 
 This is based on [libCST](https://libcst.readthedocs.io/en/latest/index.html) and implements codemods for it. This is currently very limited but the aim is to add more for helping with upcoming deprecations.
 
-Currently implemented codemodders are listed below and grouped by the version of Django where deprecations are removed.
+Codemodders are grouped by the version of Django where a function or feature is removed.
 
 Not finding what you need? I'm open to contributions, please send me a pull request.
-
-### Example of use
-
-For example, to fix deprecations removed in Django 4.0:
-
-```bash
-python3 -m libcst.tool codemod django_codemod.Django40Command .
-```
-
-Will go through all the files under your local directory `.` and apply the code modifications to update imports and function calls.
-
-Check out the [documentation](https://django-codemod.readthedocs.io) for more detail on usage and the full list of codemodders.
 
 ## Contributors ✨
 
