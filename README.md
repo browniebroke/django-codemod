@@ -9,7 +9,7 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-A tool to automatically upgrade Django projects to newer version of the framework by fixing deprecations.
+A tool to help upgrade Django projects to newer version of the framework by automatically fixing deprecations.
 
 ## Installation
 

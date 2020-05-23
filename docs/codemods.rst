@@ -1,34 +1,22 @@
 List of codemodders
 ===================
 
-If everything is setup properly, the list of Django Codemods should appear when running libCST's ``list`` command:
+Here are the automatic fixes which are supported by django-codemod at this stage:
 
-bash::
+Removed in Django 3.0
+---------------------
 
-    > python3 -m libcst.tool list
-    django_codemod.Django30Command - Resolve deprecations for removals in Django 3.0.
-    django_codemod.Django40Command - Resolve deprecations for removals in Django 4.0.
+Applied by passing the ``--removed-in 3.0`` option:
 
-Codemodders are organised following the Django `deprecation timeline page`_, listing all its deprecations by version.
+- Replaces ``render_to_response()`` by ``render()`` and add ``request=None``
+  as the first argument of ``render()``.
+- Add the ``obj`` argument to ``InlineModelAdmin.has_add_permission()``.
 
-.. _deprecation timeline page: https://docs.djangoproject.com/en/3.0/internals/deprecation/
+Removed in Django 4.0
+---------------------
 
-Django 3.0
-----------
+Applied by passing the ``--removed-in 4.0`` option:
 
-This command should fix things `removed in Django 3.0`_.
-
-.. _removed in Django 3.0: https://docs.djangoproject.com/en/dev/internals/deprecation/#deprecation-removed-in-3-0
-
-.. autoclass:: django_codemod.commands.django_codemod.Django30Command
-    :members:
-
-Django 4.0
-----------
-
-This command should fix things `removed in Django 4.0`_.
-
-.. _removed in Django 4.0: https://docs.djangoproject.com/en/dev/internals/deprecation/#deprecation-removed-in-4-0
-
-.. autoclass:: django_codemod.commands.django_codemod.Django40Command
-    :members:
+- Replaces ``force_text`` and ``smart_text`` from the ``django.utils.encoding`` module by ``force_str`` and ``smart_str``
+- Replaces ``ugettext``, ``ugettext_lazy``, ``ugettext_noop``, ``ungettext``, and ``ungettext_lazy`` from the ``django.utils.translation`` module by their replacements, respectively ``gettext``, ``gettext_lazy``, ``gettext_noop``, ``ngettext``, and ``ngettext_lazy``.
+- Replaces ``django.conf.urls.url`` by ``django.urls.re_path``

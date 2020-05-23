@@ -1,7 +1,7 @@
 Welcome to Django Codemod's documentation!
 ==========================================
 
-Collections of libCST codemodder to help upgrades to newer versions of Django.
+A tool to help upgrade Django projects to newer version of the framework by automatically fixing deprecations.
 
 .. toctree::
    :caption: User Guide
