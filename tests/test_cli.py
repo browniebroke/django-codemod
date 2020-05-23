@@ -15,7 +15,7 @@ def test_missing_argument(cli_runner):
     result = cli_runner.invoke(cli.djcodemod)
 
     assert result.exit_code == 2
-    assert 'Error: Missing argument "PATH"' in result.output
+    assert "Error: Missing argument 'PATH'" in result.output
 
 
 def test_missing_option(cli_runner):
@@ -23,7 +23,7 @@ def test_missing_option(cli_runner):
     result = cli_runner.invoke(cli.djcodemod, ["."])
 
     assert result.exit_code == 2
-    assert 'Error: Missing option "--removed-in".' in result.output
+    assert "Error: Missing option '--removed-in'." in result.output
 
 
 def test_help(cli_runner):
