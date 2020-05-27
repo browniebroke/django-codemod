@@ -34,12 +34,16 @@ class TestInlineHasAddPermissionsTransformer(BaseVisitorTest):
     def test_model_admin_base_class(self) -> None:
         """Doesn't modify if base class doesn't match."""
         before = """
+            from django.contrib import admin
+
             class MyAdmin(admin.ModelAdmin):
 
                 def has_add_permission(self, request):
                     return False
         """
         after = """
+            from django.contrib import admin
+
             class MyAdmin(admin.ModelAdmin):
 
                 def has_add_permission(self, request):
@@ -50,12 +54,16 @@ class TestInlineHasAddPermissionsTransformer(BaseVisitorTest):
     def test_no_base_class(self) -> None:
         """Doesn't modify if there is no base class."""
         before = """
+            from django.contrib import admin
+
             class MyCustomStuff:
 
                 def has_add_permission(self, request):
                     return False
         """
         after = """
+            from django.contrib import admin
+
             class MyCustomStuff:
 
                 def has_add_permission(self, request):
@@ -65,21 +73,25 @@ class TestInlineHasAddPermissionsTransformer(BaseVisitorTest):
 
     @parameterized.expand(
         [
-            "TabularInline",
-            "admin.TabularInline",
-            "StackedInline",
-            "admin.StackedInline",
+            (".admin import TabularInline", "TabularInline"),
+            (" import admin", "admin.TabularInline"),
+            (".admin import StackedInline", "StackedInline"),
+            (" import admin", "admin.StackedInline"),
         ],
     )
-    def test_simple_substitution(self, base_class) -> None:
+    def test_simple_substitution(self, import_, base_class) -> None:
         """Modification with a valid base class."""
         before = f"""
+            from django.contrib{import_}
+
             class MyInlineInline({base_class}):
 
                 def has_add_permission(self, request):
                     return False
         """
         after = f"""
+            from django.contrib{import_}
+
             class MyInlineInline({base_class}):
 
                 def has_add_permission(self, request, obj = None):
@@ -89,21 +101,25 @@ class TestInlineHasAddPermissionsTransformer(BaseVisitorTest):
 
     @parameterized.expand(
         [
-            "TabularInline",
-            "admin.TabularInline",
-            "StackedInline",
-            "admin.StackedInline",
+            (".admin import TabularInline", "TabularInline"),
+            (" import admin", "admin.TabularInline"),
+            (".admin import StackedInline", "StackedInline"),
+            (" import admin", "admin.StackedInline"),
         ],
     )
-    def test_multiple_base_classes_last(self, base_class) -> None:
+    def test_multiple_base_classes_last(self, import_, base_class) -> None:
         """Modification with multiple base classes, valid last."""
         before = f"""
+            from django.contrib{import_}
+
             class MyInlineInline(InlineMixin, {base_class}):
 
                 def has_add_permission(self, request):
                     return False
         """
         after = f"""
+            from django.contrib{import_}
+
             class MyInlineInline(InlineMixin, {base_class}):
 
                 def has_add_permission(self, request, obj = None):
@@ -113,21 +129,25 @@ class TestInlineHasAddPermissionsTransformer(BaseVisitorTest):
 
     @parameterized.expand(
         [
-            "TabularInline",
-            "admin.TabularInline",
-            "StackedInline",
-            "admin.StackedInline",
+            (".admin import TabularInline", "TabularInline"),
+            (" import admin", "admin.TabularInline"),
+            (".admin import StackedInline", "StackedInline"),
+            (" import admin", "admin.StackedInline"),
         ],
     )
-    def test_multiple_base_classes_first(self, base_class) -> None:
+    def test_multiple_base_classes_first(self, import_, base_class) -> None:
         """Modification with multiple base classes, valid first."""
         before = f"""
+            from django.contrib{import_}
+
             class MyInlineInline({base_class}, OtherBase):
 
                 def has_add_permission(self, request):
                     return False
         """
         after = f"""
+            from django.contrib{import_}
+
             class MyInlineInline({base_class}, OtherBase):
 
                 def has_add_permission(self, request, obj = None):
@@ -138,6 +158,8 @@ class TestInlineHasAddPermissionsTransformer(BaseVisitorTest):
     def test_context_cleared(self) -> None:
         """Test that context is cleared and doesn't leak to other classes."""
         before = """
+            from django.contrib import admin
+
             class MyInlineInline(admin.TabularInline):
 
                 def has_add_permission(self, request):
@@ -150,6 +172,8 @@ class TestInlineHasAddPermissionsTransformer(BaseVisitorTest):
                     return False
         """
         after = """
+            from django.contrib import admin
+
             class MyInlineInline(admin.TabularInline):
 
                 def has_add_permission(self, request, obj = None):

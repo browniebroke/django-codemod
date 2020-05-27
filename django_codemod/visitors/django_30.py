@@ -4,10 +4,13 @@ from typing import Sequence, Union
 
 from libcst import (
     Arg,
+    BaseSmallStatement,
     BaseStatement,
     Call,
     ClassDef,
     FunctionDef,
+    ImportFrom,
+    Module,
     Name,
     Param,
     RemovalSentinel,
@@ -15,7 +18,7 @@ from libcst import (
 from libcst import matchers as m
 from libcst.codemod import ContextAwareTransformer
 
-from .base import BaseSimpleFuncRenameTransformer
+from .base import BaseSimpleFuncRenameTransformer, module_matcher
 
 
 class RenderToResponseToRenderTransformer(BaseSimpleFuncRenameTransformer):
@@ -37,35 +40,85 @@ class InlineHasAddPermissionsTransformer(ContextAwareTransformer):
     """Add the ``obj`` argument to ``InlineModelAdmin.has_add_permission()``."""
 
     context_key = "InlineHasAddPermissionsTransformer"
-    base_cls_matcher = m.OneOf(
-        m.Arg(m.Attribute(value=m.Name("admin"), attr=m.Name("TabularInline"))),
-        m.Arg(m.Name("TabularInline")),
-        m.Arg(m.Attribute(value=m.Name("admin"), attr=m.Name("StackedInline"))),
-        m.Arg(m.Name("StackedInline")),
-    )
+
+    def leave_ImportFrom(
+        self, original_node: ImportFrom, updated_node: ImportFrom
+    ) -> Union[BaseSmallStatement, RemovalSentinel]:
+        base_cls_matcher = []
+        if m.matches(
+            updated_node,
+            m.ImportFrom(module=module_matcher(["django", "contrib", "admin"])),
+        ):
+            for imported_name in updated_node.names:
+                if m.matches(
+                    imported_name, m.ImportAlias(name=m.Name("TabularInline"))
+                ):
+                    base_cls_matcher.append(m.Arg(m.Name("TabularInline")))
+                if m.matches(
+                    imported_name, m.ImportAlias(name=m.Name("StackedInline"))
+                ):
+                    base_cls_matcher.append(m.Arg(m.Name("StackedInline")))
+        if m.matches(
+            updated_node, m.ImportFrom(module=module_matcher(["django", "contrib"])),
+        ):
+            for imported_name in updated_node.names:
+                if m.matches(imported_name, m.ImportAlias(name=m.Name("admin"))):
+
+                    base_cls_matcher.extend(
+                        [
+                            m.Arg(
+                                m.Attribute(
+                                    value=m.Name("admin"), attr=m.Name("TabularInline")
+                                )
+                            ),
+                            m.Arg(
+                                m.Attribute(
+                                    value=m.Name("admin"), attr=m.Name("StackedInline")
+                                )
+                            ),
+                        ]
+                    )
+        # Save valid matchers in the context
+        if base_cls_matcher:
+            self.context.scratch[f"{self.context_key}-base_cls_matcher"] = m.OneOf(
+                *base_cls_matcher
+            )
+        return super().leave_ImportFrom(original_node, updated_node)
+
+    def leave_Module(self, original_node: Module, updated_node: Module) -> Module:
+        self.context.scratch.pop(f"{self.context_key}-base_cls_matcher", None)
+        return super().leave_Module(original_node, updated_node)
+
+    @property
+    def base_cls_matcher(self):
+        return self.context.scratch.get(f"{self.context_key}-base_cls_matcher")
 
     def visit_ClassDef_bases(self, node: ClassDef) -> None:
-        for base_cls in node.bases:
-            if m.matches(base_cls, self.base_cls_matcher):
-                self.context.scratch[self.context_key] = True
+        if self.base_cls_matcher is not None:
+            for base_cls in node.bases:
+                if m.matches(base_cls, self.base_cls_matcher):
+                    self.context.scratch[
+                        f"{self.context_key}-is_visiting_subclass"
+                    ] = True
         super().visit_ClassDef_bases(node)
 
     def leave_ClassDef(
         self, original_node: ClassDef, updated_node: ClassDef
     ) -> Union[BaseStatement, RemovalSentinel]:
-        self.context.scratch.pop(self.context_key, None)
+        self.context.scratch.pop(f"{self.context_key}-is_visiting_subclass", None)
         return super().leave_ClassDef(original_node, updated_node)
 
     @property
-    def _is_context_right(self):
-        return self.context.scratch.get(self.context_key, False)
+    def is_visiting_subclass(self):
+        return self.context.scratch.get(
+            f"{self.context_key}-is_visiting_subclass", False
+        )
 
     def leave_FunctionDef(
         self, original_node: FunctionDef, updated_node: FunctionDef
     ) -> Union[BaseStatement, RemovalSentinel]:
-        if (
-            m.matches(updated_node, m.FunctionDef(name=m.Name("has_add_permission")))
-            and self._is_context_right
+        if self.is_visiting_subclass and m.matches(
+            updated_node, m.FunctionDef(name=m.Name("has_add_permission"))
         ):
             if len(updated_node.params.params) == 2:
                 old_params = updated_node.params
