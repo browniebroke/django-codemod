@@ -17,8 +17,6 @@ jobs:
             run: black --check .
           - name: PyUpgrade
             run: pyupgrade --py3-plus `find . -name "*.py"`
-          - name: iSort
-            run: isort -c -vb
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2

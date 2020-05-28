@@ -10,6 +10,12 @@ available after installation and is used as follows:
 
 .. code:: shell
 
+   $ djcodemod --deprecated-in <Django version> <path to modify>
+
+OR
+
+.. code:: shell
+
    $ djcodemod --removed-in <Django version> <path to modify>
 
 -  The Django version is the major + minor version of Django, for

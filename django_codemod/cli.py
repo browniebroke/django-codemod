@@ -1,6 +1,8 @@
 import inspect
 from abc import ABC
-from typing import List
+from collections import defaultdict
+from operator import attrgetter
+from typing import Callable, Dict, List, Tuple
 
 import click
 from libcst.codemod import (
@@ -10,8 +12,44 @@ from libcst.codemod import (
     parallel_exec_transform_with_prettyprint,
 )
 
+from django_codemod import visitors
 from django_codemod.commands.base import BaseCodemodCommand
-from django_codemod.visitors import django_30, django_40
+
+
+def find_codemoders(version_getter: Callable) -> Dict[Tuple[int, int], List]:
+    """
+    Find codemodders and index them by version.
+
+    The returned entity is a dictionary which keys are 2-tuples
+    for each major versions of Django with codemodders mapping
+    to a list of codemodders which are flagged as either `removed_in`
+    or `deprecated_in` that version.
+    """
+    codemodders_index = defaultdict(list)
+    for object_name in dir(visitors):
+        try:
+            obj = getattr(visitors, object_name)
+            if (
+                obj is ContextAwareTransformer
+                or not issubclass(obj, ContextAwareTransformer)
+                or inspect.isabstract(obj)
+            ):
+                continue
+            # isabstract is broken for direct subclasses of ABC which
+            # don't themselves define any abstract methods, so lets
+            # check for that here.
+            if any(cls[0] is ABC for cls in inspect.getclasstree([obj])):
+                continue
+            # Looks like this one is good to go
+            django_version = version_getter(obj)
+            codemodders_index[django_version].append(obj)
+        except TypeError:
+            continue
+    return dict(codemodders_index)
+
+
+DEPRECATED_IN = find_codemoders(version_getter=attrgetter("deprecated_in"))
+REMOVED_IN = find_codemoders(version_getter=attrgetter("removed_in"))
 
 
 class VersionParamType(click.ParamType):
@@ -22,6 +60,9 @@ class VersionParamType(click.ParamType):
         "Should include the major & minor digits of the Django version"
         " e.g. '2.2' or '2.2.10'"
     )
+
+    def __init__(self, version_index) -> None:
+        self.valid_versions = version_index.keys()
 
     def convert(self, value, param, ctx):
         """Parse version to keep only major an minor digits."""
@@ -37,10 +78,10 @@ class VersionParamType(click.ParamType):
     def _parse_unsafe(self, value, param, ctx):
         """Parse version and validate it's a supported one."""
         parsed_version = self._split_digits(value, param, ctx)
-        if parsed_version not in VERSIONS_MODIFIERS.keys():
+        if parsed_version not in self.valid_versions:
             supported_versions = ", ".join(
                 ".".join(str(version_part) for version_part in version_tuple)
-                for version_tuple in VERSIONS_MODIFIERS.keys()
+                for version_tuple in self.valid_versions
             )
             self.fail(
                 f"{value!r} is not supported. "
@@ -61,59 +102,41 @@ class VersionParamType(click.ParamType):
         return (major, minor)
 
 
-DJANGO_VERSION = VersionParamType()
-
-VERSIONS_MODIFIERS = {
-    (3, 0): django_30,
-    # (3, 1): django_31,
-    # (3, 2): django_32,
-    (4, 0): django_40,
-}
-
-
 @click.command()
 @click.argument("path")
 @click.option(
     "--removed-in",
     "removed_in",
-    help="The version of Django to fix deprecations for.",
-    type=DJANGO_VERSION,
-    required=True,
+    help="The version of Django where feature are removed.",
+    type=VersionParamType(REMOVED_IN),
 )
-def djcodemod(removed_in, path):
+@click.option(
+    "--deprecated-in",
+    "deprecated_in",
+    help="The version of Django where deprecations started.",
+    type=VersionParamType(DEPRECATED_IN),
+)
+def djcodemod(removed_in, deprecated_in, path):
     """
     Automatically fixes deprecations removed Django deprecations.
 
     This command takes the path to target as argument and a version of
-    Django where a previously deprecated feature is removed.
+    Django to select code modifications to apply.
     """
-    codemod_modules_list = [VERSIONS_MODIFIERS[removed_in]]
-    command_instance = build_command(codemod_modules_list)
+    if not any((removed_in, deprecated_in)) or all((removed_in, deprecated_in)):
+        raise click.UsageError(
+            "You must specify either '--removed-in' or '--deprecated-in' but not both."
+        )
+    if removed_in:
+        codemodders_list = REMOVED_IN[removed_in]
+    else:
+        codemodders_list = DEPRECATED_IN[deprecated_in]
+    command_instance = build_command(codemodders_list)
     call_command(command_instance, path)
 
 
-def build_command(codemod_modules_list: List) -> BaseCodemodCommand:
+def build_command(codemodders_list: List) -> BaseCodemodCommand:
     """Build a custom command with the list of visitors."""
-    codemodders_list = []
-    for codemod_module in codemod_modules_list:
-        for objname in dir(codemod_module):
-            try:
-                obj = getattr(codemod_module, objname)
-                if (
-                    obj is ContextAwareTransformer
-                    or not issubclass(obj, ContextAwareTransformer)
-                    or inspect.isabstract(obj)
-                ):
-                    continue
-                # isabstract is broken for direct subclasses of ABC which
-                # don't themselves define any abstract methods, so lets
-                # check for that here.
-                if any(cls[0] is ABC for cls in inspect.getclasstree([obj])):
-                    continue
-                # Looks like this one is good to go
-                codemodders_list.append(obj)
-            except TypeError:
-                continue
 
     class CustomCommand(BaseCodemodCommand):
         transformers = codemodders_list

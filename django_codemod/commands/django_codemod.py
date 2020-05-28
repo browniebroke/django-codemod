@@ -1,17 +1,17 @@
-from ..visitors.django_30 import (
-    InlineHasAddPermissionsTransformer,
-    RenderToResponseToRenderTransformer,
-)
-from ..visitors.django_40 import (
+from ..visitors.admin import InlineHasAddPermissionsTransformer
+from ..visitors.encoding import (
     ForceTextToForceStrTransformer,
     SmartTextToForceStrTransformer,
+)
+from ..visitors.shortcuts import RenderToResponseToRenderTransformer
+from ..visitors.translations import (
     UGetTextLazyToGetTextLazyTransformer,
     UGetTextNoopToGetTextNoopTransformer,
     UGetTextToGetTextTransformer,
     UNGetTextLazyToNGetTextLazyTransformer,
     UNGetTextToNGetTextTransformer,
-    URLToRePathTransformer,
 )
+from ..visitors.urls import URLToRePathTransformer
 from .base import BaseCodemodCommand
 
 
