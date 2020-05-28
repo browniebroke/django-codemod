@@ -1,24 +1,21 @@
-import logging
 from typing import Union
 
 from libcst import (
-    ImportFrom,
     BaseSmallStatement,
-    RemovalSentinel,
-    matchers as m,
-    Module,
-    ClassDef,
     BaseStatement,
+    ClassDef,
     FunctionDef,
-    Param,
+    ImportFrom,
+    Module,
     Name,
+    Param,
+    RemovalSentinel,
 )
+from libcst import matchers as m
 from libcst.codemod import ContextAwareTransformer
 
 from django_codemod.constants import DJANGO_21, DJANGO_30
 from django_codemod.visitors.base import module_matcher
-
-logger = logging.getLogger(__name__)
 
 
 class InlineHasAddPermissionsTransformer(ContextAwareTransformer):

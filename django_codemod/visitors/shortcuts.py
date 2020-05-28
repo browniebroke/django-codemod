@@ -1,12 +1,9 @@
-import logging
 from typing import Sequence
 
 from libcst import Arg, Call, Name
 
 from django_codemod.constants import DJANGO_20, DJANGO_30
 from django_codemod.visitors.base import BaseSimpleFuncRenameTransformer
-
-logger = logging.getLogger(__name__)
 
 
 class RenderToResponseToRenderTransformer(BaseSimpleFuncRenameTransformer):
