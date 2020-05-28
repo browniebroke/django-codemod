@@ -1,25 +1,12 @@
-# This is expected to cover most of the things listed in this section:
-# https://docs.djangoproject.com/en/dev/internals/deprecation/#deprecation-removed-in-4-0
-from .base import BaseSimpleFuncRenameTransformer
-
-
-class ForceTextToForceStrTransformer(BaseSimpleFuncRenameTransformer):
-    """Resolve deprecation of ``django.utils.encoding.force_text``."""
-
-    rename_from = "django.utils.encoding.force_text"
-    rename_to = "django.utils.encoding.force_str"
-
-
-class SmartTextToForceStrTransformer(BaseSimpleFuncRenameTransformer):
-    """Resolve deprecation of ``django.utils.encoding.smart_text``."""
-
-    rename_from = "django.utils.encoding.smart_text"
-    rename_to = "django.utils.encoding.smart_str"
+from django_codemod.constants import DJANGO_20, DJANGO_40
+from django_codemod.visitors.base import BaseSimpleFuncRenameTransformer
 
 
 class UGetTextToGetTextTransformer(BaseSimpleFuncRenameTransformer):
     """Resolve deprecation of ``django.utils.translation.ugettext``."""
 
+    deprecated_in = DJANGO_20
+    removed_in = DJANGO_40
     rename_from = "django.utils.translation.ugettext"
     rename_to = "django.utils.translation.gettext"
 
@@ -27,6 +14,8 @@ class UGetTextToGetTextTransformer(BaseSimpleFuncRenameTransformer):
 class UGetTextLazyToGetTextLazyTransformer(BaseSimpleFuncRenameTransformer):
     """Resolve deprecation of ``django.utils.translation.ugettext_lazy``."""
 
+    deprecated_in = DJANGO_20
+    removed_in = DJANGO_40
     rename_from = "django.utils.translation.ugettext_lazy"
     rename_to = "django.utils.translation.gettext_lazy"
 
@@ -34,6 +23,8 @@ class UGetTextLazyToGetTextLazyTransformer(BaseSimpleFuncRenameTransformer):
 class UGetTextNoopToGetTextNoopTransformer(BaseSimpleFuncRenameTransformer):
     """Resolve deprecation of ``django.utils.translation.ugettext_noop``."""
 
+    deprecated_in = DJANGO_20
+    removed_in = DJANGO_40
     rename_from = "django.utils.translation.ugettext_noop"
     rename_to = "django.utils.translation.gettext_noop"
 
@@ -41,6 +32,8 @@ class UGetTextNoopToGetTextNoopTransformer(BaseSimpleFuncRenameTransformer):
 class UNGetTextToNGetTextTransformer(BaseSimpleFuncRenameTransformer):
     """Resolve deprecation of ``django.utils.translation.ungettext``."""
 
+    deprecated_in = DJANGO_20
+    removed_in = DJANGO_40
     rename_from = "django.utils.translation.ungettext"
     rename_to = "django.utils.translation.ngettext"
 
@@ -48,12 +41,7 @@ class UNGetTextToNGetTextTransformer(BaseSimpleFuncRenameTransformer):
 class UNGetTextLazyToNGetTextLazyTransformer(BaseSimpleFuncRenameTransformer):
     """Resolve deprecation of ``django.utils.translation.ungettext_lazy``."""
 
+    deprecated_in = DJANGO_20
+    removed_in = DJANGO_40
     rename_from = "django.utils.translation.ungettext_lazy"
     rename_to = "django.utils.translation.ngettext_lazy"
-
-
-class URLToRePathTransformer(BaseSimpleFuncRenameTransformer):
-    """Resolve deprecation of ``django.conf.urls.url``."""
-
-    rename_from = "django.conf.urls.url"
-    rename_to = "django.urls.re_path"

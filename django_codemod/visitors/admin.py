@@ -1,44 +1,31 @@
-# This is expected to cover most of the things listed in this section:
-# https://docs.djangoproject.com/en/dev/internals/deprecation/#deprecation-removed-in-3-0
-from typing import Sequence, Union
+import logging
+from typing import Union
 
 from libcst import (
-    Arg,
-    BaseSmallStatement,
-    BaseStatement,
-    Call,
-    ClassDef,
-    FunctionDef,
     ImportFrom,
-    Module,
-    Name,
-    Param,
+    BaseSmallStatement,
     RemovalSentinel,
+    matchers as m,
+    Module,
+    ClassDef,
+    BaseStatement,
+    FunctionDef,
+    Param,
+    Name,
 )
-from libcst import matchers as m
 from libcst.codemod import ContextAwareTransformer
 
-from .base import BaseSimpleFuncRenameTransformer, module_matcher
+from django_codemod.constants import DJANGO_21, DJANGO_30
+from django_codemod.visitors.base import module_matcher
 
-
-class RenderToResponseToRenderTransformer(BaseSimpleFuncRenameTransformer):
-    """
-    Resolve deprecation of ``django.shortcuts.render_to_response``.
-
-    Replaces ``render_to_response()`` by ``render()`` and add
-    ``request=None`` as the first argument of ``render()``.
-    """
-
-    rename_from = "django.shortcuts.render_to_response"
-    rename_to = "django.shortcuts.render"
-
-    def update_call_args(self, node: Call) -> Sequence[Arg]:
-        return (Arg(value=Name("None")), *node.args)
+logger = logging.getLogger(__name__)
 
 
 class InlineHasAddPermissionsTransformer(ContextAwareTransformer):
     """Add the ``obj`` argument to ``InlineModelAdmin.has_add_permission()``."""
 
+    deprecated_in = DJANGO_21
+    removed_in = DJANGO_30
     context_key = "InlineHasAddPermissionsTransformer"
 
     def leave_ImportFrom(
