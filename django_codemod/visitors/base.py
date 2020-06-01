@@ -59,32 +59,32 @@ class BaseSimpleFuncRenameTransformer(ContextAwareTransformer, ABC):
     def leave_ImportFrom(
         self, original_node: ImportFrom, updated_node: ImportFrom
     ) -> Union[BaseSmallStatement, RemovalSentinel]:
-        if self._test_import_from(updated_node):
-            new_names = []
-            for import_alias in updated_node.names:
-                if import_alias.evaluated_name == self.old_name:
-                    as_name = (
-                        import_alias.asname.name.value if import_alias.asname else None
-                    )
-                    AddImportsVisitor.add_needed_import(
-                        context=self.context,
-                        module=".".join(self.new_module_parts),
-                        obj=self.new_name,
-                        asname=as_name,
-                    )
-                    self.context.scratch[self.rename_from] = not import_alias.asname
-                else:
-                    new_names.append(import_alias)
-            if not new_names:
-                return RemoveFromParent()
-            # sort imports
-            new_names = sorted(new_names, key=lambda n: n.evaluated_name)
-            # remove any trailing commas
-            last_name = new_names[-1]
-            if last_name.comma != MaybeSentinel.DEFAULT:
-                new_names[-1] = last_name.with_changes(comma=MaybeSentinel.DEFAULT)
-            return updated_node.with_changes(names=new_names)
-        return super().leave_ImportFrom(original_node, updated_node)
+        if not self._test_import_from(updated_node):
+            return super().leave_ImportFrom(original_node, updated_node)
+        new_names = []
+        for import_alias in updated_node.names:
+            if import_alias.evaluated_name == self.old_name:
+                as_name = (
+                    import_alias.asname.name.value if import_alias.asname else None
+                )
+                AddImportsVisitor.add_needed_import(
+                    context=self.context,
+                    module=".".join(self.new_module_parts),
+                    obj=self.new_name,
+                    asname=as_name,
+                )
+                self.context.scratch[self.rename_from] = not import_alias.asname
+            else:
+                new_names.append(import_alias)
+        if not new_names:
+            return RemoveFromParent()
+        # sort imports
+        new_names = sorted(new_names, key=lambda n: n.evaluated_name)
+        # remove any trailing commas
+        last_name = new_names[-1]
+        if last_name.comma != MaybeSentinel.DEFAULT:
+            new_names[-1] = last_name.with_changes(comma=MaybeSentinel.DEFAULT)
+        return updated_node.with_changes(names=new_names)
 
     @property
     def _is_context_right(self):

@@ -101,16 +101,19 @@ class InlineHasAddPermissionsTransformer(ContextAwareTransformer):
     def leave_FunctionDef(
         self, original_node: FunctionDef, updated_node: FunctionDef
     ) -> Union[BaseStatement, RemovalSentinel]:
-        if self.is_visiting_subclass and m.matches(
-            updated_node, m.FunctionDef(name=m.Name("has_add_permission"))
+        if (
+            self.is_visiting_subclass
+            and m.matches(
+                updated_node, m.FunctionDef(name=m.Name("has_add_permission"))
+            )
+            and len(updated_node.params.params) == 2
         ):
-            if len(updated_node.params.params) == 2:
-                old_params = updated_node.params
-                updated_params = old_params.with_changes(
-                    params=(
-                        *old_params.params,
-                        Param(name=Name("obj"), default=Name("None")),
-                    )
+            old_params = updated_node.params
+            updated_params = old_params.with_changes(
+                params=(
+                    *old_params.params,
+                    Param(name=Name("obj"), default=Name("None")),
                 )
-                return updated_node.with_changes(params=updated_params)
+            )
+            return updated_node.with_changes(params=updated_params)
         return super().leave_FunctionDef(original_node, updated_node)
