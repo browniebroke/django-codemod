@@ -9,6 +9,7 @@ from ..visitors.http import (
     HttpUrlQuoteTransformer,
     HttpUrlUnQuotePlusTransformer,
     HttpUrlUnQuoteTransformer,
+    IsSafeUrlTransformer,
 )
 from ..visitors.shortcuts import RenderToResponseToRenderTransformer
 from ..visitors.translations import (
@@ -48,6 +49,7 @@ class Django40Command(BaseCodemodCommand):
     - ``django.utils.http.urlquote_plus``
     - ``django.utils.http.urlunquote``
     - ``django.utils.http.urlunquote_plus``
+    - ``django.utils.http.is_safe_url``
     - ``django.utils.text.unescape_entities``
     - ``django.utils.translation.ugettext``
     - ``django.utils.translation.ugettext_lazy``
@@ -64,6 +66,7 @@ class Django40Command(BaseCodemodCommand):
         HttpUrlQuoteTransformer,
         HttpUrlUnQuotePlusTransformer,
         HttpUrlUnQuoteTransformer,
+        IsSafeUrlTransformer,
         SmartTextToForceStrTransformer,
         UGetTextLazyToGetTextLazyTransformer,
         UGetTextNoopToGetTextNoopTransformer,
