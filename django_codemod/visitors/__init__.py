@@ -8,6 +8,7 @@ from .http import (
     HttpUrlUnQuoteTransformer,
     IsSafeUrlTransformer,
 )
+from .lru_cache import LRUCacheTransformer
 from .shortcuts import RenderToResponseTransformer
 from .translations import (
     UGetTextLazyTransformer,
@@ -26,6 +27,7 @@ __all__ = (
     "HttpUrlUnQuoteTransformer",
     "InlineHasAddPermissionsTransformer",
     "IsSafeUrlTransformer",
+    "LRUCacheTransformer",
     "RenderToResponseTransformer",
     "SmartTextTransformer",
     "UGetTextLazyTransformer",

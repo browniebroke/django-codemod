@@ -124,7 +124,7 @@ def test_deprecated_in_mapping():
             "UnescapeEntitiesTransformer",
         ],
         (2, 1): ["InlineHasAddPermissionsTransformer"],
-        (2, 0): ["RenderToResponseTransformer"],
+        (2, 0): ["LRUCacheTransformer", "RenderToResponseTransformer"],
     }
 
 
@@ -147,5 +147,9 @@ def test_removed_in_mapping():
             "URLTransformer",
             "UnescapeEntitiesTransformer",
         ],
-        (3, 0): ["InlineHasAddPermissionsTransformer", "RenderToResponseTransformer"],
+        (3, 0): [
+            "InlineHasAddPermissionsTransformer",
+            "LRUCacheTransformer",
+            "RenderToResponseTransformer",
+        ],
     }
