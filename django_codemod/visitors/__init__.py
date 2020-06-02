@@ -9,6 +9,7 @@ from .http import (
     IsSafeUrlTransformer,
 )
 from .lru_cache import LRUCacheTransformer
+from .os_utils import AbsPathTransformer
 from .shortcuts import RenderToResponseTransformer
 from .translations import (
     UGetTextLazyTransformer,
@@ -20,6 +21,7 @@ from .translations import (
 from .urls import URLTransformer
 
 __all__ = (
+    "AbsPathTransformer",
     "ForceTextTransformer",
     "HttpUrlQuotePlusTransformer",
     "HttpUrlQuoteTransformer",
