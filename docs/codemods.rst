@@ -10,6 +10,9 @@ Applied by passing the ``--removed-in 3.0`` or ``--deprecated-in 2.0`` option:
 
 - Replaces ``render_to_response()`` by ``render()`` and add ``request=None``
   as the first argument of ``render()``.
+- Replaces ``django.utils.lru_cache.lru_cache()`` by the function it's an alias of: ``functools.lru_cache()``.
+- Replaces ``django.utils._os.abspathu()`` by the function it's an alias of: ``os.path.abspath()``.
+- Replaces ``django.utils.encoding.python_2_unicode_compatible()`` by the function it's an alias of: ``six.python_2_unicode_compatible()``.
 
 Applied by passing the ``--removed-in 3.0`` or ``--deprecated-in 2.1`` option:
 
