@@ -6,6 +6,7 @@
 
 ### 🚀 Enhancements:
 
+- Resolve deprecation of `django.utils.http.is\_safe\_url` in Django 3.0 [\#72](https://github.com/browniebroke/django-codemod/pull/72) ([browniebroke](https://github.com/browniebroke))
 - Resolve deprecation of `django.utils.text.unescape\_entities` in Django 3.0 [\#70](https://github.com/browniebroke/django-codemod/pull/70) ([browniebroke](https://github.com/browniebroke))
 - Resolve deprecations from `django.utils.http` in Django 3.0 [\#69](https://github.com/browniebroke/django-codemod/pull/69) ([browniebroke](https://github.com/browniebroke))
 - Add new CLI option `--deprecated-in` [\#64](https://github.com/browniebroke/django-codemod/pull/64) ([browniebroke](https://github.com/browniebroke))
