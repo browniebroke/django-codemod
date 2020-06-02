@@ -9,6 +9,10 @@
 - Add new CLI option `--deprecated-in` [\#64](https://github.com/browniebroke/django-codemod/pull/64) ([browniebroke](https://github.com/browniebroke))
 - Make InlineHasAddPermissionsTransformer more robust [\#60](https://github.com/browniebroke/django-codemod/pull/60) ([browniebroke](https://github.com/browniebroke))
 
+### 🐛 Bug Fixes:
+
+- Fix version deprecated for several Django 4.0 visitors [\#68](https://github.com/browniebroke/django-codemod/pull/68) ([browniebroke](https://github.com/browniebroke))
+
 ## [v0.7.0](https://github.com/browniebroke/django-codemod/tree/v0.7.0) (2020-05-23)
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.6.0...v0.7.0)
