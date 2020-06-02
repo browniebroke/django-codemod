@@ -1,5 +1,9 @@
 from .admin import InlineHasAddPermissionsTransformer
-from .encoding import ForceTextTransformer, SmartTextTransformer
+from .encoding import (
+    ForceTextTransformer,
+    SmartTextTransformer,
+    UnicodeCompatibleTransformer,
+)
 from .html import UnescapeEntitiesTransformer
 from .http import (
     HttpUrlQuotePlusTransformer,
@@ -8,6 +12,8 @@ from .http import (
     HttpUrlUnQuoteTransformer,
     IsSafeUrlTransformer,
 )
+from .lru_cache import LRUCacheTransformer
+from .os_utils import AbsPathTransformer
 from .shortcuts import RenderToResponseTransformer
 from .translations import (
     UGetTextLazyTransformer,
@@ -19,6 +25,7 @@ from .translations import (
 from .urls import URLTransformer
 
 __all__ = (
+    "AbsPathTransformer",
     "ForceTextTransformer",
     "HttpUrlQuotePlusTransformer",
     "HttpUrlQuoteTransformer",
@@ -26,6 +33,7 @@ __all__ = (
     "HttpUrlUnQuoteTransformer",
     "InlineHasAddPermissionsTransformer",
     "IsSafeUrlTransformer",
+    "LRUCacheTransformer",
     "RenderToResponseTransformer",
     "SmartTextTransformer",
     "UGetTextLazyTransformer",
@@ -35,4 +43,5 @@ __all__ = (
     "UNGetTextTransformer",
     "URLTransformer",
     "UnescapeEntitiesTransformer",
+    "UnicodeCompatibleTransformer",
 )
