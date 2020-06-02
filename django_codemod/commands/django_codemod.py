@@ -3,6 +3,12 @@ from ..visitors.encoding import (
     ForceTextToForceStrTransformer,
     SmartTextToForceStrTransformer,
 )
+from ..visitors.http import (
+    HttpUrlQuotePlusTransformer,
+    HttpUrlQuoteTransformer,
+    HttpUrlUnQuotePlusTransformer,
+    HttpUrlUnQuoteTransformer,
+)
 from ..visitors.shortcuts import RenderToResponseToRenderTransformer
 from ..visitors.translations import (
     UGetTextLazyToGetTextLazyTransformer,
@@ -37,6 +43,10 @@ class Django40Command(BaseCodemodCommand):
 
     - ``django.utils.encoding.force_text``
     - ``django.utils.encoding.smart_text``
+    - ``django.utils.http.urlquote``
+    - ``django.utils.http.urlquote_plus``
+    - ``django.utils.http.urlunquote``
+    - ``django.utils.http.urlunquote_plus``
     - ``django.utils.translation.ugettext``
     - ``django.utils.translation.ugettext_lazy``
     - ``django.utils.translation.ugettext_noop``
@@ -48,6 +58,10 @@ class Django40Command(BaseCodemodCommand):
     DESCRIPTION: str = "Resolve deprecations of things removed in Django 4.0"
     transformers = [
         ForceTextToForceStrTransformer,
+        HttpUrlQuotePlusTransformer,
+        HttpUrlQuoteTransformer,
+        HttpUrlUnQuotePlusTransformer,
+        HttpUrlUnQuoteTransformer,
         SmartTextToForceStrTransformer,
         UGetTextLazyToGetTextLazyTransformer,
         UGetTextNoopToGetTextNoopTransformer,

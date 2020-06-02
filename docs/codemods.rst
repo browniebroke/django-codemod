@@ -21,5 +21,6 @@ Removed in Django 4.0
 Applied by passing the ``--removed-in 4.0`` or ``--deprecated-in 3.0`` option:
 
 - Replaces ``force_text`` and ``smart_text`` from the ``django.utils.encoding`` module by ``force_str`` and ``smart_str``
+- Replaces ``urlquote``, ``urlquote_plus``, ``urlunquote`` and ``urlunquote_plus`` from the ``django.utils.http`` module by their the functions they alias to, respectively ``quote``, ``quote_plus``, ``unquote`` and ``unquote_plus`` from the ``urllib.parse.quote`` module.
 - Replaces ``ugettext``, ``ugettext_lazy``, ``ugettext_noop``, ``ungettext``, and ``ungettext_lazy`` from the ``django.utils.translation`` module by their replacements, respectively ``gettext``, ``gettext_lazy``, ``gettext_noop``, ``ngettext``, and ``ngettext_lazy``.
 - Replaces ``django.conf.urls.url`` by ``django.urls.re_path``
