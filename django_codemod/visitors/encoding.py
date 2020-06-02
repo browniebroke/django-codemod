@@ -2,7 +2,7 @@ from django_codemod.constants import DJANGO_30, DJANGO_40
 from django_codemod.visitors.base import BaseSimpleFuncRenameTransformer
 
 
-class ForceTextToForceStrTransformer(BaseSimpleFuncRenameTransformer):
+class ForceTextTransformer(BaseSimpleFuncRenameTransformer):
     """Resolve deprecation of ``django.utils.encoding.force_text``."""
 
     deprecated_in = DJANGO_30
@@ -11,7 +11,7 @@ class ForceTextToForceStrTransformer(BaseSimpleFuncRenameTransformer):
     rename_to = "django.utils.encoding.force_str"
 
 
-class SmartTextToForceStrTransformer(BaseSimpleFuncRenameTransformer):
+class SmartTextTransformer(BaseSimpleFuncRenameTransformer):
     """Resolve deprecation of ``django.utils.encoding.smart_text``."""
 
     deprecated_in = DJANGO_30

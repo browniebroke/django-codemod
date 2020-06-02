@@ -6,7 +6,7 @@ from django_codemod.constants import DJANGO_20, DJANGO_30
 from django_codemod.visitors.base import BaseSimpleFuncRenameTransformer
 
 
-class RenderToResponseToRenderTransformer(BaseSimpleFuncRenameTransformer):
+class RenderToResponseTransformer(BaseSimpleFuncRenameTransformer):
     """
     Resolve deprecation of ``django.shortcuts.render_to_response``.
 

@@ -1,10 +1,10 @@
-from django_codemod.visitors import RenderToResponseToRenderTransformer
+from django_codemod.visitors import RenderToResponseTransformer
 from tests.visitors.base import BaseVisitorTest
 
 
-class TestRenderToResponseToRenderTransformer(BaseVisitorTest):
+class TestRenderToResponseTransformer(BaseVisitorTest):
 
-    transformer = RenderToResponseToRenderTransformer
+    transformer = RenderToResponseTransformer
 
     def test_simple_substitution(self) -> None:
         """Check simple use case."""

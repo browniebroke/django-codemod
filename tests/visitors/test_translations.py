@@ -1,16 +1,16 @@
 from django_codemod.visitors import (
-    UGetTextLazyToGetTextLazyTransformer,
-    UGetTextNoopToGetTextNoopTransformer,
-    UGetTextToGetTextTransformer,
-    UNGetTextLazyToNGetTextLazyTransformer,
-    UNGetTextToNGetTextTransformer,
+    UGetTextLazyTransformer,
+    UGetTextNoopTransformer,
+    UGetTextTransformer,
+    UNGetTextLazyTransformer,
+    UNGetTextTransformer,
 )
 from tests.visitors.base import BaseVisitorTest
 
 
-class TestUGetTextToGetTextTransformer(BaseVisitorTest):
+class TestUGetTextTransformer(BaseVisitorTest):
 
-    transformer = UGetTextToGetTextTransformer
+    transformer = UGetTextTransformer
 
     def test_simple_substitution(self) -> None:
         """Check simple use case."""
@@ -55,9 +55,9 @@ class TestUGetTextToGetTextTransformer(BaseVisitorTest):
         self.assertCodemod(before, after)
 
 
-class TestUGetTextLazyToGetTextLazyTransformer(BaseVisitorTest):
+class TestUGetTextLazyTransformer(BaseVisitorTest):
 
-    transformer = UGetTextLazyToGetTextLazyTransformer
+    transformer = UGetTextLazyTransformer
 
     def test_simple_substitution(self) -> None:
         """Check simple use case."""
@@ -74,9 +74,9 @@ class TestUGetTextLazyToGetTextLazyTransformer(BaseVisitorTest):
         self.assertCodemod(before, after)
 
 
-class TestUGetTextNoopToGetTextNoopTransformer(BaseVisitorTest):
+class TestUGetTextNoopTransformer(BaseVisitorTest):
 
-    transformer = UGetTextNoopToGetTextNoopTransformer
+    transformer = UGetTextNoopTransformer
 
     def test_noop(self) -> None:
         """Test when nothing should change."""
@@ -110,9 +110,9 @@ class TestUGetTextNoopToGetTextNoopTransformer(BaseVisitorTest):
         self.assertCodemod(before, after)
 
 
-class TestUNGetTextToNGetTextTransformer(BaseVisitorTest):
+class TestUNGetTextTransformer(BaseVisitorTest):
 
-    transformer = UNGetTextToNGetTextTransformer
+    transformer = UNGetTextTransformer
 
     def test_simple_substitution(self) -> None:
         """Check simple use case."""
@@ -129,9 +129,9 @@ class TestUNGetTextToNGetTextTransformer(BaseVisitorTest):
         self.assertCodemod(before, after)
 
 
-class TestUNGetTextLazyToNGetTextLazyTransformer(BaseVisitorTest):
+class TestUNGetTextLazyTransformer(BaseVisitorTest):
 
-    transformer = UNGetTextLazyToNGetTextLazyTransformer
+    transformer = UNGetTextLazyTransformer
 
     def test_simple_substitution(self) -> None:
         """Check simple use case."""

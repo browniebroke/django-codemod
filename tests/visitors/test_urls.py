@@ -1,10 +1,10 @@
-from django_codemod.visitors import URLToRePathTransformer
+from django_codemod.visitors import URLTransformer
 from tests.visitors.base import BaseVisitorTest
 
 
-class TestURLToRePathTransformer(BaseVisitorTest):
+class TestURLTransformer(BaseVisitorTest):
 
-    transformer = URLToRePathTransformer
+    transformer = URLTransformer
 
     def test_noop(self) -> None:
         """Test when nothing should change."""
