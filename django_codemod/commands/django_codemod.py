@@ -3,6 +3,7 @@ from ..visitors.encoding import (
     ForceTextToForceStrTransformer,
     SmartTextToForceStrTransformer,
 )
+from ..visitors.html import UnescapeEntitiesTransformer
 from ..visitors.http import (
     HttpUrlQuotePlusTransformer,
     HttpUrlQuoteTransformer,
@@ -47,6 +48,7 @@ class Django40Command(BaseCodemodCommand):
     - ``django.utils.http.urlquote_plus``
     - ``django.utils.http.urlunquote``
     - ``django.utils.http.urlunquote_plus``
+    - ``django.utils.text.unescape_entities``
     - ``django.utils.translation.ugettext``
     - ``django.utils.translation.ugettext_lazy``
     - ``django.utils.translation.ugettext_noop``
@@ -69,4 +71,5 @@ class Django40Command(BaseCodemodCommand):
         UNGetTextLazyToNGetTextLazyTransformer,
         UNGetTextToNGetTextTransformer,
         URLToRePathTransformer,
+        UnescapeEntitiesTransformer,
     ]

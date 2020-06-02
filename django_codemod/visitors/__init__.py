@@ -1,5 +1,6 @@
 from .admin import InlineHasAddPermissionsTransformer
 from .encoding import ForceTextToForceStrTransformer, SmartTextToForceStrTransformer
+from .html import UnescapeEntitiesTransformer
 from .http import (
     HttpUrlQuotePlusTransformer,
     HttpUrlQuoteTransformer,
@@ -31,4 +32,5 @@ __all__ = (
     "UNGetTextLazyToNGetTextLazyTransformer",
     "UNGetTextToNGetTextTransformer",
     "URLToRePathTransformer",
+    "UnescapeEntitiesTransformer",
 )
