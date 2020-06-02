@@ -1,54 +1,11 @@
-from django_codemod.visitors.encoding import (
-    ForceTextToForceStrTransformer,
-    SmartTextToForceStrTransformer,
-)
-from django_codemod.visitors.translations import (
+from django_codemod.visitors import (
     UGetTextLazyToGetTextLazyTransformer,
     UGetTextNoopToGetTextNoopTransformer,
     UGetTextToGetTextTransformer,
     UNGetTextLazyToNGetTextLazyTransformer,
     UNGetTextToNGetTextTransformer,
 )
-from django_codemod.visitors.urls import URLToRePathTransformer
-
-from .base import BaseVisitorTest
-
-
-class TestForceTextToForceStrTransformer(BaseVisitorTest):
-
-    transformer = ForceTextToForceStrTransformer
-
-    def test_simple_substitution(self) -> None:
-        before = """
-            from django.utils.encoding import force_text
-
-            result = force_text(content)
-        """
-        after = """
-            from django.utils.encoding import force_str
-
-            result = force_str(content)
-        """
-        self.assertCodemod(before, after)
-
-
-class TestSmartTextToForceStrTransformer(BaseVisitorTest):
-
-    transformer = SmartTextToForceStrTransformer
-
-    def test_simple_substitution(self) -> None:
-        """Check simple use case."""
-        before = """
-            from django.utils.encoding import smart_text
-
-            result = smart_text(content)
-        """
-        after = """
-            from django.utils.encoding import smart_str
-
-            result = smart_str(content)
-        """
-        self.assertCodemod(before, after)
+from tests.visitors.base import BaseVisitorTest
 
 
 class TestUGetTextToGetTextTransformer(BaseVisitorTest):
@@ -201,52 +158,5 @@ class TestUNGetTextLazyToNGetTextLazyTransformer(BaseVisitorTest):
             from django.utils.translation import ngettext_lazy as _
 
             result = _(content, plural_content, count)
-        """
-        self.assertCodemod(before, after)
-
-
-class TestURLToRePathTransformer(BaseVisitorTest):
-
-    transformer = URLToRePathTransformer
-
-    def test_noop(self) -> None:
-        """Test when nothing should change."""
-        before = """
-            from django.urls import include, re_path
-
-            urlpatterns = [
-                re_path(r'^index/$', views.index, name='index'),
-                re_path(r'^weblog/', include('blog.urls')),
-            ]
-        """
-        after = """
-            from django.urls import include, re_path
-
-            urlpatterns = [
-                re_path(r'^index/$', views.index, name='index'),
-                re_path(r'^weblog/', include('blog.urls')),
-            ]
-        """
-
-        self.assertCodemod(before, after)
-
-    def test_simple_substitution(self) -> None:
-        """Check simple use case."""
-        before = """
-            from django.urls import include
-            from django.conf.urls import url
-
-            urlpatterns = [
-                url(r'^index/$', views.index, name='index'),
-                url(r'^weblog/', include('blog.urls')),
-            ]
-        """
-        after = """
-            from django.urls import re_path, include
-
-            urlpatterns = [
-                re_path(r'^index/$', views.index, name='index'),
-                re_path(r'^weblog/', include('blog.urls')),
-            ]
         """
         self.assertCodemod(before, after)
