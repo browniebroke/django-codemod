@@ -1,5 +1,5 @@
 from .admin import InlineHasAddPermissionsTransformer
-from .encoding import ForceTextToForceStrTransformer, SmartTextToForceStrTransformer
+from .encoding import ForceTextTransformer, SmartTextTransformer
 from .html import UnescapeEntitiesTransformer
 from .http import (
     HttpUrlQuotePlusTransformer,
@@ -8,31 +8,31 @@ from .http import (
     HttpUrlUnQuoteTransformer,
     IsSafeUrlTransformer,
 )
-from .shortcuts import RenderToResponseToRenderTransformer
+from .shortcuts import RenderToResponseTransformer
 from .translations import (
-    UGetTextLazyToGetTextLazyTransformer,
-    UGetTextNoopToGetTextNoopTransformer,
-    UGetTextToGetTextTransformer,
-    UNGetTextLazyToNGetTextLazyTransformer,
-    UNGetTextToNGetTextTransformer,
+    UGetTextLazyTransformer,
+    UGetTextNoopTransformer,
+    UGetTextTransformer,
+    UNGetTextLazyTransformer,
+    UNGetTextTransformer,
 )
-from .urls import URLToRePathTransformer
+from .urls import URLTransformer
 
 __all__ = (
-    "ForceTextToForceStrTransformer",
+    "ForceTextTransformer",
     "HttpUrlQuotePlusTransformer",
     "HttpUrlQuoteTransformer",
     "HttpUrlUnQuotePlusTransformer",
     "HttpUrlUnQuoteTransformer",
     "InlineHasAddPermissionsTransformer",
     "IsSafeUrlTransformer",
-    "RenderToResponseToRenderTransformer",
-    "SmartTextToForceStrTransformer",
-    "UGetTextLazyToGetTextLazyTransformer",
-    "UGetTextNoopToGetTextNoopTransformer",
-    "UGetTextToGetTextTransformer",
-    "UNGetTextLazyToNGetTextLazyTransformer",
-    "UNGetTextToNGetTextTransformer",
-    "URLToRePathTransformer",
+    "RenderToResponseTransformer",
+    "SmartTextTransformer",
+    "UGetTextLazyTransformer",
+    "UGetTextNoopTransformer",
+    "UGetTextTransformer",
+    "UNGetTextLazyTransformer",
+    "UNGetTextTransformer",
+    "URLTransformer",
     "UnescapeEntitiesTransformer",
 )

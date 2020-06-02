@@ -1,13 +1,10 @@
-from django_codemod.visitors import (
-    ForceTextToForceStrTransformer,
-    SmartTextToForceStrTransformer,
-)
+from django_codemod.visitors import ForceTextTransformer, SmartTextTransformer
 from tests.visitors.base import BaseVisitorTest
 
 
-class TestForceTextToForceStrTransformer(BaseVisitorTest):
+class TestForceTextTransformer(BaseVisitorTest):
 
-    transformer = ForceTextToForceStrTransformer
+    transformer = ForceTextTransformer
 
     def test_simple_substitution(self) -> None:
         before = """
@@ -23,9 +20,9 @@ class TestForceTextToForceStrTransformer(BaseVisitorTest):
         self.assertCodemod(before, after)
 
 
-class TestSmartTextToForceStrTransformer(BaseVisitorTest):
+class TestSmartTextTransformer(BaseVisitorTest):
 
-    transformer = SmartTextToForceStrTransformer
+    transformer = SmartTextTransformer
 
     def test_simple_substitution(self) -> None:
         """Check simple use case."""

@@ -108,23 +108,23 @@ def test_deprecated_in_mapping():
     """Transformers found by the ``DEPRECATED_IN`` mapping."""
     assert _mapping_repr(DEPRECATED_IN) == {
         (3, 0): [
-            "ForceTextToForceStrTransformer",
+            "ForceTextTransformer",
             "HttpUrlQuotePlusTransformer",
             "HttpUrlQuoteTransformer",
             "HttpUrlUnQuotePlusTransformer",
             "HttpUrlUnQuoteTransformer",
             "IsSafeUrlTransformer",
-            "SmartTextToForceStrTransformer",
-            "UGetTextLazyToGetTextLazyTransformer",
-            "UGetTextNoopToGetTextNoopTransformer",
-            "UGetTextToGetTextTransformer",
-            "UNGetTextLazyToNGetTextLazyTransformer",
-            "UNGetTextToNGetTextTransformer",
-            "URLToRePathTransformer",
+            "SmartTextTransformer",
+            "UGetTextLazyTransformer",
+            "UGetTextNoopTransformer",
+            "UGetTextTransformer",
+            "UNGetTextLazyTransformer",
+            "UNGetTextTransformer",
+            "URLTransformer",
             "UnescapeEntitiesTransformer",
         ],
         (2, 1): ["InlineHasAddPermissionsTransformer"],
-        (2, 0): ["RenderToResponseToRenderTransformer"],
+        (2, 0): ["RenderToResponseTransformer"],
     }
 
 
@@ -132,23 +132,20 @@ def test_removed_in_mapping():
     """Transformers found by the ``REMOVED_IN`` mapping."""
     assert _mapping_repr(REMOVED_IN) == {
         (4, 0): [
-            "ForceTextToForceStrTransformer",
+            "ForceTextTransformer",
             "HttpUrlQuotePlusTransformer",
             "HttpUrlQuoteTransformer",
             "HttpUrlUnQuotePlusTransformer",
             "HttpUrlUnQuoteTransformer",
             "IsSafeUrlTransformer",
-            "SmartTextToForceStrTransformer",
-            "UGetTextLazyToGetTextLazyTransformer",
-            "UGetTextNoopToGetTextNoopTransformer",
-            "UGetTextToGetTextTransformer",
-            "UNGetTextLazyToNGetTextLazyTransformer",
-            "UNGetTextToNGetTextTransformer",
-            "URLToRePathTransformer",
+            "SmartTextTransformer",
+            "UGetTextLazyTransformer",
+            "UGetTextNoopTransformer",
+            "UGetTextTransformer",
+            "UNGetTextLazyTransformer",
+            "UNGetTextTransformer",
+            "URLTransformer",
             "UnescapeEntitiesTransformer",
         ],
-        (3, 0): [
-            "InlineHasAddPermissionsTransformer",
-            "RenderToResponseToRenderTransformer",
-        ],
+        (3, 0): ["InlineHasAddPermissionsTransformer", "RenderToResponseTransformer"],
     }

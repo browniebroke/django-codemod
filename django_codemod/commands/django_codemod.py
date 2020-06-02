@@ -1,8 +1,5 @@
 from ..visitors.admin import InlineHasAddPermissionsTransformer
-from ..visitors.encoding import (
-    ForceTextToForceStrTransformer,
-    SmartTextToForceStrTransformer,
-)
+from ..visitors.encoding import ForceTextTransformer, SmartTextTransformer
 from ..visitors.html import UnescapeEntitiesTransformer
 from ..visitors.http import (
     HttpUrlQuotePlusTransformer,
@@ -11,15 +8,15 @@ from ..visitors.http import (
     HttpUrlUnQuoteTransformer,
     IsSafeUrlTransformer,
 )
-from ..visitors.shortcuts import RenderToResponseToRenderTransformer
+from ..visitors.shortcuts import RenderToResponseTransformer
 from ..visitors.translations import (
-    UGetTextLazyToGetTextLazyTransformer,
-    UGetTextNoopToGetTextNoopTransformer,
-    UGetTextToGetTextTransformer,
-    UNGetTextLazyToNGetTextLazyTransformer,
-    UNGetTextToNGetTextTransformer,
+    UGetTextLazyTransformer,
+    UGetTextNoopTransformer,
+    UGetTextTransformer,
+    UNGetTextLazyTransformer,
+    UNGetTextTransformer,
 )
-from ..visitors.urls import URLToRePathTransformer
+from ..visitors.urls import URLTransformer
 from .base import BaseCodemodCommand
 
 
@@ -34,7 +31,7 @@ class Django30Command(BaseCodemodCommand):
 
     DESCRIPTION: str = "Resolve deprecations for removals in Django 3.0."
     transformers = [
-        RenderToResponseToRenderTransformer,
+        RenderToResponseTransformer,
         InlineHasAddPermissionsTransformer,
     ]
 
@@ -61,18 +58,18 @@ class Django40Command(BaseCodemodCommand):
 
     DESCRIPTION: str = "Resolve deprecations of things removed in Django 4.0"
     transformers = [
-        ForceTextToForceStrTransformer,
+        ForceTextTransformer,
         HttpUrlQuotePlusTransformer,
         HttpUrlQuoteTransformer,
         HttpUrlUnQuotePlusTransformer,
         HttpUrlUnQuoteTransformer,
         IsSafeUrlTransformer,
-        SmartTextToForceStrTransformer,
-        UGetTextLazyToGetTextLazyTransformer,
-        UGetTextNoopToGetTextNoopTransformer,
-        UGetTextToGetTextTransformer,
-        UNGetTextLazyToNGetTextLazyTransformer,
-        UNGetTextToNGetTextTransformer,
-        URLToRePathTransformer,
+        SmartTextTransformer,
+        UGetTextLazyTransformer,
+        UGetTextNoopTransformer,
+        UGetTextTransformer,
+        UNGetTextLazyTransformer,
+        UNGetTextTransformer,
+        URLTransformer,
         UnescapeEntitiesTransformer,
     ]
