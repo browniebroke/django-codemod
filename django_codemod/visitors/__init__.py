@@ -1,5 +1,11 @@
 from .admin import InlineHasAddPermissionsTransformer
 from .encoding import ForceTextToForceStrTransformer, SmartTextToForceStrTransformer
+from .http import (
+    HttpUrlQuotePlusTransformer,
+    HttpUrlQuoteTransformer,
+    HttpUrlUnQuotePlusTransformer,
+    HttpUrlUnQuoteTransformer,
+)
 from .shortcuts import RenderToResponseToRenderTransformer
 from .translations import (
     UGetTextLazyToGetTextLazyTransformer,
@@ -12,6 +18,10 @@ from .urls import URLToRePathTransformer
 
 __all__ = (
     "ForceTextToForceStrTransformer",
+    "HttpUrlQuotePlusTransformer",
+    "HttpUrlQuoteTransformer",
+    "HttpUrlUnQuotePlusTransformer",
+    "HttpUrlUnQuoteTransformer",
     "InlineHasAddPermissionsTransformer",
     "RenderToResponseToRenderTransformer",
     "SmartTextToForceStrTransformer",
