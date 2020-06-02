@@ -128,6 +128,7 @@ def test_deprecated_in_mapping():
             "AbsPathTransformer",
             "LRUCacheTransformer",
             "RenderToResponseTransformer",
+            "UnicodeCompatibleTransformer",
         ],
     }
 
@@ -156,5 +157,6 @@ def test_removed_in_mapping():
             "InlineHasAddPermissionsTransformer",
             "LRUCacheTransformer",
             "RenderToResponseTransformer",
+            "UnicodeCompatibleTransformer",
         ],
     }
