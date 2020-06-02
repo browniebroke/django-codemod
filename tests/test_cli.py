@@ -2,6 +2,7 @@ import pytest
 from click.testing import CliRunner
 
 from django_codemod import cli
+from django_codemod.cli import DEPRECATED_IN, REMOVED_IN
 
 
 @pytest.fixture()
@@ -93,3 +94,59 @@ def test_basic_arguments(mocker, cli_runner, option, version):
 
     assert result.exit_code == 0
     call_command.assert_called_once()
+
+
+def _mapping_repr(mapping):
+    """Helper to return class names in the dict values."""
+    return {
+        version: [klass.__name__ for klass in classes_list]
+        for version, classes_list in mapping.items()
+    }
+
+
+def test_deprecated_in_mapping():
+    """Transformers found by the ``DEPRECATED_IN`` mapping."""
+    assert _mapping_repr(DEPRECATED_IN) == {
+        (3, 0): [
+            "ForceTextToForceStrTransformer",
+            "HttpUrlQuotePlusTransformer",
+            "HttpUrlQuoteTransformer",
+            "HttpUrlUnQuotePlusTransformer",
+            "HttpUrlUnQuoteTransformer",
+            "SmartTextToForceStrTransformer",
+            "UGetTextLazyToGetTextLazyTransformer",
+            "UGetTextNoopToGetTextNoopTransformer",
+            "UGetTextToGetTextTransformer",
+            "UNGetTextLazyToNGetTextLazyTransformer",
+            "UNGetTextToNGetTextTransformer",
+            "URLToRePathTransformer",
+            "UnescapeEntitiesTransformer",
+        ],
+        (2, 1): ["InlineHasAddPermissionsTransformer"],
+        (2, 0): ["RenderToResponseToRenderTransformer"],
+    }
+
+
+def test_removed_in_mapping():
+    """Transformers found by the ``REMOVED_IN`` mapping."""
+    assert _mapping_repr(REMOVED_IN) == {
+        (4, 0): [
+            "ForceTextToForceStrTransformer",
+            "HttpUrlQuotePlusTransformer",
+            "HttpUrlQuoteTransformer",
+            "HttpUrlUnQuotePlusTransformer",
+            "HttpUrlUnQuoteTransformer",
+            "SmartTextToForceStrTransformer",
+            "UGetTextLazyToGetTextLazyTransformer",
+            "UGetTextNoopToGetTextNoopTransformer",
+            "UGetTextToGetTextTransformer",
+            "UNGetTextLazyToNGetTextLazyTransformer",
+            "UNGetTextToNGetTextTransformer",
+            "URLToRePathTransformer",
+            "UnescapeEntitiesTransformer",
+        ],
+        (3, 0): [
+            "InlineHasAddPermissionsTransformer",
+            "RenderToResponseToRenderTransformer",
+        ],
+    }
