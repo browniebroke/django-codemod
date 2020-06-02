@@ -6,6 +6,7 @@
 
 ### 🚀 Enhancements:
 
+- Resolve some removed private Python 2 compatibility APIs [\#74](https://github.com/browniebroke/django-codemod/pull/74) ([browniebroke](https://github.com/browniebroke))
 - Resolve deprecation of `django.utils.http.is\_safe\_url` in Django 3.0 [\#72](https://github.com/browniebroke/django-codemod/pull/72) ([browniebroke](https://github.com/browniebroke))
 - Resolve deprecation of `django.utils.text.unescape\_entities` in Django 3.0 [\#70](https://github.com/browniebroke/django-codemod/pull/70) ([browniebroke](https://github.com/browniebroke))
 - Resolve deprecations from `django.utils.http` in Django 3.0 [\#69](https://github.com/browniebroke/django-codemod/pull/69) ([browniebroke](https://github.com/browniebroke))
@@ -72,7 +73,6 @@
 ### 🚀 Enhancements:
 
 - Resolve deprecation for django.shortcuts.render\_to\_response\(\) [\#25](https://github.com/browniebroke/django-codemod/pull/25) ([browniebroke](https://github.com/browniebroke))
-- Migrate package metadata to declarative syntax [\#19](https://github.com/browniebroke/django-codemod/pull/19) ([browniebroke](https://github.com/browniebroke))
 
 ### 📖 Documentation updates:
 
@@ -94,6 +94,10 @@
 ## [v0.2.1](https://github.com/browniebroke/django-codemod/tree/v0.2.1) (2020-05-10)
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.2.0...v0.2.1)
+
+### 🚀 Enhancements:
+
+- Migrate package metadata to declarative syntax [\#19](https://github.com/browniebroke/django-codemod/pull/19) ([browniebroke](https://github.com/browniebroke))
 
 ## [v0.2.0](https://github.com/browniebroke/django-codemod/tree/v0.2.0) (2020-05-10)
 
