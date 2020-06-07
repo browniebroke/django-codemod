@@ -4,6 +4,10 @@
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.8.0...HEAD)
 
+### 🐛 Bug Fixes:
+
+- Support fixing calls to base class has\_add\_permission in Admin Inline [\#83](https://github.com/browniebroke/django-codemod/pull/83) ([browniebroke](https://github.com/browniebroke))
+
 ### 📖 Documentation updates:
 
 - Mention changes around tests in changelog [\#82](https://github.com/browniebroke/django-codemod/pull/82) ([browniebroke](https://github.com/browniebroke))
