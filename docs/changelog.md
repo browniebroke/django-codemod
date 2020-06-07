@@ -1,5 +1,13 @@
 # Changelog
 
+## [Unreleased](https://github.com/browniebroke/django-codemod/tree/HEAD)
+
+[Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.8.1...HEAD)
+
+### 🚀 Enhancements:
+
+- Resolve deprecation of `django.utils.decorators.ContextDecorator` in Django 2.0 [\#84](https://github.com/browniebroke/django-codemod/pull/84) ([browniebroke](https://github.com/browniebroke))
+
 ## [v0.8.1](https://github.com/browniebroke/django-codemod/tree/v0.8.1) (2020-06-07)
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.8.0...v0.8.1)
