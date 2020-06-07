@@ -116,10 +116,6 @@
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.2.0...v0.2.1)
 
-### 💥 Breaking Changes:
-
-- Rename module and extract logic out into a base command [\#9](https://github.com/browniebroke/django-codemod/pull/9) ([browniebroke](https://github.com/browniebroke))
-
 ### 🚀 Enhancements:
 
 - Migrate package metadata to declarative syntax [\#19](https://github.com/browniebroke/django-codemod/pull/19) ([browniebroke](https://github.com/browniebroke))
@@ -131,6 +127,7 @@
 ### 💥 Breaking Changes:
 
 - Rename commands to reflect the functions they work with [\#13](https://github.com/browniebroke/django-codemod/pull/13) ([browniebroke](https://github.com/browniebroke))
+- Rename module and extract logic out into a base command [\#9](https://github.com/browniebroke/django-codemod/pull/9) ([browniebroke](https://github.com/browniebroke))
 
 ### 🚀 Enhancements:
 
