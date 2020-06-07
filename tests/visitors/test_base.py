@@ -1,6 +1,34 @@
-from django_codemod.visitors.base import BaseSimpleFuncRenameTransformer
+import pytest
+from libcst import matchers as m
+
+from django_codemod.visitors.base import BaseSimpleFuncRenameTransformer, module_matcher
 
 from .base import BaseVisitorTest
+
+
+@pytest.mark.parametrize(
+    ("parts", "expected_matcher"),
+    [
+        (["django"], m.Attribute(attr=m.Name("django"))),
+        (
+            ["django", "contrib"],
+            m.Attribute(value=m.Name("django"), attr=m.Name("contrib")),
+        ),
+        (
+            ["django", "contrib", "admin"],
+            m.Attribute(
+                value=m.Attribute(value=m.Name("django"), attr=m.Name("contrib")),
+                attr=m.Name("admin"),
+            ),
+        ),
+    ],
+)
+def test_module_matcher(parts, expected_matcher):
+    matcher = module_matcher(parts)
+
+    # equality comparision doesn't work with matcher:
+    # compare their representation seems to work
+    assert repr(matcher) == repr(expected_matcher)
 
 
 class SameModuleRenameTransformer(BaseSimpleFuncRenameTransformer):
