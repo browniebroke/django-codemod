@@ -23,7 +23,9 @@ class InlineHasAddPermissionsTransformer(ContextAwareTransformer):
 
     deprecated_in = DJANGO_21
     removed_in = DJANGO_30
-    context_key = "InlineHasAddPermissionsTransformer"
+    ctx_key_prefix = "InlineHasAddPermissionsTransformer"
+    ctx_key_base_cls_matcher = f"{ctx_key_prefix}-base_cls_matcher"
+    ctx_key_visiting_subclass = f"{ctx_key_prefix}-is_visiting_subclass"
 
     def leave_ImportFrom(
         self, original_node: ImportFrom, updated_node: ImportFrom
@@ -64,39 +66,35 @@ class InlineHasAddPermissionsTransformer(ContextAwareTransformer):
                     )
         # Save valid matchers in the context
         if base_cls_matcher:
-            self.context.scratch[f"{self.context_key}-base_cls_matcher"] = m.OneOf(
+            self.context.scratch[self.ctx_key_base_cls_matcher] = m.OneOf(
                 *base_cls_matcher
             )
         return super().leave_ImportFrom(original_node, updated_node)
 
     def leave_Module(self, original_node: Module, updated_node: Module) -> Module:
-        self.context.scratch.pop(f"{self.context_key}-base_cls_matcher", None)
+        self.context.scratch.pop(self.ctx_key_base_cls_matcher, None)
         return super().leave_Module(original_node, updated_node)
 
     @property
     def base_cls_matcher(self):
-        return self.context.scratch.get(f"{self.context_key}-base_cls_matcher")
+        return self.context.scratch.get(self.ctx_key_base_cls_matcher)
 
     def visit_ClassDef_bases(self, node: ClassDef) -> None:
         if self.base_cls_matcher is not None:
             for base_cls in node.bases:
                 if m.matches(base_cls, self.base_cls_matcher):
-                    self.context.scratch[
-                        f"{self.context_key}-is_visiting_subclass"
-                    ] = True
+                    self.context.scratch[self.ctx_key_visiting_subclass] = True
         super().visit_ClassDef_bases(node)
 
     def leave_ClassDef(
         self, original_node: ClassDef, updated_node: ClassDef
     ) -> Union[BaseStatement, RemovalSentinel]:
-        self.context.scratch.pop(f"{self.context_key}-is_visiting_subclass", None)
+        self.context.scratch.pop(self.ctx_key_visiting_subclass, None)
         return super().leave_ClassDef(original_node, updated_node)
 
     @property
     def is_visiting_subclass(self):
-        return self.context.scratch.get(
-            f"{self.context_key}-is_visiting_subclass", False
-        )
+        return self.context.scratch.get(self.ctx_key_visiting_subclass, False)
 
     def leave_FunctionDef(
         self, original_node: FunctionDef, updated_node: FunctionDef
