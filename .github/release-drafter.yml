@@ -1,8 +1,8 @@
 categories:
-  - title: '⚠️ Breaking Changes'
+  - title: '💥 Breaking Changes'
     labels:
       - 'breaking'
-  - title: '🚨 Deprecated'
+  - title: '⚠️ Deprecations'
     labels:
       - 'deprecated'
   - title: '🚀 Enhancements'
@@ -11,15 +11,17 @@ categories:
   - title: '🐛 Bug Fixes'
     labels:
       - 'bug'
-  - title: '🗑 Removals'
+  - title: '🔥 Removals'
     labels:
       - 'removed'
   - title: '📖 Documentation updates'
     labels:
       - 'documentation'
+  - title: '✅ Testing'
+    labels:
+      - 'tests'
 
 exclude-labels:
-  - 'tests'
   - 'automation'
   - 'nochangelog'
 
