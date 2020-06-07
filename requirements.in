@@ -1,0 +1,15 @@
+black
+bump2version
+coverage
+flake8
+flake8-isort
+parameterized
+pre-commit
+pytest-runner
+pytest-mock
+pytest
+pyupgrade
+tox
+twine
+wheel
+-r docs/requirements.txt
