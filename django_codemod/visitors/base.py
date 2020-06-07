@@ -29,7 +29,7 @@ def module_matcher(import_parts):
 
 
 class BaseSimpleFuncRenameTransformer(ContextAwareTransformer, ABC):
-    """Base class to help rename a simple function."""
+    """Base class to help rename or move a function."""
 
     rename_from: str
     rename_to: str
@@ -50,16 +50,16 @@ class BaseSimpleFuncRenameTransformer(ContextAwareTransformer, ABC):
     def new_module_parts(self):
         return self.rename_to.split(".")[:-1]
 
-    def _test_import_from(self, node: ImportFrom) -> bool:
-        """Check if 'import from' should be updated."""
-        return m.matches(
-            node, m.ImportFrom(module=module_matcher(self.old_module_parts))
-        )
+    @property
+    def ctx_key_is_imported(self):
+        return f"{self.rename_from}-is_imported"
 
     def leave_ImportFrom(
         self, original_node: ImportFrom, updated_node: ImportFrom
     ) -> Union[BaseSmallStatement, RemovalSentinel]:
-        if not self._test_import_from(updated_node):
+        if not m.matches(
+            updated_node, m.ImportFrom(module=module_matcher(self.old_module_parts))
+        ):
             return super().leave_ImportFrom(original_node, updated_node)
         new_names = []
         for import_alias in updated_node.names:
@@ -73,7 +73,7 @@ class BaseSimpleFuncRenameTransformer(ContextAwareTransformer, ABC):
                     obj=self.new_name,
                     asname=as_name,
                 )
-                self.context.scratch[self.rename_from] = not import_alias.asname
+                self.context.scratch[self.ctx_key_is_imported] = not import_alias.asname
             else:
                 new_names.append(import_alias)
         if not new_names:
@@ -87,11 +87,11 @@ class BaseSimpleFuncRenameTransformer(ContextAwareTransformer, ABC):
         return updated_node.with_changes(names=new_names)
 
     @property
-    def _is_context_right(self):
-        return self.context.scratch.get(self.rename_from, False)
+    def is_function_imported(self):
+        return self.context.scratch.get(self.ctx_key_is_imported, False)
 
     def leave_Call(self, original_node: Call, updated_node: Call) -> BaseExpression:
-        if self._is_context_right and m.matches(
+        if self.is_function_imported and m.matches(
             updated_node, m.Call(func=m.Name(self.old_name))
         ):
             updated_args = self.update_call_args(updated_node)
