@@ -51,7 +51,7 @@ pytest-mock==3.1.1        # via -r requirements.in
 pytest-runner==5.2        # via -r requirements.in
 pytest==5.4.3             # via -r requirements.in, pytest-cov, pytest-mock
 pytz==2020.1              # via babel
-pyupgrade==2.4.4          # via -r requirements.in
+pyupgrade==2.5.0          # via -r requirements.in
 pyyaml==5.3.1             # via libcst, pre-commit
 readme-renderer==26.0     # via twine
 recommonmark==0.6.0       # via -r docs/requirements.txt
