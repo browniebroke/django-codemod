@@ -16,7 +16,9 @@ class TestInlineHasAddPermissionsTransformer(BaseVisitorTest):
             class MyAdmin(admin.ModelAdmin):
 
                 def has_add_permission(self, request):
-                    return False
+                    if somethings:
+                        return False
+                    return super().has_add_permission(request)
         """
         after = """
             from django.contrib import admin
@@ -24,7 +26,9 @@ class TestInlineHasAddPermissionsTransformer(BaseVisitorTest):
             class MyAdmin(admin.ModelAdmin):
 
                 def has_add_permission(self, request):
-                    return False
+                    if somethings:
+                        return False
+                    return super().has_add_permission(request)
         """
         self.assertCodemod(before, after)
 
@@ -36,7 +40,9 @@ class TestInlineHasAddPermissionsTransformer(BaseVisitorTest):
             class MyCustomStuff:
 
                 def has_add_permission(self, request):
-                    return False
+                    if somethings:
+                        return False
+                    return super().has_add_permission(request)
         """
         after = """
             from django.contrib import admin
@@ -44,7 +50,9 @@ class TestInlineHasAddPermissionsTransformer(BaseVisitorTest):
             class MyCustomStuff:
 
                 def has_add_permission(self, request):
-                    return False
+                    if somethings:
+                        return False
+                    return super().has_add_permission(request)
         """
         self.assertCodemod(before, after)
 
@@ -64,7 +72,9 @@ class TestInlineHasAddPermissionsTransformer(BaseVisitorTest):
             class MyInlineInline({base_class}):
 
                 def has_add_permission(self, request):
-                    return False
+                    if somethings:
+                        return False
+                    return super().has_add_permission(request)
         """
         after = f"""
             from django.contrib{import_}
@@ -72,7 +82,9 @@ class TestInlineHasAddPermissionsTransformer(BaseVisitorTest):
             class MyInlineInline({base_class}):
 
                 def has_add_permission(self, request, obj = None):
-                    return False
+                    if somethings:
+                        return False
+                    return super().has_add_permission(request, obj = obj)
         """
         self.assertCodemod(before, after)
 
@@ -92,7 +104,9 @@ class TestInlineHasAddPermissionsTransformer(BaseVisitorTest):
             class MyInlineInline(InlineMixin, {base_class}):
 
                 def has_add_permission(self, request):
-                    return False
+                    if somethings:
+                        return False
+                    return super().has_add_permission(request)
         """
         after = f"""
             from django.contrib{import_}
@@ -100,7 +114,9 @@ class TestInlineHasAddPermissionsTransformer(BaseVisitorTest):
             class MyInlineInline(InlineMixin, {base_class}):
 
                 def has_add_permission(self, request, obj = None):
-                    return False
+                    if somethings:
+                        return False
+                    return super().has_add_permission(request, obj = obj)
         """
         self.assertCodemod(before, after)
 
@@ -120,7 +136,9 @@ class TestInlineHasAddPermissionsTransformer(BaseVisitorTest):
             class MyInlineInline({base_class}, OtherBase):
 
                 def has_add_permission(self, request):
-                    return False
+                    if somethings:
+                        return False
+                    return super().has_add_permission(request)
         """
         after = f"""
             from django.contrib{import_}
@@ -128,19 +146,24 @@ class TestInlineHasAddPermissionsTransformer(BaseVisitorTest):
             class MyInlineInline({base_class}, OtherBase):
 
                 def has_add_permission(self, request, obj = None):
-                    return False
+                    if somethings:
+                        return False
+                    return super().has_add_permission(request, obj = obj)
         """
         self.assertCodemod(before, after)
 
-    def test_context_cleared(self) -> None:
+    @parameterized.expand([("admin.TabularInline"), ("admin.StackedInline")])
+    def test_context_cleared(self, base_class) -> None:
         """Test that context is cleared and doesn't leak to other classes."""
-        before = """
+        before = f"""
             from django.contrib import admin
 
-            class MyInlineInline(admin.TabularInline):
+            class MyInlineInline({base_class}):
 
                 def has_add_permission(self, request):
-                    return False
+                    if somethings:
+                        return False
+                    return super().has_add_permission(request)
 
 
             class MyAdmin(admin.ModelAdmin):
@@ -148,13 +171,15 @@ class TestInlineHasAddPermissionsTransformer(BaseVisitorTest):
                 def has_add_permission(self, request):
                     return False
         """
-        after = """
+        after = f"""
             from django.contrib import admin
 
-            class MyInlineInline(admin.TabularInline):
+            class MyInlineInline({base_class}):
 
                 def has_add_permission(self, request, obj = None):
-                    return False
+                    if somethings:
+                        return False
+                    return super().has_add_permission(request, obj = obj)
 
 
             class MyAdmin(admin.ModelAdmin):

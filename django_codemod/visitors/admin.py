@@ -1,8 +1,11 @@
 from typing import Union
 
 from libcst import (
+    Arg,
+    BaseExpression,
     BaseSmallStatement,
     BaseStatement,
+    Call,
     ClassDef,
     FunctionDef,
     ImportFrom,
@@ -115,3 +118,24 @@ class InlineHasAddPermissionsTransformer(ContextAwareTransformer):
             )
             return updated_node.with_changes(params=updated_params)
         return super().leave_FunctionDef(original_node, updated_node)
+
+    def leave_Call(self, original_node: Call, updated_node: Call) -> BaseExpression:
+        if (
+            self.is_visiting_subclass
+            and m.matches(
+                updated_node,
+                m.Call(
+                    func=m.Attribute(
+                        attr=m.Name("has_add_permission"),
+                        value=m.Call(func=m.Name("super")),
+                    )
+                ),
+            )
+            and len(updated_node.args) < 2
+        ):
+            updated_args = (
+                *updated_node.args,
+                Arg(keyword=Name("obj"), value=Name("obj")),
+            )
+            return updated_node.with_changes(args=updated_args)
+        return super().leave_Call(original_node, updated_node)
