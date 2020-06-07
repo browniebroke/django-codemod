@@ -28,8 +28,8 @@ def module_matcher(import_parts):
     return m.Attribute(value=value, attr=m.Name(attr))
 
 
-class BaseSimpleFuncRenameTransformer(ContextAwareTransformer, ABC):
-    """Base class to help rename or move a function."""
+class BaseSimpleRenameTransformer(ContextAwareTransformer, ABC):
+    """Base class to help rename or move a declaration."""
 
     rename_from: str
     rename_to: str
@@ -87,11 +87,15 @@ class BaseSimpleFuncRenameTransformer(ContextAwareTransformer, ABC):
         return updated_node.with_changes(names=new_names)
 
     @property
-    def is_function_imported(self):
+    def is_entity_imported(self):
         return self.context.scratch.get(self.ctx_key_is_imported, False)
 
+
+class BaseSimpleFuncRenameTransformer(BaseSimpleRenameTransformer, ABC):
+    """Base class to help rename or move a function."""
+
     def leave_Call(self, original_node: Call, updated_node: Call) -> BaseExpression:
-        if self.is_function_imported and m.matches(
+        if self.is_entity_imported and m.matches(
             updated_node, m.Call(func=m.Name(self.old_name))
         ):
             updated_args = self.update_call_args(updated_node)

@@ -1,4 +1,5 @@
 from .admin import InlineHasAddPermissionsTransformer
+from .decorators import ContextDecoratorTransformer
 from .encoding import (
     ForceTextTransformer,
     SmartTextTransformer,
@@ -26,6 +27,7 @@ from .urls import URLTransformer
 
 __all__ = (
     "AbsPathTransformer",
+    "ContextDecoratorTransformer",
     "ForceTextTransformer",
     "HttpUrlQuotePlusTransformer",
     "HttpUrlQuoteTransformer",

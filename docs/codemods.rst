@@ -13,6 +13,7 @@ Applied by passing the ``--removed-in 3.0`` or ``--deprecated-in 2.0`` option:
 - Replaces ``django.utils.lru_cache.lru_cache()`` by the function it's an alias of: ``functools.lru_cache()``.
 - Replaces ``django.utils._os.abspathu()`` by the function it's an alias of: ``os.path.abspath()``.
 - Replaces ``django.utils.encoding.python_2_unicode_compatible()`` by the function it's an alias of: ``six.python_2_unicode_compatible()``.
+- Replaces ``django.utils.decorators.ContextDecorator`` by the class from the standard library it's an alias to ``contextlib.ContextDecorator``.
 
 Applied by passing the ``--removed-in 3.0`` or ``--deprecated-in 2.1`` option:
 
