@@ -1,5 +1,17 @@
 # Changelog
 
+## [Unreleased](https://github.com/browniebroke/django-codemod/tree/HEAD)
+
+[Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.8.0...HEAD)
+
+### 📖 Documentation updates:
+
+- Mention changes around tests in changelog [\#82](https://github.com/browniebroke/django-codemod/pull/82) ([browniebroke](https://github.com/browniebroke))
+
+### ✅ Testing:
+
+- Increase test code coverage to 100% [\#81](https://github.com/browniebroke/django-codemod/pull/81) ([browniebroke](https://github.com/browniebroke))
+
 ## [v0.8.0](https://github.com/browniebroke/django-codemod/tree/v0.8.0) (2020-06-02)
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.7.0...v0.8.0)
@@ -17,9 +29,9 @@
 
 - Fix version deprecated for several Django 4.0 visitors [\#68](https://github.com/browniebroke/django-codemod/pull/68) ([browniebroke](https://github.com/browniebroke))
 
-### 📖 Documentation updates:
+### ✅ Testing:
 
-- Updates README.me with proper travis badge [\#50](https://github.com/browniebroke/django-codemod/pull/50) ([sobolevn](https://github.com/sobolevn))
+- Test that transformers are found by CLI [\#71](https://github.com/browniebroke/django-codemod/pull/71) ([browniebroke](https://github.com/browniebroke))
 
 ## [v0.7.0](https://github.com/browniebroke/django-codemod/tree/v0.7.0) (2020-05-23)
 
@@ -32,6 +44,10 @@
 ### 🐛 Bug Fixes:
 
 - Make sure the function to rename is imported before renaming [\#54](https://github.com/browniebroke/django-codemod/pull/54) ([browniebroke](https://github.com/browniebroke))
+
+### 📖 Documentation updates:
+
+- Updates README.me with proper travis badge [\#50](https://github.com/browniebroke/django-codemod/pull/50) ([sobolevn](https://github.com/sobolevn))
 
 ## [v0.6.0](https://github.com/browniebroke/django-codemod/tree/v0.6.0) (2020-05-22)
 
@@ -48,9 +64,14 @@
 - Fix bug with trailing comma when removed import is the last one [\#39](https://github.com/browniebroke/django-codemod/pull/39) ([browniebroke](https://github.com/browniebroke))
 - Fix bug with lost alias when 'import as' is used [\#38](https://github.com/browniebroke/django-codemod/pull/38) ([browniebroke](https://github.com/browniebroke))
 
-### 🗑 Removals:
+### 🔥 Removals:
 
 - Remove commands to fix single deprecations [\#43](https://github.com/browniebroke/django-codemod/pull/43) ([browniebroke](https://github.com/browniebroke))
+
+### ✅ Testing:
+
+- Linting workflow [\#47](https://github.com/browniebroke/django-codemod/pull/47) ([browniebroke](https://github.com/browniebroke))
+- Tests visitors independently from commands [\#42](https://github.com/browniebroke/django-codemod/pull/42) ([browniebroke](https://github.com/browniebroke))
 
 ## [v0.5.0](https://github.com/browniebroke/django-codemod/tree/v0.5.0) (2020-05-13)
 
@@ -95,6 +116,10 @@
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.2.0...v0.2.1)
 
+### 💥 Breaking Changes:
+
+- Rename module and extract logic out into a base command [\#9](https://github.com/browniebroke/django-codemod/pull/9) ([browniebroke](https://github.com/browniebroke))
+
 ### 🚀 Enhancements:
 
 - Migrate package metadata to declarative syntax [\#19](https://github.com/browniebroke/django-codemod/pull/19) ([browniebroke](https://github.com/browniebroke))
@@ -103,10 +128,9 @@
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.1.1...v0.2.0)
 
-### ⚠️ Breaking Changes:
+### 💥 Breaking Changes:
 
 - Rename commands to reflect the functions they work with [\#13](https://github.com/browniebroke/django-codemod/pull/13) ([browniebroke](https://github.com/browniebroke))
-- Rename module and extract logic out into a base command [\#9](https://github.com/browniebroke/django-codemod/pull/9) ([browniebroke](https://github.com/browniebroke))
 
 ### 🚀 Enhancements:
 
@@ -118,7 +142,7 @@
 - Support smart\_text deprecation, replace by smart\_str [\#10](https://github.com/browniebroke/django-codemod/pull/10) ([browniebroke](https://github.com/browniebroke))
 - Refactor checks to use matchers [\#8](https://github.com/browniebroke/django-codemod/pull/8) ([browniebroke](https://github.com/browniebroke))
 
-### 🗑 Removals:
+### 🔥 Removals:
 
 - Remove unused entry point [\#18](https://github.com/browniebroke/django-codemod/pull/18) ([browniebroke](https://github.com/browniebroke))
 
