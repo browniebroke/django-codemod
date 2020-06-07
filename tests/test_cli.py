@@ -1,13 +1,28 @@
+import click
 import pytest
 from click.testing import CliRunner
+from libcst.codemod import ParallelTransformResult
 
 from django_codemod import cli
-from django_codemod.cli import DEPRECATED_IN, REMOVED_IN
+from django_codemod.cli import DEPRECATED_IN, REMOVED_IN, build_command, call_command
 
 
 @pytest.fixture()
 def cli_runner():
     return CliRunner()
+
+
+@pytest.fixture()
+def gather_files_mocked(mocker):
+    """Mock return value of gather_files from libCST."""
+    gather_files = mocker.patch("django_codemod.cli.gather_files")
+    gather_files.return_value = ["some/file.py"]
+
+
+@pytest.fixture()
+def command_instance():
+    """Dummy command instance to test call_command."""
+    return build_command([])
 
 
 def test_missing_argument(cli_runner):
@@ -94,6 +109,47 @@ def test_basic_arguments(mocker, cli_runner, option, version):
 
     assert result.exit_code == 0
     call_command.assert_called_once()
+
+
+@pytest.mark.usefixtures("gather_files_mocked")
+def test_call_command_success(command_instance, mocker):
+    executor = mocker.patch(
+        "django_codemod.cli.parallel_exec_transform_with_prettyprint"
+    )
+    executor.return_value = ParallelTransformResult(
+        successes=1, failures=0, warnings=0, skips=0
+    )
+
+    result = call_command(command_instance, ".")
+
+    assert result is None
+
+
+@pytest.mark.usefixtures("gather_files_mocked")
+def test_call_command_failure(command_instance, mocker):
+    executor = mocker.patch(
+        "django_codemod.cli.parallel_exec_transform_with_prettyprint"
+    )
+    executor.return_value = ParallelTransformResult(
+        successes=0, failures=1, warnings=0, skips=0
+    )
+
+    with pytest.raises(click.exceptions.Exit):
+        call_command(command_instance, ".")
+
+
+@pytest.mark.usefixtures("gather_files_mocked")
+def test_call_command_interrupted(command_instance, mocker):
+    executor = mocker.patch(
+        "django_codemod.cli.parallel_exec_transform_with_prettyprint",
+        side_effect=KeyboardInterrupt(),
+    )
+    executor.return_value = ParallelTransformResult(
+        successes=1, failures=0, warnings=0, skips=0
+    )
+
+    with pytest.raises(click.Abort):
+        call_command(command_instance, ".")
 
 
 def _mapping_repr(mapping):

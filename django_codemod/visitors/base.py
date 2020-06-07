@@ -24,7 +24,7 @@ def module_matcher(import_parts):
     elif len(values) == 1:
         value = m.Name(values[0])
     else:
-        value = None
+        value = m.DoNotCare()
     return m.Attribute(value=value, attr=m.Name(attr))
 
 

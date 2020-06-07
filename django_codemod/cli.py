@@ -1,5 +1,4 @@
 import inspect
-from abc import ABC
 from collections import defaultdict
 from operator import attrgetter
 from typing import Callable, Dict, List, Tuple
@@ -35,11 +34,6 @@ def find_codemoders(version_getter: Callable) -> Dict[Tuple[int, int], List]:
                 or inspect.isabstract(obj)
             ):
                 continue
-            # isabstract is broken for direct subclasses of ABC which
-            # don't themselves define any abstract methods, so lets
-            # check for that here.
-            if any(cls[0] is ABC for cls in inspect.getclasstree([obj])):
-                continue
             # Looks like this one is good to go
             django_version = version_getter(obj)
             codemodders_index[django_version].append(obj)
@@ -68,10 +62,6 @@ class VersionParamType(click.ParamType):
         """Parse version to keep only major an minor digits."""
         try:
             return self._parse_unsafe(value, param, ctx)
-        except TypeError:
-            self.fail(
-                f"{value!r} unable to parse version. {self.example}", param, ctx,
-            )
         except ValueError:
             self.fail(f"{value!r} is not a valid version. {self.example}", param, ctx)
 
@@ -167,7 +157,3 @@ def call_command(command_instance: BaseCodemodCommand, path: str):
     click.echo(f" - {result.warnings} warnings were generated.")
     if result.failures > 0:
         raise click.exceptions.Exit(1)
-
-
-if __name__ == "__main__":
-    djcodemod()
