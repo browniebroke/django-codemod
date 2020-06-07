@@ -9,7 +9,7 @@ pytest-runner==5.2
 pytest-mock==3.1.1
 pytest==5.4.3
 pyupgrade==2.4.4
-tox==3.15.1
+tox==3.15.2
 twine==3.1.1
 wheel==0.34.2
 -r docs/requirements.txt
