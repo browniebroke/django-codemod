@@ -25,13 +25,13 @@ jobs:
         pullRequests: true
         prWoLabels: false
         compareLink: true
-        excludeLabels: tests,automation,nochangelog
-        breakingLabel: '### ⚠️ Breaking Changes:'
-        deprecatedLabel: '### 🚨 Deprecated:'
+        excludeLabels: automation,nochangelog
+        breakingLabel: '### 💥 Breaking Changes:'
+        deprecatedLabel: '### ⚠️ Deprecations:'
         enhancementLabel: '### 🚀 Enhancements:'
         bugsLabel: '### 🐛 Bug Fixes:'
-        removedLabel: '### 🗑 Removals:'
-        addSections: '{"documentation":{"prefix":"### 📖 Documentation updates:","labels":["documentation"]}}'
+        removedLabel: '### 🔥 Removals:'
+        addSections: '{"documentation":{"prefix":"### 📖 Documentation updates:","labels":["documentation"]},"tests":{"prefix":"### ✅ Testing:","labels":["tests"]}}'
 
     - name: Copy changelog in documentation
       run: cp CHANGELOG.md docs/changelog.md
