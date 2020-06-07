@@ -5,6 +5,7 @@ flake8
 flake8-isort
 parameterized
 pre-commit
+pytest-cov
 pytest-runner
 pytest-mock
 pytest
