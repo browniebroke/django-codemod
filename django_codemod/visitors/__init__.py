@@ -14,6 +14,7 @@ from .http import (
     IsSafeUrlTransformer,
 )
 from .lru_cache import LRUCacheTransformer
+from .models import ModelsPermalinkTransformer
 from .os_utils import AbsPathTransformer
 from .shortcuts import RenderToResponseTransformer
 from .translations import (
@@ -37,6 +38,7 @@ __all__ = (
     "InlineHasAddPermissionsTransformer",
     "IsSafeUrlTransformer",
     "LRUCacheTransformer",
+    "ModelsPermalinkTransformer",
     "RenderToResponseTransformer",
     "SmartTextTransformer",
     "UGetTextLazyTransformer",
