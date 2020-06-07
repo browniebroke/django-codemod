@@ -17,6 +17,10 @@
 
 - Fix version deprecated for several Django 4.0 visitors [\#68](https://github.com/browniebroke/django-codemod/pull/68) ([browniebroke](https://github.com/browniebroke))
 
+### 📖 Documentation updates:
+
+- Updates README.me with proper travis badge [\#50](https://github.com/browniebroke/django-codemod/pull/50) ([sobolevn](https://github.com/sobolevn))
+
 ## [v0.7.0](https://github.com/browniebroke/django-codemod/tree/v0.7.0) (2020-05-23)
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.6.0...v0.7.0)
@@ -28,10 +32,6 @@
 ### 🐛 Bug Fixes:
 
 - Make sure the function to rename is imported before renaming [\#54](https://github.com/browniebroke/django-codemod/pull/54) ([browniebroke](https://github.com/browniebroke))
-
-### 📖 Documentation updates:
-
-- Updates README.me with proper travis badge [\#50](https://github.com/browniebroke/django-codemod/pull/50) ([sobolevn](https://github.com/sobolevn))
 
 ## [v0.6.0](https://github.com/browniebroke/django-codemod/tree/v0.6.0) (2020-05-22)
 
@@ -116,6 +116,7 @@
 - Support resolving django.utils.translation.ugettext\_lazy deprecation [\#14](https://github.com/browniebroke/django-codemod/pull/14) ([browniebroke](https://github.com/browniebroke))
 - Support resolving django.utils.translation.ugettext deprecation [\#12](https://github.com/browniebroke/django-codemod/pull/12) ([browniebroke](https://github.com/browniebroke))
 - Support smart\_text deprecation, replace by smart\_str [\#10](https://github.com/browniebroke/django-codemod/pull/10) ([browniebroke](https://github.com/browniebroke))
+- Refactor checks to use matchers [\#8](https://github.com/browniebroke/django-codemod/pull/8) ([browniebroke](https://github.com/browniebroke))
 
 ### 🗑 Removals:
 
