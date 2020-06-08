@@ -55,7 +55,7 @@ pyupgrade==2.5.0          # via -r requirements.in
 pyyaml==5.3.1             # via libcst, pre-commit
 readme-renderer==26.0     # via twine
 recommonmark==0.6.0       # via -r docs/requirements.txt
-regex==2020.6.7           # via black
+regex==2020.6.8           # via black
 requests-toolbelt==0.9.1  # via twine
 requests==2.23.0          # via requests-toolbelt, sphinx, twine
 six==1.15.0               # via bleach, packaging, readme-renderer, tox, virtualenv
