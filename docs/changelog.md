@@ -37,6 +37,7 @@
 - Resolve deprecations from `django.utils.http` in Django 3.0 [\#69](https://github.com/browniebroke/django-codemod/pull/69) ([browniebroke](https://github.com/browniebroke))
 - Add new CLI option `--deprecated-in` [\#64](https://github.com/browniebroke/django-codemod/pull/64) ([browniebroke](https://github.com/browniebroke))
 - Make InlineHasAddPermissionsTransformer more robust [\#60](https://github.com/browniebroke/django-codemod/pull/60) ([browniebroke](https://github.com/browniebroke))
+- Add a djcodemod CLI [\#55](https://github.com/browniebroke/django-codemod/pull/55) ([browniebroke](https://github.com/browniebroke))
 
 ### 🐛 Bug Fixes:
 
@@ -49,10 +50,6 @@
 ## [v0.7.0](https://github.com/browniebroke/django-codemod/tree/v0.7.0) (2020-05-23)
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.6.0...v0.7.0)
-
-### 🚀 Enhancements:
-
-- Add a djcodemod CLI [\#55](https://github.com/browniebroke/django-codemod/pull/55) ([browniebroke](https://github.com/browniebroke))
 
 ### 🐛 Bug Fixes:
 
