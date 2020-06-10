@@ -21,7 +21,7 @@ distlib==0.3.0            # via virtualenv
 docutils==0.16            # via readme-renderer, recommonmark, sphinx
 filelock==3.0.12          # via tox, virtualenv
 flake8-isort==3.0.0       # via -r requirements.in
-flake8==3.8.2             # via -r requirements.in, flake8-isort
+flake8==3.8.3             # via -r requirements.in, flake8-isort
 identify==1.4.19          # via pre-commit
 idna==2.9                 # via requests
 imagesize==1.2.0          # via sphinx
