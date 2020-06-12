@@ -188,6 +188,7 @@ def test_deprecated_in_mapping():
             "RenderToResponseTransformer",
             "UnicodeCompatibleTransformer",
         ],
+        (1, 11): ["ModelsPermalinkTransformer"],
     }
 
 
@@ -219,4 +220,5 @@ def test_removed_in_mapping():
             "RenderToResponseTransformer",
             "UnicodeCompatibleTransformer",
         ],
+        (2, 1): ["ModelsPermalinkTransformer"],
     }
