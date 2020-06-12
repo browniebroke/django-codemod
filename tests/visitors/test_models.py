@@ -47,3 +47,25 @@ class TestAvailableAttrsTransformer(BaseVisitorTest):
                     return reverse('guitarist_detail', None, [], {'slug': self.slug})
         """
         self.assertCodemod(before, after)
+
+    def test_more_specific_import(self) -> None:
+        before = """
+            from django.db import models
+            from django.db.models import permalink
+
+            class MyModel(models.Model):
+
+                @permalink
+                def url(self):
+                    return ('guitarist_detail', [self.slug])
+        """
+        after = """
+            from django.db import models
+            from django.urls import reverse
+
+            class MyModel(models.Model):
+
+                def url(self):
+                    return reverse('guitarist_detail', None, [self.slug])
+        """
+        self.assertCodemod(before, after)

@@ -6,8 +6,10 @@ from libcst import (
     BaseStatement,
     Call,
     FunctionDef,
+    ImportFrom,
     Name,
     RemovalSentinel,
+    RemoveFromParent,
     Return,
 )
 from libcst import matchers as m
@@ -15,6 +17,7 @@ from libcst.codemod import ContextAwareTransformer
 from libcst.codemod.visitors import AddImportsVisitor
 
 from django_codemod.constants import DJANGO_21, DJANGO_111
+from django_codemod.visitors.base import module_matcher
 
 
 class ModelsPermalinkTransformer(ContextAwareTransformer):
@@ -24,13 +27,56 @@ class ModelsPermalinkTransformer(ContextAwareTransformer):
     removed_in = DJANGO_21
     ctx_key_prefix = "ModelsPermalinkTransformer"
     ctx_key_inside_method = f"{ctx_key_prefix}-inside_method"
-    _decorator_matcher = m.Decorator(
-        decorator=m.Attribute(value=m.Name("models"), attr=m.Name("permalink"))
-    )
+    ctx_key_decorator_matchers = f"{ctx_key_prefix}-decorator_matchers"
+
+    def leave_ImportFrom(
+        self, original_node: ImportFrom, updated_node: ImportFrom
+    ) -> Union[BaseSmallStatement, RemovalSentinel]:
+        if m.matches(
+            updated_node, m.ImportFrom(module=module_matcher(["django", "db"])),
+        ):
+            for imported_name in updated_node.names:
+                if m.matches(imported_name, m.ImportAlias(name=m.Name("models"))):
+                    self.add_decorator_matcher(
+                        m.Decorator(
+                            decorator=m.Attribute(
+                                value=m.Name("models"), attr=m.Name("permalink")
+                            )
+                        )
+                    )
+        if m.matches(
+            updated_node,
+            m.ImportFrom(module=module_matcher(["django", "db", "models"])),
+        ):
+            updated_names = []
+            for imported_name in updated_node.names:
+                if m.matches(imported_name, m.ImportAlias(name=m.Name("permalink"))):
+                    self.add_decorator_matcher(
+                        m.Decorator(decorator=m.Name("permalink"))
+                    )
+                else:
+                    updated_names.append(imported_name)
+            if not updated_names:
+                return RemoveFromParent()
+        return super().leave_ImportFrom(original_node, updated_node)
+
+    def add_decorator_matcher(self, matcher):
+        if self.ctx_key_decorator_matchers not in self.context.scratch:
+            self.context.scratch[self.ctx_key_decorator_matchers] = []
+        self.context.scratch[self.ctx_key_decorator_matchers].append(matcher)
+
+    @property
+    def decorator_matcher(self):
+        matchers_list = self.context.scratch.get(self.ctx_key_decorator_matchers, [])
+        if len(matchers_list) == 0:
+            return None
+        if len(matchers_list) == 1:
+            return matchers_list[0]
+        return m.OneOf(*[matcher for matcher in matchers_list])
 
     def visit_FunctionDef(self, node: FunctionDef) -> Optional[bool]:
         for decorator in node.decorators:
-            if m.matches(decorator, self._decorator_matcher):
+            if m.matches(decorator, self.decorator_matcher):
                 self.context.scratch[self.ctx_key_inside_method] = True
         return super().visit_FunctionDef(node)
 
@@ -39,7 +85,7 @@ class ModelsPermalinkTransformer(ContextAwareTransformer):
     ) -> Union[BaseStatement, RemovalSentinel]:
         if self.visiting_permalink_method:
             for decorator in updated_node.decorators:
-                if m.matches(decorator, self._decorator_matcher):
+                if m.matches(decorator, self.decorator_matcher):
                     AddImportsVisitor.add_needed_import(
                         context=self.context, module="django.urls", obj="reverse",
                     )
