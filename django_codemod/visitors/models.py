@@ -7,6 +7,7 @@ from libcst import (
     Call,
     FunctionDef,
     ImportFrom,
+    MaybeSentinel,
     Name,
     RemovalSentinel,
     RemoveFromParent,
@@ -58,6 +59,13 @@ class ModelsPermalinkTransformer(ContextAwareTransformer):
                     updated_names.append(imported_name)
             if not updated_names:
                 return RemoveFromParent()
+            # sort imports
+            new_names = sorted(updated_names, key=lambda n: n.evaluated_name)
+            # remove any trailing commas
+            last_name = new_names[-1]
+            if last_name.comma != MaybeSentinel.DEFAULT:
+                new_names[-1] = last_name.with_changes(comma=MaybeSentinel.DEFAULT)
+            return updated_node.with_changes(names=new_names)
         return super().leave_ImportFrom(original_node, updated_node)
 
     def add_decorator_matcher(self, matcher):
