@@ -52,8 +52,13 @@ class ModelsPermalinkTransformer(ContextAwareTransformer):
             updated_names = []
             for imported_name in updated_node.names:
                 if m.matches(imported_name, m.ImportAlias(name=m.Name("permalink"))):
+                    decorator_name = (
+                        imported_name.asname.name.value
+                        if imported_name.asname
+                        else "permalink"
+                    )
                     self.add_decorator_matcher(
-                        m.Decorator(decorator=m.Name("permalink"))
+                        m.Decorator(decorator=m.Name(decorator_name))
                     )
                 else:
                     updated_names.append(imported_name)

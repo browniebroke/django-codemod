@@ -56,14 +56,20 @@ class TestAvailableAttrsTransformer(BaseVisitorTest):
         """
         self.assertCodemod(before, after)
 
-    def test_specific_import_basic(self) -> None:
-        before = """
+    @parameterized.expand(
+        [
+            ("permalink", "permalink"),
+            ("permalink as models_permalink", "models_permalink"),
+        ]
+    )
+    def test_specific_import_alone(self, import_as, decorator_name) -> None:
+        before = f"""
             from django.db import models
-            from django.db.models import permalink
+            from django.db.models import {import_as}
 
             class MyModel(models.Model):
 
-                @permalink
+                @{decorator_name}
                 def url(self):
                     return ('guitarist_detail', [self.slug])
         """
@@ -79,16 +85,21 @@ class TestAvailableAttrsTransformer(BaseVisitorTest):
         self.assertCodemod(before, after)
 
     @parameterized.expand(
-        ["permalink, ObjectDoesNotExist", "ObjectDoesNotExist, permalink"]
+        [
+            ("permalink, ObjectDoesNotExist", "permalink"),
+            ("ObjectDoesNotExist, permalink", "permalink"),
+            ("permalink as models_permalink, ObjectDoesNotExist", "models_permalink"),
+            ("ObjectDoesNotExist, permalink as models_permalink", "models_permalink"),
+        ]
     )
-    def test_specific_import_with_others(self, import_as) -> None:
+    def test_specific_import_with_others(self, import_as, decorator_name) -> None:
         before = f"""
             from django.db import models
             from django.db.models import {import_as}
 
             class MyModel(models.Model):
 
-                @permalink
+                @{decorator_name}
                 def url(self):
                     return ('guitarist_detail', [self.slug])
 
