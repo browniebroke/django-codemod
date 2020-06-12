@@ -22,7 +22,7 @@ from django_codemod.visitors.base import module_matcher
 
 
 class ModelsPermalinkTransformer(ContextAwareTransformer):
-    """Replaces ``@models.permalink`` decorator by its equivalent."""
+    """Replaces ``@models.permalink`` decorator by a call to ``reverse()``."""
 
     deprecated_in = DJANGO_111
     removed_in = DJANGO_21

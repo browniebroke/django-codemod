@@ -3,6 +3,13 @@ List of codemodders
 
 Here are the automatic fixes which are supported by django-codemod at this stage:
 
+Removed in Django 2.1
+---------------------
+
+Applied by passing the ``--removed-in 2.1`` or ``--deprecated-in 1.11`` option:
+
+- Replaces the ``@models.permalink`` decorator by a call to ``reverse()`` in the return statement.
+
 Removed in Django 3.0
 ---------------------
 
