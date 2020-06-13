@@ -82,7 +82,7 @@ typed-ast==1.4.1          # via black
 typing-extensions==3.7.4.2  # via libcst, typing-inspect
 typing-inspect==0.6.0     # via libcst
 urllib3==1.25.9           # via requests
-virtualenv==20.0.21       # via pre-commit, tox
+virtualenv==20.0.23       # via pre-commit, tox
 wcwidth==0.2.4            # via pytest
 webencodings==0.5.1       # via bleach
 wheel==0.34.2             # via -r requirements.in
