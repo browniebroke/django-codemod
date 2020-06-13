@@ -42,7 +42,6 @@
 ### 🐛 Bug Fixes:
 
 - Fix version deprecated for several Django 4.0 visitors [\#68](https://github.com/browniebroke/django-codemod/pull/68) ([browniebroke](https://github.com/browniebroke))
-- Fix InlineModelAdmin transformer with multiple base classes [\#46](https://github.com/browniebroke/django-codemod/pull/46) ([browniebroke](https://github.com/browniebroke))
 
 ### ✅ Testing:
 
@@ -74,6 +73,7 @@
 
 ### 🐛 Bug Fixes:
 
+- Fix InlineModelAdmin transformer with multiple base classes [\#46](https://github.com/browniebroke/django-codemod/pull/46) ([browniebroke](https://github.com/browniebroke))
 - Fix commands non-findable by libCST [\#44](https://github.com/browniebroke/django-codemod/pull/44) ([browniebroke](https://github.com/browniebroke))
 - Fix bug with trailing comma when removed import is the last one [\#39](https://github.com/browniebroke/django-codemod/pull/39) ([browniebroke](https://github.com/browniebroke))
 - Fix bug with lost alias when 'import as' is used [\#38](https://github.com/browniebroke/django-codemod/pull/38) ([browniebroke](https://github.com/browniebroke))
