@@ -31,7 +31,5 @@ jobs:
         pip install -r requirements.txt
     - name: Test with Pytest
       run: pytest
-    # Upload report: Linux & macOS
     - name: Upload coverage report (Unix)
-      if: matrix.os != 'windows-latest'
-      run: bash <(curl -s https://codecov.io/bash)
+      run: codecov -t ${{ secrets.CODECOV_TOKEN }}
