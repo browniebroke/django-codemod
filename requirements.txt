@@ -33,7 +33,7 @@ keyring==21.2.1           # via twine
 libcst==0.3.6             # via -r docs/requirements.txt
 markupsafe==1.1.1         # via jinja2
 mccabe==0.6.1             # via flake8
-more-itertools==8.3.0     # via pytest
+more-itertools==8.4.0     # via pytest
 mypy-extensions==0.4.3    # via typing-inspect
 nodeenv==1.4.0            # via pre-commit
 packaging==20.4           # via bleach, pytest, sphinx, tox
