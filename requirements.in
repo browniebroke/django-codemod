@@ -1,5 +1,6 @@
 black
 bump2version
+codecov
 coverage
 flake8
 flake8-isort
