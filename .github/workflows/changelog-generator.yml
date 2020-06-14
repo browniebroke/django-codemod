@@ -25,7 +25,7 @@ jobs:
         pullRequests: true
         prWoLabels: false
         compareLink: true
-        excludeLabels: automation,nochangelog
+        excludeLabels: automation,dependencies,nochangelog
         breakingLabel: '### 💥 Breaking Changes:'
         deprecatedLabel: '### ⚠️ Deprecations:'
         enhancementLabel: '### 🚀 Enhancements:'

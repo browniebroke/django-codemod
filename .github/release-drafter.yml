@@ -23,6 +23,7 @@ categories:
 
 exclude-labels:
   - 'automation'
+  - 'dependencies'
   - 'nochangelog'
 
 name-template: 'v$NEXT_PATCH_VERSION'
