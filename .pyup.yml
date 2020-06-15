@@ -1,8 +1,0 @@
-# add a label to pull requests, default is not set
-label_prs: nochangelog
-requirements:
-  - requirements.txt
-  - docs/requirements.txt:
-      pin: False
-  - setup.cfg:
-      update: False
