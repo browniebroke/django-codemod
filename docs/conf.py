@@ -35,7 +35,7 @@ import django_codemod  # noqa E402 isort:skip
 extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.viewcode",
-    "recommonmark",
+    "myst_parser",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
