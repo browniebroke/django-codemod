@@ -6,9 +6,13 @@
 
 ### 🚀 Enhancements:
 
-- Handle deprecation of @models.permalink decorator in Django 1.11 [\#87](https://github.com/browniebroke/django-codemod/pull/87) ([browniebroke](https://github.com/browniebroke))
+- Handle deprecation of `@models.permalink` decorator in Django 1.11 [\#87](https://github.com/browniebroke/django-codemod/pull/87) ([browniebroke](https://github.com/browniebroke))
 - Resolve deprecation of `django.utils.decorators.available\_attrs` in Django 2.0 [\#85](https://github.com/browniebroke/django-codemod/pull/85) ([browniebroke](https://github.com/browniebroke))
 - Resolve deprecation of `django.utils.decorators.ContextDecorator` in Django 2.0 [\#84](https://github.com/browniebroke/django-codemod/pull/84) ([browniebroke](https://github.com/browniebroke))
+
+### 📖 Documentation updates:
+
+- Convert documentation to Markdown using MyST parser [\#113](https://github.com/browniebroke/django-codemod/pull/113) ([browniebroke](https://github.com/browniebroke))
 
 ### ✅ Testing:
 
@@ -21,7 +25,7 @@
 
 ### 🐛 Bug Fixes:
 
-- Support fixing calls to base class has\_add\_permission in Admin Inline [\#83](https://github.com/browniebroke/django-codemod/pull/83) ([browniebroke](https://github.com/browniebroke))
+- Support fixing calls to base class `has\_add\_permission` in `AdminInline` [\#83](https://github.com/browniebroke/django-codemod/pull/83) ([browniebroke](https://github.com/browniebroke))
 
 ### 📖 Documentation updates:
 
@@ -42,7 +46,7 @@
 - Resolve deprecation of `django.utils.text.unescape\_entities` in Django 3.0 [\#70](https://github.com/browniebroke/django-codemod/pull/70) ([browniebroke](https://github.com/browniebroke))
 - Resolve deprecations from `django.utils.http` in Django 3.0 [\#69](https://github.com/browniebroke/django-codemod/pull/69) ([browniebroke](https://github.com/browniebroke))
 - Add new CLI option `--deprecated-in` [\#64](https://github.com/browniebroke/django-codemod/pull/64) ([browniebroke](https://github.com/browniebroke))
-- Make InlineHasAddPermissionsTransformer more robust [\#60](https://github.com/browniebroke/django-codemod/pull/60) ([browniebroke](https://github.com/browniebroke))
+- Make `InlineHasAddPermissionsTransformer` more robust [\#60](https://github.com/browniebroke/django-codemod/pull/60) ([browniebroke](https://github.com/browniebroke))
 
 ### 🐛 Bug Fixes:
 
@@ -58,7 +62,7 @@
 
 ### 🚀 Enhancements:
 
-- Add a djcodemod CLI [\#55](https://github.com/browniebroke/django-codemod/pull/55) ([browniebroke](https://github.com/browniebroke))
+- Add a `djcodemod` CLI [\#55](https://github.com/browniebroke/django-codemod/pull/55) ([browniebroke](https://github.com/browniebroke))
 
 ### 🐛 Bug Fixes:
 
@@ -157,10 +161,6 @@
 - Support resolving django.utils.translation.ugettext deprecation [\#12](https://github.com/browniebroke/django-codemod/pull/12) ([browniebroke](https://github.com/browniebroke))
 - Support smart\_text deprecation, replace by smart\_str [\#10](https://github.com/browniebroke/django-codemod/pull/10) ([browniebroke](https://github.com/browniebroke))
 - Refactor checks to use matchers [\#8](https://github.com/browniebroke/django-codemod/pull/8) ([browniebroke](https://github.com/browniebroke))
-
-### 🐛 Bug Fixes:
-
-- Fix bug for immediately invoked anonymous functions [\#6](https://github.com/browniebroke/django-codemod/pull/6) ([browniebroke](https://github.com/browniebroke))
 
 ### 🔥 Removals:
 
