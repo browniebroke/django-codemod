@@ -14,7 +14,7 @@ name = "dependencies"
 description = "Pull requests that update a dependency file"
 
 [documentation]
-color = "0075ca"
+color = "1bc4a5"
 name = "documentation"
 description = "Improvements or additions to documentation"
 
