@@ -33,9 +33,6 @@ jobs:
         removedLabel: '### 🔥 Removals:'
         addSections: '{"documentation":{"prefix":"### 📖 Documentation updates:","labels":["documentation"]},"tests":{"prefix":"### ✅ Testing:","labels":["tests"]}}'
 
-    - name: Copy changelog in documentation
-      run: cp CHANGELOG.md docs/changelog.md
-
     - name: Commit changes
       run: |
         if [ -n "$(git status --short)" ]
