@@ -158,6 +158,10 @@
 - Support smart\_text deprecation, replace by smart\_str [\#10](https://github.com/browniebroke/django-codemod/pull/10) ([browniebroke](https://github.com/browniebroke))
 - Refactor checks to use matchers [\#8](https://github.com/browniebroke/django-codemod/pull/8) ([browniebroke](https://github.com/browniebroke))
 
+### 🐛 Bug Fixes:
+
+- Fix bug for immediately invoked anonymous functions [\#6](https://github.com/browniebroke/django-codemod/pull/6) ([browniebroke](https://github.com/browniebroke))
+
 ### 🔥 Removals:
 
 - Remove unused entry point [\#18](https://github.com/browniebroke/django-codemod/pull/18) ([browniebroke](https://github.com/browniebroke))
