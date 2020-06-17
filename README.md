@@ -1,9 +1,29 @@
 # Django Codemod
 
-[![PyPI](https://img.shields.io/pypi/v/django-codemod.svg)](https://pypi.python.org/pypi/django-codemod)
-[![Test](https://github.com/browniebroke/django-codemod/workflows/Test/badge.svg)](https://github.com/browniebroke/django-codemod/actions?query=workflow%3ATest)
-[![codecov](https://codecov.io/gh/browniebroke/django-codemod/branch/master/graph/badge.svg)](https://codecov.io/gh/browniebroke/django-codemod)
-[![Documentation Status](https://readthedocs.org/projects/django-codemod/badge/?version=latest)](https://django-codemod.readthedocs.io/en/latest/?badge=latest)
+<p align="center">
+  <a href="https://github.com/browniebroke/django-codemod/actions?query=workflow%3ATest">
+    <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/browniebroke/django-codemod/Test?label=Test&logo=github&style=flat-square">
+  </a>
+  <a href="https://django-codemod.readthedocs.io">
+    <img src="https://img.shields.io/readthedocs/django-codemod.svg?logo=read-the-docs&logoColor=fff&style=flat-square" alt="Documentation Status">
+  </a>
+  <a href="https://codecov.io/gh/browniebroke/django-codemod">
+    <img src="https://img.shields.io/codecov/c/github/browniebroke/django-codemod.svg?logo=codecov&logoColor=fff&style=flat-square" alt="Test coverage percentage">
+  </a>
+  <a href="https://github.com/ambv/black">
+    <img src="https://img.shields.io/badge/code%20style-black-000000.svg?amp;style=flat-square" alt="black">
+  </a>
+</p>
+<p align="center">
+  <a href="https://pypi.org/project/django-codemod/">
+    <img src="https://img.shields.io/pypi/v/django-codemod.svg?logo=python&logoColor=fff&style=flat-square" alt="PyPi Status">
+  </a>
+  <img src="https://img.shields.io/pypi/pyversions/django-codemod.svg?style=flat-square&logo=python&amp;logoColor=fff" alt="pyversions">
+  <img src="https://img.shields.io/pypi/l/django-codemod.svg?style=flat-square" alt="license">
+  <a href="https://github.com/browniebroke/django-codemod">
+    <img src="https://tokei.rs/b1/github/browniebroke/django-codemod/" alt="LoC">
+  </a>
+</p>
 
 A tool to help upgrade Django projects to newer version of the framework by automatically fixing deprecations.
 
