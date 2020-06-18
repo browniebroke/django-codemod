@@ -1,79 +1,32 @@
 # Usage
 
-## Via the `djcodemod` command
+This package provides a `djcodemod` command line tool with 2 main supported workflows:
 
-This is the preferred way to use this tool, which should fit most of the
-use case, via the `djcodemod` command line. This command will be
-available after installation and is used as follows:
+- Prepare future upgrades by modifying code which is deprecated in a given version using the `deprecated-in` option
+- Fix previous deprecated code which is removed in a given version using the `removed-in` option
 
-```shell
-$ djcodemod --deprecated-in <Django version> <path to modify>
+## Workflows 
+
+### Deprecations
+
+Let's say you just updated to Django 3.0, and suddenly you're flooded with deprecations warning on your CI (you have warning enabled on CI, right?).
+
+You want to resolve them to avoid missing another important warning. You can do so by running the following command from the root of your repo:
+
+```bash
+djcodemod --deprecated-in 3.0 .
 ```
 
-OR
+### Removals
 
-```shell
-$ djcodemod --removed-in <Django version> <path to modify>
+This is more a just in time operation, assuming you haven't kept up to date with deprecation warnings, and right before upgrading to a given version (let's assume Django 4.0). In this case, you should be running:
+
+```bash
+djcodemod --removed-in 4.0 .
 ```
 
--   The Django version is the major + minor version of Django, for
-    example `3.0`. You may specify the patch version (e.g. `3.0.5`), but
-    only the first 2 digits are considered.
--   The path may be the root of your project or a specific file. If the
-    path is a directory, the tool works recursively and will look at all
-    the files under it.
+## Next steps
 
-## Using libCST
+In either case, the tool will take a few minutes and apply a set of modifications to your code to fix deprecated or removed usages of Django. This should be much faster than doing it manually and much robust than a simple find & replace.
 
-Unless you already use libCST for something else, you probably don't
-need this. It is less user friendly and requires more configuration than
-the CLI.
-
-The codemodders are implemented using libCST and the library provides
-commands working nicely with [libCST
-codemods](https://libcst.readthedocs.io/en/latest/codemods_tutorial.html#working-with-codemods).
-
-1.  If you starting from scratch and never used `libcst` in your
-    project, generate the `.libcst.codemod.yaml` config file [as per the
-    libCST docs](https://libcst.readthedocs.io/en/latest/codemods_tutorial.html?highlight=modules#setting-up-and-running-codemods):
-
-    ```shell
-    > python3 -m libcst.tool initialize .
-    ```
-
-    You may skip this step if the `.libcst.codemod.yaml` file is already
-    present.
-
-2.  Edit the config to add the commands from `django-codemod` to your
-    modules:
-
-    ```yaml
-    # .libcst.codemod.yaml
-    modules:
-    - 'django_codemod.commands'
-    ```
-
-    This makes the codemodders from Django codecod discoverable by libCST
-
-3.  If everything is setup properly, the list of Django Codemods should
-    appear when running libCST's `list` command:
-
-    ```shell
-    > python3 -m libcst.tool list
-    django_codemod.Django30Command - Resolve deprecations for removals in Django 3.0.
-    django_codemod.Django40Command - Resolve deprecations for removals in Django 4.0.
-    ```
-
-    Codemodders are organised following the Django 
-    [deprecation timeline page](https://docs.djangoproject.com/en/3.0/internals/deprecation/),
-    listing all its deprecations by version.
-
-4.  Run libCST with the command from `django-codemod` that you want to
-    apply:
-
-    ```shell
-    > python3 -m libcst.tool codemod django_codemod.Django40Command .
-    ```
-
-    This will apply to code modifications for all the code under `.`
-    **in place**. Make sure it's backed up in source control!
+For the list of possible modifications with their options check {ref}`the next section <list_of_codemodders>`.

@@ -1,20 +1,19 @@
+(list_of_codemodders)=
+
 # List of codemodders
 
-Here are the automatic fixes which are supported by django-codemod at
-this stage:
+Here is the list of automatic fixes which are supported by `django-codemod` at this stage. This list will be updated as new fixes are implemented.
 
 ## Removed in Django 2.1
 
-Applied by passing the `--removed-in 2.1` or `--deprecated-in 1.11`
-option:
+Applied by passing the `--removed-in 2.1` or `--deprecated-in 1.11` option:
 
 -   Replaces the `@models.permalink` decorator by a call to `reverse()`
     in the return statement.
 
 ## Removed in Django 3.0
 
-Applied by passing the `--removed-in 3.0` or `--deprecated-in 2.0`
-option:
+Applied by passing the `--removed-in 3.0` or `--deprecated-in 2.0` option:
 
 -   Replaces `render_to_response()` by `render()` and add `request=None`
     as the first argument of `render()`.
@@ -30,15 +29,13 @@ option:
 -   Replace `django.utils.decorators.available_attrs()` by its return
     value `functools.WRAPPER_ASSIGNMENTS`.
 
-Applied by passing the `--removed-in 3.0` or `--deprecated-in 2.1`
-option:
+Applied by passing the `--removed-in 3.0` or `--deprecated-in 2.1` option:
 
 -   Add the `obj` argument to `InlineModelAdmin.has_add_permission()`.
 
 ## Removed in Django 4.0
 
-Applied by passing the `--removed-in 4.0` or `--deprecated-in 3.0`
-option:
+Applied by passing the `--removed-in 4.0` or `--deprecated-in 3.0` option:
 
 -   Replaces `force_text` and `smart_text` from the
     `django.utils.encoding` module by `force_str` and `smart_str`
