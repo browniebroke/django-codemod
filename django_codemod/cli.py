@@ -12,7 +12,7 @@ from libcst.codemod import (
 )
 
 from django_codemod import visitors
-from django_codemod.commands.base import BaseCodemodCommand
+from django_codemod.commands import BaseCodemodCommand
 
 
 def find_codemoders(version_getter: Callable) -> Dict[Tuple[int, int], List]:
