@@ -10,6 +10,10 @@
 - Resolve deprecation of `django.utils.decorators.available\_attrs` in Django 2.0 [\#85](https://github.com/browniebroke/django-codemod/pull/85) ([browniebroke](https://github.com/browniebroke))
 - Resolve deprecation of `django.utils.decorators.ContextDecorator` in Django 2.0 [\#84](https://github.com/browniebroke/django-codemod/pull/84) ([browniebroke](https://github.com/browniebroke))
 
+### 🔥 Removals:
+
+- Remove the custom hardcoded libCST commands [\#114](https://github.com/browniebroke/django-codemod/pull/114) ([browniebroke](https://github.com/browniebroke))
+
 ### 📖 Documentation updates:
 
 - Convert documentation to Markdown using MyST parser [\#113](https://github.com/browniebroke/django-codemod/pull/113) ([browniebroke](https://github.com/browniebroke))
