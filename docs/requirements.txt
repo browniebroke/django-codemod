@@ -1,4 +1,4 @@
 sphinx>=3.0.3
 sphinx_rtd_theme
-myst-parser[sphinx]
+myst-parser
 libcst>=0.3.4
