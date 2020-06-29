@@ -1,7 +1,54 @@
 from parameterized import parameterized
 
-from django_codemod.visitors.models import ModelsPermalinkTransformer
+from django_codemod.visitors.models import ModelsPermalinkTransformer, OnDeleteTransformer
 from tests.visitors.base import BaseVisitorTest
+
+
+class TestOnDeleteTransformer(BaseVisitorTest):
+
+    transformer = OnDeleteTransformer
+
+    def test_foreign_key(self) -> None:
+        pass
+
+    def test_one_to_one_field(self) -> None:
+        before = """
+            from django.db import models
+
+            class MyModel(models.Model):
+                operations = [
+                    migrations.CreateModel(
+                        fields=[
+                            (
+                                'model',
+                                models.OneToOneField(to = 'random.Model'),
+                            ),
+                        ],
+                    )
+                ]
+        """
+        after = """
+            from django.db import models
+
+            class MyModel(models.Model):
+                operations = [
+                    migrations.CreateModel(
+                        fields=[
+                            (
+                                'model',
+                                models.OneToOneField(to = 'random.Model', on_delete = models.CASCADE),
+                            ),
+                        ],
+                    )
+                ]
+        """
+        self.assertCodemod(before, after)
+
+    def test_on_delete_already_exists(self) -> None:
+        pass
+
+    def test_add_import(self) -> None:
+        pass
 
 
 class TestAvailableAttrsTransformer(BaseVisitorTest):
