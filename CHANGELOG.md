@@ -1,5 +1,13 @@
 # Changelog
 
+## [Unreleased](https://github.com/browniebroke/django-codemod/tree/HEAD)
+
+[Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0...HEAD)
+
+### ✅ Testing:
+
+- Move CODECOV\_TOKEN from cmd line option to environment [\#118](https://github.com/browniebroke/django-codemod/pull/118) ([browniebroke](https://github.com/browniebroke))
+
 ## [v0](https://github.com/browniebroke/django-codemod/tree/v0) (2020-06-18)
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.9.0...v0)
