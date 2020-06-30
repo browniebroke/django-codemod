@@ -20,7 +20,7 @@ from libcst.codemod import ContextAwareTransformer
 from libcst.codemod.visitors import AddImportsVisitor
 
 from django_codemod.constants import DJANGO_19, DJANGO_20, DJANGO_21, DJANGO_111
-from django_codemod.visitors.base import module_matcher
+from django_codemod.visitors.base import BaseSimpleFuncRenameTransformer, module_matcher
 
 
 class ModelsPermalinkTransformer(ContextAwareTransformer):
@@ -161,6 +161,9 @@ class OnDeleteTransformer(ContextAwareTransformer):
         if (
             is_one_to_one_field(original_node) or is_foreign_key(original_node)
         ) and not has_on_delete(original_node):
+            AddImportsVisitor.add_needed_import(
+                context=self.context, module="django.db", obj="models",
+            )
             updated_args = (
                 *updated_node.args,
                 Arg(

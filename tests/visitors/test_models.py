@@ -88,7 +88,17 @@ class TestOnDeleteTransformer(BaseVisitorTest):
         self.assertCodemod(before, after)
 
     def test_positional_args_without_on_delete(self) -> None:
-        pass
+        before = """
+            from django.db import models
+
+            models.OneToOneField('model')
+        """
+        after = """
+            from django.db import models
+
+            models.OneToOneField('model', on_delete = models.CASCADE)
+        """
+        self.assertCodemod(before, after)
 
     def test_positional_args_with_on_delete(self) -> None:
         # shouldn't do anything
@@ -116,10 +126,44 @@ class TestOnDeleteTransformer(BaseVisitorTest):
 
     ## testing the model import for models.CASCADE
     def test_add_model_import(self) -> None:
-        pass
+        before = """
+            from random.place import CustomModel
 
-    def test_dont_add_model_import_if_it_exists(self) -> None:
-        pass
+            class MyModel(CustomModel):
+                operations = [
+                    migrations.CreateModel(
+                        fields=[
+                            (
+                                'field_name',
+                                CustomModel.OneToOneField(
+                                    'model.Location',
+                                    auto_created=True,
+                                ),
+                            ),
+                        ],
+                    )
+                ]
+        """
+        after = """
+            from random.place import CustomModel
+            from django.db import models
+
+            class MyModel(CustomModel):
+                operations = [
+                    migrations.CreateModel(
+                        fields=[
+                            (
+                                'field_name',
+                                CustomModel.OneToOneField(
+                                    'model.Location',
+                                    auto_created=True,
+                                on_delete = models.CASCADE),
+                            ),
+                        ],
+                    )
+                ]
+        """
+        self.assertCodemod(before, after)
 
 
 class TestAvailableAttrsTransformer(BaseVisitorTest):
