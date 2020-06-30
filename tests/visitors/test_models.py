@@ -1,6 +1,9 @@
 from parameterized import parameterized
 
-from django_codemod.visitors.models import ModelsPermalinkTransformer, OnDeleteTransformer
+from django_codemod.visitors.models import (
+    ModelsPermalinkTransformer,
+    OnDeleteTransformer,
+)
 from tests.visitors.base import BaseVisitorTest
 
 
@@ -44,10 +47,78 @@ class TestOnDeleteTransformer(BaseVisitorTest):
         """
         self.assertCodemod(before, after)
 
-    def test_on_delete_already_exists(self) -> None:
+    # testing our on_delete detector works as expected in
+    # all the little edge cases
+    def test_multiple_kwargs_with_on_delete(self) -> None:
         pass
 
-    def test_add_import(self) -> None:
+    def test_multiple_kwargs_without_on_delete(self) -> None:
+        before = """
+            from django.db import models
+
+
+            class MyModel(models.Model):
+                operations = [
+                    migrations.AddField(
+                        field=models.ForeignKey(
+                            related_name='model',
+                            blank=True,
+                            to='random.Model',
+                            null=True,
+                        ),
+                    )
+                ]
+        """
+        after = """
+            from django.db import models
+
+
+            class MyModel(models.Model):
+                operations = [
+                    migrations.AddField(
+                        field=models.ForeignKey(
+                            related_name='model',
+                            blank=True,
+                            to='random.Model',
+                            null=True,
+                        on_delete = models.CASCADE),
+                    )
+                ]
+        """
+        self.assertCodemod(before, after)
+
+    def test_positional_args_without_on_delete(self) -> None:
+        pass
+
+    def test_positional_args_with_on_delete(self) -> None:
+        # shouldn't do anything
+        before = """
+            from django.db import models
+
+
+            class MyModel(models.randomModel):
+                operations = [
+                    migrations.CreateModel(
+                        fields=[
+                            (
+                                'field_name',
+                                models.OneToOneField(
+                                    'model.Location',
+                                    models.CASCADE,
+                                    auto_created=True,
+                                ),
+                            ),
+                        ],
+                    )
+                ]
+        """
+        self.assertCodemod(before, before)
+
+    ## testing the model import for models.CASCADE
+    def test_add_model_import(self) -> None:
+        pass
+
+    def test_dont_add_model_import_if_it_exists(self) -> None:
         pass
 
 

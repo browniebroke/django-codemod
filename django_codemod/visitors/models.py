@@ -132,35 +132,24 @@ class ModelsPermalinkTransformer(ContextAwareTransformer):
             )
         return super().leave_Return(original_node, updated_node)
 
+
 def is_foreign_key(node: Call) -> bool:
-    return m.matches(
-        node,
-        m.Call(
-            func=m.Attribute(
-                attr=m.Name(value='ForeignKey')
-            )
-        )
-    )
+    return m.matches(node, m.Call(func=m.Attribute(attr=m.Name(value="ForeignKey"))))
+
 
 def is_one_to_one_field(node: Call) -> bool:
     return m.matches(
-        node,
-        m.Call(
-            func=m.Attribute(
-                attr=m.Name(value='OneToOneField')
-            ),
-        ),
+        node, m.Call(func=m.Attribute(attr=m.Name(value="OneToOneField")),),
     )
 
+
 def has_on_delete(node: Call) -> bool:
-    return m.matches(
-        node,
-        m.Call(
-            args=m.Arg(
-                keyword=m.Name(value='on_delete')
-            )
-        )
-    )
+    in_kwargs = m.matches(node, m.Call(args=m.Arg(keyword=m.Name(value="on_delete"))))
+    # if there are two or more nodes and there are no keywords
+    # then we can assume that positional arguments are being used
+    # and on_delete is being handled.
+    in_positional_args = len(node.args) >= 2 and not node.args[1].keyword
+    return in_kwargs or in_positional_args
 
 
 class OnDeleteTransformer(ContextAwareTransformer):
@@ -169,17 +158,15 @@ class OnDeleteTransformer(ContextAwareTransformer):
     ctx_key_prefix = "OnDeleteTransformer"
 
     def leave_Call(self, original_node: Call, updated_node: Call) -> BaseExpression:
-        if (is_one_to_one_field(original_node) or is_foreign_key(original_node)) and not has_on_delete(original_node):
+        if (
+            is_one_to_one_field(original_node) or is_foreign_key(original_node)
+        ) and not has_on_delete(original_node):
             updated_args = (
                 *updated_node.args,
                 Arg(
-                    keyword=Name('on_delete'),
-                    value=Attribute(
-                        value=Name('models'),
-                        attr=Name('CASCADE'),
-                    ),
+                    keyword=Name("on_delete"),
+                    value=Attribute(value=Name("models"), attr=Name("CASCADE"),),
                 ),
             )
             return updated_node.with_changes(args=updated_args)
         return super().leave_Call(original_node, updated_node)
-
