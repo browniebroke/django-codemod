@@ -39,6 +39,7 @@ __all__ = (
     "IsSafeUrlTransformer",
     "LRUCacheTransformer",
     "ModelsPermalinkTransformer",
+    "OnDeleteTransformer",
     "RenderToResponseTransformer",
     "SmartTextTransformer",
     "UGetTextLazyTransformer",

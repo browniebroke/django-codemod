@@ -19,12 +19,46 @@ class TestOnDeleteTransformer(BaseVisitorTest):
             from django.db import models
 
             class MyModel(models.Model):
+                migrations.CreateModel(
+                    fields=[
+                        (
+                            'model',
+                            models.OneToOneField(
+                                to = 'random.Model'),
+                        ),
+                    ],
+                )
+        """
+        after = """
+            from django.db import models
+
+            class MyModel(models.Model):
+                migrations.CreateModel(
+                    fields=[
+                        (
+                            'model',
+                            models.OneToOneField(
+                                to = 'random.Model', on_delete = models.CASCADE),
+                        ),
+                    ],
+                )
+        """
+        self.assertCodemod(before, after)
+
+    # testing our on_delete detector works as expected in
+    # all the little edge cases
+    def test_multiple_kwargs_with_on_delete(self) -> None:
+        before = """
+            from django.db import models
+
+            class MyModel(models.Model):
                 operations = [
                     migrations.CreateModel(
                         fields=[
                             (
                                 'model',
-                                models.OneToOneField(to = 'random.Model'),
+                                models.OneToOneField(
+                                    to = 'random.Model', on_delete = models.CASCADE),
                             ),
                         ],
                     )
@@ -39,18 +73,14 @@ class TestOnDeleteTransformer(BaseVisitorTest):
                         fields=[
                             (
                                 'model',
-                                models.OneToOneField(to = 'random.Model', on_delete = models.CASCADE),
+                                models.OneToOneField(
+                                    to = 'random.Model', on_delete = models.CASCADE),
                             ),
                         ],
                     )
                 ]
         """
         self.assertCodemod(before, after)
-
-    # testing our on_delete detector works as expected in
-    # all the little edge cases
-    def test_multiple_kwargs_with_on_delete(self) -> None:
-        pass
 
     def test_multiple_kwargs_without_on_delete(self) -> None:
         before = """
@@ -122,9 +152,29 @@ class TestOnDeleteTransformer(BaseVisitorTest):
                     )
                 ]
         """
-        self.assertCodemod(before, before)
+        after = """
+            from django.db import models
 
-    ## testing the model import for models.CASCADE
+
+            class MyModel(models.randomModel):
+                operations = [
+                    migrations.CreateModel(
+                        fields=[
+                            (
+                                'field_name',
+                                models.OneToOneField(
+                                    'model.Location',
+                                    models.CASCADE,
+                                    auto_created=True,
+                                ),
+                            ),
+                        ],
+                    )
+                ]
+        """
+        self.assertCodemod(before, after)
+
+    # testing the model import for models.CASCADE
     def test_add_model_import(self) -> None:
         before = """
             from random.place import CustomModel

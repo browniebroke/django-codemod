@@ -20,7 +20,7 @@ from libcst.codemod import ContextAwareTransformer
 from libcst.codemod.visitors import AddImportsVisitor
 
 from django_codemod.constants import DJANGO_19, DJANGO_20, DJANGO_21, DJANGO_111
-from django_codemod.visitors.base import BaseSimpleFuncRenameTransformer, module_matcher
+from django_codemod.visitors.base import module_matcher
 
 
 class ModelsPermalinkTransformer(ContextAwareTransformer):
@@ -144,12 +144,15 @@ def is_one_to_one_field(node: Call) -> bool:
 
 
 def has_on_delete(node: Call) -> bool:
-    in_kwargs = m.matches(node, m.Call(args=m.Arg(keyword=m.Name(value="on_delete"))))
+    # if on_delete exists in any kwarg we return True
+    for arg in node.args:
+        if m.matches(arg.keyword, m.Name("on_delete")):
+            return True
+
     # if there are two or more nodes and there are no keywords
     # then we can assume that positional arguments are being used
     # and on_delete is being handled.
-    in_positional_args = len(node.args) >= 2 and not node.args[1].keyword
-    return in_kwargs or in_positional_args
+    return len(node.args) >= 2 and node.args[1].keyword is None
 
 
 class OnDeleteTransformer(ContextAwareTransformer):
