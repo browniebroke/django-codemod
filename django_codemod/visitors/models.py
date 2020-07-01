@@ -171,7 +171,7 @@ class OnDeleteTransformer(ContextAwareTransformer):
                 *updated_node.args,
                 Arg(
                     keyword=Name("on_delete"),
-                    value=Attribute(value=Name("models"), attr=Name("CASCADE"),),
+                    value=Attribute(value=Name("models"), attr=Name("CASCADE")),
                 ),
             )
             return updated_node.with_changes(args=updated_args)
