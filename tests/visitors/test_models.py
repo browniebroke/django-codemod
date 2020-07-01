@@ -26,32 +26,14 @@ class TestOnDeleteTransformer(BaseVisitorTest):
 
     def test_one_to_one_field(self) -> None:
         before = """
-            from django.db import models
-
             class MyModel(models.Model):
-                migrations.CreateModel(
-                    fields=[
-                        (
-                            'model',
-                            models.OneToOneField(
-                                to = 'random.Model'),
-                        ),
-                    ],
-                )
+                user = models.OneToOneField('auth.User')
         """
         after = """
             from django.db import models
 
             class MyModel(models.Model):
-                migrations.CreateModel(
-                    fields=[
-                        (
-                            'model',
-                            models.OneToOneField(
-                                to = 'random.Model', on_delete = models.CASCADE),
-                        ),
-                    ],
-                )
+                user = models.OneToOneField('auth.User', on_delete = models.CASCADE)
         """
         self.assertCodemod(before, after)
 
