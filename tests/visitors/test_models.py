@@ -12,7 +12,17 @@ class TestOnDeleteTransformer(BaseVisitorTest):
     transformer = OnDeleteTransformer
 
     def test_foreign_key(self) -> None:
-        pass
+        before = """
+            class MyModel(models.Model):
+                user = models.ForeignKey('auth.User')
+        """
+        after = """
+            from django.db import models
+
+            class MyModel(models.Model):
+                user = models.ForeignKey('auth.User', on_delete = models.CASCADE)
+        """
+        self.assertCodemod(before, after)
 
     def test_one_to_one_field(self) -> None:
         before = """
@@ -45,9 +55,8 @@ class TestOnDeleteTransformer(BaseVisitorTest):
         """
         self.assertCodemod(before, after)
 
-    # testing our on_delete detector works as expected in
-    # all the little edge cases
     def test_multiple_kwargs_with_on_delete(self) -> None:
+        """ Should do nothing """
         before = """
             from django.db import models
 
@@ -131,7 +140,7 @@ class TestOnDeleteTransformer(BaseVisitorTest):
         self.assertCodemod(before, after)
 
     def test_positional_args_with_on_delete(self) -> None:
-        # shouldn't do anything
+        """ Should do nothing """
         before = """
             from django.db import models
 
@@ -174,7 +183,6 @@ class TestOnDeleteTransformer(BaseVisitorTest):
         """
         self.assertCodemod(before, after)
 
-    # testing the model import for models.CASCADE
     def test_add_model_import(self) -> None:
         before = """
             from random.place import CustomModel

@@ -146,7 +146,7 @@ def is_one_to_one_field(node: Call) -> bool:
 def has_on_delete(node: Call) -> bool:
     # if on_delete exists in any kwarg we return True
     for arg in node.args:
-        if m.matches(arg.keyword, m.Name("on_delete")):
+        if m.matches(arg, m.Arg(keyword=m.Name("on_delete"))):
             return True
 
     # if there are two or more nodes and there are no keywords
