@@ -139,7 +139,7 @@ def is_foreign_key(node: Call) -> bool:
 
 def is_one_to_one_field(node: Call) -> bool:
     return m.matches(
-        node, m.Call(func=m.Attribute(attr=m.Name(value="OneToOneField")),),
+        node, m.Call(func=m.Attribute(attr=m.Name(value="OneToOneField"))),
     )
 
 
