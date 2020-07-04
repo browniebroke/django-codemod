@@ -67,3 +67,8 @@ description = "CI, CD and testing related changes"
 color = "ffffff"
 name = "wontfix"
 description = "This will not be worked on"
+
+[discussion]
+color = "c2e0c6"
+name = "discussion"
+description = "Some discussion around the project"
