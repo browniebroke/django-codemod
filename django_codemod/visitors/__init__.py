@@ -1,4 +1,5 @@
 from .admin import InlineHasAddPermissionsTransformer
+from .core import URLResolversTransformer
 from .decorators import AvailableAttrsTransformer, ContextDecoratorTransformer
 from .encoding import (
     ForceTextTransformer,
@@ -48,6 +49,7 @@ __all__ = (
     "UNGetTextLazyTransformer",
     "UNGetTextTransformer",
     "URLTransformer",
+    "URLResolversTransformer",
     "UnescapeEntitiesTransformer",
     "UnicodeCompatibleTransformer",
 )
