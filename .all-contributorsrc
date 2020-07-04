@@ -47,6 +47,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "jayvdb",
+      "name": "John Vandenberg",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/15092?v=4",
+      "profile": "https://ghuser.io/jayvdb",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
