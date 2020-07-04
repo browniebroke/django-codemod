@@ -2,6 +2,8 @@ from typing import Optional, Union
 
 from libcst import (
     Arg,
+    Attribute,
+    BaseExpression,
     BaseSmallStatement,
     BaseStatement,
     Call,
@@ -17,7 +19,7 @@ from libcst import matchers as m
 from libcst.codemod import ContextAwareTransformer
 from libcst.codemod.visitors import AddImportsVisitor
 
-from django_codemod.constants import DJANGO_21, DJANGO_111
+from django_codemod.constants import DJANGO_19, DJANGO_20, DJANGO_21, DJANGO_111
 from django_codemod.visitors.base import module_matcher
 
 
@@ -129,3 +131,48 @@ class ModelsPermalinkTransformer(ContextAwareTransformer):
                 value=Call(func=Name("reverse"), args=args)
             )
         return super().leave_Return(original_node, updated_node)
+
+
+def is_foreign_key(node: Call) -> bool:
+    return m.matches(node, m.Call(func=m.Attribute(attr=m.Name(value="ForeignKey"))))
+
+
+def is_one_to_one_field(node: Call) -> bool:
+    return m.matches(
+        node, m.Call(func=m.Attribute(attr=m.Name(value="OneToOneField"))),
+    )
+
+
+def has_on_delete(node: Call) -> bool:
+    # if on_delete exists in any kwarg we return True
+    for arg in node.args:
+        if m.matches(arg, m.Arg(keyword=m.Name("on_delete"))):
+            return True
+
+    # if there are two or more nodes and there are no keywords
+    # then we can assume that positional arguments are being used
+    # and on_delete is being handled.
+    return len(node.args) >= 2 and node.args[1].keyword is None
+
+
+class OnDeleteTransformer(ContextAwareTransformer):
+    deprecated_in = DJANGO_19
+    removed_in = DJANGO_20
+    ctx_key_prefix = "OnDeleteTransformer"
+
+    def leave_Call(self, original_node: Call, updated_node: Call) -> BaseExpression:
+        if (
+            is_one_to_one_field(original_node) or is_foreign_key(original_node)
+        ) and not has_on_delete(original_node):
+            AddImportsVisitor.add_needed_import(
+                context=self.context, module="django.db", obj="models",
+            )
+            updated_args = (
+                *updated_node.args,
+                Arg(
+                    keyword=Name("on_delete"),
+                    value=Attribute(value=Name("models"), attr=Name("CASCADE")),
+                ),
+            )
+            return updated_node.with_changes(args=updated_args)
+        return super().leave_Call(original_node, updated_node)
