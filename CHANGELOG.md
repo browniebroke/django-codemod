@@ -1,8 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/browniebroke/django-codemod/tree/HEAD)
+## [v0.10.0](https://github.com/browniebroke/django-codemod/tree/v0.10.0) (2020-07-04)
 
-[Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0...HEAD)
+[Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0...v0.10.0)
 
 ### 🚀 Enhancements:
 
