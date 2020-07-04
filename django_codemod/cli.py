@@ -136,7 +136,7 @@ def build_command(codemodders_list: List) -> BaseCodemodCommand:
 
 def call_command(command_instance: BaseCodemodCommand, path: str):
     """Call libCST with our customized command."""
-    files = gather_files(path)
+    files = gather_files([path])
     try:
         # Super simplified call
         result = parallel_exec_transform_with_prettyprint(
