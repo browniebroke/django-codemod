@@ -4,6 +4,10 @@
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0...HEAD)
 
+### 🚀 Enhancements:
+
+- Add support for adding `on\_delete` for `ForeignKey` and `OneToOneField` [\#117](https://github.com/browniebroke/django-codemod/pull/117) ([cvanderkolk](https://github.com/cvanderkolk))
+
 ### ✅ Testing:
 
 - Move CODECOV\_TOKEN from cmd line option to environment [\#118](https://github.com/browniebroke/django-codemod/pull/118) ([browniebroke](https://github.com/browniebroke))
