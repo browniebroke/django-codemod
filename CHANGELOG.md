@@ -8,6 +8,10 @@
 
 - Add support for adding `on\_delete` for `ForeignKey` and `OneToOneField` [\#117](https://github.com/browniebroke/django-codemod/pull/117) ([cvanderkolk](https://github.com/cvanderkolk))
 
+### 🐛 Bug Fixes:
+
+- Fix bug with CLI processing entire filesystem [\#126](https://github.com/browniebroke/django-codemod/pull/126) ([browniebroke](https://github.com/browniebroke))
+
 ### ✅ Testing:
 
 - Move CODECOV\_TOKEN from cmd line option to environment [\#118](https://github.com/browniebroke/django-codemod/pull/118) ([browniebroke](https://github.com/browniebroke))
