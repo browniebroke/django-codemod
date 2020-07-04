@@ -4,10 +4,6 @@
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0...v0.10.0)
 
-### 🚀 Enhancements:
-
-- Add support for adding `on\_delete` for `ForeignKey` and `OneToOneField` [\#117](https://github.com/browniebroke/django-codemod/pull/117) ([cvanderkolk](https://github.com/cvanderkolk))
-
 ### 🐛 Bug Fixes:
 
 - Fix bug with CLI processing entire filesystem [\#126](https://github.com/browniebroke/django-codemod/pull/126) ([browniebroke](https://github.com/browniebroke))
@@ -26,6 +22,7 @@
 
 ### 🚀 Enhancements:
 
+- Add support for adding `on\_delete` for `ForeignKey` and `OneToOneField` [\#117](https://github.com/browniebroke/django-codemod/pull/117) ([cvanderkolk](https://github.com/cvanderkolk))
 - Handle deprecation of `@models.permalink` decorator in Django 1.11 [\#87](https://github.com/browniebroke/django-codemod/pull/87) ([browniebroke](https://github.com/browniebroke))
 - Resolve deprecation of `django.utils.decorators.available\_attrs` in Django 2.0 [\#85](https://github.com/browniebroke/django-codemod/pull/85) ([browniebroke](https://github.com/browniebroke))
 - Resolve deprecation of `django.utils.decorators.ContextDecorator` in Django 2.0 [\#84](https://github.com/browniebroke/django-codemod/pull/84) ([browniebroke](https://github.com/browniebroke))
