@@ -38,6 +38,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "cvanderkolk",
+      "name": "Chris VanderKolk",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/21158438?v=4",
+      "profile": "http://www.zapier.com",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
