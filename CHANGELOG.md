@@ -47,10 +47,6 @@
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.8.0...v0.8.1)
 
-### 🐛 Bug Fixes:
-
-- Support fixing calls to base class `has\_add\_permission` in `AdminInline` [\#83](https://github.com/browniebroke/django-codemod/pull/83) ([browniebroke](https://github.com/browniebroke))
-
 ### 📖 Documentation updates:
 
 - Mention changes around tests in changelog [\#82](https://github.com/browniebroke/django-codemod/pull/82) ([browniebroke](https://github.com/browniebroke))
@@ -74,6 +70,7 @@
 
 ### 🐛 Bug Fixes:
 
+- Support fixing calls to base class `has\_add\_permission` in `AdminInline` [\#83](https://github.com/browniebroke/django-codemod/pull/83) ([browniebroke](https://github.com/browniebroke))
 - Fix version deprecated for several Django 4.0 visitors [\#68](https://github.com/browniebroke/django-codemod/pull/68) ([browniebroke](https://github.com/browniebroke))
 
 ### ✅ Testing:
