@@ -19,4 +19,12 @@ jobs:
     - uses: tiangolo/issue-manager@master
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        config: '{"answered": {}}'
+        # Extra config: '<!-- issue-manager: waiting -->'
+        config: >
+          {
+            "answered": {},
+            "waiting": {
+                "delay": 864000,
+                "message": "Closing after 10 days of waiting for the additional info requested."
+            }
+          }
