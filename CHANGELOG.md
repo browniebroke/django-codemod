@@ -39,6 +39,10 @@
 - Resolve deprecation of `django.utils.decorators.available\_attrs` in Django 2.0 [\#85](https://github.com/browniebroke/django-codemod/pull/85) ([browniebroke](https://github.com/browniebroke))
 - Resolve deprecation of `django.utils.decorators.ContextDecorator` in Django 2.0 [\#84](https://github.com/browniebroke/django-codemod/pull/84) ([browniebroke](https://github.com/browniebroke))
 
+### 🐛 Bug Fixes:
+
+- Support fixing calls to base class `has\_add\_permission` in `AdminInline` [\#83](https://github.com/browniebroke/django-codemod/pull/83) ([browniebroke](https://github.com/browniebroke))
+
 ### 🔥 Removals:
 
 - Remove the custom hardcoded libCST commands [\#114](https://github.com/browniebroke/django-codemod/pull/114) ([browniebroke](https://github.com/browniebroke))
@@ -55,10 +59,6 @@
 ## [v0.8.1](https://github.com/browniebroke/django-codemod/tree/v0.8.1) (2020-06-07)
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.8.0...v0.8.1)
-
-### 🐛 Bug Fixes:
-
-- Support fixing calls to base class `has\_add\_permission` in `AdminInline` [\#83](https://github.com/browniebroke/django-codemod/pull/83) ([browniebroke](https://github.com/browniebroke))
 
 ### 📖 Documentation updates:
 
