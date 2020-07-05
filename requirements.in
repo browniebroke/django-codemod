@@ -14,4 +14,3 @@ pyupgrade
 tox
 twine
 wheel
--r docs/requirements.txt
