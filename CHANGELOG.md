@@ -163,6 +163,7 @@
 ### 🚀 Enhancements:
 
 - Support resolving django.conf.urls.url\(\) deprecation [\#22](https://github.com/browniebroke/django-codemod/pull/22) ([browniebroke](https://github.com/browniebroke))
+- Migrate package metadata to declarative syntax [\#19](https://github.com/browniebroke/django-codemod/pull/19) ([browniebroke](https://github.com/browniebroke))
 
 ### 📖 Documentation updates:
 
@@ -171,10 +172,6 @@
 ## [v0.2.1](https://github.com/browniebroke/django-codemod/tree/v0.2.1) (2020-05-10)
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.2.0...v0.2.1)
-
-### 🚀 Enhancements:
-
-- Migrate package metadata to declarative syntax [\#19](https://github.com/browniebroke/django-codemod/pull/19) ([browniebroke](https://github.com/browniebroke))
 
 ## [v0.2.0](https://github.com/browniebroke/django-codemod/tree/v0.2.0) (2020-05-10)
 
