@@ -46,7 +46,7 @@ pytest-cov==2.10.0        # via -r requirements.in
 pytest-mock==3.1.1        # via -r requirements.in
 pytest-runner==5.2        # via -r requirements.in
 pytest==5.4.3             # via -r requirements.in, pytest-cov, pytest-mock
-pyupgrade==2.6.1          # via -r requirements.in
+pyupgrade==2.6.2          # via -r requirements.in
 pyyaml==5.3.1             # via pre-commit
 readme-renderer==26.0     # via twine
 regex==2020.6.8           # via black
