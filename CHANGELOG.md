@@ -4,6 +4,10 @@
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.10.0...HEAD)
 
+### 🚀 Enhancements:
+
+- Rename constants for numerical sorting [\#139](https://github.com/browniebroke/django-codemod/pull/139) ([jayvdb](https://github.com/jayvdb))
+
 ### ✅ Testing:
 
 - Split tests and docs requirements [\#131](https://github.com/browniebroke/django-codemod/pull/131) ([browniebroke](https://github.com/browniebroke))
