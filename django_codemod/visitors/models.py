@@ -19,15 +19,15 @@ from libcst import matchers as m
 from libcst.codemod import ContextAwareTransformer
 from libcst.codemod.visitors import AddImportsVisitor
 
-from django_codemod.constants import DJANGO_19, DJANGO_20, DJANGO_21, DJANGO_111
+from django_codemod.constants import DJANGO_1_9, DJANGO_1_11, DJANGO_2_0, DJANGO_2_1
 from django_codemod.visitors.base import module_matcher
 
 
 class ModelsPermalinkTransformer(ContextAwareTransformer):
     """Replaces ``@models.permalink`` decorator by a call to ``reverse()``."""
 
-    deprecated_in = DJANGO_111
-    removed_in = DJANGO_21
+    deprecated_in = DJANGO_1_11
+    removed_in = DJANGO_2_1
     ctx_key_prefix = "ModelsPermalinkTransformer"
     ctx_key_inside_method = f"{ctx_key_prefix}-inside_method"
     ctx_key_decorator_matchers = f"{ctx_key_prefix}-decorator_matchers"
@@ -156,8 +156,8 @@ def has_on_delete(node: Call) -> bool:
 
 
 class OnDeleteTransformer(ContextAwareTransformer):
-    deprecated_in = DJANGO_19
-    removed_in = DJANGO_20
+    deprecated_in = DJANGO_1_9
+    removed_in = DJANGO_2_0
     ctx_key_prefix = "OnDeleteTransformer"
 
     def leave_Call(self, original_node: Call, updated_node: Call) -> BaseExpression:

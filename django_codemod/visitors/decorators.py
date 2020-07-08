@@ -1,15 +1,15 @@
 from libcst import BaseExpression, Call, Name
 from libcst import matchers as m
 
-from django_codemod.constants import DJANGO_20, DJANGO_30
+from django_codemod.constants import DJANGO_2_0, DJANGO_3_0
 from django_codemod.visitors.base import BaseSimpleRenameTransformer
 
 
 class ContextDecoratorTransformer(BaseSimpleRenameTransformer):
     """Resolve deprecation of ``django.utils.decorators.ContextDecorator``."""
 
-    deprecated_in = DJANGO_20
-    removed_in = DJANGO_30
+    deprecated_in = DJANGO_2_0
+    removed_in = DJANGO_3_0
     rename_from = "django.utils.decorators.ContextDecorator"
     rename_to = "contextlib.ContextDecorator"
 
@@ -17,8 +17,8 @@ class ContextDecoratorTransformer(BaseSimpleRenameTransformer):
 class AvailableAttrsTransformer(BaseSimpleRenameTransformer):
     """Resolve deprecation of ``django.utils.decorators.available_attrs``."""
 
-    deprecated_in = DJANGO_20
-    removed_in = DJANGO_30
+    deprecated_in = DJANGO_2_0
+    removed_in = DJANGO_3_0
     rename_from = "django.utils.decorators.available_attrs"
     rename_to = "functools.WRAPPER_ASSIGNMENTS"
 
