@@ -34,16 +34,41 @@ class TestURLTransformer(BaseVisitorTest):
             from django.conf.urls import url
 
             urlpatterns = [
-                url(r'^index/$', views.index, name='index'),
+                url(r'^$', views.index, name='index'),
+                url(r'^about/$', views.about, name='about'),
+                url(r'^post/(?P<slug>[w-]+)/$', views.post, name='post'),
                 url(r'^weblog/', include('blog.urls')),
             ]
         """
         after = """
-            from django.urls import re_path, include
+            from django.urls import path, re_path, include
 
             urlpatterns = [
-                re_path(r'^index/$', views.index, name='index'),
+                path('', views.index, name='index'),
+                path('about/', views.about, name='about'),
+                re_path(r'^post/(?P<slug>[w-]+)/$', views.post, name='post'),
                 re_path(r'^weblog/', include('blog.urls')),
+            ]
+        """
+        self.assertCodemod(before, after)
+
+    def test_all_path(self) -> None:
+        """Check when all can be replaced with path."""
+        before = """
+            from django.urls import include
+            from django.conf.urls import url
+
+            urlpatterns = [
+                url(r'^$', views.index, name='index'),
+                url(r'^about/$', views.about, name='about'),
+            ]
+        """
+        after = """
+            from django.urls import path, re_path, include
+
+            urlpatterns = [
+                path('', views.index, name='index'),
+                path('about/', views.about, name='about'),
             ]
         """
         self.assertCodemod(before, after)

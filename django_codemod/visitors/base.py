@@ -98,9 +98,12 @@ class BaseSimpleFuncRenameTransformer(BaseSimpleRenameTransformer, ABC):
         if self.is_entity_imported and m.matches(
             updated_node, m.Call(func=m.Name(self.old_name))
         ):
-            updated_args = self.update_call_args(updated_node)
-            return Call(args=updated_args, func=Name(self.new_name))
+            return self.update_call(updated_node=updated_node)
         return super().leave_Call(original_node, updated_node)
+
+    def update_call(self, updated_node: Call) -> BaseExpression:
+        updated_args = self.update_call_args(updated_node)
+        return Call(args=updated_args, func=Name(self.new_name))
 
     def update_call_args(self, node: Call) -> Sequence[Arg]:
         return node.args
