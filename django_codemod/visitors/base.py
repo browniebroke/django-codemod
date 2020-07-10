@@ -67,12 +67,7 @@ class BaseSimpleRenameTransformer(ContextAwareTransformer, ABC):
                 as_name = (
                     import_alias.asname.name.value if import_alias.asname else None
                 )
-                AddImportsVisitor.add_needed_import(
-                    context=self.context,
-                    module=".".join(self.new_module_parts),
-                    obj=self.new_name,
-                    asname=as_name,
-                )
+                self.add_new_import(as_name)
                 self.context.scratch[self.ctx_key_is_imported] = not import_alias.asname
             else:
                 new_names.append(import_alias)
@@ -89,6 +84,14 @@ class BaseSimpleRenameTransformer(ContextAwareTransformer, ABC):
     @property
     def is_entity_imported(self):
         return self.context.scratch.get(self.ctx_key_is_imported, False)
+
+    def add_new_import(self, as_name):
+        AddImportsVisitor.add_needed_import(
+            context=self.context,
+            module=".".join(self.new_module_parts),
+            obj=self.new_name,
+            asname=as_name,
+        )
 
 
 class BaseSimpleFuncRenameTransformer(BaseSimpleRenameTransformer, ABC):

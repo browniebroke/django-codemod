@@ -64,7 +64,7 @@ class TestURLTransformer(BaseVisitorTest):
             ]
         """
         after = """
-            from django.urls import path, re_path, include
+            from django.urls import path, include
 
             urlpatterns = [
                 path('', views.index, name='index'),
