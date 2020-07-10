@@ -39,7 +39,6 @@
 
 ### 🚀 Enhancements:
 
-- Handle deprecation of `@models.permalink` decorator in Django 1.11 [\#87](https://github.com/browniebroke/django-codemod/pull/87) ([browniebroke](https://github.com/browniebroke))
 - Resolve deprecation of `django.utils.decorators.available\_attrs` in Django 2.0 [\#85](https://github.com/browniebroke/django-codemod/pull/85) ([browniebroke](https://github.com/browniebroke))
 - Resolve deprecation of `django.utils.decorators.ContextDecorator` in Django 2.0 [\#84](https://github.com/browniebroke/django-codemod/pull/84) ([browniebroke](https://github.com/browniebroke))
 
@@ -59,6 +58,10 @@
 ## [v0.8.1](https://github.com/browniebroke/django-codemod/tree/v0.8.1) (2020-06-07)
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.8.0...v0.8.1)
+
+### 🚀 Enhancements:
+
+- Handle deprecation of `@models.permalink` decorator in Django 1.11 [\#87](https://github.com/browniebroke/django-codemod/pull/87) ([browniebroke](https://github.com/browniebroke))
 
 ### 🐛 Bug Fixes:
 
