@@ -30,8 +30,8 @@ class TestURLTransformer(BaseVisitorTest):
     def test_simple_substitution(self) -> None:
         """Check simple use case."""
         before = """
-            from django.urls import include
             from django.conf.urls import url
+            from django.urls import include
 
             urlpatterns = [
                 url(r'^$', views.index, name='index'),
@@ -55,8 +55,8 @@ class TestURLTransformer(BaseVisitorTest):
     def test_all_path(self) -> None:
         """Check when all can be replaced with path."""
         before = """
-            from django.urls import include
             from django.conf.urls import url
+            from django.urls import include
 
             urlpatterns = [
                 url(r'^$', views.index, name='index'),
@@ -69,6 +69,31 @@ class TestURLTransformer(BaseVisitorTest):
             urlpatterns = [
                 path('', views.index, name='index'),
                 path('about/', views.about, name='about'),
+            ]
+        """
+        self.assertCodemod(before, after)
+
+    def test_translated_pattern(self):
+        """URL patterns can also be marked translatable."""
+        before = """
+            from django.urls import include
+            from django.conf.urls import url
+            from django.utils.translation import gettext_lazy as _
+
+            urlpatterns = [
+                url(_(r'^about/$'), views.about, name='about'),
+                url(_(r'^post/(?P<slug>[w-]+)/$'), views.post, name='post'),
+                url(_(r'^weblog/'), include('blog.urls')),
+            ]
+        """
+        after = """
+            from django.urls import re_path, include
+            from django.utils.translation import gettext_lazy as _
+
+            urlpatterns = [
+                re_path(_(r'^about/$'), views.about, name='about'),
+                re_path(_(r'^post/(?P<slug>[w-]+)/$'), views.post, name='post'),
+                re_path(_(r'^weblog/'), include('blog.urls')),
             ]
         """
         self.assertCodemod(before, after)
