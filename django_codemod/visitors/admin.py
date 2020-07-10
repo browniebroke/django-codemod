@@ -17,15 +17,15 @@ from libcst import (
 from libcst import matchers as m
 from libcst.codemod import ContextAwareTransformer
 
-from django_codemod.constants import DJANGO_21, DJANGO_30
+from django_codemod.constants import DJANGO_2_1, DJANGO_3_0
 from django_codemod.visitors.base import module_matcher
 
 
 class InlineHasAddPermissionsTransformer(ContextAwareTransformer):
     """Add the ``obj`` argument to ``InlineModelAdmin.has_add_permission()``."""
 
-    deprecated_in = DJANGO_21
-    removed_in = DJANGO_30
+    deprecated_in = DJANGO_2_1
+    removed_in = DJANGO_3_0
     ctx_key_prefix = "InlineHasAddPermissionsTransformer"
     ctx_key_base_cls_matcher = f"{ctx_key_prefix}-base_cls_matcher"
     ctx_key_visiting_subclass = f"{ctx_key_prefix}-is_visiting_subclass"
