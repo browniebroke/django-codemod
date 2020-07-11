@@ -6,7 +6,7 @@ name: Pre-commit auto-update
 
 on:
   schedule:
-  - cron: "50 * * * *"
+  - cron: "0 * * * *"
 
 jobs:
   issue-manager:
@@ -26,4 +26,5 @@ jobs:
       with:
         branch: update/pre-commit-autoupdate
         title: Auto-updating pre-commit hooks
+        body: Update versions of tools in pre-commit configs to latest version
         labels: dependencies
