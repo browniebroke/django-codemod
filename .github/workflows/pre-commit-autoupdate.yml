@@ -26,6 +26,7 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         branch: update/pre-commit-autoupdate
-        title: Auto-updating pre-commit hooks
+        title: Auto-update pre-commit hooks
+        commit-message: Auto-update pre-commit hooks
         body: Update versions of tools in pre-commit configs to latest version
         labels: dependencies
