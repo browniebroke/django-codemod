@@ -43,7 +43,7 @@ pyflakes==2.2.0           # via flake8
 pygments==2.6.1           # via readme-renderer
 pyparsing==2.4.7          # via packaging
 pytest-cov==2.10.0        # via -r requirements.in
-pytest-mock==3.1.1        # via -r requirements.in
+pytest-mock==3.2.0        # via -r requirements.in
 pytest-runner==5.2        # via -r requirements.in
 pytest==5.4.3             # via -r requirements.in, pytest-cov, pytest-mock
 pyupgrade==2.7.0          # via -r requirements.in
