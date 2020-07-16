@@ -58,7 +58,7 @@ six==1.15.0               # via bleach, cryptography, packaging, readme-renderer
 testfixtures==6.14.1      # via flake8-isort
 tokenize-rt==4.0.0        # via pyupgrade
 toml==0.10.1              # via black, isort, pre-commit, tox
-tox==3.17.0               # via -r requirements.in
+tox==3.17.1               # via -r requirements.in
 tqdm==4.46.1              # via twine
 twine==3.2.0              # via -r requirements.in
 typed-ast==1.4.1          # via black
