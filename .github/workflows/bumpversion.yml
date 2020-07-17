@@ -22,7 +22,11 @@ jobs:
         python -m pip install -U pip
         pip install -r requirements.txt
         pip install .
-    - name: Bumversion
+    - name: Config git
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+    - name: Bumpversion
       run: bump2version ${{ github.event.inputs.part }}
 
     - name: Push
