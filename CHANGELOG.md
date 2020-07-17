@@ -88,6 +88,7 @@
 ### 🐛 Bug Fixes:
 
 - Fix version deprecated for several Django 4.0 visitors [\#68](https://github.com/browniebroke/django-codemod/pull/68) ([browniebroke](https://github.com/browniebroke))
+- Make sure the function to rename is imported before renaming [\#54](https://github.com/browniebroke/django-codemod/pull/54) ([browniebroke](https://github.com/browniebroke))
 
 ### ✅ Testing:
 
@@ -100,10 +101,6 @@
 ### 🚀 Enhancements:
 
 - Add a `djcodemod` CLI [\#55](https://github.com/browniebroke/django-codemod/pull/55) ([browniebroke](https://github.com/browniebroke))
-
-### 🐛 Bug Fixes:
-
-- Make sure the function to rename is imported before renaming [\#54](https://github.com/browniebroke/django-codemod/pull/54) ([browniebroke](https://github.com/browniebroke))
 
 ### 📖 Documentation updates:
 
@@ -187,6 +184,7 @@
 ### 💥 Breaking Changes:
 
 - Rename commands to reflect the functions they work with [\#13](https://github.com/browniebroke/django-codemod/pull/13) ([browniebroke](https://github.com/browniebroke))
+- Rename module and extract logic out into a base command [\#9](https://github.com/browniebroke/django-codemod/pull/9) ([browniebroke](https://github.com/browniebroke))
 
 ### 🚀 Enhancements:
 
