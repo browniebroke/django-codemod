@@ -187,7 +187,6 @@
 ### 💥 Breaking Changes:
 
 - Rename commands to reflect the functions they work with [\#13](https://github.com/browniebroke/django-codemod/pull/13) ([browniebroke](https://github.com/browniebroke))
-- Rename module and extract logic out into a base command [\#9](https://github.com/browniebroke/django-codemod/pull/9) ([browniebroke](https://github.com/browniebroke))
 
 ### 🚀 Enhancements:
 
@@ -195,6 +194,7 @@
 - Support resolving django.utils.translation.ungettext deprecation [\#16](https://github.com/browniebroke/django-codemod/pull/16) ([browniebroke](https://github.com/browniebroke))
 - Support resolving django.utils.translation.ugettext\_noop deprecation [\#15](https://github.com/browniebroke/django-codemod/pull/15) ([browniebroke](https://github.com/browniebroke))
 - Support resolving django.utils.translation.ugettext\_lazy deprecation [\#14](https://github.com/browniebroke/django-codemod/pull/14) ([browniebroke](https://github.com/browniebroke))
+- Support resolving django.utils.translation.ugettext deprecation [\#12](https://github.com/browniebroke/django-codemod/pull/12) ([browniebroke](https://github.com/browniebroke))
 - Support smart\_text deprecation, replace by smart\_str [\#10](https://github.com/browniebroke/django-codemod/pull/10) ([browniebroke](https://github.com/browniebroke))
 - Refactor checks to use matchers [\#8](https://github.com/browniebroke/django-codemod/pull/8) ([browniebroke](https://github.com/browniebroke))
 
