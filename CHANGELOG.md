@@ -131,6 +131,7 @@
 ### ✅ Testing:
 
 - Linting workflow [\#47](https://github.com/browniebroke/django-codemod/pull/47) ([browniebroke](https://github.com/browniebroke))
+- Tests visitors independently from commands [\#42](https://github.com/browniebroke/django-codemod/pull/42) ([browniebroke](https://github.com/browniebroke))
 
 ## [v0.5.0](https://github.com/browniebroke/django-codemod/tree/v0.5.0) (2020-05-13)
 
@@ -145,10 +146,6 @@
 ### 📖 Documentation updates:
 
 - Document list of codemodders with autodoc [\#33](https://github.com/browniebroke/django-codemod/pull/33) ([browniebroke](https://github.com/browniebroke))
-
-### ✅ Testing:
-
-- Tests visitors independently from commands [\#42](https://github.com/browniebroke/django-codemod/pull/42) ([browniebroke](https://github.com/browniebroke))
 
 ## [v0.4.0](https://github.com/browniebroke/django-codemod/tree/v0.4.0) (2020-05-11)
 
@@ -198,8 +195,8 @@
 - Support resolving django.utils.translation.ungettext deprecation [\#16](https://github.com/browniebroke/django-codemod/pull/16) ([browniebroke](https://github.com/browniebroke))
 - Support resolving django.utils.translation.ugettext\_noop deprecation [\#15](https://github.com/browniebroke/django-codemod/pull/15) ([browniebroke](https://github.com/browniebroke))
 - Support resolving django.utils.translation.ugettext\_lazy deprecation [\#14](https://github.com/browniebroke/django-codemod/pull/14) ([browniebroke](https://github.com/browniebroke))
-- Support resolving django.utils.translation.ugettext deprecation [\#12](https://github.com/browniebroke/django-codemod/pull/12) ([browniebroke](https://github.com/browniebroke))
 - Support smart\_text deprecation, replace by smart\_str [\#10](https://github.com/browniebroke/django-codemod/pull/10) ([browniebroke](https://github.com/browniebroke))
+- Refactor checks to use matchers [\#8](https://github.com/browniebroke/django-codemod/pull/8) ([browniebroke](https://github.com/browniebroke))
 
 ### 🔥 Removals:
 
