@@ -34,17 +34,7 @@ jobs:
         addSections: '{"documentation":{"prefix":"### 📖 Documentation updates:","labels":["documentation"]},"tests":{"prefix":"### ✅ Testing:","labels":["tests"]}}'
 
     - name: Commit changes
-      run: |
-        if [ -n "$(git status --short)" ]
-        then
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git commit -m "Update Changelog" -a
-        else
-          echo "No changes to commit - skipping"
-        fi
-    - name: Push
-      uses: ad-m/github-push-action@v0.6.0
+      uses: stefanzweifel/git-auto-commit-action@v4
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: master
+        commit_message: Update Changelog
+        file_pattern: CHANGELOG.md
