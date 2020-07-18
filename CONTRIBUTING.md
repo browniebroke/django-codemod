@@ -102,7 +102,10 @@ Before you submit a pull request, check that it meets these guidelines:
 
 ## Deploying
 
-A reminder for maintainers on how to publish a new version to PyPI. Before starting, make sure all builds are completed.
+A reminder for maintainers on how to publish a new version to PyPI. Before starting, make sure all builds are completed. 
 
-1. Trigger the `bumpversion` workflow with the version part you want to bump as argument (major, minor or patch). This will update the version in the code, create the git tag and push it back.
-2. Update the latest draft release in GitHub to be linked to tag that was just created before and publish it. This will trigger publication to PyPI.
+Trigger the `release` workflow with the version part you want to bump as argument (major, minor or patch). This will:
+
+- Update the version in the code, create the git tag and push it.
+- Create a release in GitHub for the tag that was just created.
+- Build the wheel and source distribution and publish them to PyPI.
