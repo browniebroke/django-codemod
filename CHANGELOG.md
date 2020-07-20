@@ -139,7 +139,6 @@
 ### ✅ Testing:
 
 - Linting workflow [\#47](https://github.com/browniebroke/django-codemod/pull/47) ([browniebroke](https://github.com/browniebroke))
-- Tests visitors independently from commands [\#42](https://github.com/browniebroke/django-codemod/pull/42) ([browniebroke](https://github.com/browniebroke))
 
 ## [v0.5.0](https://github.com/browniebroke/django-codemod/tree/v0.5.0) (2020-05-13)
 
@@ -154,6 +153,10 @@
 ### 📖 Documentation updates:
 
 - Document list of codemodders with autodoc [\#33](https://github.com/browniebroke/django-codemod/pull/33) ([browniebroke](https://github.com/browniebroke))
+
+### ✅ Testing:
+
+- Tests visitors independently from commands [\#42](https://github.com/browniebroke/django-codemod/pull/42) ([browniebroke](https://github.com/browniebroke))
 
 ## [v0.4.0](https://github.com/browniebroke/django-codemod/tree/v0.4.0) (2020-05-11)
 
