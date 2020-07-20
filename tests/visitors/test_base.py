@@ -1,7 +1,11 @@
 import pytest
 from libcst import matchers as m
 
-from django_codemod.visitors.base import BaseSimpleFuncRenameTransformer, module_matcher
+from django_codemod.visitors.base import (
+    BaseSimpleFuncRenameTransformer,
+    BaseSimpleModuleRenameTransformer,
+    module_matcher,
+)
 
 from .base import BaseVisitorTest
 
@@ -31,7 +35,7 @@ def test_module_matcher(parts, expected_matcher):
     assert repr(matcher) == repr(expected_matcher)
 
 
-class SameModuleRenameTransformer(BaseSimpleFuncRenameTransformer):
+class SameModuleFuncRenameTransformer(BaseSimpleFuncRenameTransformer):
     """Simple transformer renaming function from same module."""
 
     rename_from = "django.dummy.module.func"
@@ -40,7 +44,7 @@ class SameModuleRenameTransformer(BaseSimpleFuncRenameTransformer):
 
 class TestSimpleFuncRenameTransformer(BaseVisitorTest):
 
-    transformer = SameModuleRenameTransformer
+    transformer = SameModuleFuncRenameTransformer
 
     def test_simple_substitution(self) -> None:
         before = """
@@ -150,16 +154,16 @@ class TestSimpleFuncRenameTransformer(BaseVisitorTest):
         self.assertCodemod(before, after)
 
 
-class OtherModuleRenameTransformer(BaseSimpleFuncRenameTransformer):
+class OtherModuleFuncRenameTransformer(BaseSimpleFuncRenameTransformer):
     """Transformer with different module."""
 
     rename_from = "django.dummy.module.func"
     rename_to = "django.better.dummy.better_func"
 
 
-class TestOtherModuleRenameTransformer(BaseVisitorTest):
+class TestOtherModuleFuncRenameTransformer(BaseVisitorTest):
 
-    transformer = OtherModuleRenameTransformer
+    transformer = OtherModuleFuncRenameTransformer
 
     def test_simple_substitution(self) -> None:
         before = """
@@ -198,5 +202,30 @@ class TestOtherModuleRenameTransformer(BaseVisitorTest):
             from django.better.dummy import better_func as aliased_func
 
             result = aliased_func()
+        """
+        self.assertCodemod(before, after)
+
+
+class OtherModuleRenameTransformer(BaseSimpleModuleRenameTransformer):
+    """Simple transformer renaming function from same module."""
+
+    rename_from = "django.dummy.module"
+    rename_to = "django.dummy.other_module"
+
+
+class TestSimpleModuleRenameTransformer(BaseVisitorTest):
+
+    transformer = OtherModuleRenameTransformer
+
+    def test_simple_substitution(self) -> None:
+        before = """
+            from django.dummy.module import func
+
+            result = func()
+        """
+        after = """
+            from django.dummy.other_module import func
+
+            result = func()
         """
         self.assertCodemod(before, after)

@@ -2,7 +2,15 @@
 
 ## [Unreleased](https://github.com/browniebroke/django-codemod/tree/HEAD)
 
-[Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.10.0...HEAD)
+[Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.10.1...HEAD)
+
+### 🚀 Enhancements:
+
+- Add module rename support and URLResolversTransformer [\#123](https://github.com/browniebroke/django-codemod/pull/123) ([jayvdb](https://github.com/jayvdb))
+
+## [v0.10.1](https://github.com/browniebroke/django-codemod/tree/v0.10.1) (2020-07-17)
+
+[Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.10.0...v0.10.1)
 
 ### 🚀 Enhancements:
 
@@ -39,6 +47,7 @@
 
 ### 🚀 Enhancements:
 
+- Handle deprecation of `@models.permalink` decorator in Django 1.11 [\#87](https://github.com/browniebroke/django-codemod/pull/87) ([browniebroke](https://github.com/browniebroke))
 - Resolve deprecation of `django.utils.decorators.available\_attrs` in Django 2.0 [\#85](https://github.com/browniebroke/django-codemod/pull/85) ([browniebroke](https://github.com/browniebroke))
 - Resolve deprecation of `django.utils.decorators.ContextDecorator` in Django 2.0 [\#84](https://github.com/browniebroke/django-codemod/pull/84) ([browniebroke](https://github.com/browniebroke))
 
@@ -58,10 +67,6 @@
 ## [v0.8.1](https://github.com/browniebroke/django-codemod/tree/v0.8.1) (2020-06-07)
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.8.0...v0.8.1)
-
-### 🚀 Enhancements:
-
-- Handle deprecation of `@models.permalink` decorator in Django 1.11 [\#87](https://github.com/browniebroke/django-codemod/pull/87) ([browniebroke](https://github.com/browniebroke))
 
 ### 🐛 Bug Fixes:
 
@@ -134,7 +139,6 @@
 ### ✅ Testing:
 
 - Linting workflow [\#47](https://github.com/browniebroke/django-codemod/pull/47) ([browniebroke](https://github.com/browniebroke))
-- Tests visitors independently from commands [\#42](https://github.com/browniebroke/django-codemod/pull/42) ([browniebroke](https://github.com/browniebroke))
 
 ## [v0.5.0](https://github.com/browniebroke/django-codemod/tree/v0.5.0) (2020-05-13)
 
@@ -149,6 +153,10 @@
 ### 📖 Documentation updates:
 
 - Document list of codemodders with autodoc [\#33](https://github.com/browniebroke/django-codemod/pull/33) ([browniebroke](https://github.com/browniebroke))
+
+### ✅ Testing:
+
+- Tests visitors independently from commands [\#42](https://github.com/browniebroke/django-codemod/pull/42) ([browniebroke](https://github.com/browniebroke))
 
 ## [v0.4.0](https://github.com/browniebroke/django-codemod/tree/v0.4.0) (2020-05-11)
 

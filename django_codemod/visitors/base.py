@@ -63,11 +63,11 @@ class BaseSimpleRenameTransformer(ContextAwareTransformer, ABC):
             return super().leave_ImportFrom(original_node, updated_node)
         new_names = []
         for import_alias in updated_node.names:
-            if import_alias.evaluated_name == self.old_name:
+            if not self.old_name or import_alias.evaluated_name == self.old_name:
                 as_name = (
                     import_alias.asname.name.value if import_alias.asname else None
                 )
-                self.add_new_import(as_name)
+                self.add_new_import(import_alias.evaluated_name, as_name)
                 self.context.scratch[self.ctx_key_is_imported] = not import_alias.asname
             else:
                 new_names.append(import_alias)
@@ -85,13 +85,33 @@ class BaseSimpleRenameTransformer(ContextAwareTransformer, ABC):
     def is_entity_imported(self):
         return self.context.scratch.get(self.ctx_key_is_imported, False)
 
-    def add_new_import(self, as_name):
+    def add_new_import(self, new_name, as_name):
         AddImportsVisitor.add_needed_import(
             context=self.context,
             module=".".join(self.new_module_parts),
-            obj=self.new_name,
+            obj=new_name,
             asname=as_name,
         )
+
+
+class BaseSimpleModuleRenameTransformer(BaseSimpleRenameTransformer, ABC):
+    """Base class to help rename or move a module."""
+
+    @property
+    def old_name(self):
+        return ""
+
+    @property
+    def old_module_parts(self):
+        return self.rename_from.split(".")
+
+    @property
+    def new_name(self):
+        return ""
+
+    @property
+    def new_module_parts(self):
+        return self.rename_to.split(".")
 
 
 class BaseSimpleFuncRenameTransformer(BaseSimpleRenameTransformer, ABC):
