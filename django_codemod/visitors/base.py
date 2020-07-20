@@ -67,7 +67,9 @@ class BaseSimpleRenameTransformer(ContextAwareTransformer, ABC):
                 as_name = (
                     import_alias.asname.name.value if import_alias.asname else None
                 )
-                self.add_new_import(import_alias.evaluated_name, as_name)
+                self.add_new_import(
+                    self.new_name or import_alias.evaluated_name, as_name
+                )
                 self.context.scratch[self.ctx_key_is_imported] = not import_alias.asname
             else:
                 new_names.append(import_alias)
