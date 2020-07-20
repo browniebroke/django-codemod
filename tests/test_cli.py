@@ -189,6 +189,7 @@ def test_deprecated_in_mapping():
             "UnicodeCompatibleTransformer",
         ],
         (1, 11): ["ModelsPermalinkTransformer"],
+        (1, 10): ["URLResolversTransformer"],
         (1, 9): ["OnDeleteTransformer"],
     }
 
@@ -222,5 +223,5 @@ def test_removed_in_mapping():
             "UnicodeCompatibleTransformer",
         ],
         (2, 1): ["ModelsPermalinkTransformer"],
-        (2, 0): ["OnDeleteTransformer"],
+        (2, 0): ["OnDeleteTransformer", "URLResolversTransformer"],
     }
