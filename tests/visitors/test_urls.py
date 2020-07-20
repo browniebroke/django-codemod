@@ -47,7 +47,7 @@ class TestURLTransformer(BaseVisitorTest):
                 path('', views.index, name='index'),
                 path('about/', views.about, name='about'),
                 re_path(r'^post/(?P<slug>[w-]+)/$', views.post, name='post'),
-                re_path(r'^weblog/', include('blog.urls')),
+                path('weblog/', include('blog.urls')),
             ]
         """
         self.assertCodemod(before, after)
@@ -94,6 +94,33 @@ class TestURLTransformer(BaseVisitorTest):
                 re_path(_(r'^about/$'), views.about, name='about'),
                 re_path(_(r'^post/(?P<slug>[w-]+)/$'), views.post, name='post'),
                 re_path(_(r'^weblog/'), include('blog.urls')),
+            ]
+        """
+        self.assertCodemod(before, after)
+
+    def test_grouped_path(self) -> None:
+        """Check replacing supported groups."""
+        uuid_re = "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+        before = f"""
+            from django.conf.urls import url
+
+            urlpatterns = [
+                url(r'^page/(?P<number>[0-9]+)/$', views.page, name='page'),
+                url(r'^post/(?P<slug>[-a-zA-Z0-9_]+)/$', views.post, name='post'),
+                url(r'^about/(?P<name>[^/]+)/$', views.about, name='about'),
+                url(r'^uuid/(?P<uuid>{uuid_re})/$', by_uuid),
+                url(r'^(?P<path>.+)/$', views.default, name='default'),
+            ]
+        """
+        after = """
+            from django.urls import path
+
+            urlpatterns = [
+                path('page/<int:number>/', views.page, name='page'),
+                path('post/<slug:slug>/', views.post, name='post'),
+                path('about/<str:name>/', views.about, name='about'),
+                path('uuid/<uuid:uuid>/', by_uuid),
+                path('<path:path>/', views.default, name='default'),
             ]
         """
         self.assertCodemod(before, after)
