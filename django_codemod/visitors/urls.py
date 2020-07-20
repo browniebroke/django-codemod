@@ -14,25 +14,19 @@ class URLTransformer(BaseSimpleFuncRenameTransformer):
     rename_from = "django.conf.urls.url"
     rename_to = "django.urls.re_path"
 
+    simple_rename = False
+
     def update_call(self, updated_node: Call) -> BaseExpression:
         first_arg, *other_args = updated_node.args
         if not m.matches(first_arg, m.Arg(value=m.SimpleString())):
-            AddImportsVisitor.add_needed_import(
-                context=self.context,
-                module=".".join(self.new_module_parts),
-                obj=self.new_name,
-            )
+            self.add_new_import()
             return super().update_call(updated_node)
         # Extract the URL pattern from the first argument
         pattern = first_arg.value.evaluated_value
         if "(?P" in pattern or not pattern.startswith("^") or not pattern.endswith("$"):
             # Dynamic group or not matching full path
             # Don't try to be smart and replace with `re_path`
-            AddImportsVisitor.add_needed_import(
-                context=self.context,
-                module=".".join(self.new_module_parts),
-                obj=self.new_name,
-            )
+            self.add_new_import()
             return super().update_call(updated_node)
         # The pattern has no dynamic part:
         # Replace by a route using `path()`
@@ -42,6 +36,3 @@ class URLTransformer(BaseSimpleFuncRenameTransformer):
         route = pattern.lstrip("^").rstrip("$")
         updated_args = (Arg(value=SimpleString(f"'{route}'")), *other_args)
         return Call(args=updated_args, func=Name("path"))
-
-    def add_new_import(self, new_name, as_name):
-        pass

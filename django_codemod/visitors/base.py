@@ -1,6 +1,6 @@
 """Module to implement base functionality."""
 from abc import ABC
-from typing import Sequence, Union
+from typing import Optional, Sequence, Union
 
 from libcst import (
     Arg,
@@ -34,6 +34,8 @@ class BaseSimpleRenameTransformer(ContextAwareTransformer, ABC):
     rename_from: str
     rename_to: str
 
+    simple_rename = True
+
     @property
     def old_name(self):
         return self.rename_from.split(".")[-1]
@@ -54,6 +56,10 @@ class BaseSimpleRenameTransformer(ContextAwareTransformer, ABC):
     def ctx_key_is_imported(self):
         return f"{self.rename_from}-is_imported"
 
+    @property
+    def is_entity_imported(self):
+        return self.context.scratch.get(self.ctx_key_is_imported, False)
+
     def leave_ImportFrom(
         self, original_node: ImportFrom, updated_node: ImportFrom
     ) -> Union[BaseSmallStatement, RemovalSentinel]:
@@ -67,9 +73,8 @@ class BaseSimpleRenameTransformer(ContextAwareTransformer, ABC):
                 as_name = (
                     import_alias.asname.name.value if import_alias.asname else None
                 )
-                self.add_new_import(
-                    self.new_name or import_alias.evaluated_name, as_name
-                )
+                if self.simple_rename:
+                    self.add_new_import(import_alias.evaluated_name, as_name)
                 self.context.scratch[self.ctx_key_is_imported] = not import_alias.asname
             else:
                 new_names.append(import_alias)
@@ -83,15 +88,13 @@ class BaseSimpleRenameTransformer(ContextAwareTransformer, ABC):
             new_names[-1] = last_name.with_changes(comma=MaybeSentinel.DEFAULT)
         return updated_node.with_changes(names=new_names)
 
-    @property
-    def is_entity_imported(self):
-        return self.context.scratch.get(self.ctx_key_is_imported, False)
-
-    def add_new_import(self, new_name, as_name):
+    def add_new_import(
+        self, evaluated_name: Optional[str] = None, as_name: Optional[str] = None
+    ):
         AddImportsVisitor.add_needed_import(
             context=self.context,
             module=".".join(self.new_module_parts),
-            obj=new_name,
+            obj=self.new_name or evaluated_name,
             asname=as_name,
         )
 
