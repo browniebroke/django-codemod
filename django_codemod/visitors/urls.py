@@ -43,5 +43,5 @@ class URLTransformer(BaseSimpleFuncRenameTransformer):
         updated_args = (Arg(value=SimpleString(f"'{route}'")), *other_args)
         return Call(args=updated_args, func=Name("path"))
 
-    def add_new_import(self, as_name):
+    def add_new_import(self, new_name, as_name):
         pass
