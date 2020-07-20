@@ -2,8 +2,8 @@ import pytest
 from libcst import matchers as m
 
 from django_codemod.visitors.base import (
-    BaseSimpleFuncRenameTransformer,
-    BaseSimpleModuleRenameTransformer,
+    BaseFuncRenameTransformer,
+    BaseModuleRenameTransformer,
     module_matcher,
 )
 
@@ -35,14 +35,14 @@ def test_module_matcher(parts, expected_matcher):
     assert repr(matcher) == repr(expected_matcher)
 
 
-class SameModuleFuncRenameTransformer(BaseSimpleFuncRenameTransformer):
+class SameModuleFuncRenameTransformer(BaseFuncRenameTransformer):
     """Simple transformer renaming function from same module."""
 
     rename_from = "django.dummy.module.func"
     rename_to = "django.dummy.module.better_func"
 
 
-class TestSimpleFuncRenameTransformer(BaseVisitorTest):
+class TestFuncRenameTransformer(BaseVisitorTest):
 
     transformer = SameModuleFuncRenameTransformer
 
@@ -154,7 +154,7 @@ class TestSimpleFuncRenameTransformer(BaseVisitorTest):
         self.assertCodemod(before, after)
 
 
-class OtherModuleFuncRenameTransformer(BaseSimpleFuncRenameTransformer):
+class OtherModuleFuncRenameTransformer(BaseFuncRenameTransformer):
     """Transformer with different module."""
 
     rename_from = "django.dummy.module.func"
@@ -206,14 +206,14 @@ class TestOtherModuleFuncRenameTransformer(BaseVisitorTest):
         self.assertCodemod(before, after)
 
 
-class OtherModuleRenameTransformer(BaseSimpleModuleRenameTransformer):
+class OtherModuleRenameTransformer(BaseModuleRenameTransformer):
     """Simple transformer renaming function from same module."""
 
     rename_from = "django.dummy.module"
     rename_to = "django.dummy.other_module"
 
 
-class TestSimpleModuleRenameTransformer(BaseVisitorTest):
+class TestModuleRenameTransformer(BaseVisitorTest):
 
     transformer = OtherModuleRenameTransformer
 

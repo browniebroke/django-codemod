@@ -3,10 +3,10 @@ from typing import Sequence
 from libcst import Arg, Call, Name
 
 from django_codemod.constants import DJANGO_2_0, DJANGO_3_0
-from django_codemod.visitors.base import BaseSimpleFuncRenameTransformer
+from django_codemod.visitors.base import BaseFuncRenameTransformer
 
 
-class RenderToResponseTransformer(BaseSimpleFuncRenameTransformer):
+class RenderToResponseTransformer(BaseFuncRenameTransformer):
     """
     Resolve deprecation of ``django.shortcuts.render_to_response``.
 

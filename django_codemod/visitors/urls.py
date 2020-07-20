@@ -3,10 +3,10 @@ from libcst import matchers as m
 from libcst.codemod.visitors import AddImportsVisitor
 
 from django_codemod.constants import DJANGO_3_0, DJANGO_4_0
-from django_codemod.visitors.base import BaseSimpleFuncRenameTransformer
+from django_codemod.visitors.base import BaseFuncRenameTransformer
 
 
-class URLTransformer(BaseSimpleFuncRenameTransformer):
+class URLTransformer(BaseFuncRenameTransformer):
     """Resolve deprecation of ``django.conf.urls.url``."""
 
     deprecated_in = DJANGO_3_0

@@ -28,7 +28,7 @@ def module_matcher(import_parts):
     return m.Attribute(value=value, attr=m.Name(attr))
 
 
-class BaseSimpleRenameTransformer(ContextAwareTransformer, ABC):
+class BaseRenameTransformer(ContextAwareTransformer, ABC):
     """Base class to help rename or move a declaration."""
 
     rename_from: str
@@ -99,7 +99,7 @@ class BaseSimpleRenameTransformer(ContextAwareTransformer, ABC):
         )
 
 
-class BaseSimpleModuleRenameTransformer(BaseSimpleRenameTransformer, ABC):
+class BaseModuleRenameTransformer(BaseRenameTransformer, ABC):
     """Base class to help rename or move a module."""
 
     @property
@@ -119,7 +119,7 @@ class BaseSimpleModuleRenameTransformer(BaseSimpleRenameTransformer, ABC):
         return self.rename_to.split(".")
 
 
-class BaseSimpleFuncRenameTransformer(BaseSimpleRenameTransformer, ABC):
+class BaseFuncRenameTransformer(BaseRenameTransformer, ABC):
     """Base class to help rename or move a function."""
 
     def leave_Call(self, original_node: Call, updated_node: Call) -> BaseExpression:
