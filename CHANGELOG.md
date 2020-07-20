@@ -1,5 +1,13 @@
 # Changelog
 
+## [Unreleased](https://github.com/browniebroke/django-codemod/tree/HEAD)
+
+[Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.10.1...HEAD)
+
+### 🚀 Enhancements:
+
+- Add module rename support and URLResolversTransformer [\#123](https://github.com/browniebroke/django-codemod/pull/123) ([jayvdb](https://github.com/jayvdb))
+
 ## [v0.10.1](https://github.com/browniebroke/django-codemod/tree/v0.10.1) (2020-07-17)
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.10.0...v0.10.1)
