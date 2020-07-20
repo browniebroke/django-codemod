@@ -1,18 +1,19 @@
 """Module to implement base functionality."""
 from abc import ABC
-from typing import Optional, Sequence, Union
+from typing import Generator, Optional, Sequence, Union
 
 from libcst import (
     Arg,
     BaseExpression,
     Call,
+    ImportStar,
     MaybeSentinel,
     Name,
     RemovalSentinel,
     RemoveFromParent,
 )
 from libcst import matchers as m
-from libcst._nodes.statement import BaseSmallStatement, ImportFrom
+from libcst._nodes.statement import BaseSmallStatement, ImportAlias, ImportFrom
 from libcst.codemod import ContextAwareTransformer
 from libcst.codemod.visitors import AddImportsVisitor
 
@@ -26,6 +27,10 @@ def module_matcher(import_parts):
     else:
         value = m.DoNotCare()
     return m.Attribute(value=value, attr=m.Name(attr))
+
+
+def import_from_matches(node, module_parts):
+    return m.matches(node, m.ImportFrom(module=module_matcher(module_parts)))
 
 
 class BaseRenameTransformer(ContextAwareTransformer, ABC):
@@ -68,27 +73,39 @@ class BaseRenameTransformer(ContextAwareTransformer, ABC):
     def leave_ImportFrom(
         self, original_node: ImportFrom, updated_node: ImportFrom
     ) -> Union[BaseSmallStatement, RemovalSentinel]:
-        if not m.matches(
-            updated_node, m.ImportFrom(module=module_matcher(self.old_module_parts))
-        ):
+        """Update import statements for matching old module name."""
+        if not import_from_matches(updated_node, self.old_module_parts):
             return super().leave_ImportFrom(original_node, updated_node)
-        new_names = []
-        for import_alias in updated_node.names:
+        # This is a match
+        new_names = list(self.gen_new_imported_names(updated_node.names))
+        if not new_names:
+            # Nothing left in the import statement: remove it
+            return RemoveFromParent()
+        # Some imports are left, update the statement
+        cleaned_names = self.tidy_new_imported_names(new_names)
+        return updated_node.with_changes(names=cleaned_names)
+
+    def gen_new_imported_names(
+        self, old_names: Union[Sequence[ImportAlias], ImportStar]
+    ) -> Generator:
+        """Update import if the entity we're interested in is imported."""
+        for import_alias in old_names:
             if not self.old_name or import_alias.evaluated_name == self.old_name:
                 self.context.scratch[self.ctx_key_imported_as] = import_alias.asname
                 if self.simple_rename:
                     self.add_new_import(import_alias.evaluated_name)
             else:
-                new_names.append(import_alias)
-        if not new_names:
-            return RemoveFromParent()
-        # sort imports
-        new_names = sorted(new_names, key=lambda n: n.evaluated_name)
-        # remove any trailing commas
-        last_name = new_names[-1]
+                yield import_alias
+
+    def tidy_new_imported_names(self, new_names):
+        """Tidy up the updated list of imports"""
+        # Sort them
+        cleaned_names = sorted(new_names, key=lambda n: n.evaluated_name)
+        # Remove any trailing commas
+        last_name = cleaned_names[-1]
         if last_name.comma != MaybeSentinel.DEFAULT:
-            new_names[-1] = last_name.with_changes(comma=MaybeSentinel.DEFAULT)
-        return updated_node.with_changes(names=new_names)
+            cleaned_names[-1] = last_name.with_changes(comma=MaybeSentinel.DEFAULT)
+        return cleaned_names
 
     def add_new_import(self, evaluated_name: Optional[str] = None):
         as_name = (
