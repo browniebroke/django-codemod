@@ -53,12 +53,17 @@ class BaseRenameTransformer(ContextAwareTransformer, ABC):
         return self.rename_to.split(".")[:-1]
 
     @property
-    def ctx_key_is_imported(self):
-        return f"{self.rename_from}-is_imported"
+    def ctx_key_imported_as(self):
+        return f"{self.rename_from}-imported_as"
 
     @property
-    def is_entity_imported(self):
-        return self.context.scratch.get(self.ctx_key_is_imported, False)
+    def entity_imported_as(self):
+        return self.context.scratch.get(self.ctx_key_imported_as, None)
+
+    @property
+    def is_imported_with_old_name(self):
+        is_imported = self.ctx_key_imported_as in self.context.scratch
+        return is_imported and not self.entity_imported_as
 
     def leave_ImportFrom(
         self, original_node: ImportFrom, updated_node: ImportFrom
@@ -70,12 +75,9 @@ class BaseRenameTransformer(ContextAwareTransformer, ABC):
         new_names = []
         for import_alias in updated_node.names:
             if not self.old_name or import_alias.evaluated_name == self.old_name:
-                as_name = (
-                    import_alias.asname.name.value if import_alias.asname else None
-                )
+                self.context.scratch[self.ctx_key_imported_as] = import_alias.asname
                 if self.simple_rename:
-                    self.add_new_import(import_alias.evaluated_name, as_name)
-                self.context.scratch[self.ctx_key_is_imported] = not import_alias.asname
+                    self.add_new_import(import_alias.evaluated_name)
             else:
                 new_names.append(import_alias)
         if not new_names:
@@ -88,9 +90,10 @@ class BaseRenameTransformer(ContextAwareTransformer, ABC):
             new_names[-1] = last_name.with_changes(comma=MaybeSentinel.DEFAULT)
         return updated_node.with_changes(names=new_names)
 
-    def add_new_import(
-        self, evaluated_name: Optional[str] = None, as_name: Optional[str] = None
-    ):
+    def add_new_import(self, evaluated_name: Optional[str] = None):
+        as_name = (
+            self.entity_imported_as.name.value if self.entity_imported_as else None
+        )
         AddImportsVisitor.add_needed_import(
             context=self.context,
             module=".".join(self.new_module_parts),
@@ -123,7 +126,7 @@ class BaseFuncRenameTransformer(BaseRenameTransformer, ABC):
     """Base class to help rename or move a function."""
 
     def leave_Call(self, original_node: Call, updated_node: Call) -> BaseExpression:
-        if self.is_entity_imported and m.matches(
+        if self.is_imported_with_old_name and m.matches(
             updated_node, m.Call(func=m.Name(self.old_name))
         ):
             return self.update_call(updated_node=updated_node)
