@@ -10,11 +10,7 @@ on:
         default: 'patch'
 
 jobs:
-  # Run bumpversion:
-  # - Update version in code
-  # - Create the git tag
-  # - Push changes back to the repo
-  bumpversion:
+  release:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -27,13 +23,18 @@ jobs:
         python -m pip install -U pip
         pip install -r requirements.txt
         pip install .
+
+
+    # Run bumpversion:
+    # - Update version in code
+    # - Create the git tag
+    # - Push changes back to the repo
     - name: Config git
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
     - name: Bumpversion
       run: bump2version ${{ github.event.inputs.part }}
-
     - name: Push
       uses: ad-m/github-push-action@v0.6.0
       with:
@@ -41,15 +42,16 @@ jobs:
         branch: master
         tags: true
 
-  # Draft Github release from merged pull requests
-  # See more at: https://github.com/release-drafter/release-drafter
-  draft_release:
-    runs-on: ubuntu-latest
-    needs:
-    - bumpversion
 
-    steps:
-    - uses: actions/checkout@v2
+    # Upload release to PyPI
+    - name: Build packages
+      run: python setup.py sdist bdist_wheel
+    - name: Upload packages
+      run: twine upload -u __token__ -p ${{ secrets.PYPI_TOKEN }} dist/*
+
+
+    # Draft Github release from merged pull requests
+    # See more at: https://github.com/release-drafter/release-drafter
     - name: Read latest git tag
       id: tag
       run: echo ::set-output name=TAG::$(git describe --abbrev=0)
@@ -60,24 +62,3 @@ jobs:
         tag: '${{ steps.tag.outputs.TAG }}'
         version: '${{ steps.tag.outputs.TAG }}'
         publish: true
-
-  # Upload release to PyPI
-  upload:
-    runs-on: ubuntu-latest
-    needs:
-      - bumpversion
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.8
-    - name: Install Dependencies
-      run: |
-       python -m pip install -U pip
-       pip install -r requirements.txt
-    - name: Build packages
-      run: python setup.py sdist bdist_wheel
-    - name: Upload packages
-      run: twine upload -u __token__ -p ${{ secrets.PYPI_TOKEN }} dist/*
