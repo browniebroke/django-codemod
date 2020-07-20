@@ -8,13 +8,13 @@ class TestURLResolversTransformer(BaseVisitorTest):
 
     def test_simple_substitution(self) -> None:
         before = """
-            from django.core.urlresolvers import path
+            from django.core.urlresolvers import reverse
 
-            result = path('foo/', ...)
+            result = reverse('home_page')
         """
         after = """
-            from django.urls import path
+            from django.urls import reverse
 
-            result = path('foo/', ...)
+            result = reverse('home_page')
         """
         self.assertCodemod(before, after)
