@@ -1,5 +1,13 @@
 # Changelog
 
+## [Unreleased](https://github.com/browniebroke/django-codemod/tree/HEAD)
+
+[Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.11.0...HEAD)
+
+### 🚀 Enhancements:
+
+- Support replacing `url\(\)` with simple patterns by `path\(\)` [\#138](https://github.com/browniebroke/django-codemod/pull/138) ([browniebroke](https://github.com/browniebroke))
+
 ## [v0.11.0](https://github.com/browniebroke/django-codemod/tree/v0.11.0) (2020-07-20)
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.10.1...v0.11.0)
@@ -130,7 +138,10 @@
 - Fix InlineModelAdmin transformer with multiple base classes [\#46](https://github.com/browniebroke/django-codemod/pull/46) ([browniebroke](https://github.com/browniebroke))
 - Fix commands non-findable by libCST [\#44](https://github.com/browniebroke/django-codemod/pull/44) ([browniebroke](https://github.com/browniebroke))
 - Fix bug with trailing comma when removed import is the last one [\#39](https://github.com/browniebroke/django-codemod/pull/39) ([browniebroke](https://github.com/browniebroke))
-- Fix bug with lost alias when 'import as' is used [\#38](https://github.com/browniebroke/django-codemod/pull/38) ([browniebroke](https://github.com/browniebroke))
+
+### 🔥 Removals:
+
+- Remove commands to fix single deprecations [\#43](https://github.com/browniebroke/django-codemod/pull/43) ([browniebroke](https://github.com/browniebroke))
 
 ### ✅ Testing:
 
@@ -147,9 +158,9 @@
 - Refactor & move main logic from commands to visitors [\#36](https://github.com/browniebroke/django-codemod/pull/36) ([browniebroke](https://github.com/browniebroke))
 - Refactor BaseSimpleFuncRename to simplify implementing new codemod [\#32](https://github.com/browniebroke/django-codemod/pull/32) ([browniebroke](https://github.com/browniebroke))
 
-### 🔥 Removals:
+### 🐛 Bug Fixes:
 
-- Remove commands to fix single deprecations [\#43](https://github.com/browniebroke/django-codemod/pull/43) ([browniebroke](https://github.com/browniebroke))
+- Fix bug with lost alias when 'import as' is used [\#38](https://github.com/browniebroke/django-codemod/pull/38) ([browniebroke](https://github.com/browniebroke))
 
 ### 📖 Documentation updates:
 
@@ -204,7 +215,6 @@
 - Support resolving django.utils.translation.ugettext\_noop deprecation [\#15](https://github.com/browniebroke/django-codemod/pull/15) ([browniebroke](https://github.com/browniebroke))
 - Support resolving django.utils.translation.ugettext\_lazy deprecation [\#14](https://github.com/browniebroke/django-codemod/pull/14) ([browniebroke](https://github.com/browniebroke))
 - Support resolving django.utils.translation.ugettext deprecation [\#12](https://github.com/browniebroke/django-codemod/pull/12) ([browniebroke](https://github.com/browniebroke))
-- Support smart\_text deprecation, replace by smart\_str [\#10](https://github.com/browniebroke/django-codemod/pull/10) ([browniebroke](https://github.com/browniebroke))
 - Refactor checks to use matchers [\#8](https://github.com/browniebroke/django-codemod/pull/8) ([browniebroke](https://github.com/browniebroke))
 
 ### 🔥 Removals:
