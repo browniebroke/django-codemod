@@ -12,8 +12,10 @@ class PatternNotSupported(RuntimeError):
 
 REGEX_TO_CONVERTER = {
     "[0-9]+": "int",
+    r"\d+": "int",
     ".+": "path",
     "[-a-zA-Z0-9_]+": "slug",
+    r"[\w-]+": "slug",
     "[^/]+": "str",
     "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}": "uuid",
 }

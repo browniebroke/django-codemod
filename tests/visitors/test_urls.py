@@ -119,12 +119,14 @@ class TestURLTransformer(BaseVisitorTest):
     def test_grouped_path(self) -> None:
         """Check replacing pattern with groups."""
         uuid_re = "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
-        before = f"""
+        before = fr"""
             from django.conf.urls import url
 
             urlpatterns = [
                 url(r'^page/(?P<number>[0-9]+)/$', views.page, name='page'),
+                url(r'^page/(?P<number>\d+)/$', views.page, name='page'),
                 url(r'^post/(?P<slug>[-a-zA-Z0-9_]+)/$', views.post, name='post'),
+                url(r'^post/(?P<slug>[\w-]+)/$', views.post, name='post'),
                 url(r'^about/(?P<name>[^/]+)/$', views.about, name='about'),
                 url(r'^uuid/(?P<uuid>{uuid_re})/$', by_uuid),
                 url(r'^(?P<path>.+)/$', views.default, name='default'),
@@ -135,6 +137,8 @@ class TestURLTransformer(BaseVisitorTest):
 
             urlpatterns = [
                 path('page/<int:number>/', views.page, name='page'),
+                path('page/<int:number>/', views.page, name='page'),
+                path('post/<slug:slug>/', views.post, name='post'),
                 path('post/<slug:slug>/', views.post, name='post'),
                 path('about/<str:name>/', views.about, name='about'),
                 path('uuid/<uuid:uuid>/', by_uuid),
