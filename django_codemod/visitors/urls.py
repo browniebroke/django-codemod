@@ -1,9 +1,8 @@
-import re
-
 from libcst import Arg, BaseExpression, Call, Name, SimpleString
 from libcst import matchers as m
 from libcst.codemod.visitors import AddImportsVisitor
 
+from django_codemod import re
 from django_codemod.constants import DJANGO_3_0, DJANGO_4_0
 from django_codemod.visitors.base import BaseFuncRenameTransformer
 
