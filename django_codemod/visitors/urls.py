@@ -1,3 +1,5 @@
+import re
+
 from libcst import Arg, BaseExpression, Call, Name, SimpleString
 from libcst import matchers as m
 from libcst.codemod.visitors import AddImportsVisitor
@@ -32,9 +34,11 @@ class URLTransformer(BaseFuncRenameTransformer):
     simple_rename = False
 
     def update_call(self, updated_node: Call) -> BaseExpression:
+        """Update `url` call with either `path` or `re_path`."""
         try:
             return self.update_call_to_path(updated_node)
         except PatternNotSupported:
+            # Safe fallback to re_path()
             self.add_new_import()
             return super().update_call(updated_node)
 
@@ -74,15 +78,24 @@ class URLTransformer(BaseFuncRenameTransformer):
         route = ""
         # Parse each group
         while "(?P<" in stripped_pattern:
-            # Extract group info
-            prefix, rest = stripped_pattern.split("(?P<", 1)
-            group, stripped_pattern = rest.split(")", 1)
-            group_name, group_regex = group.split(">", 1)
-            try:
-                converter = REGEX_TO_CONVERTER[group_regex]
-            except KeyError:
-                # No simple converter found: fallback to re_path()
-                raise PatternNotSupported
-            route += prefix + f"<{converter}:{group_name}>"
+            route_part, stripped_pattern = self.parse_next_group(stripped_pattern)
+            route += route_part
         route += stripped_pattern
+        self.check_route(route)
         return route
+
+    def parse_next_group(self, left_to_parse):
+        """Extract captured group info."""
+        prefix, rest = left_to_parse.split("(?P<", 1)
+        group, left_to_parse = rest.split(")", 1)
+        group_name, group_regex = group.split(">", 1)
+        try:
+            converter = REGEX_TO_CONVERTER[group_regex]
+        except KeyError:
+            raise PatternNotSupported("No converter found")
+        return prefix + f"<{converter}:{group_name}>", left_to_parse
+
+    def check_route(self, route):
+        """Check that route doesn't contain anymore regex."""
+        if route != re.escape(route):
+            raise PatternNotSupported("Route contains regex")

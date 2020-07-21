@@ -146,3 +146,21 @@ class TestURLTransformer(BaseVisitorTest):
             ]
         """
         self.assertCodemod(before, after)
+
+    def test_non_captured_group(self) -> None:
+        """Non-capturing regex should be moved to re_path."""
+        before = """
+            from django.conf.urls import url
+
+            urlpatterns = [
+                url(r'^page/[0-9]+/$', views.page, name='page'),
+            ]
+        """
+        after = """
+            from django.urls import re_path
+
+            urlpatterns = [
+                re_path(r'^page/[0-9]+/$', views.page, name='page'),
+            ]
+        """
+        self.assertCodemod(before, after)
