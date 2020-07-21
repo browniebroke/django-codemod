@@ -99,7 +99,7 @@ class TestURLTransformer(BaseVisitorTest):
         self.assertCodemod(before, after)
 
     def test_grouped_path(self) -> None:
-        """Check replacing supported groups."""
+        """Check replacing pattern with groups."""
         uuid_re = "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
         before = f"""
             from django.conf.urls import url
