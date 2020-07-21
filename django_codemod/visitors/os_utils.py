@@ -1,8 +1,8 @@
 from django_codemod.constants import DJANGO_2_0, DJANGO_3_0
-from django_codemod.visitors.base import BaseSimpleFuncRenameTransformer
+from django_codemod.visitors.base import BaseFuncRenameTransformer
 
 
-class AbsPathTransformer(BaseSimpleFuncRenameTransformer):
+class AbsPathTransformer(BaseFuncRenameTransformer):
     """Resolve deprecation of ``django.utils._os.abspathu``."""
 
     deprecated_in = DJANGO_2_0

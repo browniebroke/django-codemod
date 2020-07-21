@@ -1,8 +1,8 @@
 from django_codemod.constants import DJANGO_3_0, DJANGO_4_0
-from django_codemod.visitors.base import BaseSimpleFuncRenameTransformer
+from django_codemod.visitors.base import BaseFuncRenameTransformer
 
 
-class UnescapeEntitiesTransformer(BaseSimpleFuncRenameTransformer):
+class UnescapeEntitiesTransformer(BaseFuncRenameTransformer):
     """Resolve deprecation of ``django.utils.text.unescape_entities``."""
 
     deprecated_in = DJANGO_3_0

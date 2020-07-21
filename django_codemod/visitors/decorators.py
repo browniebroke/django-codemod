@@ -2,10 +2,10 @@ from libcst import BaseExpression, Call, Name
 from libcst import matchers as m
 
 from django_codemod.constants import DJANGO_2_0, DJANGO_3_0
-from django_codemod.visitors.base import BaseSimpleRenameTransformer
+from django_codemod.visitors.base import BaseRenameTransformer
 
 
-class ContextDecoratorTransformer(BaseSimpleRenameTransformer):
+class ContextDecoratorTransformer(BaseRenameTransformer):
     """Resolve deprecation of ``django.utils.decorators.ContextDecorator``."""
 
     deprecated_in = DJANGO_2_0
@@ -14,7 +14,7 @@ class ContextDecoratorTransformer(BaseSimpleRenameTransformer):
     rename_to = "contextlib.ContextDecorator"
 
 
-class AvailableAttrsTransformer(BaseSimpleRenameTransformer):
+class AvailableAttrsTransformer(BaseRenameTransformer):
     """Resolve deprecation of ``django.utils.decorators.available_attrs``."""
 
     deprecated_in = DJANGO_2_0
@@ -23,7 +23,7 @@ class AvailableAttrsTransformer(BaseSimpleRenameTransformer):
     rename_to = "functools.WRAPPER_ASSIGNMENTS"
 
     def leave_Call(self, original_node: Call, updated_node: Call) -> BaseExpression:
-        if self.is_entity_imported and m.matches(
+        if self.is_imported_with_old_name and m.matches(
             updated_node, m.Call(func=m.Name(self.old_name))
         ):
             return Name(self.new_name)
