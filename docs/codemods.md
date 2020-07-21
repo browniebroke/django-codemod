@@ -63,6 +63,8 @@ Applied by passing the `--removed-in 4.0` or `--deprecated-in 3.0` option:
     `gettext_noop`, `ngettext`, and `ngettext_lazy`.
 -   Replaces `unescape_entities` from the `django.utils.text` module by
     `html.unescape` from the standard library.
--   Replaces `django.conf.urls.url` by `django.urls.re_path`.
+-   Replaces `django.conf.urls.url` by `django.urls.path` or `re_path`. 
+    This is quite conservative for replacements to `path` and fallback 
+    to `re_path` for anything non-simple.
 -   Replaces `django.utils.http.is_safe_url` by
     `django.utils.http.url_has_allowed_host_and_scheme`.
