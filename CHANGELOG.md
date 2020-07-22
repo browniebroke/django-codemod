@@ -58,7 +58,6 @@
 - Handle deprecation of `@models.permalink` decorator in Django 1.11 [\#87](https://github.com/browniebroke/django-codemod/pull/87) ([browniebroke](https://github.com/browniebroke))
 - Resolve deprecation of `django.utils.decorators.available\_attrs` in Django 2.0 [\#85](https://github.com/browniebroke/django-codemod/pull/85) ([browniebroke](https://github.com/browniebroke))
 - Resolve deprecation of `django.utils.decorators.ContextDecorator` in Django 2.0 [\#84](https://github.com/browniebroke/django-codemod/pull/84) ([browniebroke](https://github.com/browniebroke))
-- Resolve some removed private Python 2 compatibility APIs [\#74](https://github.com/browniebroke/django-codemod/pull/74) ([browniebroke](https://github.com/browniebroke))
 
 ### 🔥 Removals:
 
@@ -95,12 +94,12 @@
 
 ### 🚀 Enhancements:
 
+- Resolve some removed private Python 2 compatibility APIs [\#74](https://github.com/browniebroke/django-codemod/pull/74) ([browniebroke](https://github.com/browniebroke))
 - Resolve deprecation of `django.utils.http.is\_safe\_url` in Django 3.0 [\#72](https://github.com/browniebroke/django-codemod/pull/72) ([browniebroke](https://github.com/browniebroke))
 - Resolve deprecation of `django.utils.text.unescape\_entities` in Django 3.0 [\#70](https://github.com/browniebroke/django-codemod/pull/70) ([browniebroke](https://github.com/browniebroke))
 - Resolve deprecations from `django.utils.http` in Django 3.0 [\#69](https://github.com/browniebroke/django-codemod/pull/69) ([browniebroke](https://github.com/browniebroke))
 - Add new CLI option `--deprecated-in` [\#64](https://github.com/browniebroke/django-codemod/pull/64) ([browniebroke](https://github.com/browniebroke))
 - Make `InlineHasAddPermissionsTransformer` more robust [\#60](https://github.com/browniebroke/django-codemod/pull/60) ([browniebroke](https://github.com/browniebroke))
-- Add a `djcodemod` CLI [\#55](https://github.com/browniebroke/django-codemod/pull/55) ([browniebroke](https://github.com/browniebroke))
 
 ### 🐛 Bug Fixes:
 
@@ -113,6 +112,10 @@
 ## [v0.7.0](https://github.com/browniebroke/django-codemod/tree/v0.7.0) (2020-05-23)
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.6.0...v0.7.0)
+
+### 🚀 Enhancements:
+
+- Add a `djcodemod` CLI [\#55](https://github.com/browniebroke/django-codemod/pull/55) ([browniebroke](https://github.com/browniebroke))
 
 ### 🐛 Bug Fixes:
 
@@ -209,6 +212,7 @@
 - Support resolving django.utils.translation.ugettext\_noop deprecation [\#15](https://github.com/browniebroke/django-codemod/pull/15) ([browniebroke](https://github.com/browniebroke))
 - Support resolving django.utils.translation.ugettext\_lazy deprecation [\#14](https://github.com/browniebroke/django-codemod/pull/14) ([browniebroke](https://github.com/browniebroke))
 - Support resolving django.utils.translation.ugettext deprecation [\#12](https://github.com/browniebroke/django-codemod/pull/12) ([browniebroke](https://github.com/browniebroke))
+- Support smart\_text deprecation, replace by smart\_str [\#10](https://github.com/browniebroke/django-codemod/pull/10) ([browniebroke](https://github.com/browniebroke))
 - Refactor checks to use matchers [\#8](https://github.com/browniebroke/django-codemod/pull/8) ([browniebroke](https://github.com/browniebroke))
 
 ### 🔥 Removals:
