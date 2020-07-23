@@ -33,4 +33,4 @@ jobs:
         pip install .
     - name: Test with Pytest
       run: pytest
-    - uses: codecov/codecov-action@v1.0.11
+    - uses: codecov/codecov-action@v1.0.12
