@@ -3,7 +3,7 @@ from django_codemod.visitors.base import BaseModuleRenameTransformer
 
 
 class URLResolversTransformer(BaseModuleRenameTransformer):
-    """Resolve deprecation of ``django.core.urlresolvers``."""
+    """Replace `django.core.urlresolvers` by `django.urls`."""
 
     deprecated_in = DJANGO_1_10
     removed_in = DJANGO_2_0

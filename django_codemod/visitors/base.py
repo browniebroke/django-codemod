@@ -1,6 +1,6 @@
 """Module to implement base functionality."""
 from abc import ABC
-from typing import Generator, Optional, Sequence, Union
+from typing import Generator, Optional, Sequence, Tuple, Union
 
 from libcst import (
     Arg,
@@ -18,6 +18,11 @@ from libcst.codemod import ContextAwareTransformer
 from libcst.codemod.visitors import AddImportsVisitor
 
 
+class BaseDjCodemodTransformer(ContextAwareTransformer, ABC):
+    deprecated_in: Tuple[int, int]
+    removed_in: Tuple[int, int]
+
+
 def module_matcher(import_parts):
     *values, attr = import_parts
     if len(values) > 1:
@@ -33,7 +38,7 @@ def import_from_matches(node, module_parts):
     return m.matches(node, m.ImportFrom(module=module_matcher(module_parts)))
 
 
-class BaseRenameTransformer(ContextAwareTransformer, ABC):
+class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
     """Base class to help rename or move a declaration."""
 
     rename_from: str

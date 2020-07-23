@@ -15,14 +15,13 @@ from libcst import (
     RemovalSentinel,
 )
 from libcst import matchers as m
-from libcst.codemod import ContextAwareTransformer
 
 from django_codemod.constants import DJANGO_2_1, DJANGO_3_0
-from django_codemod.visitors.base import module_matcher
+from django_codemod.visitors.base import BaseDjCodemodTransformer, module_matcher
 
 
-class InlineHasAddPermissionsTransformer(ContextAwareTransformer):
-    """Add the ``obj`` argument to ``InlineModelAdmin.has_add_permission()``."""
+class InlineHasAddPermissionsTransformer(BaseDjCodemodTransformer):
+    """Add the `obj` argument to `InlineModelAdmin.has_add_permission()`."""
 
     deprecated_in = DJANGO_2_1
     removed_in = DJANGO_3_0

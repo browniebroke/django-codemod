@@ -1,53 +1,55 @@
 import inspect
 from collections import defaultdict
 from operator import attrgetter
-from typing import Callable, Dict, List, Tuple
+from typing import Callable, Dict, Generator, List, Tuple, Type
 
 import click
 from libcst.codemod import (
     CodemodContext,
-    ContextAwareTransformer,
     gather_files,
     parallel_exec_transform_with_prettyprint,
 )
+from rich.console import Console
+from rich.markdown import Markdown
+from rich.table import Table
 
 from django_codemod import visitors
 from django_codemod.commands import BaseCodemodCommand
+from django_codemod.visitors.base import BaseDjCodemodTransformer
 
 
-def find_codemoders(version_getter: Callable) -> Dict[Tuple[int, int], List]:
+def index_codemoders(version_getter: Callable) -> Dict[Tuple[int, int], List]:
     """
-    Find codemodders and index them by version.
+    Index codemodders by version.
 
-    The returned entity is a dictionary which keys are 2-tuples
-    for each major versions of Django with codemodders mapping
-    to a list of codemodders which are flagged as either `removed_in`
-    or `deprecated_in` that version.
+    Build a map of Django version to list of codemodders.
     """
     codemodders_index = defaultdict(list)
-    for object_name in dir(visitors):
-        try:
-            obj = getattr(visitors, object_name)
-            if (
-                obj is ContextAwareTransformer
-                or not issubclass(obj, ContextAwareTransformer)
-                or inspect.isabstract(obj)
-            ):
-                continue
-            # Looks like this one is good to go
-            django_version = version_getter(obj)
-            codemodders_index[django_version].append(obj)
-        except TypeError:
-            continue
+    for obj in iter_codemodders():
+        django_version = version_getter(obj)
+        codemodders_index[django_version].append(obj)
     return dict(codemodders_index)
 
 
-DEPRECATED_IN = find_codemoders(version_getter=attrgetter("deprecated_in"))
-REMOVED_IN = find_codemoders(version_getter=attrgetter("removed_in"))
+def iter_codemodders() -> Generator[BaseDjCodemodTransformer, None, None]:
+    """Iterator of all the codemodders classes."""
+    for object_name in dir(visitors):
+        try:
+            obj = getattr(visitors, object_name)
+            if not issubclass(obj, BaseDjCodemodTransformer) or inspect.isabstract(obj):
+                continue
+            # Looks like this one is good to go
+            yield obj
+        except TypeError:
+            continue
+
+
+DEPRECATED_IN = index_codemoders(version_getter=attrgetter("deprecated_in"))
+REMOVED_IN = index_codemoders(version_getter=attrgetter("removed_in"))
 
 
 class VersionParamType(click.ParamType):
-    """A type of parameter to parse Versions as arguments."""
+    """A type of parameter to parse version as arguments."""
 
     name = "version"
     example = (
@@ -92,7 +94,12 @@ class VersionParamType(click.ParamType):
         return (major, minor)
 
 
-@click.command()
+@click.group()
+def djcodemod():
+    """CLI entry point."""
+
+
+@djcodemod.command()
 @click.argument("path")
 @click.option(
     "--removed-in",
@@ -106,7 +113,7 @@ class VersionParamType(click.ParamType):
     help="The version of Django where deprecations started.",
     type=VersionParamType(DEPRECATED_IN),
 )
-def djcodemod(removed_in, deprecated_in, path):
+def run(removed_in: Tuple[int, int], deprecated_in: Tuple[int, int], path: str) -> None:
     """
     Automatically fixes deprecations removed Django deprecations.
 
@@ -148,3 +155,53 @@ def call_command(command_instance: BaseCodemodCommand, path: str):
     click.echo(f" - {result.warnings} warnings were generated.")
     if result.failures > 0:
         raise click.exceptions.Exit(1)
+
+
+@djcodemod.command()
+def list() -> None:
+    """Print all available codemodders as a table."""
+    console = Console()
+    table = Table(show_header=True, header_style="bold")
+    # Headers
+    table.add_column("Codemodder")
+    table.add_column("Deprecated in", justify="right")
+    table.add_column("Removed in", justify="right")
+    table.add_column("Description")
+    # Content
+    prev_version = None
+    for name, deprecated_in, removed_in, description in generate_rows():
+        if prev_version and prev_version != (deprecated_in, removed_in):
+            table.add_row()
+        table.add_row(name, deprecated_in, removed_in, Markdown(description))
+        prev_version = (deprecated_in, removed_in)
+    # Print it out
+    console.print(table)
+
+
+def generate_rows() -> Generator[Tuple[str, str, str, str], None, None]:
+    """Build up the rows for the table of codemodders."""
+    codemodders_list = sorted(
+        iter_codemodders(), key=lambda obj: (obj.deprecated_in, obj.removed_in)
+    )
+    for codemodder in codemodders_list:
+        yield (
+            codemodder.__name__,
+            version_str(codemodder.deprecated_in),
+            version_str(codemodder.removed_in),
+            get_short_description(codemodder),
+        )
+
+
+def get_short_description(codemodder: Type) -> str:
+    """Get a one line description of the codemodder from its docstring."""
+    if codemodder.__doc__ is None:
+        return ""
+    for line in codemodder.__doc__.split("\n"):
+        description = line.strip()
+        if description:
+            return description
+
+
+def version_str(version_parts: Tuple[int, int]) -> str:
+    """Format the version tuple as string."""
+    return ".".join(str(d) for d in version_parts)

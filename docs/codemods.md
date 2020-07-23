@@ -5,6 +5,8 @@
 Here is the list of automatic fixes which are supported by `django-codemod` 
 at this stage. This list will be updated as new fixes are implemented.
 
+This is also accessible via the `djcodemod list` command. 
+
 ## Removed in Django 2.0
 
 Applied by passing the `--removed-in 2.0` or `--deprecated-in 1.9` option:

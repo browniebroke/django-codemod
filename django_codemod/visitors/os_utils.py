@@ -3,7 +3,7 @@ from django_codemod.visitors.base import BaseFuncRenameTransformer
 
 
 class AbsPathTransformer(BaseFuncRenameTransformer):
-    """Resolve deprecation of ``django.utils._os.abspathu``."""
+    """Replace `django.utils._os.abspathu` by `os.path.abspath`."""
 
     deprecated_in = DJANGO_2_0
     removed_in = DJANGO_3_0

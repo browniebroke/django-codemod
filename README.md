@@ -47,7 +47,7 @@ Let's say you just updated to Django 3.0, and suddenly you're flooded with depre
 You want to resolve them to avoid missing another important warning. You can do so by running the following command from the root of your repo:
 
 ```bash
-djcodemod --deprecated-in 3.0 .
+djcodemod run --deprecated-in 3.0 .
 ```
 
 **2. Removals**
@@ -55,7 +55,7 @@ djcodemod --deprecated-in 3.0 .
 This is more a just in time operation, assuming you haven't kept up to date with deprecation warnings, and right before upgrading to a given version (let's assume Django 4.0). In this case, you should be running:
 
 ```bash
-djcodemod --removed-in 4.0 .
+djcodemod run --removed-in 4.0 .
 ```
 
 ### What happens
