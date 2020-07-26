@@ -1,5 +1,13 @@
 # Changelog
 
+## [Unreleased](https://github.com/browniebroke/django-codemod/tree/HEAD)
+
+[Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.12.0...HEAD)
+
+### ✅ Testing:
+
+- Internal refactoring of CLI and test improvements [\#157](https://github.com/browniebroke/django-codemod/pull/157) ([browniebroke](https://github.com/browniebroke))
+
 ## [v0.12.0](https://github.com/browniebroke/django-codemod/tree/v0.12.0) (2020-07-21)
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.11.0...v0.12.0)
@@ -132,7 +140,6 @@
 ### 🚀 Enhancements:
 
 - Add the `obj` argument to `InlineModelAdmin.has\_add\_permission\(\)` [\#45](https://github.com/browniebroke/django-codemod/pull/45) ([browniebroke](https://github.com/browniebroke))
-- New commands to fix all deprecations for a given version of Django [\#37](https://github.com/browniebroke/django-codemod/pull/37) ([browniebroke](https://github.com/browniebroke))
 
 ### 🐛 Bug Fixes:
 
@@ -156,6 +163,7 @@
 
 ### 🚀 Enhancements:
 
+- New commands to fix all deprecations for a given version of Django [\#37](https://github.com/browniebroke/django-codemod/pull/37) ([browniebroke](https://github.com/browniebroke))
 - Refactor & move main logic from commands to visitors [\#36](https://github.com/browniebroke/django-codemod/pull/36) ([browniebroke](https://github.com/browniebroke))
 - Refactor BaseSimpleFuncRename to simplify implementing new codemod [\#32](https://github.com/browniebroke/django-codemod/pull/32) ([browniebroke](https://github.com/browniebroke))
 
