@@ -8,10 +8,6 @@ class BaseVisitorTest(CodemodTest):
 
     transformer = None
 
-    def TRANSFORM(self, context, *args, **kwargs):
+    def TRANSFORM(self, context):
         """Create a command for the transformer under test."""
-
-        class TransformerCommand(BaseCodemodCommand):
-            transformers = [self.transformer]
-
-        return TransformerCommand(context, *args, **kwargs)
+        return BaseCodemodCommand([self.transformer], context)
