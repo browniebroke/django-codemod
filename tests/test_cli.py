@@ -1,10 +1,13 @@
+from pathlib import Path
+
 import click
 import pytest
 from click.testing import CliRunner
-from libcst.codemod import ParallelTransformResult
+from libcst.codemod import CodemodContext, ParallelTransformResult
 
 from django_codemod import cli
-from django_codemod.cli import DEPRECATED_IN, REMOVED_IN, build_command, call_command
+from django_codemod.cli import DEPRECATED_IN, REMOVED_IN, call_command
+from django_codemod.commands import BaseCodemodCommand
 
 
 @pytest.fixture()
@@ -22,7 +25,7 @@ def gather_files_mocked(mocker):
 @pytest.fixture()
 def command_instance():
     """Dummy command instance to test call_command."""
-    return build_command([])
+    return BaseCodemodCommand([], CodemodContext())
 
 
 def test_missing_argument(cli_runner):
@@ -102,13 +105,20 @@ def test_invalid_version(cli_runner):
         ("--deprecated-in", "2.0"),
     ],
 )
-def test_basic_arguments(mocker, cli_runner, option, version):
-    call_command = mocker.patch("django_codemod.cli.call_command")
+@pytest.mark.parametrize("path", [".", "my_app"])
+def test_basic_arguments(cli_runner, option, version, path):
+    with cli_runner.isolated_filesystem() as tempdir:
+        dir = Path(tempdir) / "my_app"
+        dir.mkdir()
+        for file_name in ["hello1.py", "hello2.py", "hello3.py"]:
+            py_file = dir / file_name
+            with py_file.open("w") as f:
+                f.write('print("Hello World!")')
 
-    result = cli_runner.invoke(cli.djcodemod, [option, version, "."])
+        result = cli_runner.invoke(cli.djcodemod, [option, version, path])
 
-    assert result.exit_code == 0
-    call_command.assert_called_once()
+    assert result.exit_code == 0, result
+    assert "Finished codemodding 3 files!" in result.output
 
 
 @pytest.mark.usefixtures("gather_files_mocked")

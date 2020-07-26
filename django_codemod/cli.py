@@ -121,17 +121,8 @@ def djcodemod(removed_in, deprecated_in, path):
         codemodders_list = REMOVED_IN[removed_in]
     else:
         codemodders_list = DEPRECATED_IN[deprecated_in]
-    command_instance = build_command(codemodders_list)
+    command_instance = BaseCodemodCommand(codemodders_list, CodemodContext())
     call_command(command_instance, path)
-
-
-def build_command(codemodders_list: List) -> BaseCodemodCommand:
-    """Build a custom command with the list of visitors."""
-
-    class CustomCommand(BaseCodemodCommand):
-        transformers = codemodders_list
-
-    return CustomCommand(CodemodContext())
 
 
 def call_command(command_instance: BaseCodemodCommand, path: str):
