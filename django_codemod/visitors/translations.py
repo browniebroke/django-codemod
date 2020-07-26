@@ -3,7 +3,7 @@ from django_codemod.visitors.base import BaseFuncRenameTransformer
 
 
 class UGetTextTransformer(BaseFuncRenameTransformer):
-    """Resolve deprecation of ``django.utils.translation.ugettext``."""
+    """Replace `django.utils.translation.ugettext` by `gettext`."""
 
     deprecated_in = DJANGO_3_0
     removed_in = DJANGO_4_0
@@ -12,7 +12,7 @@ class UGetTextTransformer(BaseFuncRenameTransformer):
 
 
 class UGetTextLazyTransformer(BaseFuncRenameTransformer):
-    """Resolve deprecation of ``django.utils.translation.ugettext_lazy``."""
+    """Replace `django.utils.translation.ugettext_lazy` by `gettext_lazy`."""
 
     deprecated_in = DJANGO_3_0
     removed_in = DJANGO_4_0
@@ -21,7 +21,7 @@ class UGetTextLazyTransformer(BaseFuncRenameTransformer):
 
 
 class UGetTextNoopTransformer(BaseFuncRenameTransformer):
-    """Resolve deprecation of ``django.utils.translation.ugettext_noop``."""
+    """Replace `django.utils.translation.ugettext_noop` by `gettext_noop`."""
 
     deprecated_in = DJANGO_3_0
     removed_in = DJANGO_4_0
@@ -30,7 +30,7 @@ class UGetTextNoopTransformer(BaseFuncRenameTransformer):
 
 
 class UNGetTextTransformer(BaseFuncRenameTransformer):
-    """Resolve deprecation of ``django.utils.translation.ungettext``."""
+    """Replace `django.utils.translation.ungettext` by `ngettext`."""
 
     deprecated_in = DJANGO_3_0
     removed_in = DJANGO_4_0
@@ -39,7 +39,7 @@ class UNGetTextTransformer(BaseFuncRenameTransformer):
 
 
 class UNGetTextLazyTransformer(BaseFuncRenameTransformer):
-    """Resolve deprecation of ``django.utils.translation.ungettext_lazy``."""
+    """Replace `django.utils.translation.ungettext_lazy` by `ngettext_lazy`."""
 
     deprecated_in = DJANGO_3_0
     removed_in = DJANGO_4_0

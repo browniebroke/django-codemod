@@ -3,7 +3,7 @@ from django_codemod.visitors.base import BaseFuncRenameTransformer
 
 
 class HttpUrlQuoteTransformer(BaseFuncRenameTransformer):
-    """Resolve deprecation of ``django.utils.http.urlquote``."""
+    """Replace `django.utils.http.urlquote` by `urllib.parse.quote`."""
 
     deprecated_in = DJANGO_3_0
     removed_in = DJANGO_4_0
@@ -12,7 +12,7 @@ class HttpUrlQuoteTransformer(BaseFuncRenameTransformer):
 
 
 class HttpUrlQuotePlusTransformer(BaseFuncRenameTransformer):
-    """Resolve deprecation of ``django.utils.http.urlquote_plus``."""
+    """Replace `django.utils.http.urlquote_plus` by `urllib.parse.quote_plus`."""
 
     deprecated_in = DJANGO_3_0
     removed_in = DJANGO_4_0
@@ -21,7 +21,7 @@ class HttpUrlQuotePlusTransformer(BaseFuncRenameTransformer):
 
 
 class HttpUrlUnQuoteTransformer(BaseFuncRenameTransformer):
-    """Resolve deprecation of ``django.utils.http.urlunquote``."""
+    """Replace `django.utils.http.urlunquote` by `urllib.parse.unquote`."""
 
     deprecated_in = DJANGO_3_0
     removed_in = DJANGO_4_0
@@ -30,7 +30,7 @@ class HttpUrlUnQuoteTransformer(BaseFuncRenameTransformer):
 
 
 class HttpUrlUnQuotePlusTransformer(BaseFuncRenameTransformer):
-    """Resolve deprecation of ``django.utils.http.urlunquote_plus``."""
+    """Replace `django.utils.http.urlunquote_plus` by `urllib.parse.unquote_plus`."""
 
     deprecated_in = DJANGO_3_0
     removed_in = DJANGO_4_0
@@ -39,7 +39,7 @@ class HttpUrlUnQuotePlusTransformer(BaseFuncRenameTransformer):
 
 
 class IsSafeUrlTransformer(BaseFuncRenameTransformer):
-    """Resolve deprecation of ``django.utils.http.is_safe_url``."""
+    """Rename `django.utils.http.is_safe_url` to `url_has_allowed_host_and_scheme`."""
 
     deprecated_in = DJANGO_3_0
     removed_in = DJANGO_4_0

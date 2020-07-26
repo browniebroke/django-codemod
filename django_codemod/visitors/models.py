@@ -16,15 +16,14 @@ from libcst import (
     Return,
 )
 from libcst import matchers as m
-from libcst.codemod import ContextAwareTransformer
 from libcst.codemod.visitors import AddImportsVisitor
 
 from django_codemod.constants import DJANGO_1_9, DJANGO_1_11, DJANGO_2_0, DJANGO_2_1
-from django_codemod.visitors.base import module_matcher
+from django_codemod.visitors.base import BaseDjCodemodTransformer, module_matcher
 
 
-class ModelsPermalinkTransformer(ContextAwareTransformer):
-    """Replaces ``@models.permalink`` decorator by a call to ``reverse()``."""
+class ModelsPermalinkTransformer(BaseDjCodemodTransformer):
+    """Replace `@models.permalink` decorator by a call to `reverse()`."""
 
     deprecated_in = DJANGO_1_11
     removed_in = DJANGO_2_1
@@ -155,7 +154,9 @@ def has_on_delete(node: Call) -> bool:
     return len(node.args) >= 2 and node.args[1].keyword is None
 
 
-class OnDeleteTransformer(ContextAwareTransformer):
+class OnDeleteTransformer(BaseDjCodemodTransformer):
+    """Add the `on_delete=CASCADE` to `ForeignKey` and `OneToOneField`."""
+
     deprecated_in = DJANGO_1_9
     removed_in = DJANGO_2_0
     ctx_key_prefix = "OnDeleteTransformer"

@@ -3,7 +3,7 @@ from django_codemod.visitors.base import BaseFuncRenameTransformer
 
 
 class LRUCacheTransformer(BaseFuncRenameTransformer):
-    """Resolve deprecation of ``django.utils.lru_cache.lru_cache``."""
+    """Replace `django.utils.lru_cache.lru_cache` by `functools.lru_cache`."""
 
     deprecated_in = DJANGO_2_0
     removed_in = DJANGO_3_0

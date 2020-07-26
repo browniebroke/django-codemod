@@ -6,7 +6,7 @@ from django_codemod.visitors.base import BaseRenameTransformer
 
 
 class ContextDecoratorTransformer(BaseRenameTransformer):
-    """Resolve deprecation of ``django.utils.decorators.ContextDecorator``."""
+    """Replace Django's `ContextDecorator` decorator by the `contextlib`'s one."""
 
     deprecated_in = DJANGO_2_0
     removed_in = DJANGO_3_0
@@ -15,7 +15,7 @@ class ContextDecoratorTransformer(BaseRenameTransformer):
 
 
 class AvailableAttrsTransformer(BaseRenameTransformer):
-    """Resolve deprecation of ``django.utils.decorators.available_attrs``."""
+    """Replace `django.utils.decorators.available_attrs` by `WRAPPER_ASSIGNMENTS`."""
 
     deprecated_in = DJANGO_2_0
     removed_in = DJANGO_3_0

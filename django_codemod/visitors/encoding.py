@@ -3,7 +3,7 @@ from django_codemod.visitors.base import BaseFuncRenameTransformer
 
 
 class ForceTextTransformer(BaseFuncRenameTransformer):
-    """Resolve deprecation of ``django.utils.encoding.force_text``."""
+    """Replace `django.utils.encoding.force_text` by `force_str`."""
 
     deprecated_in = DJANGO_3_0
     removed_in = DJANGO_4_0
@@ -12,7 +12,7 @@ class ForceTextTransformer(BaseFuncRenameTransformer):
 
 
 class SmartTextTransformer(BaseFuncRenameTransformer):
-    """Resolve deprecation of ``django.utils.encoding.smart_text``."""
+    """Replace `django.utils.encoding.smart_text` by `smart_str`."""
 
     deprecated_in = DJANGO_3_0
     removed_in = DJANGO_4_0
@@ -21,7 +21,7 @@ class SmartTextTransformer(BaseFuncRenameTransformer):
 
 
 class UnicodeCompatibleTransformer(BaseFuncRenameTransformer):
-    """Resolve deprecation of ``django.utils.encoding.python_2_unicode_compatible``."""
+    """Replace Django's `python_2_unicode_compatible` by the one from `six`."""
 
     deprecated_in = DJANGO_2_0
     removed_in = DJANGO_3_0

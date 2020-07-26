@@ -6,7 +6,12 @@ from click.testing import CliRunner
 from libcst.codemod import CodemodContext, ParallelTransformResult
 
 from django_codemod import cli
-from django_codemod.cli import DEPRECATED_IN, REMOVED_IN, call_command
+from django_codemod.cli import (
+    DEPRECATED_IN,
+    REMOVED_IN,
+    call_command,
+    get_short_description,
+)
 from django_codemod.commands import BaseCodemodCommand
 
 
@@ -30,7 +35,7 @@ def command_instance():
 
 def test_missing_argument(cli_runner):
     """Should explain missing arguments."""
-    result = cli_runner.invoke(cli.djcodemod)
+    result = cli_runner.invoke(cli.djcodemod, ["run"])
 
     assert result.exit_code == 2
     assert "Error: Missing argument 'PATH'" in result.output
@@ -40,9 +45,9 @@ def test_missing_argument(cli_runner):
     "command_line",
     [
         # Missing options
-        ["."],
+        ["run", "."],
         # Too many options
-        ["--removed-in", "3.0", "--deprecated-in", "2.0", "."],
+        ["run", "--removed-in", "3.0", "--deprecated-in", "2.0", "."],
     ],
 )
 def test_invalid_options(cli_runner, command_line):
@@ -66,7 +71,7 @@ def test_help(cli_runner):
 
 
 def test_missing_version_parts(cli_runner):
-    result = cli_runner.invoke(cli.djcodemod, ["--removed-in", "3", "."])
+    result = cli_runner.invoke(cli.djcodemod, ["run", "--removed-in", "3", "."])
 
     assert result.exit_code == 2
     assert "missing version parts." in result.output
@@ -84,14 +89,16 @@ def test_missing_version_parts(cli_runner):
     ],
 )
 def test_non_supported_version(cli_runner, option, version):
-    result = cli_runner.invoke(cli.djcodemod, [option, version, "."])
+    result = cli_runner.invoke(cli.djcodemod, ["run", option, version, "."])
 
     assert result.exit_code == 2
     assert f"'{version}' is not supported. Versions supported:" in result.output
 
 
 def test_invalid_version(cli_runner):
-    result = cli_runner.invoke(cli.djcodemod, ["--removed-in", "not.a.version", "."])
+    result = cli_runner.invoke(
+        cli.djcodemod, ["run", "--removed-in", "not.a.version", "."]
+    )
 
     assert result.exit_code == 2
     assert "'not.a.version' is not a valid version" in result.output
@@ -115,7 +122,7 @@ def test_basic_arguments(cli_runner, option, version, path):
             with py_file.open("w") as f:
                 f.write('print("Hello World!")')
 
-        result = cli_runner.invoke(cli.djcodemod, [option, version, path])
+        result = cli_runner.invoke(cli.djcodemod, ["run", option, version, path])
 
     assert result.exit_code == 0, result
     assert "Finished codemodding 3 files!" in result.output
@@ -235,3 +242,48 @@ def test_removed_in_mapping():
         (2, 1): ["ModelsPermalinkTransformer"],
         (2, 0): ["OnDeleteTransformer", "URLResolversTransformer"],
     }
+
+
+def test_list_command(cli_runner):
+    result = cli_runner.invoke(cli.djcodemod, ["list"])
+
+    assert result.exit_code == 0, result
+    assert "Codemodder" in result.output
+    assert "Deprecated in" in result.output
+    assert "Removed in" in result.output
+    assert "Description" in result.output
+
+
+class NoDocString:
+    pass
+
+
+class SingleLine:
+    """This is the description."""
+
+
+class MultiLine1:
+    """This is the title.
+
+    This is more details."""
+
+
+class MultiLine2:
+    """
+    Another title.
+
+    And even more extra stuff.
+    """
+
+
+@pytest.mark.parametrize(
+    ("klass", "expected_result"),
+    [
+        (NoDocString, ""),
+        (SingleLine, "This is the description."),
+        (MultiLine1, "This is the title."),
+        (MultiLine2, "Another title."),
+    ],
+)
+def test_get_short_description(klass, expected_result):
+    assert get_short_description(klass) == expected_result

@@ -8,10 +8,9 @@ from django_codemod.visitors.base import BaseFuncRenameTransformer
 
 class RenderToResponseTransformer(BaseFuncRenameTransformer):
     """
-    Resolve deprecation of ``django.shortcuts.render_to_response``.
+    Replace `render_to_response()` by `render()`.
 
-    Replaces ``render_to_response()`` by ``render()`` and add
-    ``request=None`` as the first argument of ``render()``.
+    Use `None` as the first argument to `render()`.
     """
 
     deprecated_in = DJANGO_2_0

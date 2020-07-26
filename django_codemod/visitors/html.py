@@ -3,7 +3,7 @@ from django_codemod.visitors.base import BaseFuncRenameTransformer
 
 
 class UnescapeEntitiesTransformer(BaseFuncRenameTransformer):
-    """Resolve deprecation of ``django.utils.text.unescape_entities``."""
+    """Replace `django.utils.text.unescape_entities` by `html.unescape`."""
 
     deprecated_in = DJANGO_3_0
     removed_in = DJANGO_4_0

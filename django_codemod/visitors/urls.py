@@ -23,7 +23,7 @@ REGEX_TO_CONVERTER = {
 
 
 class URLTransformer(BaseFuncRenameTransformer):
-    """Resolve deprecation of ``django.conf.urls.url``."""
+    """Update `django.conf.urls.url` by equivalent `path` or `re_path`."""
 
     deprecated_in = DJANGO_3_0
     removed_in = DJANGO_4_0
