@@ -1,8 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/browniebroke/django-codemod/tree/HEAD)
+## [v0.13.0](https://github.com/browniebroke/django-codemod/tree/v0.13.0) (2020-07-26)
 
-[Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.12.0...HEAD)
+[Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.12.0...v0.13.0)
 
 ### 🚀 Enhancements:
 
@@ -24,10 +24,6 @@
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.10.1...v0.11.0)
 
-### 🚀 Enhancements:
-
-- Add module rename support and URLResolversTransformer [\#123](https://github.com/browniebroke/django-codemod/pull/123) ([jayvdb](https://github.com/jayvdb))
-
 ## [v0.10.1](https://github.com/browniebroke/django-codemod/tree/v0.10.1) (2020-07-17)
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.10.0...v0.10.1)
@@ -47,6 +43,7 @@
 
 ### 🚀 Enhancements:
 
+- Add module rename support and URLResolversTransformer [\#123](https://github.com/browniebroke/django-codemod/pull/123) ([jayvdb](https://github.com/jayvdb))
 - Add support for adding `on\_delete` for `ForeignKey` and `OneToOneField` [\#117](https://github.com/browniebroke/django-codemod/pull/117) ([cvanderkolk](https://github.com/cvanderkolk))
 
 ### 🐛 Bug Fixes:
@@ -133,10 +130,6 @@
 
 - Make sure the function to rename is imported before renaming [\#54](https://github.com/browniebroke/django-codemod/pull/54) ([browniebroke](https://github.com/browniebroke))
 
-### 📖 Documentation updates:
-
-- Updates README.me with proper travis badge [\#50](https://github.com/browniebroke/django-codemod/pull/50) ([sobolevn](https://github.com/sobolevn))
-
 ## [v0.6.0](https://github.com/browniebroke/django-codemod/tree/v0.6.0) (2020-05-22)
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.5.0...v0.6.0)
@@ -155,6 +148,10 @@
 ### 🔥 Removals:
 
 - Remove commands to fix single deprecations [\#43](https://github.com/browniebroke/django-codemod/pull/43) ([browniebroke](https://github.com/browniebroke))
+
+### 📖 Documentation updates:
+
+- Updates README.me with proper travis badge [\#50](https://github.com/browniebroke/django-codemod/pull/50) ([sobolevn](https://github.com/sobolevn))
 
 ### ✅ Testing:
 
@@ -179,6 +176,10 @@
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.3.0...v0.4.0)
 
+### 🚀 Enhancements:
+
+- Resolve deprecation for django.shortcuts.render\_to\_response\(\) [\#25](https://github.com/browniebroke/django-codemod/pull/25) ([browniebroke](https://github.com/browniebroke))
+
 ### 📖 Documentation updates:
 
 - Add missing description for URLToRePathCommand [\#28](https://github.com/browniebroke/django-codemod/pull/28) ([browniebroke](https://github.com/browniebroke))
@@ -190,7 +191,6 @@
 
 ### 🚀 Enhancements:
 
-- Resolve deprecation for django.shortcuts.render\_to\_response\(\) [\#25](https://github.com/browniebroke/django-codemod/pull/25) ([browniebroke](https://github.com/browniebroke))
 - Support resolving django.conf.urls.url\(\) deprecation [\#22](https://github.com/browniebroke/django-codemod/pull/22) ([browniebroke](https://github.com/browniebroke))
 
 ### 📖 Documentation updates:
