@@ -55,7 +55,7 @@ jobs:
     - name: Read latest git tag
       id: tag
       run: echo ::set-output name=TAG::$(git describe --abbrev=0)
-    - uses: release-drafter/release-drafter@v5
+    - uses: release-drafter/release-drafter@v5.11.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
