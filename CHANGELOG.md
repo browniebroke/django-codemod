@@ -174,6 +174,7 @@
 ### 📖 Documentation updates:
 
 - Document list of codemodders with autodoc [\#33](https://github.com/browniebroke/django-codemod/pull/33) ([browniebroke](https://github.com/browniebroke))
+- Add missing description for URLToRePathCommand [\#28](https://github.com/browniebroke/django-codemod/pull/28) ([browniebroke](https://github.com/browniebroke))
 
 ## [v0.4.0](https://github.com/browniebroke/django-codemod/tree/v0.4.0) (2020-05-11)
 
@@ -185,7 +186,6 @@
 
 ### 📖 Documentation updates:
 
-- Add missing description for URLToRePathCommand [\#28](https://github.com/browniebroke/django-codemod/pull/28) ([browniebroke](https://github.com/browniebroke))
 - Document how to list all available codemodders [\#27](https://github.com/browniebroke/django-codemod/pull/27) ([browniebroke](https://github.com/browniebroke))
 
 ## [v0.3.0](https://github.com/browniebroke/django-codemod/tree/v0.3.0) (2020-05-10)
