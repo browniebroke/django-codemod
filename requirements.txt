@@ -46,7 +46,7 @@ pyparsing==2.4.7          # via packaging
 pytest-cov==2.10.0        # via -r requirements.in
 pytest-mock==3.2.0        # via -r requirements.in
 pytest-runner==5.2        # via -r requirements.in
-pytest==6.0.0             # via -r requirements.in, pytest-cov, pytest-mock
+pytest==6.0.1             # via -r requirements.in, pytest-cov, pytest-mock
 pyupgrade==2.7.2          # via -r requirements.in
 pyyaml==5.3.1             # via pre-commit
 readme-renderer==26.0     # via twine
