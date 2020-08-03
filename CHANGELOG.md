@@ -4,10 +4,6 @@
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.12.0...v0.13.0)
 
-### 🚀 Enhancements:
-
-- Add CLI command to list all codemodders [\#156](https://github.com/browniebroke/django-codemod/pull/156) ([browniebroke](https://github.com/browniebroke))
-
 ### ✅ Testing:
 
 - Internal refactoring of CLI and test improvements [\#157](https://github.com/browniebroke/django-codemod/pull/157) ([browniebroke](https://github.com/browniebroke))
@@ -47,6 +43,7 @@
 
 ### 🚀 Enhancements:
 
+- Add CLI command to list all codemodders [\#156](https://github.com/browniebroke/django-codemod/pull/156) ([browniebroke](https://github.com/browniebroke))
 - Add support for adding `on\_delete` for `ForeignKey` and `OneToOneField` [\#117](https://github.com/browniebroke/django-codemod/pull/117) ([cvanderkolk](https://github.com/cvanderkolk))
 
 ### 🐛 Bug Fixes:
@@ -174,7 +171,6 @@
 ### 📖 Documentation updates:
 
 - Document list of codemodders with autodoc [\#33](https://github.com/browniebroke/django-codemod/pull/33) ([browniebroke](https://github.com/browniebroke))
-- Add missing description for URLToRePathCommand [\#28](https://github.com/browniebroke/django-codemod/pull/28) ([browniebroke](https://github.com/browniebroke))
 
 ## [v0.4.0](https://github.com/browniebroke/django-codemod/tree/v0.4.0) (2020-05-11)
 
@@ -186,6 +182,7 @@
 
 ### 📖 Documentation updates:
 
+- Add missing description for URLToRePathCommand [\#28](https://github.com/browniebroke/django-codemod/pull/28) ([browniebroke](https://github.com/browniebroke))
 - Document how to list all available codemodders [\#27](https://github.com/browniebroke/django-codemod/pull/27) ([browniebroke](https://github.com/browniebroke))
 
 ## [v0.3.0](https://github.com/browniebroke/django-codemod/tree/v0.3.0) (2020-05-10)
