@@ -4,6 +4,10 @@
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.12.0...v0.13.0)
 
+### 🚀 Enhancements:
+
+- Add CLI command to list all codemodders [\#156](https://github.com/browniebroke/django-codemod/pull/156) ([browniebroke](https://github.com/browniebroke))
+
 ### ✅ Testing:
 
 - Internal refactoring of CLI and test improvements [\#157](https://github.com/browniebroke/django-codemod/pull/157) ([browniebroke](https://github.com/browniebroke))
@@ -43,7 +47,6 @@
 
 ### 🚀 Enhancements:
 
-- Add CLI command to list all codemodders [\#156](https://github.com/browniebroke/django-codemod/pull/156) ([browniebroke](https://github.com/browniebroke))
 - Add support for adding `on\_delete` for `ForeignKey` and `OneToOneField` [\#117](https://github.com/browniebroke/django-codemod/pull/117) ([cvanderkolk](https://github.com/cvanderkolk))
 
 ### 🐛 Bug Fixes:
