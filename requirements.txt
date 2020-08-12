@@ -20,12 +20,12 @@ cryptography==2.9.2       # via secretstorage
 distlib==0.3.0            # via virtualenv
 docutils==0.16            # via readme-renderer
 filelock==3.0.12          # via tox, virtualenv
-flake8-isort==3.0.1       # via -r requirements.in
+flake8-isort==4.0.0       # via -r requirements.in
 flake8==3.8.3             # via -r requirements.in, flake8-isort
 identify==1.4.19          # via pre-commit
 idna==2.9                 # via requests
 iniconfig==1.0.0          # via pytest
-isort[pyproject]==4.3.21  # via flake8-isort
+isort==4.3.21             # via flake8-isort
 jeepney==0.4.3            # via keyring, secretstorage
 keyring==21.2.1           # via twine
 mccabe==0.6.1             # via flake8
@@ -58,7 +58,7 @@ secretstorage==3.1.2      # via keyring
 six==1.15.0               # via bleach, cryptography, packaging, readme-renderer, tox, virtualenv
 testfixtures==6.14.1      # via flake8-isort
 tokenize-rt==4.0.0        # via pyupgrade
-toml==0.10.1              # via black, isort, pre-commit, pytest, tox
+toml==0.10.1              # via black, pre-commit, pytest, tox
 tox==3.19.0               # via -r requirements.in
 tqdm==4.46.1              # via twine
 twine==3.2.0              # via -r requirements.in
