@@ -82,7 +82,6 @@
 ### ✅ Testing:
 
 - Use codecov to upload coverage data cross-platform [\#105](https://github.com/browniebroke/django-codemod/pull/105) ([browniebroke](https://github.com/browniebroke))
-- Remove Travis CI [\#103](https://github.com/browniebroke/django-codemod/pull/103) ([browniebroke](https://github.com/browniebroke))
 
 ## [v0.8.1](https://github.com/browniebroke/django-codemod/tree/v0.8.1) (2020-06-07)
 
@@ -98,6 +97,7 @@
 
 ### ✅ Testing:
 
+- Remove Travis CI [\#103](https://github.com/browniebroke/django-codemod/pull/103) ([browniebroke](https://github.com/browniebroke))
 - Increase test code coverage to 100% [\#81](https://github.com/browniebroke/django-codemod/pull/81) ([browniebroke](https://github.com/browniebroke))
 
 ## [v0.8.0](https://github.com/browniebroke/django-codemod/tree/v0.8.0) (2020-06-02)
