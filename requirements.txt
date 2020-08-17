@@ -31,7 +31,7 @@ keyring==21.2.1           # via twine
 mccabe==0.6.1             # via flake8
 more-itertools==8.3.0     # via pytest
 nodeenv==1.4.0            # via pre-commit
-packaging==20.4           # via bleach, pytest, tox, wheel
+packaging==20.4           # via bleach, pytest, tox
 parameterized==0.7.4      # via -r requirements.in
 pathspec==0.8.0           # via black
 pkginfo==1.5.0.1          # via twine
@@ -66,7 +66,7 @@ typed-ast==1.4.1          # via black
 urllib3==1.25.9           # via requests
 virtualenv==20.0.23       # via pre-commit, tox
 webencodings==0.5.1       # via bleach
-wheel==0.35.0             # via -r requirements.in
+wheel==0.35.1             # via -r requirements.in
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
