@@ -4,6 +4,10 @@
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.12.0...v0.13.0)
 
+### 🚀 Enhancements:
+
+- Add CLI command to list all codemodders [\#156](https://github.com/browniebroke/django-codemod/pull/156) ([browniebroke](https://github.com/browniebroke))
+
 ### ✅ Testing:
 
 - Internal refactoring of CLI and test improvements [\#157](https://github.com/browniebroke/django-codemod/pull/157) ([browniebroke](https://github.com/browniebroke))
@@ -20,17 +24,12 @@
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.10.1...v0.11.0)
 
-### 🚀 Enhancements:
-
-- Add module rename support and URLResolversTransformer [\#123](https://github.com/browniebroke/django-codemod/pull/123) ([jayvdb](https://github.com/jayvdb))
-
 ## [v0.10.1](https://github.com/browniebroke/django-codemod/tree/v0.10.1) (2020-07-17)
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.10.0...v0.10.1)
 
 ### 🚀 Enhancements:
 
-- Add CLI command to list all codemodders [\#156](https://github.com/browniebroke/django-codemod/pull/156) ([browniebroke](https://github.com/browniebroke))
 - Rename constants for numerical sorting [\#139](https://github.com/browniebroke/django-codemod/pull/139) ([jayvdb](https://github.com/jayvdb))
 
 ### ✅ Testing:
@@ -44,6 +43,7 @@
 
 ### 🚀 Enhancements:
 
+- Add module rename support and URLResolversTransformer [\#123](https://github.com/browniebroke/django-codemod/pull/123) ([jayvdb](https://github.com/jayvdb))
 - Add support for adding `on\_delete` for `ForeignKey` and `OneToOneField` [\#117](https://github.com/browniebroke/django-codemod/pull/117) ([cvanderkolk](https://github.com/cvanderkolk))
 
 ### 🐛 Bug Fixes:
