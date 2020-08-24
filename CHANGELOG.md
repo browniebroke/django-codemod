@@ -24,6 +24,10 @@
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.10.1...v0.11.0)
 
+### 🚀 Enhancements:
+
+- Add module rename support and URLResolversTransformer [\#123](https://github.com/browniebroke/django-codemod/pull/123) ([jayvdb](https://github.com/jayvdb))
+
 ## [v0.10.1](https://github.com/browniebroke/django-codemod/tree/v0.10.1) (2020-07-17)
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.10.0...v0.10.1)
@@ -43,7 +47,6 @@
 
 ### 🚀 Enhancements:
 
-- Add module rename support and URLResolversTransformer [\#123](https://github.com/browniebroke/django-codemod/pull/123) ([jayvdb](https://github.com/jayvdb))
 - Add support for adding `on\_delete` for `ForeignKey` and `OneToOneField` [\#117](https://github.com/browniebroke/django-codemod/pull/117) ([cvanderkolk](https://github.com/cvanderkolk))
 
 ### 🐛 Bug Fixes:
@@ -144,7 +147,6 @@
 
 ### 🐛 Bug Fixes:
 
-- Fix InlineModelAdmin transformer with multiple base classes [\#46](https://github.com/browniebroke/django-codemod/pull/46) ([browniebroke](https://github.com/browniebroke))
 - Fix commands non-findable by libCST [\#44](https://github.com/browniebroke/django-codemod/pull/44) ([browniebroke](https://github.com/browniebroke))
 - Fix bug with trailing comma when removed import is the last one [\#39](https://github.com/browniebroke/django-codemod/pull/39) ([browniebroke](https://github.com/browniebroke))
 - Fix bug with lost alias when 'import as' is used [\#38](https://github.com/browniebroke/django-codemod/pull/38) ([browniebroke](https://github.com/browniebroke))
@@ -167,6 +169,10 @@
 - New commands to fix all deprecations for a given version of Django [\#37](https://github.com/browniebroke/django-codemod/pull/37) ([browniebroke](https://github.com/browniebroke))
 - Refactor & move main logic from commands to visitors [\#36](https://github.com/browniebroke/django-codemod/pull/36) ([browniebroke](https://github.com/browniebroke))
 - Refactor BaseSimpleFuncRename to simplify implementing new codemod [\#32](https://github.com/browniebroke/django-codemod/pull/32) ([browniebroke](https://github.com/browniebroke))
+
+### 🐛 Bug Fixes:
+
+- Fix InlineModelAdmin transformer with multiple base classes [\#46](https://github.com/browniebroke/django-codemod/pull/46) ([browniebroke](https://github.com/browniebroke))
 
 ### 📖 Documentation updates:
 
