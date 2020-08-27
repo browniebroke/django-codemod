@@ -51,7 +51,9 @@ class URLTransformer(BaseFuncRenameTransformer):
         # If we reach this point, we might be able to use `path()`
         call = self.build_path_call(pattern, other_args)
         AddImportsVisitor.add_needed_import(
-            context=self.context, module=".".join(self.new_module_parts), obj="path",
+            context=self.context,
+            module=".".join(self.new_module_parts),
+            obj="path",
         )
         return call
 

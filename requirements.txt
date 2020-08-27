@@ -5,8 +5,8 @@
 #    pip-compile
 #
 appdirs==1.4.4            # via black, virtualenv
-attrs==19.3.0             # via black, pytest
-black==19.10b0            # via -r requirements.in
+attrs==19.3.0             # via pytest
+black==20.8b1             # via -r requirements.in
 bleach==3.1.5             # via readme-renderer
 bump2version==1.0.0       # via -r requirements.in
 certifi==2020.4.5.2       # via requests
@@ -30,6 +30,7 @@ jeepney==0.4.3            # via keyring, secretstorage
 keyring==21.2.1           # via twine
 mccabe==0.6.1             # via flake8
 more-itertools==8.3.0     # via pytest
+mypy-extensions==0.4.3    # via black
 nodeenv==1.4.0            # via pre-commit
 packaging==20.4           # via bleach, pytest, tox
 parameterized==0.7.4      # via -r requirements.in
@@ -63,6 +64,7 @@ tox==3.19.0               # via -r requirements.in
 tqdm==4.46.1              # via twine
 twine==3.2.0              # via -r requirements.in
 typed-ast==1.4.1          # via black
+typing-extensions==3.7.4.3  # via black
 urllib3==1.25.9           # via requests
 virtualenv==20.0.23       # via pre-commit, tox
 webencodings==0.5.1       # via bleach

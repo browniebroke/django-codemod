@@ -47,7 +47,8 @@ class InlineHasAddPermissionsTransformer(BaseDjCodemodTransformer):
                 ):
                     base_cls_matcher.append(m.Arg(m.Name("StackedInline")))
         if m.matches(
-            updated_node, m.ImportFrom(module=module_matcher(["django", "contrib"])),
+            updated_node,
+            m.ImportFrom(module=module_matcher(["django", "contrib"])),
         ):
             for imported_name in updated_node.names:
                 if m.matches(imported_name, m.ImportAlias(name=m.Name("admin"))):
