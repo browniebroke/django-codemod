@@ -35,7 +35,8 @@ class ModelsPermalinkTransformer(BaseDjCodemodTransformer):
         self, original_node: ImportFrom, updated_node: ImportFrom
     ) -> Union[BaseSmallStatement, RemovalSentinel]:
         if m.matches(
-            updated_node, m.ImportFrom(module=module_matcher(["django", "db"])),
+            updated_node,
+            m.ImportFrom(module=module_matcher(["django", "db"])),
         ):
             for imported_name in updated_node.names:
                 if m.matches(imported_name, m.ImportAlias(name=m.Name("models"))):
@@ -101,7 +102,9 @@ class ModelsPermalinkTransformer(BaseDjCodemodTransformer):
             for decorator in updated_node.decorators:
                 if m.matches(decorator, self.decorator_matcher):
                     AddImportsVisitor.add_needed_import(
-                        context=self.context, module="django.urls", obj="reverse",
+                        context=self.context,
+                        module="django.urls",
+                        obj="reverse",
                     )
                     updated_decorators = list(updated_node.decorators)
                     updated_decorators.remove(decorator)
@@ -138,7 +141,8 @@ def is_foreign_key(node: Call) -> bool:
 
 def is_one_to_one_field(node: Call) -> bool:
     return m.matches(
-        node, m.Call(func=m.Attribute(attr=m.Name(value="OneToOneField"))),
+        node,
+        m.Call(func=m.Attribute(attr=m.Name(value="OneToOneField"))),
     )
 
 
@@ -166,7 +170,9 @@ class OnDeleteTransformer(BaseDjCodemodTransformer):
             is_one_to_one_field(original_node) or is_foreign_key(original_node)
         ) and not has_on_delete(original_node):
             AddImportsVisitor.add_needed_import(
-                context=self.context, module="django.db", obj="models",
+                context=self.context,
+                module="django.db",
+                obj="models",
             )
             updated_args = (
                 *updated_node.args,

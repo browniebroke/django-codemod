@@ -88,7 +88,9 @@ class VersionParamType(click.ParamType):
         values_parts = tuple(int(v) for v in value.split("."))
         if len(values_parts) < 2:
             self.fail(
-                f"{value!r} missing version parts. {self.example}", param, ctx,
+                f"{value!r} missing version parts. {self.example}",
+                param,
+                ctx,
             )
         major, minor, *patches = values_parts
         return (major, minor)
