@@ -38,7 +38,6 @@
 
 ### ✅ Testing:
 
-- Split tests and docs requirements [\#131](https://github.com/browniebroke/django-codemod/pull/131) ([browniebroke](https://github.com/browniebroke))
 - Upload coverage report using codecov action [\#130](https://github.com/browniebroke/django-codemod/pull/130) ([browniebroke](https://github.com/browniebroke))
 
 ## [v0.10.0](https://github.com/browniebroke/django-codemod/tree/v0.10.0) (2020-07-04)
@@ -55,6 +54,7 @@
 
 ### ✅ Testing:
 
+- Split tests and docs requirements [\#131](https://github.com/browniebroke/django-codemod/pull/131) ([browniebroke](https://github.com/browniebroke))
 - Move CODECOV\_TOKEN from cmd line option to environment [\#118](https://github.com/browniebroke/django-codemod/pull/118) ([browniebroke](https://github.com/browniebroke))
 
 ## [v0](https://github.com/browniebroke/django-codemod/tree/v0) (2020-06-18)
