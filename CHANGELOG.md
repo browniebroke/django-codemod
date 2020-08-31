@@ -179,6 +179,10 @@
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.3.0...v0.4.0)
 
+### 🚀 Enhancements:
+
+- Resolve deprecation for django.shortcuts.render\_to\_response\(\) [\#25](https://github.com/browniebroke/django-codemod/pull/25) ([browniebroke](https://github.com/browniebroke))
+
 ### 📖 Documentation updates:
 
 - Add missing description for URLToRePathCommand [\#28](https://github.com/browniebroke/django-codemod/pull/28) ([browniebroke](https://github.com/browniebroke))
@@ -190,7 +194,6 @@
 
 ### 🚀 Enhancements:
 
-- Resolve deprecation for django.shortcuts.render\_to\_response\(\) [\#25](https://github.com/browniebroke/django-codemod/pull/25) ([browniebroke](https://github.com/browniebroke))
 - Support resolving django.conf.urls.url\(\) deprecation [\#22](https://github.com/browniebroke/django-codemod/pull/22) ([browniebroke](https://github.com/browniebroke))
 
 ### 📖 Documentation updates:
