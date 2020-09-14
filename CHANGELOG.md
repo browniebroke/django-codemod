@@ -8,10 +8,6 @@
 
 - Add CLI command to list all codemodders [\#156](https://github.com/browniebroke/django-codemod/pull/156) ([browniebroke](https://github.com/browniebroke))
 
-### ✅ Testing:
-
-- Internal refactoring of CLI and test improvements [\#157](https://github.com/browniebroke/django-codemod/pull/157) ([browniebroke](https://github.com/browniebroke))
-
 ## [v0.12.0](https://github.com/browniebroke/django-codemod/tree/v0.12.0) (2020-07-21)
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.11.0...v0.12.0)
@@ -38,6 +34,7 @@
 
 ### ✅ Testing:
 
+- Internal refactoring of CLI and test improvements [\#157](https://github.com/browniebroke/django-codemod/pull/157) ([browniebroke](https://github.com/browniebroke))
 - Split tests and docs requirements [\#131](https://github.com/browniebroke/django-codemod/pull/131) ([browniebroke](https://github.com/browniebroke))
 - Upload coverage report using codecov action [\#130](https://github.com/browniebroke/django-codemod/pull/130) ([browniebroke](https://github.com/browniebroke))
 
