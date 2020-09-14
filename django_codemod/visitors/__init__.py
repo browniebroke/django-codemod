@@ -18,6 +18,7 @@ from .lru_cache import LRUCacheTransformer
 from .models import ModelsPermalinkTransformer, OnDeleteTransformer
 from .os_utils import AbsPathTransformer
 from .shortcuts import RenderToResponseTransformer
+from .timezone import FixedOffsetTransformer
 from .translations import (
     UGetTextLazyTransformer,
     UGetTextNoopTransformer,
@@ -31,6 +32,7 @@ __all__ = (
     "AbsPathTransformer",
     "AvailableAttrsTransformer",
     "ContextDecoratorTransformer",
+    "FixedOffsetTransformer",
     "ForceTextTransformer",
     "HttpUrlQuotePlusTransformer",
     "HttpUrlQuoteTransformer",

@@ -196,6 +196,7 @@ def test_deprecated_in_mapping():
             "URLTransformer",
             "UnescapeEntitiesTransformer",
         ],
+        (2, 2): ["FixedOffsetTransformer"],
         (2, 1): ["InlineHasAddPermissionsTransformer"],
         (2, 0): [
             "AbsPathTransformer",
@@ -230,6 +231,7 @@ def test_removed_in_mapping():
             "URLTransformer",
             "UnescapeEntitiesTransformer",
         ],
+        (3, 1): ["FixedOffsetTransformer"],
         (3, 0): [
             "AbsPathTransformer",
             "AvailableAttrsTransformer",
