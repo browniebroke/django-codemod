@@ -47,8 +47,8 @@ jobs:
 
     # Workaround for an error happening at the next step:
     # `fatal: could not open '.git/COMMIT_EDITMSG': Permission denied`
-    # https://stackoverflow.com/a/19919029/2261637
-    - run: chown -R $(whoami) .
+    # https://stackoverflow.com/a/26596817/2261637
+    - run: rm -f .git/COMMIT_EDITMSG
 
     - name: Commit changes
       uses: stefanzweifel/git-auto-commit-action@v4
