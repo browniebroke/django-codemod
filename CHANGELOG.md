@@ -1,5 +1,17 @@
 # Changelog
 
+## [v0.15.0](https://github.com/browniebroke/django-codemod/tree/v0.15.0) (2020-09-15)
+
+[Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.14.0...v0.15.0)
+
+### 🚀 Enhancements:
+
+- New visitor to replace usages of `QuerySetPaginator` [\#196](https://github.com/browniebroke/django-codemod/pull/196) ([browniebroke](https://github.com/browniebroke))
+
+### 🐛 Bug Fixes:
+
+- Fix support renaming of usages of function without calls [\#197](https://github.com/browniebroke/django-codemod/pull/197) ([browniebroke](https://github.com/browniebroke))
+
 ## [v0.14.0](https://github.com/browniebroke/django-codemod/tree/v0.14.0) (2020-09-15)
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.13.3...v0.14.0)
@@ -23,10 +35,6 @@
 ## [v0.13.1](https://github.com/browniebroke/django-codemod/tree/v0.13.1) (2020-09-14)
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.13.0...v0.13.1)
-
-### 🐛 Bug Fixes:
-
-- fix\(packaging\): Python wheels are not for Python 2 [\#193](https://github.com/browniebroke/django-codemod/pull/193) ([browniebroke](https://github.com/browniebroke))
 
 ## [v0.13.0](https://github.com/browniebroke/django-codemod/tree/v0.13.0) (2020-07-26)
 
@@ -64,8 +72,13 @@
 
 - Rename constants for numerical sorting [\#139](https://github.com/browniebroke/django-codemod/pull/139) ([jayvdb](https://github.com/jayvdb))
 
+### 🐛 Bug Fixes:
+
+- fix\(packaging\): Python wheels are not for Python 2 [\#193](https://github.com/browniebroke/django-codemod/pull/193) ([browniebroke](https://github.com/browniebroke))
+
 ### ✅ Testing:
 
+- Split tests and docs requirements [\#131](https://github.com/browniebroke/django-codemod/pull/131) ([browniebroke](https://github.com/browniebroke))
 - Upload coverage report using codecov action [\#130](https://github.com/browniebroke/django-codemod/pull/130) ([browniebroke](https://github.com/browniebroke))
 
 ## [v0.10.0](https://github.com/browniebroke/django-codemod/tree/v0.10.0) (2020-07-04)
@@ -82,7 +95,6 @@
 
 ### ✅ Testing:
 
-- Split tests and docs requirements [\#131](https://github.com/browniebroke/django-codemod/pull/131) ([browniebroke](https://github.com/browniebroke))
 - Move CODECOV\_TOKEN from cmd line option to environment [\#118](https://github.com/browniebroke/django-codemod/pull/118) ([browniebroke](https://github.com/browniebroke))
 
 ## [v0](https://github.com/browniebroke/django-codemod/tree/v0) (2020-06-18)
@@ -96,7 +108,6 @@
 ### 🚀 Enhancements:
 
 - Handle deprecation of `@models.permalink` decorator in Django 1.11 [\#87](https://github.com/browniebroke/django-codemod/pull/87) ([browniebroke](https://github.com/browniebroke))
-- Resolve deprecation of `django.utils.decorators.available\_attrs` in Django 2.0 [\#85](https://github.com/browniebroke/django-codemod/pull/85) ([browniebroke](https://github.com/browniebroke))
 - Resolve deprecation of `django.utils.decorators.ContextDecorator` in Django 2.0 [\#84](https://github.com/browniebroke/django-codemod/pull/84) ([browniebroke](https://github.com/browniebroke))
 
 ### 🔥 Removals:
@@ -134,6 +145,7 @@
 
 ### 🚀 Enhancements:
 
+- Resolve deprecation of `django.utils.decorators.available\_attrs` in Django 2.0 [\#85](https://github.com/browniebroke/django-codemod/pull/85) ([browniebroke](https://github.com/browniebroke))
 - Resolve some removed private Python 2 compatibility APIs [\#74](https://github.com/browniebroke/django-codemod/pull/74) ([browniebroke](https://github.com/browniebroke))
 - Resolve deprecation of `django.utils.http.is\_safe\_url` in Django 3.0 [\#72](https://github.com/browniebroke/django-codemod/pull/72) ([browniebroke](https://github.com/browniebroke))
 - Resolve deprecation of `django.utils.text.unescape\_entities` in Django 3.0 [\#70](https://github.com/browniebroke/django-codemod/pull/70) ([browniebroke](https://github.com/browniebroke))
