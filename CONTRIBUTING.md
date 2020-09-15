@@ -90,7 +90,7 @@ for local development.
     $ git push origin name-of-your-bugfix-or-feature
     ```
     
-    Note: the commit message should follow [the Angular commit guidelines](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#commits), this is to enable the automation of releases. We run [`commitlint` on CI](https://github.com/marketplace/actions/commit-linter) which will validate the commit messages.
+    Note: the commit message should follow [the conventional commits guidelines](https://www.conventionalcommits.org), this is to enable the automation of releases. We run [`commitlint` on CI](https://github.com/marketplace/actions/commit-linter) which will validate the commit messages.
 
 7.  Submit a pull request through the GitHub website.
 

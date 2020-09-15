@@ -1,4 +1,5 @@
-# Make sure commit messages follow the Angular commit convention
+# Make sure commit messages follow the conventional commits convention:
+# https://www.conventionalcommits.org
 
 name: Lint Commit Messages
 on: [push]
