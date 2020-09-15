@@ -17,6 +17,7 @@ from .http import (
 from .lru_cache import LRUCacheTransformer
 from .models import ModelsPermalinkTransformer, OnDeleteTransformer
 from .os_utils import AbsPathTransformer
+from .paginator import QuerySetPaginatorTransformer
 from .shortcuts import RenderToResponseTransformer
 from .timezone import FixedOffsetTransformer
 from .translations import (
@@ -43,6 +44,7 @@ __all__ = (
     "LRUCacheTransformer",
     "ModelsPermalinkTransformer",
     "OnDeleteTransformer",
+    "QuerySetPaginatorTransformer",
     "RenderToResponseTransformer",
     "SmartTextTransformer",
     "UGetTextLazyTransformer",
