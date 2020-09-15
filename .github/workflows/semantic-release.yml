@@ -6,11 +6,6 @@ on:
       - master
 
 jobs:
-  # Run semantic release:
-  # - Update version in code
-  # - Create git tag
-  # - Create Github release
-  # - Publish to PyPI
   release:
     runs-on: ubuntu-latest
 
@@ -19,41 +14,39 @@ jobs:
       with:
         fetch-depth: 0
 
+    # Run semantic release:
+    # - Update version in code
+    # - Create git tag
+    # - Create Github release
+    # - Publish to PyPI
     - name: Python Semantic Release
       uses: relekang/python-semantic-release@v7.2.4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         pypi_token: ${{ secrets.PYPI_TOKEN }}
 
-  # Generates the changelog file in the documentation based on the merged pull requests
-  # See more at: https://github.com/heinrichreimer/action-github-changelog-generator
-  generate_changelog_file:
-    needs: release
-    runs-on: ubuntu-latest
+    # Generates the changelog file in the documentation based on the merged pull requests
+    # See more at: https://github.com/heinrichreimer/action-github-changelog-generator
+    - name: Generate changelog
+      uses: browniebroke/action-github-changelog-generator@main
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        author: true
+        unreleased: true
+        issues: false
+        pullRequests: true
+        prWoLabels: false
+        compareLink: true
+        excludeLabels: automation,dependencies,nochangelog
+        breakingLabel: '### 💥 Breaking Changes:'
+        deprecatedLabel: '### ⚠️ Deprecations:'
+        enhancementLabel: '### 🚀 Enhancements:'
+        bugsLabel: '### 🐛 Bug Fixes:'
+        removedLabel: '### 🔥 Removals:'
+        addSections: '{"documentation":{"prefix":"### 📖 Documentation updates:","labels":["documentation"]},"tests":{"prefix":"### ✅ Testing:","labels":["tests"]}}'
 
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Generate changelog
-        uses: browniebroke/action-github-changelog-generator@main
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          author: true
-          unreleased: true
-          issues: false
-          pullRequests: true
-          prWoLabels: false
-          compareLink: true
-          excludeLabels: automation,dependencies,nochangelog
-          breakingLabel: '### 💥 Breaking Changes:'
-          deprecatedLabel: '### ⚠️ Deprecations:'
-          enhancementLabel: '### 🚀 Enhancements:'
-          bugsLabel: '### 🐛 Bug Fixes:'
-          removedLabel: '### 🔥 Removals:'
-          addSections: '{"documentation":{"prefix":"### 📖 Documentation updates:","labels":["documentation"]},"tests":{"prefix":"### ✅ Testing:","labels":["tests"]}}'
-
-      - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: Update Changelog
-          file_pattern: CHANGELOG.md
+    - name: Commit changes
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: Update Changelog
+        file_pattern: CHANGELOG.md
