@@ -1,5 +1,13 @@
 # Changelog
 
+## [Unreleased](https://github.com/browniebroke/django-codemod/tree/HEAD)
+
+[Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.13.1...HEAD)
+
+### ✅ Testing:
+
+- Use semantic release to publish [\#195](https://github.com/browniebroke/django-codemod/pull/195) ([browniebroke](https://github.com/browniebroke))
+
 ## [v0.13.1](https://github.com/browniebroke/django-codemod/tree/v0.13.1) (2020-09-14)
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.13.0...v0.13.1)
@@ -32,6 +40,10 @@
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.10.1...v0.11.0)
 
+### 🚀 Enhancements:
+
+- Add module rename support and URLResolversTransformer [\#123](https://github.com/browniebroke/django-codemod/pull/123) ([jayvdb](https://github.com/jayvdb))
+
 ## [v0.10.1](https://github.com/browniebroke/django-codemod/tree/v0.10.1) (2020-07-17)
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.10.0...v0.10.1)
@@ -51,7 +63,6 @@
 
 ### 🚀 Enhancements:
 
-- Add module rename support and URLResolversTransformer [\#123](https://github.com/browniebroke/django-codemod/pull/123) ([jayvdb](https://github.com/jayvdb))
 - Add support for adding `on\_delete` for `ForeignKey` and `OneToOneField` [\#117](https://github.com/browniebroke/django-codemod/pull/117) ([cvanderkolk](https://github.com/cvanderkolk))
 
 ### 🐛 Bug Fixes:
@@ -61,6 +72,7 @@
 ### ✅ Testing:
 
 - Move CODECOV\_TOKEN from cmd line option to environment [\#118](https://github.com/browniebroke/django-codemod/pull/118) ([browniebroke](https://github.com/browniebroke))
+- Use codecov to upload coverage data cross-platform [\#105](https://github.com/browniebroke/django-codemod/pull/105) ([browniebroke](https://github.com/browniebroke))
 
 ## [v0](https://github.com/browniebroke/django-codemod/tree/v0) (2020-06-18)
 
@@ -86,7 +98,6 @@
 
 ### ✅ Testing:
 
-- Use codecov to upload coverage data cross-platform [\#105](https://github.com/browniebroke/django-codemod/pull/105) ([browniebroke](https://github.com/browniebroke))
 - Remove Travis CI [\#103](https://github.com/browniebroke/django-codemod/pull/103) ([browniebroke](https://github.com/browniebroke))
 
 ## [v0.8.1](https://github.com/browniebroke/django-codemod/tree/v0.8.1) (2020-06-07)
