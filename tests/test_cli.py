@@ -196,8 +196,13 @@ def test_deprecated_in_mapping():
             "URLTransformer",
             "UnescapeEntitiesTransformer",
         ],
-        (2, 2): ["FixedOffsetTransformer"],
-        (2, 1): ["InlineHasAddPermissionsTransformer"],
+        (2, 2): [
+            "FixedOffsetTransformer",
+            "QuerySetPaginatorTransformer",
+        ],
+        (2, 1): [
+            "InlineHasAddPermissionsTransformer",
+        ],
         (2, 0): [
             "AbsPathTransformer",
             "AvailableAttrsTransformer",
@@ -206,9 +211,15 @@ def test_deprecated_in_mapping():
             "RenderToResponseTransformer",
             "UnicodeCompatibleTransformer",
         ],
-        (1, 11): ["ModelsPermalinkTransformer"],
-        (1, 10): ["URLResolversTransformer"],
-        (1, 9): ["OnDeleteTransformer"],
+        (1, 11): [
+            "ModelsPermalinkTransformer",
+        ],
+        (1, 10): [
+            "URLResolversTransformer",
+        ],
+        (1, 9): [
+            "OnDeleteTransformer",
+        ],
     }
 
 
@@ -231,7 +242,10 @@ def test_removed_in_mapping():
             "URLTransformer",
             "UnescapeEntitiesTransformer",
         ],
-        (3, 1): ["FixedOffsetTransformer"],
+        (3, 1): [
+            "FixedOffsetTransformer",
+            "QuerySetPaginatorTransformer",
+        ],
         (3, 0): [
             "AbsPathTransformer",
             "AvailableAttrsTransformer",
@@ -241,8 +255,13 @@ def test_removed_in_mapping():
             "RenderToResponseTransformer",
             "UnicodeCompatibleTransformer",
         ],
-        (2, 1): ["ModelsPermalinkTransformer"],
-        (2, 0): ["OnDeleteTransformer", "URLResolversTransformer"],
+        (2, 1): [
+            "ModelsPermalinkTransformer",
+        ],
+        (2, 0): [
+            "OnDeleteTransformer",
+            "URLResolversTransformer",
+        ],
     }
 
 
