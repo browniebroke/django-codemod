@@ -24,24 +24,9 @@ jobs:
         pip install -r requirements.txt
         pip install .
 
-
-    # Run bumpversion:
-    # - Update version in code
-    # - Create the git tag
-    # - Push changes back to the repo
-    - name: Config git
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
+    # Run bumpversion to update version in code and create git tag
     - name: Bumpversion
       run: bump2version ${{ github.event.inputs.part }}
-    - name: Push
-      uses: ad-m/github-push-action@v0.6.0
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: master
-        tags: true
-
 
     # Upload release to PyPI
     - name: Build packages
@@ -49,6 +34,17 @@ jobs:
     - name: Upload packages
       run: twine upload -u __token__ -p ${{ secrets.PYPI_TOKEN }} dist/*
 
+    # Commit and push back changes
+    - name: Config git
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+    - name: Push
+      uses: ad-m/github-push-action@v0.6.0
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: master
+        tags: true
 
     # Draft Github release from merged pull requests
     # See more at: https://github.com/release-drafter/release-drafter
