@@ -18,6 +18,10 @@ from .lru_cache import LRUCacheTransformer
 from .models import ModelsPermalinkTransformer, OnDeleteTransformer
 from .os_utils import AbsPathTransformer
 from .paginator import QuerySetPaginatorTransformer
+from .postgres_fields import (
+    FloatRangeFormFieldTransformer,
+    FloatRangeModelFieldTransformer,
+)
 from .shortcuts import RenderToResponseTransformer
 from .timezone import FixedOffsetTransformer
 from .translations import (
@@ -34,6 +38,8 @@ __all__ = (
     "AvailableAttrsTransformer",
     "ContextDecoratorTransformer",
     "FixedOffsetTransformer",
+    "FloatRangeFormFieldTransformer",
+    "FloatRangeModelFieldTransformer",
     "ForceTextTransformer",
     "HttpUrlQuotePlusTransformer",
     "HttpUrlQuoteTransformer",

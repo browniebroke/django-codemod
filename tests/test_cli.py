@@ -198,6 +198,8 @@ def test_deprecated_in_mapping():
         ],
         (2, 2): [
             "FixedOffsetTransformer",
+            "FloatRangeFormFieldTransformer",
+            "FloatRangeModelFieldTransformer",
             "QuerySetPaginatorTransformer",
         ],
         (2, 1): [
@@ -244,6 +246,8 @@ def test_removed_in_mapping():
         ],
         (3, 1): [
             "FixedOffsetTransformer",
+            "FloatRangeFormFieldTransformer",
+            "FloatRangeModelFieldTransformer",
             "QuerySetPaginatorTransformer",
         ],
         (3, 0): [
