@@ -51,5 +51,5 @@ jobs:
     - name: Commit changes
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
-        commit_message: 'docs: update Changelog'
+        commit_message: 'chore: update changelog'
         file_pattern: CHANGELOG.md
