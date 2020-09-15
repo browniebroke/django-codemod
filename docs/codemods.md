@@ -49,6 +49,13 @@ Applied by passing the `--removed-in 3.0` or `--deprecated-in 2.1` option:
 
 -   Add the `obj` argument to `InlineModelAdmin.has_add_permission()`.
 
+## Removed in Django 3.1
+
+Applied by passing the `--removed-in 3.1` or `--deprecated-in 2.2` option:
+
+-   Replace `django.utils.timezone.FixedOffset` by `datetime.timezone`.
+-   Replace `django.core.paginator.QuerySetPaginator` class by `Paginator`.
+
 ## Removed in Django 4.0
 
 Applied by passing the `--removed-in 4.0` or `--deprecated-in 3.0` option:
