@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.16.0](https://github.com/browniebroke/django-codemod/tree/v0.16.0) (2020-09-15)
+
+[Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.15.0...v0.16.0)
+
+### 🚀 Enhancements:
+
+- Add visitor to replace usages of postgres' `FloatRangeFormField` [\#198](https://github.com/browniebroke/django-codemod/pull/198) ([browniebroke](https://github.com/browniebroke))
 
 ## [v0.15.0](https://github.com/browniebroke/django-codemod/tree/v0.15.0) (2020-09-15)
 
@@ -37,6 +44,10 @@
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.13.0...v0.13.1)
 
+### 🐛 Bug Fixes:
+
+- fix\(packaging\): Python wheels are not for Python 2 [\#193](https://github.com/browniebroke/django-codemod/pull/193) ([browniebroke](https://github.com/browniebroke))
+
 ## [v0.13.0](https://github.com/browniebroke/django-codemod/tree/v0.13.0) (2020-07-26)
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.12.0...v0.13.0)
@@ -73,10 +84,6 @@
 
 - Rename constants for numerical sorting [\#139](https://github.com/browniebroke/django-codemod/pull/139) ([jayvdb](https://github.com/jayvdb))
 
-### 🐛 Bug Fixes:
-
-- fix\(packaging\): Python wheels are not for Python 2 [\#193](https://github.com/browniebroke/django-codemod/pull/193) ([browniebroke](https://github.com/browniebroke))
-
 ### ✅ Testing:
 
 - Split tests and docs requirements [\#131](https://github.com/browniebroke/django-codemod/pull/131) ([browniebroke](https://github.com/browniebroke))
@@ -109,6 +116,7 @@
 ### 🚀 Enhancements:
 
 - Handle deprecation of `@models.permalink` decorator in Django 1.11 [\#87](https://github.com/browniebroke/django-codemod/pull/87) ([browniebroke](https://github.com/browniebroke))
+- Resolve deprecation of `django.utils.decorators.available\_attrs` in Django 2.0 [\#85](https://github.com/browniebroke/django-codemod/pull/85) ([browniebroke](https://github.com/browniebroke))
 - Resolve deprecation of `django.utils.decorators.ContextDecorator` in Django 2.0 [\#84](https://github.com/browniebroke/django-codemod/pull/84) ([browniebroke](https://github.com/browniebroke))
 
 ### 🔥 Removals:
@@ -146,7 +154,6 @@
 
 ### 🚀 Enhancements:
 
-- Resolve deprecation of `django.utils.decorators.available\_attrs` in Django 2.0 [\#85](https://github.com/browniebroke/django-codemod/pull/85) ([browniebroke](https://github.com/browniebroke))
 - Resolve some removed private Python 2 compatibility APIs [\#74](https://github.com/browniebroke/django-codemod/pull/74) ([browniebroke](https://github.com/browniebroke))
 - Resolve deprecation of `django.utils.http.is\_safe\_url` in Django 3.0 [\#72](https://github.com/browniebroke/django-codemod/pull/72) ([browniebroke](https://github.com/browniebroke))
 - Resolve deprecation of `django.utils.text.unescape\_entities` in Django 3.0 [\#70](https://github.com/browniebroke/django-codemod/pull/70) ([browniebroke](https://github.com/browniebroke))
@@ -191,7 +198,6 @@
 - Fix InlineModelAdmin transformer with multiple base classes [\#46](https://github.com/browniebroke/django-codemod/pull/46) ([browniebroke](https://github.com/browniebroke))
 - Fix commands non-findable by libCST [\#44](https://github.com/browniebroke/django-codemod/pull/44) ([browniebroke](https://github.com/browniebroke))
 - Fix bug with trailing comma when removed import is the last one [\#39](https://github.com/browniebroke/django-codemod/pull/39) ([browniebroke](https://github.com/browniebroke))
-- Fix bug with lost alias when 'import as' is used [\#38](https://github.com/browniebroke/django-codemod/pull/38) ([browniebroke](https://github.com/browniebroke))
 
 ### 🔥 Removals:
 
@@ -211,6 +217,10 @@
 - New commands to fix all deprecations for a given version of Django [\#37](https://github.com/browniebroke/django-codemod/pull/37) ([browniebroke](https://github.com/browniebroke))
 - Refactor & move main logic from commands to visitors [\#36](https://github.com/browniebroke/django-codemod/pull/36) ([browniebroke](https://github.com/browniebroke))
 - Refactor BaseSimpleFuncRename to simplify implementing new codemod [\#32](https://github.com/browniebroke/django-codemod/pull/32) ([browniebroke](https://github.com/browniebroke))
+
+### 🐛 Bug Fixes:
+
+- Fix bug with lost alias when 'import as' is used [\#38](https://github.com/browniebroke/django-codemod/pull/38) ([browniebroke](https://github.com/browniebroke))
 
 ### 📖 Documentation updates:
 
