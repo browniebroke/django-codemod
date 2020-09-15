@@ -55,6 +55,8 @@ Applied by passing the `--removed-in 3.1` or `--deprecated-in 2.2` option:
 
 -   Replace `django.utils.timezone.FixedOffset` by `datetime.timezone`.
 -   Replace `django.core.paginator.QuerySetPaginator` class by `Paginator`.
+-   Replace the `FloatRangeField` model and form fields in 
+    `django.contrib.postgres` by `DecimalRangeField`.
 
 ## Removed in Django 4.0
 
