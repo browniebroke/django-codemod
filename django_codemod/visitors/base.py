@@ -71,6 +71,14 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
         return self.context.scratch.get(self.ctx_key_imported_as, None)
 
     @property
+    def ctx_key_is_name_called(self):
+        return f"{self.rename_from}-is_name_called"
+
+    @property
+    def entity_is_name_called(self):
+        return self.context.scratch.get(self.ctx_key_is_name_called, False)
+
+    @property
     def is_imported_with_old_name(self):
         is_imported = self.ctx_key_imported_as in self.context.scratch
         return is_imported and not self.entity_imported_as
@@ -122,6 +130,25 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
             obj=self.new_name or evaluated_name,
             asname=as_name,
         )
+
+    def visit_Call(self, node: Call) -> Optional[bool]:
+        if self.is_imported_with_old_name and m.matches(
+            node, m.Call(func=m.Name(self.old_name))
+        ):
+            self.context.scratch[self.ctx_key_is_name_called] = True
+
+    def leave_Call(self, original_node: Call, updated_node: Call) -> BaseExpression:
+        self.context.scratch.pop(self.ctx_key_is_name_called, None)
+        return super().leave_Call(original_node, updated_node)
+
+    def leave_Name(self, original_node: Name, updated_node: Name) -> BaseExpression:
+        if (
+            self.is_imported_with_old_name
+            and not self.entity_is_name_called
+            and m.matches(updated_node, m.Name(value=self.old_name))
+        ):
+            return updated_node.with_changes(value=self.new_name)
+        return super().leave_Name(original_node, updated_node)
 
 
 class BaseModuleRenameTransformer(BaseRenameTransformer, ABC):

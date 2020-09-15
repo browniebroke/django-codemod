@@ -59,6 +59,20 @@ class TestFuncRenameTransformer(BaseVisitorTest):
         """
         self.assertCodemod(before, after)
 
+    def test_reference_without_call(self) -> None:
+        """Replace reference of the function even is it's not called."""
+        before = """
+            from django.dummy.module import func
+
+            new_func = func
+        """
+        after = """
+            from django.dummy.module import better_func
+
+            new_func = better_func
+        """
+        self.assertCodemod(before, after)
+
     def test_already_imported(self) -> None:
         """Function to modify is already imported with an alias."""
         before = """
