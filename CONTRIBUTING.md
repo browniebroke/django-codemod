@@ -86,9 +86,11 @@ for local development.
 
     ```shell
     $ git add .
-    $ git commit -m "Your detailed description of your changes."
+    $ git commit -m "feat(something): your detailed description of your changes"
     $ git push origin name-of-your-bugfix-or-feature
     ```
+    
+    Note: the commit message should follow [the Angular commit guidelines](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#commits), this is to enable the automation of releases. We run [`commitlint` on CI](https://github.com/marketplace/actions/commit-linter) which will validate the commit messages.
 
 7.  Submit a pull request through the GitHub website.
 
@@ -102,10 +104,4 @@ Before you submit a pull request, check that it meets these guidelines:
 
 ## Deploying
 
-A reminder for maintainers on how to publish a new version to PyPI. Before starting, make sure all builds are completed. 
-
-Trigger the `release` workflow with the version part you want to bump as argument (major, minor or patch). This will:
-
-- Update the version in the code, create the git tag and push it.
-- Create a release in GitHub for the tag that was just created.
-- Build the wheel and source distribution and publish them to PyPI.
+The deployment should be automated on each merge, based on [the commit logs](https://python-semantic-release.readthedocs.io/en/latest/commit-log-parsing.html#commit-log-parsing). This is done by [python-semantic-release](https://python-semantic-release.readthedocs.io/en/latest/index.html) via a Github action.

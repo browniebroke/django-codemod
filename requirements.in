@@ -1,5 +1,4 @@
 black
-bump2version
 coverage
 flake8
 flake8-isort
@@ -9,7 +8,6 @@ pytest-cov
 pytest-runner
 pytest-mock
 pytest
+python-semantic-release
 pyupgrade
 tox
-twine
-wheel
