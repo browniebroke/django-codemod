@@ -1,0 +1,13 @@
+# Make sure commit messages follow the Angular commit convention
+
+name: Lint Commit Messages
+on: [push]
+
+jobs:
+  commitlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: wagoid/commitlint-github-action@v2
