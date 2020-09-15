@@ -104,4 +104,4 @@ Before you submit a pull request, check that it meets these guidelines:
 
 ## Deploying
 
-The deployment should be automated on each merge, based on [the commit logs](https://python-semantic-release.readthedocs.io/en/latest/commit-log-parsing.html#commit-log-parsing). This is done by [python-semantic-release](https://python-semantic-release.readthedocs.io/en/latest/index.html) via a Github action.
+The deployment should be automated and can be triggered from the Semantic Release workflow in Github. The next version will be based on [the commit logs](https://python-semantic-release.readthedocs.io/en/latest/commit-log-parsing.html#commit-log-parsing). This is done by [python-semantic-release](https://python-semantic-release.readthedocs.io/en/latest/index.html) via a Github action.
