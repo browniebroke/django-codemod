@@ -1,8 +1,12 @@
 # Changelog
 
-## [Unreleased](https://github.com/browniebroke/django-codemod/tree/HEAD)
+## [v0.13.3](https://github.com/browniebroke/django-codemod/tree/v0.13.3) (2020-09-15)
 
-[Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.13.1...HEAD)
+[Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.13.2...v0.13.3)
+
+## [v0.13.2](https://github.com/browniebroke/django-codemod/tree/v0.13.2) (2020-09-15)
+
+[Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.13.1...v0.13.2)
 
 ### ✅ Testing:
 
@@ -72,7 +76,6 @@
 ### ✅ Testing:
 
 - Move CODECOV\_TOKEN from cmd line option to environment [\#118](https://github.com/browniebroke/django-codemod/pull/118) ([browniebroke](https://github.com/browniebroke))
-- Use codecov to upload coverage data cross-platform [\#105](https://github.com/browniebroke/django-codemod/pull/105) ([browniebroke](https://github.com/browniebroke))
 
 ## [v0](https://github.com/browniebroke/django-codemod/tree/v0) (2020-06-18)
 
@@ -98,6 +101,7 @@
 
 ### ✅ Testing:
 
+- Use codecov to upload coverage data cross-platform [\#105](https://github.com/browniebroke/django-codemod/pull/105) ([browniebroke](https://github.com/browniebroke))
 - Remove Travis CI [\#103](https://github.com/browniebroke/django-codemod/pull/103) ([browniebroke](https://github.com/browniebroke))
 
 ## [v0.8.1](https://github.com/browniebroke/django-codemod/tree/v0.8.1) (2020-06-07)
