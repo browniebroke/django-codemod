@@ -8,6 +8,7 @@ from .encoding import (
 )
 from .html import UnescapeEntitiesTransformer
 from .http import (
+    HttpRequestXReadLinesTransformer,
     HttpUrlQuotePlusTransformer,
     HttpUrlQuoteTransformer,
     HttpUrlUnQuotePlusTransformer,
@@ -41,6 +42,7 @@ __all__ = (
     "FloatRangeFormFieldTransformer",
     "FloatRangeModelFieldTransformer",
     "ForceTextTransformer",
+    "HttpRequestXReadLinesTransformer",
     "HttpUrlQuotePlusTransformer",
     "HttpUrlQuoteTransformer",
     "HttpUrlUnQuotePlusTransformer",
