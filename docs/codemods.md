@@ -33,17 +33,24 @@ Applied by passing the `--removed-in 3.0` or `--deprecated-in 2.0` option:
 
 -   Replaces `render_to_response()` by `render()` and add `request=None`
     as the first argument of `render()`.
--   Replaces `django.utils.lru_cache.lru_cache()` by the function it\'s
+-   Replaces `django.utils.lru_cache.lru_cache()` by the function it's
     an alias of: `functools.lru_cache()`.
--   Replaces `django.utils._os.abspathu()` by the function it\'s an
+-   Replaces `django.utils._os.abspathu()` by the function it's an
     alias of: `os.path.abspath()`.
 -   Replaces `django.utils.encoding.python_2_unicode_compatible()` by
-    the function it\'s an alias of: `six.python_2_unicode_compatible()`.
+    the function it's an alias of: `six.python_2_unicode_compatible()`.
 -   Replaces `django.utils.decorators.ContextDecorator` by the class
-    from the standard library it\'s an alias to
+    from the standard library it's an alias to
     `contextlib.ContextDecorator`.
 -   Replace `django.utils.decorators.available_attrs()` by its return
     value `functools.WRAPPER_ASSIGNMENTS`.
+-   Replace `HttpRequest.xreadlines()` by iterating over the request.
+
+    This codemodder is quite conservative and will only replace function 
+    calls on variables or attributes called `request` or `req`.
+    
+    For example, it will fix `request.xreadlines()` or `self.request.xreadlines()` 
+    but not `r.xreadlines()`.
 
 Applied by passing the `--removed-in 3.0` or `--deprecated-in 2.1` option:
 

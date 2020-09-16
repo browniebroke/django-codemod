@@ -1,4 +1,7 @@
+from parameterized import parameterized
+
 from django_codemod.visitors import (
+    HttpRequestXReadLinesTransformer,
     HttpUrlQuotePlusTransformer,
     HttpUrlQuoteTransformer,
     HttpUrlUnQuotePlusTransformer,
@@ -94,5 +97,66 @@ class TestIsSafeUrlTransformer(BaseVisitorTest):
             from django.utils.http import url_has_allowed_host_and_scheme
 
             result = url_has_allowed_host_and_scheme('http://test.com/some-path', None)
+        """
+        self.assertCodemod(before, after)
+
+
+class TestHttpRequestXReadLinesTransformer(BaseVisitorTest):
+
+    transformer = HttpRequestXReadLinesTransformer
+
+    def test_noop_wrong_name(self) -> None:
+        """Don't replace calls for name other than `request` or `req`."""
+        before = after = """
+            for line in r.xreadlines():
+                print(line)
+        """
+        self.assertCodemod(before, after)
+
+    @parameterized.expand(["req", "request"])
+    def test_simple_substitution(self, variable_name) -> None:
+        before = f"""
+            for line in {variable_name}.xreadlines():
+                print(line)
+        """
+        after = f"""
+            for line in {variable_name}:
+                print(line)
+        """
+        self.assertCodemod(before, after)
+
+    @parameterized.expand(["req", "request"])
+    def test_substitution_class_attribute(self, attribute_name) -> None:
+        before = f"""
+            for line in self.{attribute_name}.xreadlines():
+                print(line)
+        """
+        after = f"""
+            for line in self.{attribute_name}:
+                print(line)
+        """
+        self.assertCodemod(before, after)
+
+    @parameterized.expand(["req", "request"])
+    def test_substitution_view_attribute(self, attribute_name) -> None:
+        before = f"""
+            for line in view.{attribute_name}.xreadlines():
+                print(line)
+        """
+        after = f"""
+            for line in view.{attribute_name}:
+                print(line)
+        """
+        self.assertCodemod(before, after)
+
+    @parameterized.expand(["req", "request"])
+    def test_substitution_nested_attribute(self, attribute_name) -> None:
+        before = f"""
+            for line in self.view.{attribute_name}.xreadlines():
+                print(line)
+        """
+        after = f"""
+            for line in self.view.{attribute_name}:
+                print(line)
         """
         self.assertCodemod(before, after)

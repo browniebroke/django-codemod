@@ -1,5 +1,11 @@
-from django_codemod.constants import DJANGO_3_0, DJANGO_4_0
-from django_codemod.visitors.base import BaseFuncRenameTransformer
+from libcst import BaseExpression, Call
+from libcst import matchers as m
+
+from django_codemod.constants import DJANGO_2_0, DJANGO_3_0, DJANGO_4_0
+from django_codemod.visitors.base import (
+    BaseDjCodemodTransformer,
+    BaseFuncRenameTransformer,
+)
 
 
 class HttpUrlQuoteTransformer(BaseFuncRenameTransformer):
@@ -45,3 +51,30 @@ class IsSafeUrlTransformer(BaseFuncRenameTransformer):
     removed_in = DJANGO_4_0
     rename_from = "django.utils.http.is_safe_url"
     rename_to = "django.utils.http.url_has_allowed_host_and_scheme"
+
+
+class HttpRequestXReadLinesTransformer(BaseDjCodemodTransformer):
+    """Replace `HttpRequest.xreadlines()` by iterating over the request."""
+
+    deprecated_in = DJANGO_2_0
+    removed_in = DJANGO_3_0
+
+    # This should be conservative and only apply changes to:
+    # - variables called `request`/`req`
+    # - `request`/`req` attributes (e.g `self.request`/`view.req`...)
+    matcher = m.Call(
+        func=m.Attribute(
+            value=m.OneOf(
+                m.Name(value="request"),
+                m.Name(value="req"),
+                m.Attribute(attr=m.Name(value="request")),
+                m.Attribute(attr=m.Name(value="req")),
+            ),
+            attr=m.Name(value="xreadlines"),
+        )
+    )
+
+    def leave_Call(self, original_node: Call, updated_node: Call) -> BaseExpression:
+        if m.matches(updated_node, self.matcher):
+            return updated_node.func.value
+        return super().leave_Call(original_node, updated_node)
