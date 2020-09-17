@@ -29,7 +29,7 @@ A tool to help upgrade Django projects to newer version of the framework by auto
 
 ## Installation
 
-Install this via pip (or your favourite installer):
+Install via pip (or your favourite installer):
 
 `pip install django-codemod`
 
