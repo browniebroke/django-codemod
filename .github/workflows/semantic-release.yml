@@ -13,43 +13,13 @@ jobs:
         fetch-depth: 0
 
     # Run semantic release:
+    # - Update CHANGELOG.md
     # - Update version in code
     # - Create git tag
     # - Create Github release
     # - Publish to PyPI
     - name: Python Semantic Release
-      uses: relekang/python-semantic-release@v7.2.5
+      uses: browniebroke/python-semantic-release@feat/changelog-md-file
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         pypi_token: ${{ secrets.PYPI_TOKEN }}
-
-    # Generates the changelog file in the documentation based on the merged pull requests
-    # See more at: https://github.com/heinrichreimer/action-github-changelog-generator
-    - name: Generate changelog
-      uses: browniebroke/action-github-changelog-generator@main
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        author: true
-        unreleased: true
-        issues: false
-        pullRequests: true
-        prWoLabels: false
-        compareLink: true
-        excludeLabels: automation,dependencies,nochangelog
-        breakingLabel: '### 💥 Breaking Changes:'
-        deprecatedLabel: '### ⚠️ Deprecations:'
-        enhancementLabel: '### 🚀 Enhancements:'
-        bugsLabel: '### 🐛 Bug Fixes:'
-        removedLabel: '### 🔥 Removals:'
-        addSections: '{"documentation":{"prefix":"### 📖 Documentation updates:","labels":["documentation"]},"tests":{"prefix":"### ✅ Testing:","labels":["tests"]}}'
-
-    # Workaround for an error happening at the next step:
-    # `fatal: could not open '.git/COMMIT_EDITMSG': Permission denied`
-    # https://stackoverflow.com/a/26596817/2261637
-    - run: rm -f .git/COMMIT_EDITMSG
-
-    - name: Commit changes
-      uses: stefanzweifel/git-auto-commit-action@v4
-      with:
-        commit_message: 'chore: update changelog'
-        file_pattern: CHANGELOG.md
