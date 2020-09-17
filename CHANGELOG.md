@@ -2,6 +2,9 @@
 
 <!--next-version-placeholder-->
 
+## v0.17.1
+
+
 ## [v0.17.0](https://github.com/browniebroke/django-codemod/tree/v0.17.0) (2020-09-16)
 
 [Full Changelog](https://github.com/browniebroke/django-codemod/compare/v0.16.0...v0.17.0)
