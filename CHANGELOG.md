@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.17.5 (2020-09-17)
+### Fix
+* More version bump to test deployment ([`ece3df2`](https://github.com/browniebroke/django-codemod/commit/ece3df2e10aeeb3de3b134623b53aeda01df1786))
+
 ## v0.17.4 (2020-09-17)
 ### Fix
 * No actual changes, version bump to test deployment ([d0824c2](https://github.com/browniebroke/django-codemod/commit/d0824c2c09a4634d0afa7d3719ab660c95399b6e))
