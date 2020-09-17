@@ -9,12 +9,14 @@ attrs==19.3.0             # via pytest
 black==20.8b1             # via -r requirements.in
 bleach==3.1.5             # via readme-renderer
 certifi==2020.4.5.2       # via requests
+cffi==1.14.2              # via cryptography
 cfgv==3.1.0               # via pre-commit
 chardet==3.0.4            # via requests
 click-log==0.3.2          # via python-semantic-release
 click==7.1.2              # via black, click-log, python-semantic-release
 colorama==0.4.3           # via twine
 coverage==5.3             # via -r requirements.in, pytest-cov
+cryptography==3.1         # via secretstorage
 distlib==0.3.0            # via virtualenv
 docutils==0.16            # via readme-renderer
 filelock==3.0.12          # via tox, virtualenv
@@ -24,10 +26,10 @@ gitdb==4.0.5              # via gitpython
 gitpython==3.1.8          # via python-semantic-release
 identify==1.4.19          # via pre-commit
 idna==2.9                 # via requests
-importlib-metadata==1.7.0  # via flake8, keyring, pluggy, pre-commit, pytest, tox, twine, virtualenv
 iniconfig==1.0.0          # via pytest
 invoke==1.4.1             # via python-semantic-release
 isort==4.3.21             # via flake8-isort
+jeepney==0.4.3            # via keyring, secretstorage
 keyring==21.2.1           # via twine
 mccabe==0.6.1             # via flake8
 more-itertools==8.3.0     # via pytest
@@ -41,6 +43,7 @@ pluggy==0.13.1            # via pytest, tox
 pre-commit==2.7.1         # via -r requirements.in
 py==1.9.0                 # via pytest, tox
 pycodestyle==2.6.0        # via flake8
+pycparser==2.20           # via cffi
 pyflakes==2.2.0           # via flake8
 pygments==2.6.1           # via readme-renderer
 pyparsing==2.4.7          # via packaging
@@ -49,7 +52,7 @@ pytest-mock==3.3.1        # via -r requirements.in
 pytest-runner==5.2        # via -r requirements.in
 pytest==6.0.2             # via -r requirements.in, pytest-cov, pytest-mock
 python-gitlab==1.15.0     # via python-semantic-release
-python-semantic-release==7.2.4  # via -r requirements.in
+python-semantic-release==7.2.5  # via -r requirements.in
 pyupgrade==2.7.2          # via -r requirements.in
 pyyaml==5.3.1             # via pre-commit
 readme-renderer==26.0     # via twine
@@ -57,8 +60,9 @@ regex==2020.6.8           # via black
 requests-toolbelt==0.9.1  # via twine
 requests==2.23.0          # via python-gitlab, python-semantic-release, requests-toolbelt, twine
 rfc3986==1.4.0            # via twine
+secretstorage==3.1.2      # via keyring
 semver==2.10.2            # via python-semantic-release
-six==1.15.0               # via bleach, packaging, python-gitlab, readme-renderer, tox, virtualenv
+six==1.15.0               # via bleach, cryptography, packaging, python-gitlab, readme-renderer, tox, virtualenv
 smmap==3.0.4              # via gitdb
 testfixtures==6.14.1      # via flake8-isort
 tokenize-rt==4.0.0        # via pyupgrade
@@ -72,7 +76,6 @@ urllib3==1.25.9           # via requests
 virtualenv==20.0.23       # via pre-commit, tox
 webencodings==0.5.1       # via bleach
 wheel==0.35.1             # via python-semantic-release
-zipp==3.1.0               # via importlib-metadata
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
