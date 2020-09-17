@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v0.17.2 (2020-09-17)
+### Fix
+* No actual changes, version bump to test deployment (10e16e34dea4762af94fd911434307e505580a38)
+
+### Documentation
+* Update changelog (98734602da59edbf485d87123902414981f5e952)
+
 ## [v0.17.1](https://github.com/browniebroke/django-codemod/tree/v0.17.1) (2020-09-17)
 
 - No actual changes, just a minor version bump to test new deployment.
