@@ -26,7 +26,7 @@ jobs:
       with:
         token: ${{ secrets.CPR_GITHUB_TOKEN }}
         branch: update/pre-commit-autoupdate
-        title: Auto-update pre-commit hooks
-        commit-message: Auto-update pre-commit hooks
-        body: Update versions of tools in pre-commit configs to latest version
+        title: Update pre-commit hooks
+        commit-message: 'chore: update pre-commit hooks'
+        body: Update versions of tools in pre-commit configs to latest version.
         labels: dependencies
