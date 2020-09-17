@@ -58,9 +58,9 @@ This is more a just in time operation, assuming you haven't kept up to date with
 djcodemod run --removed-in 4.0 .
 ```
 
-### What happens
+### Explanations
 
-In either case, the tool will take a few minutes and apply a set of modifications to your code to fix deprecated or removed usages of Django. This should be much faster than doing it manually and much robust than a simple find & replace.
+In either case, the tool will run for a few minutes and apply a set of modifications to your code to fix deprecated or removed usages of Django. This should be much faster than doing it manually and much robust than a simple find & replace.
 
 Check out the [documentation](https://django-codemod.readthedocs.io) for more detail on usage and the full list of codemodders.
 
