@@ -12,6 +12,10 @@ repos:
     hooks:
       - id: pyupgrade
         args: [--py3-plus]
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.5.2
+    hooks:
+      - id: isort
   - repo: https://github.com/psf/black
     rev: 20.8b1
     hooks:
