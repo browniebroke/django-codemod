@@ -13,7 +13,7 @@ from .base import BaseVisitorTest
 @pytest.mark.parametrize(
     ("parts", "expected_matcher"),
     [
-        (["django"], m.Attribute(attr=m.Name("django"))),
+        (["django"], m.Name("django")),
         (
             ["django", "contrib"],
             m.Attribute(value=m.Name("django"), attr=m.Name("contrib")),

@@ -13,8 +13,7 @@ Applied by passing the `--removed-in 2.0` or `--deprecated-in 1.9` option:
 
 -   Adds the `on_delete=models.CASCADE` to all `ForeignKey` and `OneToOneField`s
     that don’t use a different option.
-
-## Removed in Django 2.0
+-   Replaces template tags decorator `assignment_tag` by `simple_tag`.
 
 Applied by passing the `--removed-in 2.0` or `--deprecated-in 1.10` option:
 
