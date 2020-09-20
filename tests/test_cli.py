@@ -223,6 +223,7 @@ def test_deprecated_in_mapping():
         (1, 9): [
             "AssignmentTagTransformer",
             "OnDeleteTransformer",
+            "SignalDisconnectWeakTransformer",
         ],
     }
 
@@ -268,6 +269,7 @@ def test_removed_in_mapping():
         (2, 0): [
             "AssignmentTagTransformer",
             "OnDeleteTransformer",
+            "SignalDisconnectWeakTransformer",
             "URLResolversTransformer",
         ],
     }

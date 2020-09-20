@@ -14,6 +14,9 @@ Applied by passing the `--removed-in 2.0` or `--deprecated-in 1.9` option:
 -   Adds the `on_delete=models.CASCADE` to all `ForeignKey` and `OneToOneField`s
     that don’t use a different option.
 -   Replaces template tags decorator `assignment_tag` by `simple_tag`.
+-   Removes the `weak` argument to `Signal.disconnect()` calls. This will only
+    apply to built-in signals (`pre_save`, `post_save`, ...) and to `disconnect()` 
+    calls with keyword arguments.
 
 Applied by passing the `--removed-in 2.0` or `--deprecated-in 1.10` option:
 
