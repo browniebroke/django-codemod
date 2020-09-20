@@ -24,6 +24,7 @@ from .postgres_fields import (
     FloatRangeModelFieldTransformer,
 )
 from .shortcuts import RenderToResponseTransformer
+from .template_tags import AssignmentTagTransformer
 from .timezone import FixedOffsetTransformer
 from .translations import (
     UGetTextLazyTransformer,
@@ -36,6 +37,7 @@ from .urls import URLTransformer
 
 __all__ = (
     "AbsPathTransformer",
+    "AssignmentTagTransformer",
     "AvailableAttrsTransformer",
     "ContextDecoratorTransformer",
     "FixedOffsetTransformer",

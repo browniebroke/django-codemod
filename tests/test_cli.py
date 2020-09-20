@@ -221,6 +221,7 @@ def test_deprecated_in_mapping():
             "URLResolversTransformer",
         ],
         (1, 9): [
+            "AssignmentTagTransformer",
             "OnDeleteTransformer",
         ],
     }
@@ -265,6 +266,7 @@ def test_removed_in_mapping():
             "ModelsPermalinkTransformer",
         ],
         (2, 0): [
+            "AssignmentTagTransformer",
             "OnDeleteTransformer",
             "URLResolversTransformer",
         ],
