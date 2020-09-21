@@ -8,6 +8,5 @@ pytest-cov
 pytest-runner
 pytest-mock
 pytest
-python-semantic-release
 pyupgrade
 tox
