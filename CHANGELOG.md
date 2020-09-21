@@ -2,6 +2,11 @@
 
 <!--next-version-placeholder-->
 
+## v0.18.0 (2020-09-21)
+### Feature
+* Remove the weak argument from Signal.disconnect() ([`ab41491`](https://github.com/browniebroke/django-codemod/commit/ab414910e3e1fa1b04af9dd200d0a07cbe65c3f3))
+* Add a transformer for assignment_tag ([`cb8afdd`](https://github.com/browniebroke/django-codemod/commit/cb8afddab1249ae3126eabdb7002ea1df6e724d3))
+
 ## v0.17.5 (2020-09-17)
 ### Fix
 * More version bump to test deployment ([`ece3df2`](https://github.com/browniebroke/django-codemod/commit/ece3df2e10aeeb3de3b134623b53aeda01df1786))
