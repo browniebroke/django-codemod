@@ -24,6 +24,7 @@ from .postgres_fields import (
     FloatRangeModelFieldTransformer,
 )
 from .shortcuts import RenderToResponseTransformer
+from .signals import SignalDisconnectWeakTransformer
 from .template_tags import AssignmentTagTransformer
 from .timezone import FixedOffsetTransformer
 from .translations import (
@@ -56,6 +57,7 @@ __all__ = (
     "OnDeleteTransformer",
     "QuerySetPaginatorTransformer",
     "RenderToResponseTransformer",
+    "SignalDisconnectWeakTransformer",
     "SmartTextTransformer",
     "UGetTextLazyTransformer",
     "UGetTextNoopTransformer",
