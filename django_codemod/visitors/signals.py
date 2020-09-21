@@ -26,6 +26,9 @@ class SignalDisconnectWeakTransformer(BaseDjCodemodTransformer):
         "pre_migrate",
         "post_migrate",
     ]
+    import_alias_matcher = m.OneOf(
+        *(m.ImportAlias(name=m.Name(signal_name)) for signal_name in builtin_signals)
+    )
 
     @property
     def disconnect_call_matchers(self) -> List[m.Call]:
@@ -44,14 +47,8 @@ class SignalDisconnectWeakTransformer(BaseDjCodemodTransformer):
     def visit_ImportFrom(self, node: ImportFrom) -> Optional[bool]:
         """Set the `Call` matcher depending on which signals are imported.."""
         if import_from_matches(node, ["django", "db", "models", "signals"]):
-            import_alias_matcher = m.OneOf(
-                *(
-                    m.ImportAlias(name=m.Name(signal_name))
-                    for signal_name in self.builtin_signals
-                )
-            )
             for import_alias in node.names:
-                if m.matches(import_alias, import_alias_matcher):
+                if m.matches(import_alias, self.import_alias_matcher):
                     # We're visiting an import statement for a built-in signal
                     # Get the actual name it's imported as (in case of import alias)
                     imported_name = (
