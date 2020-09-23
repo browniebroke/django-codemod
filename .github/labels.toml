@@ -13,6 +13,11 @@ color = "0366d6"
 name = "dependencies"
 description = "Pull requests that update a dependency file"
 
+[github_actions]
+color = "000000"
+name = "github_actions"
+description = "Update of github actions"
+
 [documentation]
 color = "1bc4a5"
 name = "documentation"
