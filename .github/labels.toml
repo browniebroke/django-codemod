@@ -72,3 +72,8 @@ description = "This will not be worked on"
 color = "c2e0c6"
 name = "discussion"
 description = "Some discussion around the project"
+
+[hacktoberfest]
+color = "ffa663"
+name = "hacktoberfest"
+description = "Good issues for Hacktoberfest"
