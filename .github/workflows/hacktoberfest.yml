@@ -1,0 +1,21 @@
+name: Hacktoberfest
+
+on:
+  schedule:
+    - cron: "0 0 * 10 *"
+  workflow_dispatch:
+    inputs:
+      revert:
+        description: 'If true label will be removed'
+        required: true
+        default: '0'
+
+jobs:
+  example:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: browniebroke/hacktoberfest-labeler-action@v1.1.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          revert: ${{ github.event.inputs.revert }}
