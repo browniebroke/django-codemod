@@ -14,11 +14,9 @@ distlib==0.3.0            # via virtualenv
 filelock==3.0.12          # via tox, virtualenv
 flake8==3.8.3             # via -r requirements.in
 identify==1.4.19          # via pre-commit
-importlib-metadata==1.7.0  # via flake8, pluggy, pre-commit, pytest, tox, virtualenv
 iniconfig==1.0.0          # via pytest
 isort==5.5.3              # via -r requirements.in
 mccabe==0.6.1             # via flake8
-more-itertools==8.3.0     # via pytest
 mypy-extensions==0.4.3    # via black
 nodeenv==1.4.0            # via pre-commit
 packaging==20.4           # via pytest, tox
@@ -33,7 +31,7 @@ pyparsing==2.4.7          # via packaging
 pytest-cov==2.10.1        # via -r requirements.in
 pytest-mock==3.3.1        # via -r requirements.in
 pytest-runner==5.2        # via -r requirements.in
-pytest==6.0.2             # via -r requirements.in, pytest-cov, pytest-mock
+pytest==6.1.0             # via -r requirements.in, pytest-cov, pytest-mock
 pyupgrade==2.7.2          # via -r requirements.in
 pyyaml==5.3.1             # via pre-commit
 regex==2020.6.8           # via black
@@ -44,4 +42,3 @@ tox==3.20.0               # via -r requirements.in
 typed-ast==1.4.1          # via black
 typing-extensions==3.7.4.3  # via black
 virtualenv==20.0.23       # via pre-commit, tox
-zipp==3.1.0               # via importlib-metadata
