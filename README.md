@@ -30,13 +30,13 @@
 
 A tool to help upgrade Django projects to newer version of the framework by automatically fixing deprecations.
 
-## Installation
+## Installation:-
 
 Install via pip (or your favourite installer):
 
 `pip install django-codemod`
 
-## Usage
+## Usage:-
 
 2 main workflow are supported:
 
@@ -61,13 +61,13 @@ This is more a just in time operation, assuming you haven't kept up to date with
 djcodemod run --removed-in 4.0 .
 ```
 
-### Explanations
+### Explanations:-
 
 In either case, the tool will run for a few minutes and apply a set of modifications to your code to fix deprecated or removed usages of Django. This should be much faster than doing it manually and much robust than a simple find & replace.
 
 Check out the [documentation](https://django-codemod.readthedocs.io) for more detail on usage and the full list of codemodders.
 
-## How it works
+## How it works:-
 
 This is based on [libCST](https://libcst.readthedocs.io/en/latest/index.html) and implements codemods for it. This is currently very limited but the aim is to add more for helping with upcoming deprecations.
 
