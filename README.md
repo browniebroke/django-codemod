@@ -1,8 +1,8 @@
 # Django Codemod
 
 <p align="center">
-  <a href="https://github.com/browniebroke/django-codemod/actions?query=workflow%3ATest">
-    <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/browniebroke/django-codemod/Test?label=Test&logo=github&style=flat-square">
+  <a href="https://github.com/browniebroke/django-codemod/actions?query=workflow%3ACI">
+    <img alt="CI Status" src="https://img.shields.io/github/workflow/status/browniebroke/django-codemod/CI?label=CI&logo=github&style=flat-square">
   </a>
   <a href="https://django-codemod.readthedocs.io">
     <img src="https://img.shields.io/readthedocs/django-codemod.svg?logo=read-the-docs&logoColor=fff&style=flat-square" alt="Documentation Status">
