@@ -12,7 +12,7 @@ click==7.1.2              # via black
 coverage==5.3             # via -r requirements.in, pytest-cov
 distlib==0.3.0            # via virtualenv
 filelock==3.0.12          # via tox, virtualenv
-flake8==3.8.3             # via -r requirements.in
+flake8==3.8.4             # via -r requirements.in
 identify==1.4.19          # via pre-commit
 iniconfig==1.0.0          # via pytest
 isort==5.5.4              # via -r requirements.in
