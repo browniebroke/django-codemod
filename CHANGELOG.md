@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v0.19.0 (2020-10-10)
+### Feature
+* Add support for Python 3.9 ([`904ba55`](https://github.com/browniebroke/django-codemod/commit/904ba5565efef38c46c3d2ed65edf694fcc1760e))
+
+### Documentation
+* Add iamshnoo as a contributor (#221) ([`4758bd6`](https://github.com/browniebroke/django-codemod/commit/4758bd6725a44d174c9d5ae65182acc5853a770d))
+
 ## v0.18.0 (2020-09-21)
 ### Feature
 * Remove the weak argument from Signal.disconnect() ([`ab41491`](https://github.com/browniebroke/django-codemod/commit/ab414910e3e1fa1b04af9dd200d0a07cbe65c3f3))
