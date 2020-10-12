@@ -102,7 +102,7 @@ def djcodemod():
 
 
 @djcodemod.command()
-@click.argument("path")
+@click.argument("path", nargs=-1, required=True)
 @click.option(
     "--removed-in",
     "removed_in",
@@ -115,7 +115,9 @@ def djcodemod():
     help="The version of Django where deprecations started.",
     type=VersionParamType(DEPRECATED_IN),
 )
-def run(removed_in: Tuple[int, int], deprecated_in: Tuple[int, int], path: str) -> None:
+def run(
+    removed_in: Tuple[int, int], deprecated_in: Tuple[int, int], path: List[str]
+) -> None:
     """
     Automatically fixes deprecations removed Django deprecations.
 
@@ -134,9 +136,9 @@ def run(removed_in: Tuple[int, int], deprecated_in: Tuple[int, int], path: str) 
     call_command(command_instance, path)
 
 
-def call_command(command_instance: BaseCodemodCommand, path: str):
+def call_command(command_instance: BaseCodemodCommand, path: List[str]):
     """Call libCST with our customized command."""
-    files = gather_files([path])
+    files = gather_files(path)
     try:
         # Super simplified call
         result = parallel_exec_transform_with_prettyprint(
