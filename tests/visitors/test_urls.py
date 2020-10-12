@@ -79,6 +79,7 @@ class TestURLTransformer(BaseVisitorTest):
             urlpatterns = [
                 url(r'^$', views.index, name='index'),
                 url(r'^about/$', views.about, name='about'),
+                url(r'^more-info/$', views.about, name='more-info'),
             ]
         """
         after = """
@@ -87,6 +88,7 @@ class TestURLTransformer(BaseVisitorTest):
             urlpatterns = [
                 path('', views.index, name='index'),
                 path('about/', views.about, name='about'),
+                path('more-info/', views.about, name='more-info'),
             ]
         """
         self.assertCodemod(before, after)

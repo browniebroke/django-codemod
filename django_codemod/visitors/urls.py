@@ -2,7 +2,6 @@ from libcst import Arg, BaseExpression, Call, Name, SimpleString
 from libcst import matchers as m
 from libcst.codemod.visitors import AddImportsVisitor
 
-from django_codemod import re
 from django_codemod.constants import DJANGO_3_0, DJANGO_4_0
 from django_codemod.visitors.base import BaseFuncRenameTransformer
 
@@ -10,6 +9,9 @@ from django_codemod.visitors.base import BaseFuncRenameTransformer
 class PatternNotSupported(RuntimeError):
     pass
 
+
+# A set of regex special characters sans the dash character
+REGEX_SPECIALS_SANS_DASH = set("()[]{}?*+|^$\\.&~# \t\n\r\v\f")
 
 REGEX_TO_CONVERTER = {
     "[0-9]+": "int",
@@ -98,5 +100,5 @@ class URLTransformer(BaseFuncRenameTransformer):
 
     def check_route(self, route):
         """Check that route doesn't contain anymore regex."""
-        if route != re.escape(route):
-            raise PatternNotSupported("Route contains regex")
+        if set(route) & REGEX_SPECIALS_SANS_DASH:
+            raise PatternNotSupported(f"Route {route} contains regex")
