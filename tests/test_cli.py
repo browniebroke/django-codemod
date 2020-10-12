@@ -38,7 +38,7 @@ def test_missing_argument(cli_runner):
     result = cli_runner.invoke(cli.djcodemod, ["run"])
 
     assert result.exit_code == 2
-    assert "Error: Missing argument 'PATH'" in result.output
+    assert "Error: Missing argument 'PATH" in result.output
 
 
 @pytest.mark.parametrize(
