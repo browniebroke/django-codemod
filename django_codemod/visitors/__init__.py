@@ -1,5 +1,6 @@
 from .admin import InlineHasAddPermissionsTransformer
 from .core import URLResolversTransformer
+from .crypto import GetRandomStringTransformer
 from .decorators import AvailableAttrsTransformer, ContextDecoratorTransformer
 from .encoding import (
     ForceTextTransformer,
@@ -46,6 +47,7 @@ __all__ = (
     "FloatRangeFormFieldTransformer",
     "FloatRangeModelFieldTransformer",
     "ForceTextTransformer",
+    "GetRandomStringTransformer",
     "HttpRequestXReadLinesTransformer",
     "HttpUrlQuotePlusTransformer",
     "HttpUrlQuoteTransformer",
