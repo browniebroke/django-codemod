@@ -108,15 +108,19 @@ def djcodemod():
     "removed_in",
     help="The version of Django where feature are removed.",
     type=VersionParamType(REMOVED_IN),
+    multiple=True,
 )
 @click.option(
     "--deprecated-in",
     "deprecated_in",
     help="The version of Django where deprecations started.",
     type=VersionParamType(DEPRECATED_IN),
+    multiple=True,
 )
 def run(
-    removed_in: Tuple[int, int], deprecated_in: Tuple[int, int], path: List[str]
+    removed_in: List[Tuple[int, int]],
+    deprecated_in: List[Tuple[int, int]],
+    path: List[str],
 ) -> None:
     """
     Automatically fixes deprecations removed Django deprecations.
@@ -124,14 +128,18 @@ def run(
     This command takes the path to target as argument and a version of
     Django to select code modifications to apply.
     """
-    if not any((removed_in, deprecated_in)) or all((removed_in, deprecated_in)):
+    codemodders_set = set()
+    for version in removed_in:
+        codemodders_set |= set(REMOVED_IN[version])
+    for version in deprecated_in:
+        codemodders_set |= set(DEPRECATED_IN[version])
+    if not codemodders_set:
         raise click.UsageError(
-            "You must specify either '--removed-in' or '--deprecated-in' but not both."
+            "No codemods were selected. "
+            "Specify '--removed-in' and/or '--deprecated-in'."
         )
-    if removed_in:
-        codemodders_list = REMOVED_IN[removed_in]
-    else:
-        codemodders_list = DEPRECATED_IN[deprecated_in]
+    codemodders_list = sorted(codemodders_set, key=lambda m: m.__name__)
+    click.echo(f"Running codemods: {', '.join(m.__name__ for m in codemodders_list)}")
     command_instance = BaseCodemodCommand(codemodders_list, CodemodContext())
     call_command(command_instance, path)
 
