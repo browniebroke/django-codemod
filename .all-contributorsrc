@@ -66,6 +66,15 @@
       "contributions": [
         "infra"
       ]
+    },
+    {
+      "login": "akx",
+      "name": "Aarni Koskela",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/58669?v=4",
+      "profile": "https://akx.github.io/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
