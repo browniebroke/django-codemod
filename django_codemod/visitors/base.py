@@ -105,10 +105,11 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
         for import_alias in old_names:
             if not self.old_name or import_alias.evaluated_name == self.old_name:
                 self.context.scratch[self.ctx_key_imported_as] = import_alias.asname
-                if self.simple_rename:
-                    self.add_new_import(import_alias.evaluated_name)
-            else:
-                yield import_alias
+                if self.rename_from != self.rename_to:
+                    if self.simple_rename:
+                        self.add_new_import(import_alias.evaluated_name)
+                    continue
+            yield import_alias
 
     def tidy_new_imported_names(self, new_names):
         """Tidy up the updated list of imports"""
