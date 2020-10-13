@@ -41,24 +41,12 @@ def test_missing_argument(cli_runner):
     assert "Error: Missing argument 'PATH" in result.output
 
 
-@pytest.mark.parametrize(
-    "command_line",
-    [
-        # Missing options
-        ["run", "."],
-        # Too many options
-        ["run", "--removed-in", "3.0", "--deprecated-in", "2.0", "."],
-    ],
-)
-def test_invalid_options(cli_runner, command_line):
+def test_no_mods_selected(cli_runner):
     """Should explain missing option."""
-    result = cli_runner.invoke(cli.djcodemod, command_line)
+    result = cli_runner.invoke(cli.djcodemod, ["run", "."])
 
     assert result.exit_code == 2
-    assert (
-        "Error: You must specify either '--removed-in' or "
-        "'--deprecated-in' but not both." in result.output
-    )
+    assert "No codemods were selected" in result.output
 
 
 def test_help(cli_runner):

@@ -5,7 +5,7 @@ This package provides a `djcodemod` command line tool with 2 main supported work
 - Prepare future upgrades by modifying code which is deprecated in a given version using the `deprecated-in` option
 - Fix previous deprecated code which is removed in a given version using the `removed-in` option
 
-## Workflows 
+## Workflows
 
 ### Deprecations
 
@@ -24,6 +24,10 @@ This is more a just in time operation, assuming you haven't kept up to date with
 ```bash
 djcodemod run --removed-in 4.0 .
 ```
+
+### Mix and match
+
+Both `--deprecated-in` and `--removed-in` can be passed at once, and both accept multiple repetitions.
 
 ## Next steps
 
