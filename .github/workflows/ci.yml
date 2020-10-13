@@ -31,8 +31,7 @@ jobs:
     - name: Install Dependencies
       run: |
         python -m pip install -U pip
-        pip install -r requirements.txt
-        pip install .
+        pip install --use-feature=2020-resolver -r requirements.txt .
     - name: Test with Pytest
       run: pytest
     - uses: codecov/codecov-action@v1.0.13
@@ -61,8 +60,7 @@ jobs:
     - name: Install Dependencies
       run: |
         python -m pip install -U pip
-        pip install -r requirements.txt
-        pip install .
+        pip install --use-feature=2020-resolver -r requirements.txt .
     - name: ${{ matrix.linter.name }}
       run: ${{ matrix.linter.run }}
 
