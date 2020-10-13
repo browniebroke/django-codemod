@@ -6,12 +6,6 @@ from click.testing import CliRunner
 from libcst.codemod import CodemodContext, ParallelTransformResult
 
 from django_codemod import cli
-from django_codemod.cli import (
-    DEPRECATED_IN,
-    REMOVED_IN,
-    call_command,
-    get_short_description,
-)
 from django_codemod.commands import BaseCodemodCommand
 
 
@@ -137,7 +131,7 @@ def test_call_command_success(command_instance, mocker):
         successes=1, failures=0, warnings=0, skips=0
     )
 
-    result = call_command(command_instance, ".")
+    result = cli.call_command(command_instance, ".")
 
     assert result is None
 
@@ -152,7 +146,7 @@ def test_call_command_failure(command_instance, mocker):
     )
 
     with pytest.raises(click.exceptions.Exit):
-        call_command(command_instance, ".")
+        cli.call_command(command_instance, ".")
 
 
 @pytest.mark.usefixtures("gather_files_mocked")
@@ -166,7 +160,7 @@ def test_call_command_interrupted(command_instance, mocker):
     )
 
     with pytest.raises(click.Abort):
-        call_command(command_instance, ".")
+        cli.call_command(command_instance, ".")
 
 
 def _mapping_repr(mapping):
@@ -179,7 +173,7 @@ def _mapping_repr(mapping):
 
 def test_deprecated_in_mapping():
     """Transformers found by the ``DEPRECATED_IN`` mapping."""
-    assert _mapping_repr(DEPRECATED_IN) == {
+    assert _mapping_repr(cli.DEPRECATED_IN) == {
         (3, 0): [
             "ForceTextTransformer",
             "HttpUrlQuotePlusTransformer",
@@ -230,7 +224,7 @@ def test_deprecated_in_mapping():
 
 def test_removed_in_mapping():
     """Transformers found by the ``REMOVED_IN`` mapping."""
-    assert _mapping_repr(REMOVED_IN) == {
+    assert _mapping_repr(cli.REMOVED_IN) == {
         (4, 0): [
             "ForceTextTransformer",
             "HttpUrlQuotePlusTransformer",
@@ -317,4 +311,4 @@ class MultiLine2:
     ],
 )
 def test_get_short_description(klass, expected_result):
-    assert get_short_description(klass) == expected_result
+    assert cli.get_short_description(klass) == expected_result
