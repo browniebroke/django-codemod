@@ -2,6 +2,11 @@
 
 <!--next-version-placeholder-->
 
+## v0.20.0 (2020-10-13)
+### Feature
+* Support multiple target path arguments ([`8dafb0f`](https://github.com/browniebroke/django-codemod/commit/8dafb0faff7e9681a5a80341830d9d674804636e))
+* Urls: allow path() instead of re_path() if a path contains dashes ([`de744cf`](https://github.com/browniebroke/django-codemod/commit/de744cfb24f931ed3f9c8e9b4fd72e699d9730b9))
+
 ## v0.19.0 (2020-10-10)
 ### Feature
 * Add support for Python 3.9 ([`904ba55`](https://github.com/browniebroke/django-codemod/commit/904ba5565efef38c46c3d2ed65edf694fcc1760e))
