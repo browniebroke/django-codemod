@@ -73,7 +73,7 @@ class VersionParamType(click.ParamType):
         if parsed_version not in self.valid_versions:
             supported_versions = ", ".join(
                 ".".join(str(version_part) for version_part in version_tuple)
-                for version_tuple in self.valid_versions
+                for version_tuple in sorted(self.valid_versions)
             )
             self.fail(
                 f"{value!r} is not supported. "
