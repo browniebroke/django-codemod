@@ -22,6 +22,7 @@ from .paginator import QuerySetPaginatorTransformer
 from .postgres_fields import (
     FloatRangeFormFieldTransformer,
     FloatRangeModelFieldTransformer,
+    JSONModelFieldTransformer,
 )
 from .shortcuts import RenderToResponseTransformer
 from .signals import SignalDisconnectWeakTransformer
@@ -52,6 +53,7 @@ __all__ = (
     "HttpUrlUnQuoteTransformer",
     "InlineHasAddPermissionsTransformer",
     "IsSafeUrlTransformer",
+    "JSONModelFieldTransformer",
     "LRUCacheTransformer",
     "ModelsPermalinkTransformer",
     "OnDeleteTransformer",
@@ -62,10 +64,10 @@ __all__ = (
     "UGetTextLazyTransformer",
     "UGetTextNoopTransformer",
     "UGetTextTransformer",
+    "UnescapeEntitiesTransformer",
     "UNGetTextLazyTransformer",
     "UNGetTextTransformer",
-    "URLTransformer",
-    "URLResolversTransformer",
-    "UnescapeEntitiesTransformer",
     "UnicodeCompatibleTransformer",
+    "URLResolversTransformer",
+    "URLTransformer",
 )
