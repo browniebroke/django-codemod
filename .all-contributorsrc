@@ -16,11 +16,9 @@
       "avatar_url": "https://avatars1.githubusercontent.com/u/861044?v=4",
       "profile": "https://browniebroke.com",
       "contributions": [
-        "bug",
         "code",
         "doc",
-        "ideas",
-        "test"
+        "ideas"
       ]
     },
     {
@@ -29,7 +27,6 @@
       "avatar_url": "https://avatars2.githubusercontent.com/u/58669?v=4",
       "profile": "https://akx.github.io/",
       "contributions": [
-        "bug",
         "code",
         "ideas",
         "test"
