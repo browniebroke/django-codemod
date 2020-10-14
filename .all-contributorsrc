@@ -16,9 +16,23 @@
       "avatar_url": "https://avatars1.githubusercontent.com/u/861044?v=4",
       "profile": "https://browniebroke.com",
       "contributions": [
-        "code",
         "bug",
-        "doc"
+        "code",
+        "doc",
+        "ideas",
+        "test"
+      ]
+    },
+    {
+      "login": "akx",
+      "name": "Aarni Koskela",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/58669?v=4",
+      "profile": "https://akx.github.io/",
+      "contributions": [
+        "bug",
+        "code",
+        "ideas",
+        "test"
       ]
     },
     {
@@ -65,15 +79,6 @@
       "profile": "https://iamshnoo.github.io/blog/",
       "contributions": [
         "infra"
-      ]
-    },
-    {
-      "login": "akx",
-      "name": "Aarni Koskela",
-      "avatar_url": "https://avatars2.githubusercontent.com/u/58669?v=4",
-      "profile": "https://akx.github.io/",
-      "contributions": [
-        "code"
       ]
     }
   ],
