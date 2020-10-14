@@ -5,7 +5,7 @@ import pytest
 from click.testing import CliRunner
 from libcst.codemod import CodemodContext, ParallelTransformResult
 
-from django_codemod import cli
+from django_codemod import cli, visitors
 from django_codemod.commands import BaseCodemodCommand
 
 
@@ -151,110 +151,24 @@ def test_call_command_interrupted(command_instance, mocker):
         cli.call_command(command_instance, ".")
 
 
-def _mapping_repr(mapping):
-    """Helper to return class names in the dict values."""
-    return {
-        version: [klass.__name__ for klass in classes_list]
-        for version, classes_list in mapping.items()
-    }
+def _verify_mapping(mapping, version_attr):
+    seen_names = set()
+    for version, classes in mapping.items():
+        seen_names |= {cls.__name__ for cls in classes}
+        for cls in classes:
+            # Verify we gathered the mapping correctly by version
+            assert getattr(cls, version_attr) == version
+
+    # Verify all codemods exported from visitors are mapped
+    assert seen_names == set(visitors.__all__)
 
 
 def test_deprecated_in_mapping():
-    """Transformers found by the ``DEPRECATED_IN`` mapping."""
-    assert _mapping_repr(cli.DEPRECATED_IN) == {
-        (3, 0): [
-            "ForceTextTransformer",
-            "HttpUrlQuotePlusTransformer",
-            "HttpUrlQuoteTransformer",
-            "HttpUrlUnQuotePlusTransformer",
-            "HttpUrlUnQuoteTransformer",
-            "IsSafeUrlTransformer",
-            "SmartTextTransformer",
-            "UGetTextLazyTransformer",
-            "UGetTextNoopTransformer",
-            "UGetTextTransformer",
-            "UNGetTextLazyTransformer",
-            "UNGetTextTransformer",
-            "URLTransformer",
-            "UnescapeEntitiesTransformer",
-        ],
-        (2, 2): [
-            "FixedOffsetTransformer",
-            "FloatRangeFormFieldTransformer",
-            "FloatRangeModelFieldTransformer",
-            "QuerySetPaginatorTransformer",
-        ],
-        (2, 1): [
-            "InlineHasAddPermissionsTransformer",
-        ],
-        (2, 0): [
-            "AbsPathTransformer",
-            "AvailableAttrsTransformer",
-            "ContextDecoratorTransformer",
-            "HttpRequestXReadLinesTransformer",
-            "LRUCacheTransformer",
-            "RenderToResponseTransformer",
-            "UnicodeCompatibleTransformer",
-        ],
-        (1, 11): [
-            "ModelsPermalinkTransformer",
-        ],
-        (1, 10): [
-            "URLResolversTransformer",
-        ],
-        (1, 9): [
-            "AssignmentTagTransformer",
-            "OnDeleteTransformer",
-            "SignalDisconnectWeakTransformer",
-        ],
-    }
+    _verify_mapping(cli.DEPRECATED_IN, "deprecated_in")
 
 
 def test_removed_in_mapping():
-    """Transformers found by the ``REMOVED_IN`` mapping."""
-    assert _mapping_repr(cli.REMOVED_IN) == {
-        (4, 0): [
-            "ForceTextTransformer",
-            "HttpUrlQuotePlusTransformer",
-            "HttpUrlQuoteTransformer",
-            "HttpUrlUnQuotePlusTransformer",
-            "HttpUrlUnQuoteTransformer",
-            "IsSafeUrlTransformer",
-            "SmartTextTransformer",
-            "UGetTextLazyTransformer",
-            "UGetTextNoopTransformer",
-            "UGetTextTransformer",
-            "UNGetTextLazyTransformer",
-            "UNGetTextTransformer",
-            "URLTransformer",
-            "UnescapeEntitiesTransformer",
-        ],
-        (3, 1): [
-            "FixedOffsetTransformer",
-            "FloatRangeFormFieldTransformer",
-            "FloatRangeModelFieldTransformer",
-            "QuerySetPaginatorTransformer",
-        ],
-        (3, 0): [
-            "AbsPathTransformer",
-            "AvailableAttrsTransformer",
-            "ContextDecoratorTransformer",
-            "HttpRequestXReadLinesTransformer",
-            "InlineHasAddPermissionsTransformer",
-            "LRUCacheTransformer",
-            "RenderToResponseTransformer",
-            "UnicodeCompatibleTransformer",
-        ],
-        (2, 1): [
-            "ModelsPermalinkTransformer",
-        ],
-        (2, 0): [
-            "AssignmentTagTransformer",
-            "OnDeleteTransformer",
-            "SignalDisconnectWeakTransformer",
-            "URLResolversTransformer",
-        ],
-    }
+    _verify_mapping(cli.REMOVED_IN, "removed_in")
 
 
 def test_list_command(cli_runner):
