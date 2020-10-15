@@ -19,6 +19,7 @@ from libcst import matchers as m
 from libcst.codemod.visitors import AddImportsVisitor
 
 from django_codemod.constants import DJANGO_1_9, DJANGO_1_11, DJANGO_2_0, DJANGO_2_1
+from django_codemod.utils.calls import find_keyword_arg
 from django_codemod.visitors.base import BaseDjCodemodTransformer, module_matcher
 
 
@@ -148,9 +149,8 @@ def is_one_to_one_field(node: Call) -> bool:
 
 def has_on_delete(node: Call) -> bool:
     # if on_delete exists in any kwarg we return True
-    for arg in node.args:
-        if m.matches(arg, m.Arg(keyword=m.Name("on_delete"))):
-            return True
+    if find_keyword_arg(node.args, "on_delete"):
+        return True
 
     # if there are two or more nodes and there are no keywords
     # then we can assume that positional arguments are being used
