@@ -86,12 +86,25 @@ def test_invalid_version(cli_runner):
     assert "'not.a.version' is not a valid version" in result.output
 
 
+def test_run_help(cli_runner):
+    result = cli_runner.invoke(
+        cli.djcodemod,
+        ["run", "--help"],
+    )
+
+    assert result.exit_code == 0
+    assert "--codemod" in result.output
+    assert "--deprecated-in" in result.output
+    assert "--removed-in" in result.output
+    assert "djcodemod list" in result.output
+
+
 @pytest.mark.parametrize(
     ("option", "version"),
     [
-        # Removed in option
         ("--removed-in", "3.0"),
         ("--deprecated-in", "2.0"),
+        ("--codemod", "URLResolversTransformer"),
     ],
 )
 @pytest.mark.parametrize("path", [".", "my_app"])
