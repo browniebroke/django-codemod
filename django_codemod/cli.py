@@ -18,7 +18,7 @@ from django_codemod.commands import BaseCodemodCommand
 from django_codemod.visitors.base import BaseDjCodemodTransformer
 
 
-def index_codemoders(version_getter: Callable) -> Dict[Tuple[int, int], List]:
+def index_codemodders(version_getter: Callable) -> Dict[Tuple[int, int], List]:
     """
     Index codemodders by version.
 
@@ -44,8 +44,8 @@ def iter_codemodders() -> Generator[BaseDjCodemodTransformer, None, None]:
             continue
 
 
-DEPRECATED_IN = index_codemoders(version_getter=attrgetter("deprecated_in"))
-REMOVED_IN = index_codemoders(version_getter=attrgetter("removed_in"))
+DEPRECATED_IN = index_codemodders(version_getter=attrgetter("deprecated_in"))
+REMOVED_IN = index_codemodders(version_getter=attrgetter("removed_in"))
 
 
 class VersionParamType(click.ParamType):
