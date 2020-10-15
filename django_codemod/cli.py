@@ -44,6 +44,12 @@ def iter_codemodders() -> Generator[BaseDjCodemodTransformer, None, None]:
 
 DEPRECATED_IN = index_codemodders(version_getter=attrgetter("deprecated_in"))
 REMOVED_IN = index_codemodders(version_getter=attrgetter("removed_in"))
+BY_NAME = {cls.__name__: cls for cls in iter_codemodders()}
+
+
+class CodemodChoice(click.Choice):
+    def get_metavar(self, param):
+        return "(see `djcodemod list`)"
 
 
 class VersionParamType(click.ParamType):
@@ -115,9 +121,17 @@ def djcodemod():
     type=VersionParamType(DEPRECATED_IN),
     multiple=True,
 )
+@click.option(
+    "--codemod",
+    "codemod",
+    help="Choose a specific codemod to run. Can be repeated.",
+    type=CodemodChoice(BY_NAME.keys()),
+    multiple=True,
+)
 def run(
     removed_in: List[Tuple[int, int]],
     deprecated_in: List[Tuple[int, int]],
+    codemod: List[str],
     path: List[str],
 ) -> None:
     """
@@ -131,10 +145,12 @@ def run(
         codemodders_set |= set(REMOVED_IN[version])
     for version in deprecated_in:
         codemodders_set |= set(DEPRECATED_IN[version])
+    for name in codemod:
+        codemodders_set.add(BY_NAME[name])
     if not codemodders_set:
         raise click.UsageError(
             "No codemods were selected. "
-            "Specify '--removed-in' and/or '--deprecated-in'."
+            "Specify '--removed-in' and/or '--deprecated-in' and/or '--codemod'."
         )
     codemodders_list = sorted(codemodders_set, key=lambda m: m.__name__)
     click.echo(f"Running codemods: {', '.join(m.__name__ for m in codemodders_list)}")
