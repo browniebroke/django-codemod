@@ -2,6 +2,18 @@
 
 <!--next-version-placeholder-->
 
+## v0.21.0 (2020-10-19)
+### Feature
+* Cli: add --codemod option ([`0ffe315`](https://github.com/browniebroke/django-codemod/commit/0ffe315fc0201d16360afea9cb8bf6c8efcc76fc))
+* Add codemod to add a length parameter to get_random_string() ([`f88f56d`](https://github.com/browniebroke/django-codemod/commit/f88f56de5f9b6de4f9bec13fdb80530f38d60db5))
+* Add find_keyword_arg utility ([`111dd37`](https://github.com/browniebroke/django-codemod/commit/111dd37ed781a5dfbdb4ba7e2c7f50d5d94d90a9))
+* Add a transformer for the new core JSONField in Django 3.1 ([`7ca1c99`](https://github.com/browniebroke/django-codemod/commit/7ca1c999c26ab3b2752d3542dc9a37c8a2f25f4f))
+
+### Fix
+* Avoid changing import list if old name is new name ([`c3fecb3`](https://github.com/browniebroke/django-codemod/commit/c3fecb32a4f8e0a484fb52349f2710f2df4c7a9a))
+* Allow both removed-in and deprecated-in as well as multiple arguments for both ([`d89676b`](https://github.com/browniebroke/django-codemod/commit/d89676b236da1c21c716709deb8a766a93a76eb2))
+* Sort valid versions semantically ([`ab4c20e`](https://github.com/browniebroke/django-codemod/commit/ab4c20eeae7c3edb2c116da08836d44af340413f))
+
 ## v0.20.0 (2020-10-13)
 ### Feature
 * CLI: Support multiple target `path` arguments ([`8dafb0f`](https://github.com/browniebroke/django-codemod/commit/8dafb0faff7e9681a5a80341830d9d674804636e))
