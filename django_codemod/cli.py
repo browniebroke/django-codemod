@@ -36,10 +36,8 @@ def iter_codemodders() -> Generator[BaseDjCodemodTransformer, None, None]:
     for object_name in dir(visitors):
         try:
             obj = getattr(visitors, object_name)
-            if not issubclass(obj, BaseDjCodemodTransformer) or inspect.isabstract(obj):
-                continue
-            # Looks like this one is good to go
-            yield obj
+            if issubclass(obj, BaseDjCodemodTransformer) and not inspect.isabstract(obj):
+                yield obj  # Looks like this one is good to go
         except TypeError:
             continue
 
