@@ -31,7 +31,7 @@ pyparsing==2.4.7          # via packaging
 pytest-cov==2.10.1        # via -r requirements.in
 pytest-mock==3.3.1        # via -r requirements.in
 pytest-runner==5.2        # via -r requirements.in
-pytest==6.1.1             # via -r requirements.in, pytest-cov, pytest-mock
+pytest==6.1.2             # via -r requirements.in, pytest-cov, pytest-mock
 pyupgrade==2.7.3          # via -r requirements.in
 pyyaml==5.3.1             # via pre-commit
 regex==2020.6.8           # via black
