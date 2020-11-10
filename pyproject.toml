@@ -1,0 +1,75 @@
+[tool.poetry]
+name = "django-codemod"
+version = "0.21.0"
+description = "A command line tool to automatically fix Django deprecations."
+authors = ["Bruno Alla <alla.brunoo@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+keywords = ["django", "codemod", "libCST"]
+repository = "https://github.com/browniebroke/django-codemod"
+documentation = "https://django-codemod.readthedocs.io"
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Developers",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries",
+]
+packages = [
+    { include = "django_codemod" },
+]
+
+[tool.poetry.urls]
+"Bug Tracker" = "https://github.com/browniebroke/django-codemod/issues"
+"Changelog" = "https://django-codemod.readthedocs.io/changelog.html"
+
+[tool.poetry.scripts]
+djcodemod = "django_codemod.cli:djcodemod"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+libcst = "<1"
+click = "<8"
+rich = "<7"
+
+# Docs deps
+Sphinx = {version = "^3.3.0", optional = true}
+sphinx-rtd-theme = {version = "^0.5.0", optional = true}
+myst-parser = {version = "^0.12.10", optional = true}
+
+[tool.poetry.extras]
+docs = [
+    "myst-parser",
+    "sphinx",
+    "sphinx-rtd-theme",
+]
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.1.2"
+black = "^20.8b1"
+pytest-cov = "^2.10.1"
+pytest-mock = "^3.3.1"
+tox = "^3.20.1"
+parameterized = "^0.7.4"
+flake8 = "^3.8.4"
+pyupgrade = {version = "^2.7.3", python = "^3.6.1"}
+isort = "^5.6.4"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.semantic_release]
+branch = "main"
+version_variable = [
+    "django_codemod/__init__.py:__version__",
+    "pyproject.toml:version",
+]
+build_command = "pip install poetry && poetry build"
+
+[tool.pytest.ini_options]
+addopts = "-v -Wdefault --cov=django_codemod"
+
+[tool.isort]
+profile = "black"
+known_first_party = ["django_codemod", "tests"]

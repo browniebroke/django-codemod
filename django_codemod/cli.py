@@ -104,7 +104,7 @@ class VersionParamType(click.ParamType):
 
 @click.group()
 def djcodemod():
-    """CLI entry point."""
+    """Automatically fix Django deprecations."""
 
 
 @djcodemod.command()
