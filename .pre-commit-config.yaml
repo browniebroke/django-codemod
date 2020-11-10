@@ -1,12 +1,6 @@
 # See https://pre-commit.com for more information
 # See https://pre-commit.com/hooks.html for more hooks
 repos:
-  - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
-    rev: v4.0.0
-    hooks:
-      - id: commitlint
-        stages: [ commit-msg ]
-        additional_dependencies: ['@commitlint/config-conventional']
   - repo: https://github.com/asottile/pyupgrade
     rev: v2.7.3
     hooks:
@@ -23,8 +17,7 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v3.3.0
     hooks:
-      # disabled due to bump2commit compatibility
-      # - id: trailing-whitespace
+      - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-yaml
       - id: check-json
@@ -33,4 +26,3 @@ repos:
     rev: 3.8.4
     hooks:
       - id: flake8
-        args: [--config=setup.cfg]
