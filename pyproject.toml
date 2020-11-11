@@ -30,7 +30,7 @@ djcodemod = "django_codemod.cli:djcodemod"
 python = "^3.6"
 libcst = "<1"
 click = "<8"
-rich = "<7"
+rich = "<10"
 
 # Docs deps
 Sphinx = {version = "^3.3.0", optional = true}
