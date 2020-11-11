@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.0 (2020-11-11)
+### Feature
+* Migrate packaging to Poetry ([`8ed12c8`](https://github.com/browniebroke/django-codemod/commit/8ed12c898c8a8eb63b3e9b005e20af635bf8cc42))
+
+### Breaking
+* Stable release  ([`8ed12c8`](https://github.com/browniebroke/django-codemod/commit/8ed12c898c8a8eb63b3e9b005e20af635bf8cc42))
+
 ## v0.21.0 (2020-10-19)
 ### Feature
 * Cli: add --codemod option ([`0ffe315`](https://github.com/browniebroke/django-codemod/commit/0ffe315fc0201d16360afea9cb8bf6c8efcc76fc))
