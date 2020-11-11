@@ -9,7 +9,7 @@ keywords = ["django", "codemod", "libCST"]
 repository = "https://github.com/browniebroke/django-codemod"
 documentation = "https://django-codemod.readthedocs.io"
 classifiers = [
-    "Development Status :: 2 - Pre-Alpha",
+    "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
     "Natural Language :: English",
     "Operating System :: OS Independent",
