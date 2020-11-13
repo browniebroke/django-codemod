@@ -8,7 +8,7 @@ on:
     - cron: "0 13 1 11 *"
 
 jobs:
-  example:
+  hacktoberfest:
     runs-on: ubuntu-latest
 
     steps:
