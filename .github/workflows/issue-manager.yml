@@ -4,27 +4,25 @@
 #
 # Default to 10 days delay and comment:
 # <!-- issue-manager: answered -->
-
-
 name: Issue Manager
 
 on:
   schedule:
-  - cron: "0 0 * * *"
+    - cron: "0 0 * * *"
 
 jobs:
   issue-manager:
     runs-on: ubuntu-latest
     steps:
-    - uses: tiangolo/issue-manager@0.3.0
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        # Extra config: '<!-- issue-manager: waiting -->'
-        config: >
-          {
-            "answered": {},
-            "waiting": {
-                "delay": 864000,
-                "message": "Closing after 10 days of waiting for the additional info requested."
+      - uses: tiangolo/issue-manager@0.3.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # Extra config: '<!-- issue-manager: waiting -->'
+          config: >
+            {
+              "answered": {},
+              "waiting": {
+                  "delay": 864000,
+                  "message": "Closing after 10 days of waiting for the additional info requested."
+              }
             }
-          }

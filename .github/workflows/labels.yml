@@ -5,18 +5,18 @@ on:
     branches:
       - main
     paths:
-      - '.github/**'
+      - ".github/**"
 
 jobs:
   labels:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.8
-    - name: Install labels
-      run: pip install labels
-    - name: Sync config with Github
-      run: labels -u ${{ github.repository_owner }} -t ${{ secrets.GITHUB_TOKEN }} sync -f .github/labels.toml
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Install labels
+        run: pip install labels
+      - name: Sync config with Github
+        run: labels -u ${{ github.repository_owner }} -t ${{ secrets.GITHUB_TOKEN }} sync -f .github/labels.toml

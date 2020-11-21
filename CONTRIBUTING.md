@@ -100,7 +100,7 @@ When you submit a pull request, check that it meets these guidelines:
 The deployment should be automated and can be triggered from the Semantic Release workflow in Github. The next version will be based on [the commit logs][commit-log-parsing]. This is done by [python-semantic-release][psr] via a Github action.
 
 [bug-tracker]: https://github.com/browniebroke/django-codemod/issues
-[Poetry]: https://python-poetry.org/
+[poetry]: https://python-poetry.org/
 [conv-commits]: https://www.conventionalcommits.org
 [commitlint]: https://github.com/marketplace/actions/commit-linter
 [commit-log-parsing]: https://python-semantic-release.readthedocs.io/en/latest/commit-log-parsing.html#commit-log-parsing
