@@ -35,7 +35,7 @@ rich = "<10"
 # Docs deps
 Sphinx = {version = "^3.3.0", optional = true}
 sphinx-rtd-theme = {version = "^0.5.0", optional = true}
-myst-parser = {version = "^0.12.10", optional = true}
+myst-parser = {version = "^0.13.0", optional = true}
 
 [tool.poetry.extras]
 docs = [
