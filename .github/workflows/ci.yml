@@ -33,7 +33,7 @@ jobs:
         run: poetry install
       - name: Test with Pytest
         run: poetry run pytest --cov-report=xml
-      - uses: codecov/codecov-action@v1.1.0
+      - uses: codecov/codecov-action@v1.1.1
 
   lint:
     name: Lint
