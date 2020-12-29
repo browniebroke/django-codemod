@@ -14,20 +14,24 @@ Let's say you just updated to Django 3.0, and suddenly you're flooded with depre
 You want to resolve them to avoid missing another important warning. You can do so by running the following command from the root of your repo:
 
 ```bash
-djcodemod run --deprecated-in 3.0 .
+djcodemod run --deprecated-in 3.0 {source_file_or_directory}
 ```
 
 ### Removals
 
-This is more a just in time operation, assuming you haven't kept up to date with deprecation warnings, and right before upgrading to a given version (let's assume Django 4.0). In this case, you should be running:
+This is more of a just in time operation, assuming you haven't kept up to date with deprecation warnings, and right before upgrading to a given version (let's assume Django 4.0). In this case, you should be running:
 
 ```bash
-djcodemod run --removed-in 4.0 .
+djcodemod run --removed-in 4.0 {source_file_or_directory}
 ```
 
 ### Mix and match
 
-Both `--deprecated-in` and `--removed-in` can be passed at once, and both accept multiple repetitions.
+Both `--deprecated-in` and `--removed-in` can be passed at once, and both accept multiple repetitions. You can also give as many source files or directory paths as you want. A more complex example might look like this:
+
+```bash
+djcodemod run --deprecated-in 3.0 --deprecated-in 3.1 --removed-in 2.2 example example1 example2/models.py settings.py
+```
 
 ## Next steps
 
