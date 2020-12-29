@@ -15,9 +15,9 @@ def cli_runner():
 
 
 @pytest.fixture()
-def gather_files_mocked(mocker):
-    """Mock return value of gather_files from libCST."""
-    gather_files = mocker.patch("django_codemod.cli.gather_files")
+def get_sources_mocked(mocker):
+    """Mock return value of get_sources util function."""
+    gather_files = mocker.patch("django_codemod.cli.get_sources")
     gather_files.return_value = ["some/file.py"]
 
 
@@ -32,7 +32,7 @@ def test_missing_argument(cli_runner):
     result = cli_runner.invoke(cli.djcodemod, ["run"])
 
     assert result.exit_code == 2
-    assert "Error: Missing argument 'PATH" in result.output
+    assert "Error: Missing argument 'SRC...'" in result.output
 
 
 def test_no_mods_selected(cli_runner):
@@ -123,7 +123,7 @@ def test_basic_arguments(cli_runner, option, version, path):
     assert "Finished codemodding 3 files!" in result.output
 
 
-@pytest.mark.usefixtures("gather_files_mocked")
+@pytest.mark.usefixtures("get_sources_mocked")
 def test_call_command_success(command_instance, mocker):
     executor = mocker.patch(
         "django_codemod.cli.parallel_exec_transform_with_prettyprint"
@@ -137,7 +137,7 @@ def test_call_command_success(command_instance, mocker):
     assert result is None
 
 
-@pytest.mark.usefixtures("gather_files_mocked")
+@pytest.mark.usefixtures("get_sources_mocked")
 def test_call_command_failure(command_instance, mocker):
     executor = mocker.patch(
         "django_codemod.cli.parallel_exec_transform_with_prettyprint"
@@ -150,7 +150,7 @@ def test_call_command_failure(command_instance, mocker):
         cli.call_command(command_instance, ".")
 
 
-@pytest.mark.usefixtures("gather_files_mocked")
+@pytest.mark.usefixtures("get_sources_mocked")
 def test_call_command_interrupted(command_instance, mocker):
     executor = mocker.patch(
         "django_codemod.cli.parallel_exec_transform_with_prettyprint",

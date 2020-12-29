@@ -1,20 +1,18 @@
 import inspect
 from collections import defaultdict
 from operator import attrgetter
+from pathlib import Path
 from typing import Callable, Dict, Generator, List, Tuple, Type
 
 import click
-from libcst.codemod import (
-    CodemodContext,
-    gather_files,
-    parallel_exec_transform_with_prettyprint,
-)
+from libcst.codemod import CodemodContext, parallel_exec_transform_with_prettyprint
 from rich.console import Console
 from rich.markdown import Markdown
 from rich.table import Table
 
 from django_codemod import visitors
 from django_codemod.commands import BaseCodemodCommand
+from django_codemod.path_utils import get_sources
 from django_codemod.visitors.base import BaseDjCodemodTransformer
 
 
@@ -108,7 +106,14 @@ def djcodemod():
 
 
 @djcodemod.command()
-@click.argument("path", nargs=-1, required=True)
+@click.argument(
+    "src",
+    nargs=-1,
+    type=click.Path(
+        exists=True, file_okay=True, dir_okay=True, readable=True, allow_dash=True
+    ),
+    required=True,
+)
 @click.option(
     "--removed-in",
     "removed_in",
@@ -134,7 +139,7 @@ def run(
     removed_in: List[Tuple[int, int]],
     deprecated_in: List[Tuple[int, int]],
     codemod: List[str],
-    path: List[str],
+    src: Tuple[str, ...],
 ) -> None:
     """
     Automatically fixes deprecations removed Django deprecations.
@@ -157,12 +162,12 @@ def run(
     codemodders_list = sorted(codemodders_set, key=lambda m: m.__name__)
     click.echo(f"Running codemods: {', '.join(m.__name__ for m in codemodders_list)}")
     command_instance = BaseCodemodCommand(codemodders_list, CodemodContext())
-    call_command(command_instance, path)
+    files = get_sources(src)
+    call_command(command_instance, files)
 
 
-def call_command(command_instance: BaseCodemodCommand, path: List[str]):
+def call_command(command_instance: BaseCodemodCommand, files: List[Path]):
     """Call libCST with our customized command."""
-    files = gather_files(path)
     try:
         # Super simplified call
         result = parallel_exec_transform_with_prettyprint(
