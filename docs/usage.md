@@ -48,3 +48,7 @@ For the list of possible codemodders, you may use the `list` subcommand or check
 │ ...                 │           ... │        ... │                                                            │
 └─────────────────────┴───────────────┴────────────┴────────────────────────────────────────────────────────────┘
 ```
+
+## Files included for codemodding
+
+The tool will only consider Python files under the given source path, ignoring files which are not tracked in git, according to rules listed in the `.gitignore` file.
