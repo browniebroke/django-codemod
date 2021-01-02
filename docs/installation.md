@@ -1,35 +1,22 @@
+(installation)=
+
 # Installation
 
-## Stable release
-
-To install Django Codemod, run this command in your terminal:
+Django Codemod requires Python 3.6 or above. The preferred way to install Django Codemod, is with [pipx]:
 
 ```shell
-$ pip install django-codemod
+$ pips install django-codemod
 ```
 
-This is the preferred method to install Django Codemod, as it will always install the most recent stable release.
+It will install the latest stable release in an isolated virtual environment, hence not polluting your global Python with dependencies.
 
-If you don't have [pip](https://pip.pypa.io) installed, this [Python installation guide](http://docs.python-guide.org/en/latest/starting/installation/) can guide you through the process.
+If you don't have [pipx] installed, checkout [their installation instructions][pipx-install] for your operating system of choice.
 
-## From sources
+## Other ways to install
 
-The sources for Django Codemod can be downloaded from the [Github repo](https://github.com/browniebroke/django-codemod).
+Django Codemod [is published on PyPI][pypi], and is based on [libCST], therefore you may install it with `pip`, `poetry` or `pipenv` if you wish to.
 
-You can either clone the public repository:
-
-```shell
-$ git clone git://github.com/browniebroke/django-codemod
-```
-
-Or download the [tarball](https://github.com/browniebroke/django-codemod/tarball/main):
-
-```shell
-$ curl -OJL https://github.com/browniebroke/django-codemod/tarball/main
-```
-
-Once you have a copy of the source, you can install it with:
-
-```shell
-$ python setup.py install
-```
+[pipx]: https://pipxproject.github.io/pipx/
+[pipx-install]: https://pipxproject.github.io/pipx/installation/
+[pypi]: https://pypi.org/project/django-codemod/
+[libcst]: https://libcst.readthedocs.io

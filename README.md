@@ -35,48 +35,26 @@
 
 A tool to help upgrade Django projects to newer version of the framework by automatically fixing deprecations.
 
-## Installation
+## The problem
 
-Install via pip (or your favourite installer):
+When maintaining a Django site, over time you'll find yourself to a point where you'll need to update to the next major version of Django. When Django APIs changes, functions move or are removed, changing usages in your project might add up to many changes. Often these changes are simple to do, but sometimes a simple "find and replace" is not possible.
 
-`pip install django-codemod`
+Take, for instance, the removal of the `url()` function from Django 4.0, to be replaced by `re_path()`. In simple cases, you might even want to switch to `path()`, which has a nicer API. A typical Django project easily has 100's or routes, so this simple decision becomes a much longer task when to be made for each of them.
 
-## Usage
+### This solution
 
-2 main workflow are supported:
+This project solves this problem by providing codemodders for simple changes like this. A codemodder re-writes your code from the old way to the new way.
 
-- Prepare future upgrades by modifying code which is deprecated in a given version using the `deprecated-in` option
-- Fix previous deprecated code which is removed in a given version using the `removed-in` option
+With the help of AST analysis, we're able to understand what modifications are applicable, remove imports as they become irrelevant, and add missing ones as they are needed.
 
-**1. Deprecations**
+To continue the example, the tool will look at the route in the `url()` call, and decide whether the regular expression may be replaced by one of the built-in URL converters and use `path()` or stick to a regex and use `re_path()`.
 
-Let's say you just updated to Django 3.0, and suddenly you're flooded with deprecations warning on your CI (you have warning enabled on CI, right?).
+Interested? Check out [the documentation](https://django-codemod.readthedocs.io) for usage and the full list of codemodders.
 
-You want to resolve them to avoid missing another important warning. You can do so by running the following command from the root of your repo:
+### What this tool is not
 
-```bash
-djcodemod run --deprecated-in 3.0 {source_file_or_directory}
-```
-
-**2. Removals**
-
-This is more of a just in time operation, assuming you haven't kept up to date with deprecation warnings, and right before upgrading to a given version (let's assume Django 4.0). In this case, you should be running:
-
-```bash
-djcodemod run --removed-in 4.0 {source_file_or_directory}
-```
-
-### Explanations
-
-In either case, the tool will run for a few minutes and apply a set of modifications to your code to fix deprecated or removed usages of Django. This should be much faster than doing it manually and much robust than a simple find & replace.
-
-Check out the [documentation](https://django-codemod.readthedocs.io) for more detail on usage and the full list of codemodders.
-
-## How it works
-
-This is based on [libCST](https://libcst.readthedocs.io/en/latest/index.html) and implements codemods for it. This is currently very limited but the aim is to add more for helping with upcoming deprecations.
-
-Not finding what you need? I'm open to contributions, please send me a pull request.
+- This tool is best suited for Django sites, NOT for reusable Django applications. The project needs to target a single Django version, e.g. 3.1.x.
+- You do NOT need to install this tool as part of your project dependencies, it is a CLI tool, not a Django package to be installed in your site.
 
 ## Contributors ✨
 

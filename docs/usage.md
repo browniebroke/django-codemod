@@ -1,3 +1,5 @@
+(usage)=
+
 # Usage
 
 This package provides a `djcodemod` command line tool with 2 main supported workflows:
@@ -25,7 +27,11 @@ This is more of a just in time operation, assuming you haven't kept up to date w
 djcodemod run --removed-in 4.0 {source_file_or_directory}
 ```
 
-### Mix and match
+### Files considered
+
+The tool will only consider Python files under the given source path, ignoring files which are not tracked in git, according to rules listed in the `.gitignore` file.
+
+## Mix and match
 
 Both `--deprecated-in` and `--removed-in` can be passed at once, and both accept multiple repetitions. You can also give as many source files or directory paths as you want. A more complex example might look like this:
 
@@ -33,11 +39,17 @@ Both `--deprecated-in` and `--removed-in` can be passed at once, and both accept
 djcodemod run --deprecated-in 3.0 --deprecated-in 3.1 --removed-in 2.2 example example1 example2/models.py settings.py
 ```
 
-## Next steps
+## Only run a specific codemodder
 
-In either case, the tool will take a few minutes and apply a set of modifications to your code to fix deprecated or removed usages of Django. This should be much faster than doing it manually and much robust than a simple find & replace.
+You may also run just some specific codemodders with the `--codemod` option (it can be repeated too):
 
-For the list of possible codemodders, you may use the `list` subcommand or check {ref}`the next section <list_of_codemodders>`.
+```bash
+djcodemod run --codemod URLTransformer urls.py
+```
+
+## List codemodders
+
+For the list of all possible codemodders, you may use the `list` subcommand or check {ref}`the next section <list_of_codemodders>`.
 
 ```bash
 > djcodemod list
@@ -48,7 +60,3 @@ For the list of possible codemodders, you may use the `list` subcommand or check
 │ ...                 │           ... │        ... │                                                            │
 └─────────────────────┴───────────────┴────────────┴────────────────────────────────────────────────────────────┘
 ```
-
-## Files included for codemodding
-
-The tool will only consider Python files under the given source path, ignoring files which are not tracked in git, according to rules listed in the `.gitignore` file.

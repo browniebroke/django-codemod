@@ -1,6 +1,6 @@
 (list_of_codemodders)=
 
-# List of codemodders
+# Codemodders
 
 Here is the list of automatic fixes which are supported by `django-codemod`
 at this stage. This list will be updated as new fixes are implemented.
