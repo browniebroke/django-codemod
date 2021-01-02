@@ -2,6 +2,18 @@
 
 <!--next-version-placeholder-->
 
+## v1.1.0 (2021-01-02)
+### Feature
+* Ignore files according to .gitignore ([`ae74273`](https://github.com/browniebroke/django-codemod/commit/ae742731fc91c7d130b6fc5c6ab91bac92299151))
+
+### Fix
+* **deps:** Update dependency myst-parser to ^0.13.0 ([`c9ac21a`](https://github.com/browniebroke/django-codemod/commit/c9ac21a570149bec2ae6673e0cfba37104e35bb4))
+* **deps:** Update dependency rich to v9 ([`6818668`](https://github.com/browniebroke/django-codemod/commit/68186681a9791734fb0e40471446a7ad7a37a6e0))
+
+### Documentation
+* Rework documentation ([`5e9dc2b`](https://github.com/browniebroke/django-codemod/commit/5e9dc2b1723fa110bd01954fc2e198ca23533dc9))
+* Make recommended command less error prone ([`fc51862`](https://github.com/browniebroke/django-codemod/commit/fc51862417d3ae42e9006e460ebdc9b6cbeefc30))
+
 ## v1.0.0 (2020-11-11)
 ### Feature
 * Migrate packaging to Poetry ([`8ed12c8`](https://github.com/browniebroke/django-codemod/commit/8ed12c898c8a8eb63b3e9b005e20af635bf8cc42))
