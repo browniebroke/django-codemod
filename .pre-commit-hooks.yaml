@@ -1,0 +1,9 @@
+- id: djcodemod
+  name: djcodemod
+  entry: djcodemod
+  require_serial: true
+  language: python
+  language_version: python3
+  types: [file, python]
+  args: ["run"]
+  minimum_pre_commit_version: "2"
