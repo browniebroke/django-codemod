@@ -25,6 +25,7 @@ Interested? Check out the next sections for {ref}`installation <installation>` a
 
 installation
 usage
+pre-commit-hook
 codemods
 ```
 
