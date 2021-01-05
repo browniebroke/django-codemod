@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v1.2.0 (2021-01-05)
+### Feature
+* Make it runnable as pre-commit hook ([#294](https://github.com/browniebroke/django-codemod/issues/294)) ([`2f78502`](https://github.com/browniebroke/django-codemod/commit/2f78502a9755436e2d4b7aa54a8a52c6acc27c77))
+
+### Fix
+* Add pathspec to dependencies ([`2cb8a82`](https://github.com/browniebroke/django-codemod/commit/2cb8a82f53d307ded2f878b83ea5de0cb5aa0677))
+
 ## v1.1.0 (2021-01-02)
 ### Feature
 * Ignore files according to .gitignore ([`ae74273`](https://github.com/browniebroke/django-codemod/commit/ae742731fc91c7d130b6fc5c6ab91bac92299151))
