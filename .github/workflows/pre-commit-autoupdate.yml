@@ -5,6 +5,7 @@ name: Pre-commit auto-update
 on:
   schedule:
     - cron: "0 0 * * *"
+  workflow_dispatch:
 
 jobs:
   auto-update:
@@ -15,10 +16,7 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: 3.8
-      - name: Install pre-commit
-        run: pip install pre-commit
-      - name: Run pre-commit autoupdate
-        run: pre-commit autoupdate
+      - uses: browniebroke/pre-commit-autoupdate-action@main
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
