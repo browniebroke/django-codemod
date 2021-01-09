@@ -29,7 +29,7 @@ djcodemod run --removed-in 4.0 {source_file_or_directory}
 
 ### Files considered
 
-The tool will only consider Python files under the given source path, ignoring files which are not tracked in git, according to rules listed in the `.gitignore` file.
+The tool will only consider Python files under the given source path, ignoring files which are not tracked in git, according to rules listed in the `.gitignore` file. If your repo has multiple `.gitignore` files, only one will be considered.
 
 ## Mix and match
 
