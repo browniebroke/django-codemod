@@ -26,3 +26,8 @@ repos:
     rev: 3.8.4
     hooks:
       - id: flake8
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: master
+    hooks:
+      - id: commitizen
+        stages: [commit-msg]
