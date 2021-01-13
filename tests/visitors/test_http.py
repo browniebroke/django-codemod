@@ -1,6 +1,7 @@
 from parameterized import parameterized
 
 from django_codemod.visitors import (
+    CookieDateTransformer,
     HttpRequestXReadLinesTransformer,
     HttpUrlQuotePlusTransformer,
     HttpUrlQuoteTransformer,
@@ -158,5 +159,30 @@ class TestHttpRequestXReadLinesTransformer(BaseVisitorTest):
         after = f"""
             for line in self.view.{attribute_name}:
                 print(line)
+        """
+        self.assertCodemod(before, after)
+
+
+class TestCookieDateTransformer(BaseVisitorTest):
+    transformer = CookieDateTransformer
+
+    def test_noop(self):
+        before = after = """
+            from django.utils.http import http_date
+
+            http_date(12345)
+        """
+        self.assertCodemod(before, after)
+
+    def test_basic(self):
+        before = """
+            from django.utils.http import cookie_date
+
+            cookie_date(12345)
+        """
+        after = """
+            from django.utils.http import http_date
+
+            http_date(12345)
         """
         self.assertCodemod(before, after)

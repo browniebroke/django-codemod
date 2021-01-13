@@ -9,6 +9,7 @@ from .encoding import (
 )
 from .html import UnescapeEntitiesTransformer
 from .http import (
+    CookieDateTransformer,
     HttpRequestXReadLinesTransformer,
     HttpUrlQuotePlusTransformer,
     HttpUrlQuoteTransformer,
@@ -43,6 +44,7 @@ __all__ = (
     "AssignmentTagTransformer",
     "AvailableAttrsTransformer",
     "ContextDecoratorTransformer",
+    "CookieDateTransformer",
     "FixedOffsetTransformer",
     "FloatRangeFormFieldTransformer",
     "FloatRangeModelFieldTransformer",

@@ -57,6 +57,8 @@ Applied by passing the `--removed-in 3.0` or `--deprecated-in 2.0` option:
 Applied by passing the `--removed-in 3.0` or `--deprecated-in 2.1` option:
 
 - Add the `obj` argument to `InlineModelAdmin.has_add_permission()`.
+- Replace `django.utils.http.cookie_date()` by `http_date()`, which follows
+  the format of the latest RFC.
 
 ## Removed in Django 3.1
 
