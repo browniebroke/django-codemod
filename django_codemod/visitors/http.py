@@ -1,7 +1,7 @@
 from libcst import BaseExpression, Call
 from libcst import matchers as m
 
-from django_codemod.constants import DJANGO_2_0, DJANGO_3_0, DJANGO_4_0
+from django_codemod.constants import DJANGO_2_0, DJANGO_2_1, DJANGO_3_0, DJANGO_4_0
 from django_codemod.visitors.base import (
     BaseDjCodemodTransformer,
     BaseFuncRenameTransformer,
@@ -78,3 +78,12 @@ class HttpRequestXReadLinesTransformer(BaseDjCodemodTransformer):
         if m.matches(updated_node, self.matcher):
             return updated_node.func.value
         return super().leave_Call(original_node, updated_node)
+
+
+class CookieDateTransformer(BaseFuncRenameTransformer):
+    """Replace `django.utils.http.cookie_date()` by `http_date`."""
+
+    deprecated_in = DJANGO_2_1
+    removed_in = DJANGO_3_0
+    rename_from = "django.utils.http.cookie_date"
+    rename_to = "django.utils.http.http_date"
