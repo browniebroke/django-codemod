@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v1.3.0 (2021-01-14)
+### Feature
+* Add fixer for `django.utils.http.cookie_date` ([`a3e12d1`](https://github.com/browniebroke/django-codemod/commit/a3e12d1c867345133c8bf77c30085edb41f1e800))
+
+### Documentation
+* Add @drewbrew as a contributor ([`08ed73b`](https://github.com/browniebroke/django-codemod/commit/08ed73ba97c1525ff047668923761d02e9150ed0))
+* Explain limitation with gitignore ([`e102bde`](https://github.com/browniebroke/django-codemod/commit/e102bde122a562a4b20f3a7977895bfc0a663202))
+
 ## v1.2.0 (2021-01-05)
 ### Feature
 * Make it runnable as pre-commit hook ([#294](https://github.com/browniebroke/django-codemod/issues/294)) ([`2f78502`](https://github.com/browniebroke/django-codemod/commit/2f78502a9755436e2d4b7aa54a8a52c6acc27c77))
