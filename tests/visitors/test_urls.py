@@ -52,8 +52,8 @@ class TestURLTransformer(BaseVisitorTest):
         """
         self.assertCodemod(before, after)
 
-    def test_starting_caret(self) -> None:
-        """Patterns not starting with '^' are migrated to re_path."""
+    def test_no_starting_caret(self) -> None:
+        """Patterns not starting with '^' are also migrated to path."""
         before = """
             from django.conf.urls import url
 
@@ -62,10 +62,10 @@ class TestURLTransformer(BaseVisitorTest):
             ]
         """
         after = """
-            from django.urls import re_path
+            from django.urls import path
 
             urlpatterns = [
-                re_path(r'about/$', views.about, name='about'),
+                path('about/', views.about, name='about'),
             ]
         """
         self.assertCodemod(before, after)

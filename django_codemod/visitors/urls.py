@@ -49,7 +49,6 @@ class URLTransformer(BaseFuncRenameTransformer):
         self.check_not_simple_string(first_arg)
         # Extract the URL pattern from the first argument
         pattern = first_arg.value.evaluated_value
-        self.check_missing_start(pattern)
         # If we reach this point, we might be able to use `path()`
         call = self.build_path_call(pattern, other_args)
         AddImportsVisitor.add_needed_import(
@@ -62,11 +61,6 @@ class URLTransformer(BaseFuncRenameTransformer):
     def check_not_simple_string(self, first_arg: Arg):
         """Translated patterns are not supported."""
         if not m.matches(first_arg, m.Arg(value=m.SimpleString())):
-            raise PatternNotSupported()
-
-    def check_missing_start(self, pattern):
-        """Patterns that do not match the start of the string with caret."""
-        if not pattern.startswith("^"):
             raise PatternNotSupported()
 
     def build_path_call(self, pattern, other_args):
