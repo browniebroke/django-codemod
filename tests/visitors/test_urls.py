@@ -129,6 +129,7 @@ class TestURLTransformer(BaseVisitorTest):
                 url(r'^page/(?P<number>\d+)/$', views.page, name='page'),
                 url(r'^post/(?P<slug>[-a-zA-Z0-9_]+)/$', views.post, name='post'),
                 url(r'^post/(?P<slug>[\w-]+)/$', views.post, name='post'),
+                url(r'^post/(?P<slug>[-\w]+)/$', views.post, name='post'),
                 url(r'^about/(?P<name>[^/]+)/$', views.about, name='about'),
                 url(r'^uuid/(?P<uuid>{uuid_re})/$', by_uuid),
                 url(r'^(?P<path>.+)/$', views.default, name='default'),
@@ -140,6 +141,7 @@ class TestURLTransformer(BaseVisitorTest):
             urlpatterns = [
                 path('page/<int:number>/', views.page, name='page'),
                 path('page/<int:number>/', views.page, name='page'),
+                path('post/<slug:slug>/', views.post, name='post'),
                 path('post/<slug:slug>/', views.post, name='post'),
                 path('post/<slug:slug>/', views.post, name='post'),
                 path('about/<str:name>/', views.about, name='about'),
