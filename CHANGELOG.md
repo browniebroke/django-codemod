@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v1.3.1 (2021-01-19)
+### Fix
+* Pin libCST to 0.3.13 ([`8269370`](https://github.com/browniebroke/django-codemod/commit/8269370d4e6e4d40c3e706b7e8b0008ea3cd0e85))
+* Support another slug pattern ([`a4ce0cb`](https://github.com/browniebroke/django-codemod/commit/a4ce0cb039a24ebee86d7ff0cabe620ff0ab3f3c))
+* Migrate partial patterns to path ([`202a6b3`](https://github.com/browniebroke/django-codemod/commit/202a6b3cde651173d91386d01ad5399e106049f3))
+
 ## v1.3.0 (2021-01-14)
 ### Feature
 * Add fixer for `django.utils.http.cookie_date` ([`a3e12d1`](https://github.com/browniebroke/django-codemod/commit/a3e12d1c867345133c8bf77c30085edb41f1e800))
