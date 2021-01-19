@@ -168,3 +168,25 @@ class TestURLTransformer(BaseVisitorTest):
             ]
         """
         self.assertCodemod(before, after)
+
+    def test_route_with_kwargs(self) -> None:
+        """Check when `url()` call uses keyword argument `regex`."""
+        before = """
+            from django.conf.urls import url
+
+            urlpatterns = [
+                url(regex=r'^/$', view=views.home, name='home'),
+                url(regex=r'^p/(?P<page>[0-9]+)/$', view=views.page, name='page'),
+                url(regex=r'^hex/(?P<code>[a-f1-9]+)/$', view=views.hex, name='hex'),
+            ]
+        """
+        after = """
+            from django.urls import path, re_path
+
+            urlpatterns = [
+                path('/', view=views.home, name='home'),
+                path('p/<int:page>/', view=views.page, name='page'),
+                re_path(r'^hex/(?P<code>[a-f1-9]+)/$', view=views.hex, name='hex'),
+            ]
+        """
+        self.assertCodemod(before, after)
