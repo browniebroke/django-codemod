@@ -1,3 +1,5 @@
+from typing import Sequence
+
 from libcst import Arg, BaseExpression, Call, Name, SimpleString
 from libcst import matchers as m
 from libcst.codemod.visitors import AddImportsVisitor
@@ -97,3 +99,11 @@ class URLTransformer(BaseFuncRenameTransformer):
         """Check that route doesn't contain anymore regex."""
         if set(route) & REGEX_SPECIALS_SANS_DASH:
             raise PatternNotSupported(f"Route {route} contains regex")
+
+    def update_call_args(self, node: Call) -> Sequence[Arg]:
+        """Remove keyword argument from first argument of `re_path`."""
+        first_arg, *other_args = node.args
+        if m.matches(first_arg, m.Arg(keyword=m.Name("regex"))):
+            first_arg = Arg(value=first_arg.value)
+            return (first_arg, *other_args)
+        return super().update_call_args(node)
