@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.3.2 (2021-01-19)
+### Fix
+* Bug when `url()` route uses the `regex` kwarg ([`b7bcc3d`](https://github.com/browniebroke/django-codemod/commit/b7bcc3dee08fadc90afdc9490828569e7ec06786))
+
 ## v1.3.1 (2021-01-19)
 ### Fix
 * Pin libCST to 0.3.13 ([`8269370`](https://github.com/browniebroke/django-codemod/commit/8269370d4e6e4d40c3e706b7e8b0008ea3cd0e85))
