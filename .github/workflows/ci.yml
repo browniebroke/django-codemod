@@ -35,6 +35,23 @@ jobs:
         run: poetry run pytest --cov-report=xml
       - uses: codecov/codecov-action@v1.2.1
 
+  e2e:
+    # https://github.com/browniebroke/django-codemod/issues/302
+    name: e2e
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+            python-version: 3.8
+      - name: Install Dependencies
+        run: |
+          pip install .
+          pip install 'Django>=3.0,<3.1'
+      - name: Run e2e script
+        run: ./tests/test_e2e.sh
+
   lint:
     name: Lint
     strategy:
