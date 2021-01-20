@@ -7,6 +7,7 @@ from libcst import (
     BaseExpression,
     BaseSmallStatement,
     Call,
+    CSTNode,
     ImportAlias,
     ImportFrom,
     ImportStar,
@@ -18,6 +19,7 @@ from libcst import (
 from libcst import matchers as m
 from libcst.codemod import ContextAwareTransformer
 from libcst.codemod.visitors import AddImportsVisitor
+from libcst.metadata import Scope, ScopeProvider
 
 
 class BaseDjCodemodTransformer(ContextAwareTransformer, ABC):
@@ -93,6 +95,7 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
             return super().leave_ImportFrom(original_node, updated_node)
         # This is a match
         new_names = list(self.gen_new_imported_names(updated_node.names))
+        self.save_import_scope(original_node)
         if not new_names:
             # Nothing left in the import statement: remove it
             return RemoveFromParent()
@@ -112,6 +115,22 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
                         self.add_new_import(import_alias.evaluated_name)
                     continue
             yield import_alias
+
+    def resolve_scope(self, node: CSTNode) -> Scope:
+        scopes_map = self.context.wrapper.resolve(ScopeProvider)
+        return scopes_map[node]
+
+    def save_import_scope(self, import_from: ImportFrom) -> None:
+        scope = self.resolve_scope(import_from)
+        self.context.scratch[self.ctx_key_import_scope] = scope
+
+    @property
+    def import_scope(self) -> Optional[Scope]:
+        return self.context.scratch.get(self.ctx_key_import_scope, None)
+
+    @property
+    def ctx_key_import_scope(self) -> str:
+        return f"{self.rename_from}-import_scope"
 
     @staticmethod
     def tidy_new_imported_names(
@@ -153,6 +172,7 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
             self.is_imported_with_old_name
             and not self.entity_is_name_called
             and m.matches(updated_node, m.Name(value=self.old_name))
+            and self.resolve_scope(original_node) == self.import_scope
         ):
             return updated_node.with_changes(value=self.new_name)
         return super().leave_Name(original_node, updated_node)
