@@ -1,5 +1,6 @@
 import pytest
 from libcst import matchers as m
+from parameterized import parameterized
 
 from django_codemod.visitors.base import (
     BaseFuncRenameTransformer,
@@ -186,6 +187,35 @@ class TestFuncRenameTransformer(BaseVisitorTest):
             def something():
                 func = get_func()
                 return func
+        """
+        self.assertCodemod(before, after)
+
+    @parameterized.expand(
+        [
+            ("response.func",),
+            ("response.func.other",),
+            ("response.func.other.one",),
+        ]
+    )
+    def test_attribute_access(self, attribute_access) -> None:
+        """When accessing an attribute that looks like the imported name."""
+        before = f"""
+            from django.dummy.module import func
+
+            result = func()
+
+            def test_something():
+                response = get_response()
+                assert {attribute_access} == 1
+        """
+        after = f"""
+            from django.dummy.module import better_func
+
+            result = better_func()
+
+            def test_something():
+                response = get_response()
+                assert {attribute_access} == 1
         """
         self.assertCodemod(before, after)
 

@@ -4,6 +4,7 @@ from typing import Generator, Optional, Sequence, Tuple, Union
 
 from libcst import (
     Arg,
+    Attribute,
     BaseExpression,
     BaseSmallStatement,
     Call,
@@ -73,14 +74,6 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
     @property
     def entity_imported_as(self):
         return self.context.scratch.get(self.ctx_key_imported_as, None)
-
-    @property
-    def ctx_key_is_name_called(self):
-        return f"{self.rename_from}-is_name_called"
-
-    @property
-    def entity_is_name_called(self):
-        return self.context.scratch.get(self.ctx_key_is_name_called, False)
 
     @property
     def is_imported_with_old_name(self):
@@ -156,6 +149,14 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
             asname=as_name,
         )
 
+    @property
+    def ctx_key_is_name_called(self):
+        return f"{self.rename_from}-is_name_called"
+
+    @property
+    def entity_is_name_called(self):
+        return self.context.scratch.get(self.ctx_key_is_name_called, False)
+
     def visit_Call(self, node: Call) -> Optional[bool]:
         if self.is_imported_with_old_name and m.matches(
             node, m.Call(func=m.Name(self.old_name))
@@ -167,10 +168,32 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
         self.context.scratch.pop(self.ctx_key_is_name_called, None)
         return super().leave_Call(original_node, updated_node)
 
+    @property
+    def ctx_key_is_name_in_attribute(self):
+        return f"{self.rename_from}-is_in_attribute"
+
+    @property
+    def entity_is_in_attribute(self):
+        return self.context.scratch.get(self.ctx_key_is_name_in_attribute, False)
+
+    def visit_Attribute(self, node: Attribute) -> Optional[bool]:
+        if self.is_imported_with_old_name and m.matches(
+            node, m.Attribute(attr=m.Name(self.old_name))
+        ):
+            self.context.scratch[self.ctx_key_is_name_in_attribute] = True
+        return super().visit_Attribute(node)
+
+    def leave_Attribute(
+        self, original_node: Attribute, updated_node: Attribute
+    ) -> BaseExpression:
+        self.context.scratch.pop(self.ctx_key_is_name_in_attribute, None)
+        return super().leave_Attribute(original_node, updated_node)
+
     def leave_Name(self, original_node: Name, updated_node: Name) -> BaseExpression:
         if (
             self.is_imported_with_old_name
             and not self.entity_is_name_called
+            and not self.entity_is_in_attribute
             and m.matches(updated_node, m.Name(value=self.old_name))
             and self.resolve_scope(original_node) == self.import_scope
         ):
