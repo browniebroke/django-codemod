@@ -5,7 +5,10 @@ from typing import Generator, Optional, Sequence, Tuple, Union
 from libcst import (
     Arg,
     BaseExpression,
+    BaseSmallStatement,
     Call,
+    ImportAlias,
+    ImportFrom,
     ImportStar,
     MaybeSentinel,
     Name,
@@ -13,7 +16,6 @@ from libcst import (
     RemoveFromParent,
 )
 from libcst import matchers as m
-from libcst._nodes.statement import BaseSmallStatement, ImportAlias, ImportFrom
 from libcst.codemod import ContextAwareTransformer
 from libcst.codemod.visitors import AddImportsVisitor
 
@@ -33,7 +35,7 @@ def module_matcher(import_parts: Sequence) -> Union[m.BaseMatcherNode, m.DoNotCa
     return m.Attribute(value=value, attr=m.Name(attr))
 
 
-def import_from_matches(node: ImportFrom, module_parts: Sequence):
+def import_from_matches(node: ImportFrom, module_parts: Sequence) -> bool:
     """Check if an `ImportFrom` node matches sequence of module parts."""
     return m.matches(node, m.ImportFrom(module=module_matcher(module_parts)))
 
@@ -111,7 +113,10 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
                     continue
             yield import_alias
 
-    def tidy_new_imported_names(self, new_names):
+    @staticmethod
+    def tidy_new_imported_names(
+        new_names: Sequence[ImportAlias],
+    ) -> Sequence[ImportAlias]:
         """Tidy up the updated list of imports"""
         # Sort them
         cleaned_names = sorted(new_names, key=lambda n: n.evaluated_name)
@@ -121,7 +126,7 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
             cleaned_names[-1] = last_name.with_changes(comma=MaybeSentinel.DEFAULT)
         return cleaned_names
 
-    def add_new_import(self, evaluated_name: Optional[str] = None):
+    def add_new_import(self, evaluated_name: Optional[str] = None) -> None:
         as_name = (
             self.entity_imported_as.name.value if self.entity_imported_as else None
         )
@@ -137,6 +142,7 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
             node, m.Call(func=m.Name(self.old_name))
         ):
             self.context.scratch[self.ctx_key_is_name_called] = True
+        return None
 
     def leave_Call(self, original_node: Call, updated_node: Call) -> BaseExpression:
         self.context.scratch.pop(self.ctx_key_is_name_called, None)
