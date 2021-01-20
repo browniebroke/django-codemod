@@ -167,6 +167,28 @@ class TestFuncRenameTransformer(BaseVisitorTest):
         """
         self.assertCodemod(before, after)
 
+    def test_name_from_outer_scope(self) -> None:
+        """When import from outer scope has same name as function variable."""
+        before = """
+            from django.dummy.module import func
+
+            result = func()
+
+            def something():
+                func = get_func()
+                return func
+        """
+        after = """
+            from django.dummy.module import better_func
+
+            result = better_func()
+
+            def something():
+                func = get_func()
+                return func
+        """
+        self.assertCodemod(before, after)
+
 
 class OtherModuleFuncRenameTransformer(BaseFuncRenameTransformer):
     """Transformer with different module."""
