@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.3.4 (2021-01-21)
+### Fix
+* Don't confuse kwargs with symbol to codemod ([`f576347`](https://github.com/browniebroke/django-codemod/commit/f576347a4e387a7e478142e29a1a3e189ee38cd9))
+
 ## v1.3.3 (2021-01-21)
 ### Fix
 * Bug with attributes accessing ([`417e630`](https://github.com/browniebroke/django-codemod/commit/417e6302ed6c3182fba2199888610c19f35c5105))
