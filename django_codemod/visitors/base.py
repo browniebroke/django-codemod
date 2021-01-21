@@ -17,7 +17,7 @@ from libcst import (
     RemoveFromParent,
 )
 from libcst import matchers as m
-from libcst.codemod import ContextAwareTransformer
+from libcst.codemod import CodemodContext, ContextAwareTransformer
 from libcst.codemod.visitors import AddImportsVisitor
 from libcst.metadata import ParentNodeProvider, Scope, ScopeProvider
 
@@ -50,25 +50,12 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
 
     simple_rename = True
 
-    @property
-    def old_name(self):
-        return self.rename_from.split(".")[-1]
-
-    @property
-    def old_module_parts(self):
-        return self.rename_from.split(".")[:-1]
-
-    @property
-    def new_name(self):
-        return self.rename_to.split(".")[-1]
-
-    @property
-    def new_module_parts(self):
-        return self.rename_to.split(".")[:-1]
-
-    @property
-    def ctx_key_imported_as(self):
-        return f"{self.rename_from}-imported_as"
+    def __init__(self, context: CodemodContext) -> None:
+        super().__init__(context)
+        *self.old_module_parts, self.old_name = self.rename_from.split(".")
+        *self.new_module_parts, self.new_name = self.rename_to.split(".")
+        self.ctx_key_imported_as = f"{self.rename_from}-imported_as"
+        self.ctx_key_import_scope = f"{self.rename_from}-import_scope"
 
     @property
     def entity_imported_as(self):
@@ -123,10 +110,6 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
     @property
     def import_scope(self) -> Optional[Scope]:
         return self.context.scratch.get(self.ctx_key_import_scope, None)
-
-    @property
-    def ctx_key_import_scope(self) -> str:
-        return f"{self.rename_from}-import_scope"
 
     @staticmethod
     def tidy_new_imported_names(
@@ -185,21 +168,12 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
 class BaseModuleRenameTransformer(BaseRenameTransformer, ABC):
     """Base class to help rename or move a module."""
 
-    @property
-    def old_name(self):
-        return ""
-
-    @property
-    def old_module_parts(self):
-        return self.rename_from.split(".")
-
-    @property
-    def new_name(self):
-        return ""
-
-    @property
-    def new_module_parts(self):
-        return self.rename_to.split(".")
+    def __init__(self, context: CodemodContext) -> None:
+        super().__init__(context)
+        self.old_name = ""
+        self.old_module_parts = self.rename_from.split(".")
+        self.new_name = ""
+        self.new_module_parts = self.rename_to.split(".")
 
 
 class BaseFuncRenameTransformer(BaseRenameTransformer, ABC):
