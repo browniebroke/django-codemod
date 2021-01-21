@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v1.3.3 (2021-01-21)
+### Fix
+* Bug with attributes accessing ([`417e630`](https://github.com/browniebroke/django-codemod/commit/417e6302ed6c3182fba2199888610c19f35c5105))
+* Bug with scopes ([`3dcee1d`](https://github.com/browniebroke/django-codemod/commit/3dcee1db59a8e5c14d54537872e4c95d0320fa18))
+* Add some missing type hints ([`a403e90`](https://github.com/browniebroke/django-codemod/commit/a403e906d3cb14d99cd6880964c1a3ed54e0b9db))
+
 ## v1.3.2 (2021-01-19)
 ### Fix
 * Bug when `url()` route uses the `regex` kwarg ([`b7bcc3d`](https://github.com/browniebroke/django-codemod/commit/b7bcc3dee08fadc90afdc9490828569e7ec06786))
