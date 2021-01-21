@@ -19,7 +19,7 @@ from libcst import (
 from libcst import matchers as m
 from libcst.codemod import ContextAwareTransformer
 from libcst.codemod.visitors import AddImportsVisitor
-from libcst.metadata import Scope, ScopeProvider
+from libcst.metadata import ParentNodeProvider, Scope, ScopeProvider
 
 
 class BaseDjCodemodTransformer(ContextAwareTransformer, ABC):
@@ -108,6 +108,10 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
                     continue
             yield import_alias
 
+    def resolve_parent_node(self, node: CSTNode) -> CSTNode:
+        parent_nodes = self.context.wrapper.resolve(ParentNodeProvider)
+        return parent_nodes[node]
+
     def resolve_scope(self, node: CSTNode) -> Scope:
         scopes_map = self.context.wrapper.resolve(ScopeProvider)
         return scopes_map[node]
@@ -148,44 +152,34 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
             asname=as_name,
         )
 
-    @property
-    def ctx_key_is_name_called(self):
-        return f"{self.rename_from}-is_name_called"
-
-    @property
-    def entity_is_name_called(self):
-        return self.context.scratch.get(self.ctx_key_is_name_called, False)
-
-    def visit_Call(self, node: Call) -> Optional[bool]:
-        if self.is_imported_with_old_name and m.matches(
-            node, m.Call(func=m.Name(self.old_name))
-        ):
-            self.context.scratch[self.ctx_key_is_name_called] = True
-        return None
-
-    def leave_Call(self, original_node: Call, updated_node: Call) -> BaseExpression:
-        self.context.scratch.pop(self.ctx_key_is_name_called, None)
-        return super().leave_Call(original_node, updated_node)
-
     def leave_Name(self, original_node: Name, updated_node: Name) -> BaseExpression:
+        """Rename reference to the imported name."""
         if (
             self.is_imported_with_old_name
-            and not self.entity_is_name_called
             and m.matches(updated_node, m.Name(value=self.old_name))
+            and not self.is_wrapped_in_call(original_node)
+            and self.matches_import_scope(original_node)
         ):
-            try:
-                scope = self.resolve_scope(original_node)
-            except KeyError:
-                # Can't resolve scope of original_node, ignore it
-                # Might be because of one of these reasons:
-                # - It's the same name in another scope
-                # - It's a attribute with the same name
-                # - It's a keyword argument
-                pass
-            else:
-                if scope == self.import_scope:
-                    return updated_node.with_changes(value=self.new_name)
+            return updated_node.with_changes(value=self.new_name)
         return super().leave_Name(original_node, updated_node)
+
+    def is_wrapped_in_call(self, node: CSTNode) -> bool:
+        """Check whether given node is wrapped in Call."""
+        parent = self.resolve_parent_node(node)
+        return m.matches(parent, m.Call())
+
+    def matches_import_scope(self, node: CSTNode) -> bool:
+        """Check whether given node matches the scope of the import."""
+        try:
+            scope = self.resolve_scope(node)
+        except KeyError:
+            # Can't resolve scope of node -> consider no match
+            # Might be because of one of these reasons:
+            # - It's the same name in another scope
+            # - It's a attribute with the same name
+            # - It's a keyword argument
+            return False
+        return scope == self.import_scope
 
 
 class BaseModuleRenameTransformer(BaseRenameTransformer, ABC):
@@ -220,7 +214,7 @@ class BaseFuncRenameTransformer(BaseRenameTransformer, ABC):
 
     def update_call(self, updated_node: Call) -> BaseExpression:
         updated_args = self.update_call_args(updated_node)
-        return Call(args=updated_args, func=Name(self.new_name))
+        return updated_node.with_changes(args=updated_args, func=Name(self.new_name))
 
     def update_call_args(self, node: Call) -> Sequence[Arg]:
         return node.args
