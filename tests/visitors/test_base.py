@@ -219,6 +219,22 @@ class TestFuncRenameTransformer(BaseVisitorTest):
         """
         self.assertCodemod(before, after)
 
+    def test_kwargs(self) -> None:
+        """When function is called with a kwargs bearing the same name."""
+        before = """
+            from django.dummy.module import func
+
+            func()
+            something(func="test")
+        """
+        after = """
+            from django.dummy.module import better_func
+
+            better_func()
+            something(func="test")
+        """
+        self.assertCodemod(before, after)
+
 
 class OtherModuleFuncRenameTransformer(BaseFuncRenameTransformer):
     """Transformer with different module."""
