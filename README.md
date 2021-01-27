@@ -1,4 +1,6 @@
-# Django Codemod
+<p align="center">
+  <img alt="Django Codemod" src="https://raw.githubusercontent.com/browniebroke/django-codemod/main/assets/djangocodemod-stroke.png">
+</p>
 
 <p align="center">
   <a href="https://github.com/browniebroke/django-codemod/actions?query=workflow%3ACI">
