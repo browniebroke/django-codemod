@@ -1,3 +1,9 @@
 {
-  "extends": ["github>browniebroke/renovate-configs"]
+  "extends": ["github>browniebroke/renovate-configs"],
+  "packageRules": [
+    {
+      "packageNames": ["libcst"],
+      "allowedVersions": "<=0.3.13 || >0.3.16"
+    }
+  ]
 }
