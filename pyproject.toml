@@ -62,8 +62,10 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.semantic_release]
 branch = "main"
-version_toml = "pyproject.toml:poetry.tool.version"
-version_variable = "django_codemod/__init__.py:__version__"
+version_variable = [
+    "django_codemod/__init__.py:__version__",
+    "pyproject.toml:version",
+]
 build_command = "pip install poetry && poetry build"
 
 [tool.pytest.ini_options]
