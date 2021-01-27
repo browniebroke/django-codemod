@@ -29,7 +29,7 @@ djcodemod = "django_codemod.cli:djcodemod"
 [tool.poetry.dependencies]
 python = "^3.6"
 click = "<8"
-libcst = "==0.3.13"
+libcst = "<=0.3.13"
 pathspec = ">=0.6,<1"
 rich = "<10"
 
