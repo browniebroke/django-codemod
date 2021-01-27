@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.3.5 (2021-01-27)
+### Fix
+* Loosen up version for libcst ([`4129e23`](https://github.com/browniebroke/django-codemod/commit/4129e2372f1deae58c68a2d4e5a202576170299e))
+
 ## v1.3.4 (2021-01-21)
 ### Fix
 * Don't confuse kwargs with symbol to codemod ([`f576347`](https://github.com/browniebroke/django-codemod/commit/f576347a4e387a7e478142e29a1a3e189ee38cd9))
