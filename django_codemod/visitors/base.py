@@ -27,7 +27,9 @@ class BaseDjCodemodTransformer(ContextAwareTransformer, ABC):
     removed_in: Tuple[int, int]
 
 
-def module_matcher(import_parts: Sequence) -> Union[m.BaseMatcherNode, m.DoNotCare]:
+def module_matcher(
+    import_parts: Sequence[str],
+) -> Union[m.BaseMatcherNode, m.DoNotCare]:
     """Build matcher for a module given sequence of import parts."""
     # If only one element, it is just a Name
     if len(import_parts) == 1:
@@ -37,7 +39,7 @@ def module_matcher(import_parts: Sequence) -> Union[m.BaseMatcherNode, m.DoNotCa
     return m.Attribute(value=value, attr=m.Name(attr))
 
 
-def import_from_matches(node: ImportFrom, module_parts: Sequence) -> bool:
+def import_from_matches(node: ImportFrom, module_parts: Sequence[str]) -> bool:
     """Check if an `ImportFrom` node matches sequence of module parts."""
     return m.matches(node, m.ImportFrom(module=module_matcher(module_parts)))
 
