@@ -22,14 +22,14 @@ def index_codemodders(version_getter: Callable) -> Dict[Tuple[int, int], List]:
 
     Build a map of Django version to list of codemodders.
     """
-    codemodders_index = defaultdict(list)
+    codemodders_index: defaultdict = defaultdict(list)
     for obj in iter_codemodders():
         django_version = version_getter(obj)
         codemodders_index[django_version].append(obj)
     return dict(codemodders_index)
 
 
-def iter_codemodders() -> Generator[BaseDjCodemodTransformer, None, None]:
+def iter_codemodders() -> Generator[Type[BaseDjCodemodTransformer], None, None]:
     """Iterator of all the codemodders classes."""
     for object_name in dir(visitors):
         try:
@@ -225,7 +225,7 @@ def generate_rows() -> Generator[Tuple[str, str, str, str], None, None]:
         )
 
 
-def get_short_description(codemodder: Type) -> str:
+def get_short_description(codemodder: Type[BaseDjCodemodTransformer]) -> str:
     """Get a one line description of the codemodder from its docstring."""
     if codemodder.__doc__ is None:
         return ""
@@ -233,6 +233,7 @@ def get_short_description(codemodder: Type) -> str:
         description = line.strip()
         if description:
             return description
+    return ""
 
 
 def version_str(version_parts: Tuple[int, int]) -> str:

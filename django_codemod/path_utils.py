@@ -4,7 +4,7 @@ Inspired or taken from black:
 https://github.com/psf/black
 """
 from pathlib import Path
-from typing import Iterable, Iterator, List, Optional
+from typing import Iterable, Iterator, List, Optional, Set
 
 from pathspec import PathSpec
 
@@ -17,14 +17,14 @@ def get_sources(src: Iterable[str]) -> List[Path]:
     """
     root = find_project_root(src)
     gitignore = get_gitignore(root)
-    sources = set()
+    sources: Set[Path] = set()
     for s in src:
         p = Path(s)
-        paths = None
+        paths: Iterable[Path] = []
         if p.is_file():
             paths = [p]
         elif p.is_dir():
-            paths = p.iterdir()
+            paths = list(p.iterdir())
         if paths:
             sources.update(gen_python_files(paths, root, gitignore))
     return sorted(sources)

@@ -198,6 +198,12 @@ class NoDocString:
     pass
 
 
+class EmptyDocString:
+    """"""
+
+    pass
+
+
 class SingleLine:
     """This is the description."""
 
@@ -220,6 +226,7 @@ class MultiLine2:
     ("klass", "expected_result"),
     [
         (NoDocString, ""),
+        (EmptyDocString, ""),
         (SingleLine, "This is the description."),
         (MultiLine1, "This is the title."),
         (MultiLine2, "Another title."),
