@@ -70,8 +70,10 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
         self, original_node: ImportFrom, updated_node: ImportFrom
     ) -> Union[BaseSmallStatement, RemovalSentinel]:
         """Update import statements for matching old module name."""
-        if not import_from_matches(updated_node, self.old_module_parts):
-            return super().leave_ImportFrom(original_node, updated_node)
+        if not import_from_matches(updated_node, self.old_module_parts) or isinstance(
+            updated_node.names, ImportStar
+        ):
+            return updated_node
         # This is a match
         new_names = list(self.gen_new_imported_names(updated_node.names))
         self.save_import_scope(original_node)

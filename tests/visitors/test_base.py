@@ -102,6 +102,20 @@ class TestFuncRenameTransformer(BaseVisitorTest):
         """
         self.assertCodemod(before, after)
 
+    def test_import_star_ignored(self) -> None:
+        """Should not change anything in case of a star import."""
+        before = """
+            from django.dummy.module import *
+
+            result = func()
+        """
+        after = """
+            from django.dummy.module import *
+
+            result = func()
+        """
+        self.assertCodemod(before, after)
+
     def test_same_name_function(self) -> None:
         """Should not be fooled by a function bearing the same name."""
         before = """
