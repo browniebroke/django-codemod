@@ -44,7 +44,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-            python-version: 3.8
+          python-version: 3.8
       - name: Install Dependencies
         run: |
           pip install .
@@ -58,14 +58,16 @@ jobs:
       fail-fast: false
       matrix:
         linter:
-          - name: Flake8
+          - name: flake8
             run: flake8
-          - name: Black
+          - name: black
             run: black --check .
-          - name: PyUpgrade
+          - name: pyupgrade
             run: pyupgrade --py3-plus `find . -name "*.py"`
           - name: isort
             run: isort -c -v .
+          - name: mypy
+            run: mypy .
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
