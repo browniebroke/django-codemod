@@ -9,6 +9,7 @@ from libcst import (
     Call,
     FunctionDef,
     ImportFrom,
+    ImportStar,
     MaybeSentinel,
     Name,
     RemovalSentinel,
@@ -35,6 +36,8 @@ class ModelsPermalinkTransformer(BaseDjCodemodTransformer):
     def leave_ImportFrom(
         self, original_node: ImportFrom, updated_node: ImportFrom
     ) -> Union[BaseSmallStatement, RemovalSentinel]:
+        if isinstance(updated_node.names, ImportStar):
+            return super().leave_ImportFrom(original_node, updated_node)
         if m.matches(
             updated_node,
             m.ImportFrom(module=module_matcher(["django", "db"])),

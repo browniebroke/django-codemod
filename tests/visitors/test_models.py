@@ -210,6 +210,28 @@ class TestAvailableAttrsTransformer(BaseVisitorTest):
 
     transformer = ModelsPermalinkTransformer
 
+    @parameterized.expand(
+        [
+            ("from django.db import *",),
+            ("from django.db.models import *",),
+        ]
+    )
+    def test_noop_import_star(self, import_str: str) -> None:
+        """Should not try to replace if import star is used."""
+        before = after = f"""
+            {import_str}
+
+            class MyModel(models.Model):
+
+                @models.permalink
+                def url(self):
+                    return ('guitarist_detail', [self.slug])
+
+                def get_name(self):
+                    return get_name_from(self)
+        """
+        self.assertCodemod(before, after)
+
     def test_simple_substitution_args(self) -> None:
         before = """
             from django.db import models
