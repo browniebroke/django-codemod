@@ -75,14 +75,12 @@ class AssignmentTagTransformer(BaseDjCodemodTransformer):
             if m.matches(import_alias, m.ImportAlias(name=m.Name("Library"))):
                 # We're visiting the `from django.template import Library` statement
                 # Get the actual name it's imported as (in case of import alias)
-                imported_name = (
-                    import_alias.asname
-                    and import_alias.asname.name
-                    or import_alias.name
+                imported_name_str = (
+                    import_alias.evaluated_alias or import_alias.evaluated_name
                 )
                 # Build the `Call` matcher to look out for, eg `Library()`
                 self.context.scratch[self.ctx_key_library_call_matcher] = m.Call(
-                    func=m.Name(imported_name.value)
+                    func=m.Name(imported_name_str)
                 )
                 return True
         return False
