@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+## v1.3.6 (2021-02-02)
+### Fix
+* Mypy issues when following imports ([#328](https://github.com/browniebroke/django-codemod/issues/328)) ([`4fb45f8`](https://github.com/browniebroke/django-codemod/commit/4fb45f83265ff8e77e62b157a110915defe49bf0))
+* Type hint issues ([`b11a68c`](https://github.com/browniebroke/django-codemod/commit/b11a68c47912b3a87593b24d58302003c01d6c77))
+* Error with star import ([`56d09b7`](https://github.com/browniebroke/django-codemod/commit/56d09b7d56cf757ac3d1e9fcdd3a083f167554b5))
+
+### Documentation
+* Add logo ([`82d1419`](https://github.com/browniebroke/django-codemod/commit/82d1419e1b00e439f9ca2bb2e04f3079700d458f))
+
 ## v1.3.5 (2021-01-27)
 ### Fix
 * Loosen up version for libcst ([`4129e23`](https://github.com/browniebroke/django-codemod/commit/4129e2372f1deae58c68a2d4e5a202576170299e))
