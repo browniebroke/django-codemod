@@ -94,7 +94,8 @@ class AssignmentTagTransformer(BaseDjCodemodTransformer):
             # Visiting a `register = template.Library()` statement
             # Get all names on the left side of the assignment
             target_names = (
-                assign_target.target.value for assign_target in node.targets
+                assign_target.target.value  # type: ignore
+                for assign_target in node.targets
             )
             # Build the decorator matchers to look out for
             target_matchers = (

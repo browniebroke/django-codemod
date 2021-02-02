@@ -100,12 +100,12 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
             yield import_alias
 
     def resolve_parent_node(self, node: CSTNode) -> CSTNode:
-        parent_nodes = self.context.wrapper.resolve(ParentNodeProvider)
+        parent_nodes = self.context.wrapper.resolve(ParentNodeProvider)  # type: ignore
         return parent_nodes[node]
 
     def resolve_scope(self, node: CSTNode) -> Scope:
-        scopes_map = self.context.wrapper.resolve(ScopeProvider)
-        return scopes_map[node]
+        scopes_map = self.context.wrapper.resolve(ScopeProvider)  # type: ignore
+        return scopes_map[node]  # type: ignore
 
     def save_import_scope(self, import_from: ImportFrom) -> None:
         scope = self.resolve_scope(import_from)
