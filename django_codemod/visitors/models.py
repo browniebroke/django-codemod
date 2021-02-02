@@ -58,13 +58,11 @@ class ModelsPermalinkTransformer(BaseDjCodemodTransformer):
             updated_names = []
             for imported_name in updated_node.names:
                 if m.matches(imported_name, m.ImportAlias(name=m.Name("permalink"))):
-                    decorator_name = (
-                        imported_name.asname.name.value
-                        if imported_name.asname
-                        else "permalink"
+                    decorator_name_str = (
+                        imported_name.evaluated_alias or imported_name.evaluated_name
                     )
                     self.add_decorator_matcher(
-                        m.Decorator(decorator=m.Name(decorator_name))
+                        m.Decorator(decorator=m.Name(decorator_name_str))
                     )
                 else:
                     updated_names.append(imported_name)
