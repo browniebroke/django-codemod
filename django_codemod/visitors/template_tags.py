@@ -41,7 +41,7 @@ class AssignmentTagTransformer(BaseDjCodemodTransformer):
 
     def visit_ImportFrom(self, node: ImportFrom) -> Optional[bool]:
         """Record whether an interesting import is detected."""
-        return self._check_template_imported(node) or self._check_libary_imported(node)
+        return self._check_template_imported(node) or self._check_library_imported(node)
 
     def _check_template_imported(self, node: ImportFrom) -> bool:
         """Record matcher if django.template is imported."""
@@ -65,7 +65,7 @@ class AssignmentTagTransformer(BaseDjCodemodTransformer):
                 return True
         return False
 
-    def _check_libary_imported(self, node: ImportFrom) -> bool:
+    def _check_library_imported(self, node: ImportFrom) -> bool:
         """Record matcher if django.template.Library is imported."""
         if import_from_matches(node, ["django", "template"]):
             for import_alias in node.names:
