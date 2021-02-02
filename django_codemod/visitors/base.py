@@ -29,7 +29,7 @@ class BaseDjCodemodTransformer(ContextAwareTransformer, ABC):
 
 def module_matcher(
     import_parts: Sequence[str],
-) -> Union[m.BaseMatcherNode, m.DoNotCare]:
+) -> Union[m.Attribute, m.Name]:
     """Build matcher for a module given sequence of import parts."""
     # If only one element, it is just a Name
     if len(import_parts) == 1:
@@ -87,8 +87,8 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
         return updated_node.with_changes(names=cleaned_names)
 
     def gen_new_imported_names(
-        self, old_names: Union[Sequence[ImportAlias], ImportStar]
-    ) -> Generator:
+        self, old_names: Sequence[ImportAlias]
+    ) -> Generator[ImportAlias, None, None]:
         """Update import if the entity we're interested in is imported."""
         for import_alias in old_names:
             if not self.old_name or import_alias.evaluated_name == self.old_name:

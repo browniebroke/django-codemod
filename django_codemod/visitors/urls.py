@@ -46,10 +46,11 @@ class URLTransformer(BaseFuncRenameTransformer):
             self.add_new_import()
             return super().update_call(updated_node)
 
-    def update_call_to_path(self, updated_node: Call):
+    def update_call_to_path(self, updated_node: Call) -> Call:
         """Update an URL pattern to `path()` in simple cases."""
         first_arg, *other_args = updated_node.args
-        self.check_not_simple_string(first_arg)
+        if not isinstance(first_arg.value, SimpleString):
+            raise PatternNotSupported()
         # Extract the URL pattern from the first argument
         pattern = first_arg.value.evaluated_value
         # If we reach this point, we might be able to use `path()`
@@ -61,12 +62,7 @@ class URLTransformer(BaseFuncRenameTransformer):
         )
         return call
 
-    def check_not_simple_string(self, first_arg: Arg):
-        """Translated patterns are not supported."""
-        if not m.matches(first_arg, m.Arg(value=m.SimpleString())):
-            raise PatternNotSupported()
-
-    def build_path_call(self, pattern, other_args):
+    def build_path_call(self, pattern: str, other_args: Sequence[Arg]) -> Call:
         """Build the `Call` node using Django 2.0's `path()` function."""
         route = self.build_route(pattern)
         updated_args = (Arg(value=SimpleString(f"'{route}'")), *other_args)
