@@ -8,19 +8,30 @@ class TestInlineHasAddPermissionsTransformer(BaseVisitorTest):
 
     transformer = InlineHasAddPermissionsTransformer
 
-    def test_model_admin_base_class(self) -> None:
-        """Doesn't modify if base class doesn't match."""
-        before = """
-            from django.contrib import admin
+    @parameterized.expand(
+        [
+            ("from django.contrib.admin import *", "TabularInline"),
+            ("from django.contrib import *", "admin.TabularInline"),
+            ("from django.contrib.admin import *", "StackedInline"),
+            ("from django.contrib import *", "admin.StackedInline"),
+        ]
+    )
+    def test_noop_import_star(self, import_line: str, base_class: str) -> None:
+        before = after = f"""
+            {import_line}
 
-            class MyAdmin(admin.ModelAdmin):
+            class MyInlineInline(InlineMixin, {base_class}):
 
                 def has_add_permission(self, request):
                     if somethings:
                         return False
                     return super().has_add_permission(request)
         """
-        after = """
+        self.assertCodemod(before, after)
+
+    def test_model_admin_base_class(self) -> None:
+        """Doesn't modify if base class doesn't match."""
+        before = after = """
             from django.contrib import admin
 
             class MyAdmin(admin.ModelAdmin):
@@ -34,17 +45,7 @@ class TestInlineHasAddPermissionsTransformer(BaseVisitorTest):
 
     def test_no_base_class(self) -> None:
         """Doesn't modify if there is no base class."""
-        before = """
-            from django.contrib import admin
-
-            class MyCustomStuff:
-
-                def has_add_permission(self, request):
-                    if somethings:
-                        return False
-                    return super().has_add_permission(request)
-        """
-        after = """
+        before = after = """
             from django.contrib import admin
 
             class MyCustomStuff:
