@@ -1,4 +1,4 @@
-from libcst import BaseExpression, Call
+from libcst import Attribute, BaseExpression, Call
 from libcst import matchers as m
 
 from django_codemod.constants import DJANGO_2_0, DJANGO_2_1, DJANGO_3_0, DJANGO_4_0
@@ -75,6 +75,10 @@ class HttpRequestXReadLinesTransformer(BaseDjCodemodTransformer):
     )
 
     def leave_Call(self, original_node: Call, updated_node: Call) -> BaseExpression:
+        if not isinstance(updated_node.func, Attribute):
+            # A bit redundant with matcher below,
+            # but this is to make type checker happy
+            return super().leave_Call(original_node, updated_node)
         if m.matches(updated_node, self.matcher):
             return updated_node.func.value
         return super().leave_Call(original_node, updated_node)
