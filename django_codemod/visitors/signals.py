@@ -54,16 +54,14 @@ class SignalDisconnectWeakTransformer(BaseDjCodemodTransformer):
             if m.matches(import_alias, self.import_alias_matcher):
                 # We're visiting an import statement for a built-in signal
                 # Get the actual name it's imported as (in case of import alias)
-                imported_name = (
-                    import_alias.asname
-                    and import_alias.asname.name
-                    or import_alias.name
+                imported_name_str = (
+                    import_alias.evaluated_alias or import_alias.evaluated_name
                 )
                 # Add the call matcher for the current signal to the list
                 self.add_disconnect_call_matcher(
                     m.Call(
                         func=m.Attribute(
-                            value=m.Name(imported_name.value),
+                            value=m.Name(imported_name_str),
                             attr=m.Name("disconnect"),
                         ),
                     )
@@ -90,7 +88,7 @@ class SignalDisconnectWeakTransformer(BaseDjCodemodTransformer):
                     should_change = True
                 else:
                     updated_args.append(arg)
-                last_comma = arg.comma
+                last_comma = arg.comma  # type: ignore
             if should_change:
                 # Make sure the end of line is formatted as initially
                 updated_args[-1] = updated_args[-1].with_changes(comma=last_comma)
