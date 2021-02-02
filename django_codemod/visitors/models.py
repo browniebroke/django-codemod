@@ -123,9 +123,10 @@ class ModelsPermalinkTransformer(BaseDjCodemodTransformer):
     def leave_Return(
         self, original_node: Return, updated_node: Return
     ) -> Union[BaseSmallStatement, RemovalSentinel]:
-        if self.visiting_permalink_method and m.matches(updated_node.value, m.Tuple()):
-            elem_0 = updated_node.value.elements[0]
-            elem_1_3 = updated_node.value.elements[1:3]
+        if self.visiting_permalink_method and m.matches(
+            updated_node.value, m.Tuple()  # type: ignore
+        ):
+            elem_0, *elem_1_3 = updated_node.value.elements[:3]  # type: ignore
             args = (
                 Arg(elem_0.value),
                 Arg(Name("None")),
