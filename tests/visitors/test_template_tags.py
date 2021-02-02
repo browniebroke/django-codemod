@@ -33,6 +33,21 @@ class TestAssignmentTagTransformer(BaseVisitorTest):
 
         self.assertCodemod(before, after)
 
+    def test_noop_import_star(self) -> None:
+        """Test when imported as star import."""
+        before = after = """
+            from django import *
+
+            register = template.Library()
+
+
+            @register.assignment_tag
+            def some_tag():
+                return "Hello"
+        """
+
+        self.assertCodemod(before, after)
+
     def test_simple_substitution(self) -> None:
         """Test basic substitution."""
         before = """
