@@ -67,21 +67,24 @@ class AssignmentTagTransformer(BaseDjCodemodTransformer):
 
     def _check_library_imported(self, node: ImportFrom) -> bool:
         """Record matcher if django.template.Library is imported."""
-        if import_from_matches(node, ["django", "template"]):
-            for import_alias in node.names:
-                if m.matches(import_alias, m.ImportAlias(name=m.Name("Library"))):
-                    # We're visiting the `from django.template import Library` statement
-                    # Get the actual name it's imported as (in case of import alias)
-                    imported_name = (
-                        import_alias.asname
-                        and import_alias.asname.name
-                        or import_alias.name
-                    )
-                    # Build the `Call` matcher to look out for, eg `Library()`
-                    self.context.scratch[self.ctx_key_library_call_matcher] = m.Call(
-                        func=m.Name(imported_name.value)
-                    )
-                    return True
+        if not import_from_matches(node, ["django", "template"]) or isinstance(
+            node.names, ImportStar
+        ):
+            return False
+        for import_alias in node.names:
+            if m.matches(import_alias, m.ImportAlias(name=m.Name("Library"))):
+                # We're visiting the `from django.template import Library` statement
+                # Get the actual name it's imported as (in case of import alias)
+                imported_name = (
+                    import_alias.asname
+                    and import_alias.asname.name
+                    or import_alias.name
+                )
+                # Build the `Call` matcher to look out for, eg `Library()`
+                self.context.scratch[self.ctx_key_library_call_matcher] = m.Call(
+                    func=m.Name(imported_name.value)
+                )
+                return True
         return False
 
     def visit_Assign(self, node: Assign) -> Optional[bool]:

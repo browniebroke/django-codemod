@@ -123,6 +123,21 @@ class TestAssignmentTagTransformer(BaseVisitorTest):
 
         self.assertCodemod(before, after)
 
+    def test_noop_content_star_import(self) -> None:
+        """Test when Library class is imported as star import."""
+        before = after = """
+            from django.template import *
+
+            register = Library()
+
+
+            @register.assignment_tag
+            def some_tag():
+                return "Hello"
+        """
+
+        self.assertCodemod(before, after)
+
     def test_library_class_imported(self) -> None:
         """Test when Library class is imported."""
         before = """
