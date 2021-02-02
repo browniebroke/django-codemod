@@ -65,7 +65,7 @@ class TestInlineHasAddPermissionsTransformer(BaseVisitorTest):
             (" import admin", "admin.StackedInline"),
         ],
     )
-    def test_simple_substitution(self, import_, base_class) -> None:
+    def test_simple_substitution(self, import_: str, base_class: str) -> None:
         """Modification with a valid base class."""
         before = f"""
             from django.contrib{import_}
@@ -97,7 +97,7 @@ class TestInlineHasAddPermissionsTransformer(BaseVisitorTest):
             (" import admin", "admin.StackedInline"),
         ],
     )
-    def test_multiple_base_classes_last(self, import_, base_class) -> None:
+    def test_multiple_base_classes_last(self, import_: str, base_class: str) -> None:
         """Modification with multiple base classes, valid last."""
         before = f"""
             from django.contrib{import_}
@@ -129,7 +129,7 @@ class TestInlineHasAddPermissionsTransformer(BaseVisitorTest):
             (" import admin", "admin.StackedInline"),
         ],
     )
-    def test_multiple_base_classes_first(self, import_, base_class) -> None:
+    def test_multiple_base_classes_first(self, import_: str, base_class: str) -> None:
         """Modification with multiple base classes, valid first."""
         before = f"""
             from django.contrib{import_}
@@ -153,8 +153,13 @@ class TestInlineHasAddPermissionsTransformer(BaseVisitorTest):
         """
         self.assertCodemod(before, after)
 
-    @parameterized.expand([("admin.TabularInline"), ("admin.StackedInline")])
-    def test_context_cleared(self, base_class) -> None:
+    @parameterized.expand(
+        [
+            ("admin.TabularInline",),
+            ("admin.StackedInline",),
+        ]
+    )
+    def test_context_cleared(self, base_class: str) -> None:
         """Test that context is cleared and doesn't leak to other classes."""
         before = f"""
             from django.contrib import admin
