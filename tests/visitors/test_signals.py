@@ -34,6 +34,16 @@ class TestSignalDisconnectWeakTransformer(BaseVisitorTest):
         self.assertCodemod(before, after)
 
     @parameterized.expand(DJANGO_SIGNAL_NAMES)
+    def test_noop_import_star(self, signal_name):
+        before = after = f"""
+            from django.db.models.signals import *
+
+            {signal_name}.disconnect(receiver=some_handler, sender=MyModel, weak=True)
+        """
+
+        self.assertCodemod(before, after)
+
+    @parameterized.expand(DJANGO_SIGNAL_NAMES)
     def test_with_kwargs(self, signal_name):
         before = f"""
             from django.db.models.signals import {signal_name}

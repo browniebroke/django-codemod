@@ -172,9 +172,7 @@ def call_command(command_instance: BaseCodemodCommand, files: List[Path]):
         # Super simplified call
         result = parallel_exec_transform_with_prettyprint(
             command_instance,
-            files,
-            # Number of jobs to use when processing files. Defaults to number of cores
-            jobs=None,
+            files,  # type: ignore
         )
     except KeyboardInterrupt:
         raise click.Abort("Interrupted!")

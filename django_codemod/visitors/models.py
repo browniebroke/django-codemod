@@ -9,6 +9,7 @@ from libcst import (
     Call,
     FunctionDef,
     ImportFrom,
+    ImportStar,
     MaybeSentinel,
     Name,
     RemovalSentinel,
@@ -35,6 +36,8 @@ class ModelsPermalinkTransformer(BaseDjCodemodTransformer):
     def leave_ImportFrom(
         self, original_node: ImportFrom, updated_node: ImportFrom
     ) -> Union[BaseSmallStatement, RemovalSentinel]:
+        if isinstance(updated_node.names, ImportStar):
+            return super().leave_ImportFrom(original_node, updated_node)
         if m.matches(
             updated_node,
             m.ImportFrom(module=module_matcher(["django", "db"])),
@@ -55,13 +58,11 @@ class ModelsPermalinkTransformer(BaseDjCodemodTransformer):
             updated_names = []
             for imported_name in updated_node.names:
                 if m.matches(imported_name, m.ImportAlias(name=m.Name("permalink"))):
-                    decorator_name = (
-                        imported_name.asname.name.value
-                        if imported_name.asname
-                        else "permalink"
+                    decorator_name_str = (
+                        imported_name.evaluated_alias or imported_name.evaluated_name
                     )
                     self.add_decorator_matcher(
-                        m.Decorator(decorator=m.Name(decorator_name))
+                        m.Decorator(decorator=m.Name(decorator_name_str))
                     )
                 else:
                     updated_names.append(imported_name)
@@ -122,9 +123,10 @@ class ModelsPermalinkTransformer(BaseDjCodemodTransformer):
     def leave_Return(
         self, original_node: Return, updated_node: Return
     ) -> Union[BaseSmallStatement, RemovalSentinel]:
-        if self.visiting_permalink_method and m.matches(updated_node.value, m.Tuple()):
-            elem_0 = updated_node.value.elements[0]
-            elem_1_3 = updated_node.value.elements[1:3]
+        if self.visiting_permalink_method and m.matches(
+            updated_node.value, m.Tuple()  # type: ignore
+        ):
+            elem_0, *elem_1_3 = updated_node.value.elements[:3]  # type: ignore
             args = (
                 Arg(elem_0.value),
                 Arg(Name("None")),

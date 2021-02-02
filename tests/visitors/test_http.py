@@ -114,6 +114,14 @@ class TestHttpRequestXReadLinesTransformer(BaseVisitorTest):
         """
         self.assertCodemod(before, after)
 
+    def test_noop_function_call(self) -> None:
+        """Don't replace calls for name other than `request` or `req`."""
+        before = after = """
+            for line in xreadlines(r):
+                print(line)
+        """
+        self.assertCodemod(before, after)
+
     @parameterized.expand(["req", "request"])
     def test_simple_substitution(self, variable_name) -> None:
         before = f"""

@@ -29,7 +29,7 @@ class BaseDjCodemodTransformer(ContextAwareTransformer, ABC):
 
 def module_matcher(
     import_parts: Sequence[str],
-) -> Union[m.BaseMatcherNode, m.DoNotCare]:
+) -> Union[m.Attribute, m.Name]:
     """Build matcher for a module given sequence of import parts."""
     # If only one element, it is just a Name
     if len(import_parts) == 1:
@@ -87,8 +87,8 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
         return updated_node.with_changes(names=cleaned_names)
 
     def gen_new_imported_names(
-        self, old_names: Union[Sequence[ImportAlias], ImportStar]
-    ) -> Generator:
+        self, old_names: Sequence[ImportAlias]
+    ) -> Generator[ImportAlias, None, None]:
         """Update import if the entity we're interested in is imported."""
         for import_alias in old_names:
             if not self.old_name or import_alias.evaluated_name == self.old_name:
@@ -100,12 +100,12 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
             yield import_alias
 
     def resolve_parent_node(self, node: CSTNode) -> CSTNode:
-        parent_nodes = self.context.wrapper.resolve(ParentNodeProvider)
+        parent_nodes = self.context.wrapper.resolve(ParentNodeProvider)  # type: ignore
         return parent_nodes[node]
 
     def resolve_scope(self, node: CSTNode) -> Scope:
-        scopes_map = self.context.wrapper.resolve(ScopeProvider)
-        return scopes_map[node]
+        scopes_map = self.context.wrapper.resolve(ScopeProvider)  # type: ignore
+        return scopes_map[node]  # type: ignore
 
     def save_import_scope(self, import_from: ImportFrom) -> None:
         scope = self.resolve_scope(import_from)

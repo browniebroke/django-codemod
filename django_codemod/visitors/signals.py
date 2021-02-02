@@ -1,6 +1,6 @@
 from typing import List, Optional
 
-from libcst import BaseExpression, Call, ImportFrom, MaybeSentinel, Module
+from libcst import BaseExpression, Call, ImportFrom, ImportStar, MaybeSentinel, Module
 from libcst import matchers as m
 
 from django_codemod.constants import DJANGO_1_9, DJANGO_2_0
@@ -46,26 +46,27 @@ class SignalDisconnectWeakTransformer(BaseDjCodemodTransformer):
 
     def visit_ImportFrom(self, node: ImportFrom) -> Optional[bool]:
         """Set the `Call` matcher depending on which signals are imported.."""
-        if import_from_matches(node, ["django", "db", "models", "signals"]):
-            for import_alias in node.names:
-                if m.matches(import_alias, self.import_alias_matcher):
-                    # We're visiting an import statement for a built-in signal
-                    # Get the actual name it's imported as (in case of import alias)
-                    imported_name = (
-                        import_alias.asname
-                        and import_alias.asname.name
-                        or import_alias.name
+        if not import_from_matches(
+            node, ["django", "db", "models", "signals"]
+        ) or isinstance(node.names, ImportStar):
+            return False
+        for import_alias in node.names:
+            if m.matches(import_alias, self.import_alias_matcher):
+                # We're visiting an import statement for a built-in signal
+                # Get the actual name it's imported as (in case of import alias)
+                imported_name_str = (
+                    import_alias.evaluated_alias or import_alias.evaluated_name
+                )
+                # Add the call matcher for the current signal to the list
+                self.add_disconnect_call_matcher(
+                    m.Call(
+                        func=m.Attribute(
+                            value=m.Name(imported_name_str),
+                            attr=m.Name("disconnect"),
+                        ),
                     )
-                    # Add the call matcher for the current signal to the list
-                    self.add_disconnect_call_matcher(
-                        m.Call(
-                            func=m.Attribute(
-                                value=m.Name(imported_name.value),
-                                attr=m.Name("disconnect"),
-                            ),
-                        )
-                    )
-        return super().visit_ImportFrom(node)
+                )
+        return None
 
     def leave_Call(self, original_node: Call, updated_node: Call) -> BaseExpression:
         """
@@ -87,7 +88,7 @@ class SignalDisconnectWeakTransformer(BaseDjCodemodTransformer):
                     should_change = True
                 else:
                     updated_args.append(arg)
-                last_comma = arg.comma
+                last_comma = arg.comma  # type: ignore
             if should_change:
                 # Make sure the end of line is formatted as initially
                 updated_args[-1] = updated_args[-1].with_changes(comma=last_comma)

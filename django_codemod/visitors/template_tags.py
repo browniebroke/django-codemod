@@ -1,6 +1,14 @@
 from typing import Optional, Union
 
-from libcst import Assign, Decorator, ImportFrom, Module, Name, RemovalSentinel
+from libcst import (
+    Assign,
+    Decorator,
+    ImportFrom,
+    ImportStar,
+    Module,
+    Name,
+    RemovalSentinel,
+)
 from libcst import matchers as m
 
 from django_codemod.constants import DJANGO_1_9, DJANGO_2_0
@@ -33,46 +41,48 @@ class AssignmentTagTransformer(BaseDjCodemodTransformer):
 
     def visit_ImportFrom(self, node: ImportFrom) -> Optional[bool]:
         """Record whether an interesting import is detected."""
-        return self._check_template_imported(node) or self._check_libary_imported(node)
+        return self._check_template_imported(node) or self._check_library_imported(node)
 
     def _check_template_imported(self, node: ImportFrom) -> bool:
         """Record matcher if django.template is imported."""
-        if import_from_matches(node, ["django"]):
-            for import_alias in node.names:
-                if m.matches(import_alias, m.ImportAlias(name=m.Name("template"))):
-                    # We're visiting the `from django import template` statement
-                    # Get the actual name it's imported as (in case of import alias)
-                    imported_name = (
-                        import_alias.asname
-                        and import_alias.asname.name
-                        or import_alias.name
+        if not import_from_matches(node, ["django"]) or isinstance(
+            node.names, ImportStar
+        ):
+            return False
+        for import_alias in node.names:
+            if m.matches(import_alias, m.ImportAlias(name=m.Name("template"))):
+                # We're visiting the `from django import template` statement
+                # Get the actual name it's imported as (in case of import alias)
+                imported_name_str = (
+                    import_alias.evaluated_alias or import_alias.evaluated_name
+                )
+                # Build the `Call` matcher to look out for, eg `template.Library()`
+                self.context.scratch[self.ctx_key_library_call_matcher] = m.Call(
+                    func=m.Attribute(
+                        attr=m.Name("Library"), value=m.Name(value=imported_name_str)
                     )
-                    # Build the `Call` matcher to look out for, eg `template.Library()`
-                    self.context.scratch[self.ctx_key_library_call_matcher] = m.Call(
-                        func=m.Attribute(
-                            attr=m.Name("Library"), value=m.Name(imported_name.value)
-                        )
-                    )
-                    return True
+                )
+                return True
         return False
 
-    def _check_libary_imported(self, node: ImportFrom) -> bool:
+    def _check_library_imported(self, node: ImportFrom) -> bool:
         """Record matcher if django.template.Library is imported."""
-        if import_from_matches(node, ["django", "template"]):
-            for import_alias in node.names:
-                if m.matches(import_alias, m.ImportAlias(name=m.Name("Library"))):
-                    # We're visiting the `from django.template import Library` statement
-                    # Get the actual name it's imported as (in case of import alias)
-                    imported_name = (
-                        import_alias.asname
-                        and import_alias.asname.name
-                        or import_alias.name
-                    )
-                    # Build the `Call` matcher to look out for, eg `Library()`
-                    self.context.scratch[self.ctx_key_library_call_matcher] = m.Call(
-                        func=m.Name(imported_name.value)
-                    )
-                    return True
+        if not import_from_matches(node, ["django", "template"]) or isinstance(
+            node.names, ImportStar
+        ):
+            return False
+        for import_alias in node.names:
+            if m.matches(import_alias, m.ImportAlias(name=m.Name("Library"))):
+                # We're visiting the `from django.template import Library` statement
+                # Get the actual name it's imported as (in case of import alias)
+                imported_name_str = (
+                    import_alias.evaluated_alias or import_alias.evaluated_name
+                )
+                # Build the `Call` matcher to look out for, eg `Library()`
+                self.context.scratch[self.ctx_key_library_call_matcher] = m.Call(
+                    func=m.Name(imported_name_str)
+                )
+                return True
         return False
 
     def visit_Assign(self, node: Assign) -> Optional[bool]:
@@ -84,7 +94,8 @@ class AssignmentTagTransformer(BaseDjCodemodTransformer):
             # Visiting a `register = template.Library()` statement
             # Get all names on the left side of the assignment
             target_names = (
-                assign_target.target.value for assign_target in node.targets
+                assign_target.target.value  # type: ignore
+                for assign_target in node.targets
             )
             # Build the decorator matchers to look out for
             target_matchers = (

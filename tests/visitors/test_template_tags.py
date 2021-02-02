@@ -1,3 +1,5 @@
+from parameterized import parameterized
+
 from django_codemod.visitors import AssignmentTagTransformer
 from tests.visitors.base import BaseVisitorTest
 
@@ -21,10 +23,31 @@ class TestAssignmentTagTransformer(BaseVisitorTest):
 
         self.assertCodemod(before, after)
 
-    def test_noop_not_imported(self) -> None:
+    @parameterized.expand(
+        [
+            ("from django import contrib",),
+            ("from django.template import Engine",),
+        ]
+    )
+    def test_noop_not_imported(self, import_line: str) -> None:
         """Test when import is missing."""
+        before = after = f"""
+            {import_line}
+
+            @register.assignment_tag
+            def some_tag():
+                return "Hello"
+        """
+
+        self.assertCodemod(before, after)
+
+    def test_noop_import_star(self) -> None:
+        """Test when imported as star import."""
         before = after = """
-            from django import contrib
+            from django import *
+
+            register = template.Library()
+
 
             @register.assignment_tag
             def some_tag():
@@ -102,6 +125,21 @@ class TestAssignmentTagTransformer(BaseVisitorTest):
 
 
             @register.simple_tag
+            def some_tag():
+                return "Hello"
+        """
+
+        self.assertCodemod(before, after)
+
+    def test_noop_content_star_import(self) -> None:
+        """Test when Library class is imported as star import."""
+        before = after = """
+            from django.template import *
+
+            register = Library()
+
+
+            @register.assignment_tag
             def some_tag():
                 return "Hello"
         """
