@@ -91,3 +91,30 @@ jobs:
         with:
           fetch-depth: 0
       - uses: wagoid/commitlint-github-action@v2.1.7
+
+  release:
+    runs-on: ubuntu-latest
+    environment: release
+    if: github.ref == 'refs/heads/main'
+    needs:
+      - test
+      - e2e
+      - lint
+      - commitlint
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      # Run semantic release:
+      # - Update CHANGELOG.md
+      # - Update version in code
+      # - Create git tag
+      # - Create Github release
+      # - Publish to PyPI
+      - name: Python Semantic Release
+        uses: relekang/python-semantic-release@v7.13.2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          pypi_token: ${{ secrets.PYPI_TOKEN }}
