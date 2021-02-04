@@ -1,7 +1,8 @@
-from typing import Optional, Union
+from typing import Generator, Optional, Sequence, Union
 
 from libcst import (
     Assign,
+    AssignTarget,
     Decorator,
     ImportFrom,
     ImportStar,
@@ -96,27 +97,31 @@ class AssignmentTagTransformer(BaseDjCodemodTransformer):
             m.Assign(value=self.library_call_matcher),
         ):
             # Visiting a `register = template.Library()` statement
-            # Get all names on the left side of the assignment
-            target_names = (
-                assign_target.target.value
-                for assign_target in node.targets
-                if isinstance(assign_target.target, Name)
+            # Generate decorator matchers based on left hand side names
+            decorator_matchers = self._gen_decorator_matchers(node.targets)
+            # should match if any of the decorator matches
+            self.context.scratch[self.ctx_key_decorator_matcher] = m.OneOf(
+                *decorator_matchers
             )
-            # Build the decorator matchers to look out for
-            target_matchers = (
-                m.Decorator(
+        return super().visit_Assign(node)
+
+    @staticmethod
+    def _gen_decorator_matchers(
+        assign_targets: Sequence[AssignTarget],
+    ) -> Generator[m.Decorator, None, None]:
+        """Generate matchers for all possible decorators."""
+        for assign_target in assign_targets:
+            # for each variable it's assigned to
+            if isinstance(assign_target.target, Name):
+                # get the name of the target
+                target_str = assign_target.target.value
+                # matcher we should use for finding decorators to modify
+                yield m.Decorator(
                     decorator=m.Attribute(
-                        value=m.Name(name),
+                        value=m.Name(target_str),
                         attr=m.Name("assignment_tag"),
                     )
                 )
-                for name in target_names
-            )
-            # The final matcher should match if any of the decorator matchers matches
-            self.context.scratch[self.ctx_key_decorator_matcher] = m.OneOf(
-                *target_matchers
-            )
-        return super().visit_Assign(node)
 
     def leave_Decorator(
         self, original_node: Decorator, updated_node: Decorator
