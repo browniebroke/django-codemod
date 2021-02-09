@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.3.7 (2021-02-09)
+### Fix
+* **deps:** Update dependency libcst to <=0.3.17 ([`76dbc7c`](https://github.com/browniebroke/django-codemod/commit/76dbc7c7e0ccdd53fcd6263ee527f23d24bb55a6))
+
 ## v1.3.6 (2021-02-02)
 ### Fix
 * Mypy issues when following imports ([#328](https://github.com/browniebroke/django-codemod/issues/328)) ([`4fb45f8`](https://github.com/browniebroke/django-codemod/commit/4fb45f83265ff8e77e62b157a110915defe49bf0))
