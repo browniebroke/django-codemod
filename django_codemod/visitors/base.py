@@ -79,10 +79,11 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
         self, original_node: ImportFrom, updated_node: ImportFrom
     ) -> Union[BaseSmallStatement, RemovalSentinel]:
         """Update import statements for matching old module name."""
+        # First, exit early if 'import *' is used
         if isinstance(updated_node.names, ImportStar):
             return updated_node
+        # Then, check for when the exact symbol is imported
         if import_from_matches(updated_node, self.old_module_parts):
-            # This is a match
             new_import_aliases = []
             for import_alias in updated_node.names:
                 if not self.old_name or import_alias.evaluated_name == self.old_name:
@@ -111,7 +112,7 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
             # Some imports are left, update the statement
             new_import_aliases = clean_new_import_aliases(new_import_aliases)
             return updated_node.with_changes(names=new_import_aliases)
-        # Now check for parent module
+        # Finally, check for parent module is imported
         if import_from_matches(updated_node, self.old_parent_module_parts):
             new_import_aliases = []
             for import_alias in updated_node.names:
