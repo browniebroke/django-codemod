@@ -31,7 +31,7 @@ from .base import BaseVisitorTest
 def test_module_matcher(parts, expected_matcher):
     matcher = module_matcher(parts)
 
-    # equality comparision doesn't work with matcher:
+    # equality comparison doesn't work with matcher:
     # compare their representation seems to work
     assert repr(matcher) == repr(expected_matcher)
 
@@ -57,6 +57,19 @@ class TestFuncRenameTransformer(BaseVisitorTest):
             from django.dummy.module import better_func
 
             result = better_func()
+        """
+        self.assertCodemod(before, after)
+
+    def test_parent_module(self) -> None:
+        before = """
+            from django.dummy import module
+
+            result = module.func()
+        """
+        after = """
+            from django.dummy import module
+
+            result = module.better_func()
         """
         self.assertCodemod(before, after)
 
@@ -271,6 +284,32 @@ class TestOtherModuleFuncRenameTransformer(BaseVisitorTest):
             from django.better.dummy import better_func
 
             result = better_func()
+        """
+        self.assertCodemod(before, after)
+
+    def test_parent_module(self) -> None:
+        before = """
+            from django.dummy import module
+
+            result = module.func()
+        """
+        after = """
+            from django.better import dummy
+
+            result = dummy.better_func()
+        """
+        self.assertCodemod(before, after)
+
+    def test_parent_module_import_alias(self) -> None:
+        before = """
+            from django.dummy import module as django_module
+
+            result = django_module.func()
+        """
+        after = """
+            from django.better import dummy as django_module
+
+            result = django_module.better_func()
         """
         self.assertCodemod(before, after)
 

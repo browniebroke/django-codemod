@@ -1,4 +1,4 @@
-from typing import Sequence
+from typing import Sequence, Tuple
 
 from libcst import Arg, BaseExpression, Call, Name, SimpleString
 from libcst import matchers as m
@@ -43,7 +43,11 @@ class URLTransformer(BaseFuncRenameTransformer):
             return self.update_call_to_path(updated_node)
         except PatternNotSupported:
             # Safe fallback to re_path()
-            self.add_new_import()
+            AddImportsVisitor.add_needed_import(
+                context=self.context,
+                module=".".join(self.new_module_parts),
+                obj=self.new_name,
+            )
             return super().update_call(updated_node)
 
     def update_call_to_path(self, updated_node: Call) -> Call:
@@ -68,7 +72,7 @@ class URLTransformer(BaseFuncRenameTransformer):
         updated_args = (Arg(value=SimpleString(f"'{route}'")), *other_args)
         return Call(args=updated_args, func=Name("path"))
 
-    def build_route(self, pattern):
+    def build_route(self, pattern: str) -> str:
         """Build route from a URL pattern."""
         stripped_pattern = pattern.lstrip("^").rstrip("$")
         route = ""
@@ -80,7 +84,8 @@ class URLTransformer(BaseFuncRenameTransformer):
         self.check_route(route)
         return route
 
-    def parse_next_group(self, left_to_parse):
+    @staticmethod
+    def parse_next_group(left_to_parse: str) -> Tuple[str, str]:
         """Extract captured group info."""
         prefix, rest = left_to_parse.split("(?P<", 1)
         group, left_to_parse = rest.split(")", 1)
@@ -91,7 +96,8 @@ class URLTransformer(BaseFuncRenameTransformer):
             raise PatternNotSupported("No converter found")
         return prefix + f"<{converter}:{group_name}>", left_to_parse
 
-    def check_route(self, route):
+    @staticmethod
+    def check_route(route: str) -> None:
         """Check that route doesn't contain anymore regex."""
         if set(route) & REGEX_SPECIALS_SANS_DASH:
             raise PatternNotSupported(f"Route {route} contains regex")
@@ -101,5 +107,5 @@ class URLTransformer(BaseFuncRenameTransformer):
         first_arg, *other_args = node.args
         if m.matches(first_arg, m.Arg(keyword=m.Name("regex"))):
             first_arg = Arg(value=first_arg.value)
-            return (first_arg, *other_args)
+            return [first_arg, *other_args]
         return super().update_call_args(node)
