@@ -1,6 +1,6 @@
 """Module to implement base functionality."""
 from abc import ABC
-from typing import Generator, List, Optional, Sequence, Tuple, Union
+from typing import List, Optional, Sequence, Tuple, Union
 
 from libcst import (
     Arg,
@@ -83,7 +83,27 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
             return updated_node
         if import_from_matches(updated_node, self.old_module_parts):
             # This is a match
-            new_import_aliases = list(self.gen_new_imported_aliases(updated_node.names))
+            new_import_aliases = []
+            for import_alias in updated_node.names:
+                if not self.old_name or import_alias.evaluated_name == self.old_name:
+                    if import_alias.evaluated_alias is None:
+                        self.context.scratch[self.ctx_key_name_matcher] = m.Name(
+                            self.old_name
+                        )
+                        if self.new_name:
+                            self.context.scratch[self.ctx_key_new_func] = Name(
+                                self.new_name
+                            )
+                    if self.rename_from != self.rename_to:
+                        if self.simple_rename:
+                            AddImportsVisitor.add_needed_import(
+                                context=self.context,
+                                module=".".join(self.new_module_parts),
+                                obj=self.new_name or import_alias.evaluated_name,
+                                asname=import_alias.evaluated_alias,
+                            )
+                        continue
+                new_import_aliases.append(import_alias)
             self.save_import_scope(original_node)
             if not new_import_aliases:
                 # Nothing left in the import statement: remove it
@@ -119,10 +139,7 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
                             asname=import_alias.evaluated_alias,
                         )
                         continue
-                    else:
-                        new_import_aliases.append(import_alias)
-                else:
-                    new_import_aliases.append(import_alias)
+                new_import_aliases.append(import_alias)
             if not new_import_aliases:
                 # Nothing left in the import statement: remove it
                 return RemoveFromParent()
@@ -130,26 +147,6 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
             new_import_aliases = clean_new_import_aliases(new_import_aliases)
             return updated_node.with_changes(names=new_import_aliases)
         return updated_node
-
-    def gen_new_imported_aliases(
-        self, import_aliases: Sequence[ImportAlias]
-    ) -> Generator[ImportAlias, None, None]:
-        """Update import if the entity we're interested in is imported."""
-        for import_alias in import_aliases:
-            if not self.old_name or import_alias.evaluated_name == self.old_name:
-                if import_alias.evaluated_alias is None:
-                    self.context.scratch[self.ctx_key_name_matcher] = m.Name(
-                        self.old_name
-                    )
-                    if self.new_name:
-                        self.context.scratch[self.ctx_key_new_func] = Name(
-                            self.new_name
-                        )
-                if self.rename_from != self.rename_to:
-                    if self.simple_rename:
-                        self.add_new_import(import_alias)
-                    continue
-            yield import_alias
 
     def resolve_parent_node(self, node: CSTNode) -> CSTNode:
         parent_nodes = self.context.wrapper.resolve(ParentNodeProvider)  # type: ignore
@@ -166,14 +163,6 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
     @property
     def import_scope(self) -> Optional[Scope]:
         return self.context.scratch.get(self.ctx_key_import_scope, None)
-
-    def add_new_import(self, old_import_alias: ImportAlias) -> None:
-        AddImportsVisitor.add_needed_import(
-            context=self.context,
-            module=".".join(self.new_module_parts),
-            obj=self.new_name or old_import_alias.evaluated_name,
-            asname=old_import_alias.evaluated_alias,
-        )
 
     def leave_Name(self, original_node: Name, updated_node: Name) -> BaseExpression:
         """Rename reference to the imported name."""
