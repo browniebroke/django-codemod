@@ -79,75 +79,92 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
         self, original_node: ImportFrom, updated_node: ImportFrom
     ) -> Union[BaseSmallStatement, RemovalSentinel]:
         """Update import statements for matching old module name."""
+        return (
+            self._check_import_from_exact(original_node, updated_node)
+            or self._check_import_from_parent(original_node, updated_node)
+            or updated_node
+        )
+
+    def _check_import_from_exact(
+        self, original_node: ImportFrom, updated_node: ImportFrom
+    ) -> Optional[Union[BaseSmallStatement, RemovalSentinel]]:
         # First, exit early if 'import *' is used
         if isinstance(updated_node.names, ImportStar):
-            return updated_node
-        # Then, check for when the exact symbol is imported
-        if import_from_matches(updated_node, self.old_module_parts):
-            new_import_aliases = []
-            for import_alias in updated_node.names:
-                if not self.old_name or import_alias.evaluated_name == self.old_name:
-                    if import_alias.evaluated_alias is None:
-                        self.context.scratch[self.ctx_key_name_matcher] = m.Name(
-                            self.old_name
+            return None
+        # Check whether the exact symbol is imported
+        if not import_from_matches(updated_node, self.old_module_parts):
+            return None
+        # Match, update the node an return it
+        new_import_aliases = []
+        for import_alias in updated_node.names:
+            if not self.old_name or import_alias.evaluated_name == self.old_name:
+                if import_alias.evaluated_alias is None:
+                    self.context.scratch[self.ctx_key_name_matcher] = m.Name(
+                        self.old_name
+                    )
+                    if self.new_name:
+                        self.context.scratch[self.ctx_key_new_func] = Name(
+                            self.new_name
                         )
-                        if self.new_name:
-                            self.context.scratch[self.ctx_key_new_func] = Name(
-                                self.new_name
-                            )
-                    if self.rename_from != self.rename_to:
-                        if self.simple_rename:
-                            AddImportsVisitor.add_needed_import(
-                                context=self.context,
-                                module=".".join(self.new_module_parts),
-                                obj=self.new_name or import_alias.evaluated_name,
-                                asname=import_alias.evaluated_alias,
-                            )
-                        continue
-                new_import_aliases.append(import_alias)
-            self.save_import_scope(original_node)
-            if not new_import_aliases:
-                # Nothing left in the import statement: remove it
-                return RemoveFromParent()
-            # Some imports are left, update the statement
-            new_import_aliases = clean_new_import_aliases(new_import_aliases)
-            return updated_node.with_changes(names=new_import_aliases)
-        # Finally, check for parent module is imported
-        if import_from_matches(updated_node, self.old_parent_module_parts):
-            new_import_aliases = []
-            for import_alias in updated_node.names:
-                if import_alias.evaluated_name == self.old_parent_name:
-                    module_name_str = (
-                        import_alias.evaluated_alias or import_alias.evaluated_name
-                    )
-                    self.context.scratch[self.ctx_key_name_matcher] = m.Attribute(
-                        value=m.Name(module_name_str),
-                        attr=m.Name(self.old_name),
-                    )
-                    self.context.scratch[self.ctx_key_new_func] = Attribute(
-                        attr=Name(self.new_name),
-                        value=Name(
-                            import_alias.evaluated_alias or self.new_parent_name
-                        ),
-                    )
-                    self.save_import_scope(original_node)
-                    if self.old_parent_module_parts != self.new_parent_module_parts:
-                        # import statement needs updating
+                if self.rename_from != self.rename_to:
+                    if self.simple_rename:
                         AddImportsVisitor.add_needed_import(
                             context=self.context,
-                            module=".".join(self.new_parent_module_parts),
-                            obj=self.new_parent_name,
+                            module=".".join(self.new_module_parts),
+                            obj=self.new_name or import_alias.evaluated_name,
                             asname=import_alias.evaluated_alias,
                         )
-                        continue
-                new_import_aliases.append(import_alias)
-            if not new_import_aliases:
-                # Nothing left in the import statement: remove it
-                return RemoveFromParent()
-            # Some imports are left, update the statement
-            new_import_aliases = clean_new_import_aliases(new_import_aliases)
-            return updated_node.with_changes(names=new_import_aliases)
-        return updated_node
+                    continue
+            new_import_aliases.append(import_alias)
+        self.save_import_scope(original_node)
+        if not new_import_aliases:
+            # Nothing left in the import statement: remove it
+            return RemoveFromParent()
+        # Some imports are left, update the statement
+        new_import_aliases = clean_new_import_aliases(new_import_aliases)
+        return updated_node.with_changes(names=new_import_aliases)
+
+    def _check_import_from_parent(
+        self, original_node: ImportFrom, updated_node: ImportFrom
+    ) -> Optional[Union[BaseSmallStatement, RemovalSentinel]]:
+        # First, exit early if 'import *' is used
+        if isinstance(updated_node.names, ImportStar):
+            return None
+        # Check whether parent module is imported
+        if not import_from_matches(updated_node, self.old_parent_module_parts):
+            return None
+        # Match, update the node an return it
+        new_import_aliases = []
+        for import_alias in updated_node.names:
+            if import_alias.evaluated_name == self.old_parent_name:
+                module_name_str = (
+                    import_alias.evaluated_alias or import_alias.evaluated_name
+                )
+                self.context.scratch[self.ctx_key_name_matcher] = m.Attribute(
+                    value=m.Name(module_name_str),
+                    attr=m.Name(self.old_name),
+                )
+                self.context.scratch[self.ctx_key_new_func] = Attribute(
+                    attr=Name(self.new_name),
+                    value=Name(import_alias.evaluated_alias or self.new_parent_name),
+                )
+                self.save_import_scope(original_node)
+                if self.old_parent_module_parts != self.new_parent_module_parts:
+                    # import statement needs updating
+                    AddImportsVisitor.add_needed_import(
+                        context=self.context,
+                        module=".".join(self.new_parent_module_parts),
+                        obj=self.new_parent_name,
+                        asname=import_alias.evaluated_alias,
+                    )
+                    continue
+            new_import_aliases.append(import_alias)
+        if not new_import_aliases:
+            # Nothing left in the import statement: remove it
+            return RemoveFromParent()
+        # Some imports are left, update the statement
+        new_import_aliases = clean_new_import_aliases(new_import_aliases)
+        return updated_node.with_changes(names=new_import_aliases)
 
     def resolve_parent_node(self, node: CSTNode) -> CSTNode:
         parent_nodes = self.context.wrapper.resolve(ParentNodeProvider)  # type: ignore
