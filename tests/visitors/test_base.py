@@ -87,6 +87,19 @@ class TestFuncRenameTransformer(BaseVisitorTest):
         """
         self.assertCodemod(before, after)
 
+    def test_parent_reference_without_call(self) -> None:
+        before = """
+            from django.dummy import module
+
+            new_func = module.func
+        """
+        after = """
+            from django.dummy import module
+
+            new_func = module.better_func
+        """
+        self.assertCodemod(before, after)
+
     def test_already_imported(self) -> None:
         """Function to modify is already imported with an alias."""
         before = """
@@ -294,6 +307,20 @@ class TestOtherModuleFuncRenameTransformer(BaseVisitorTest):
             result = module.func()
         """
         after = """
+            from django.better import dummy
+
+            result = dummy.better_func()
+        """
+        self.assertCodemod(before, after)
+
+    def test_parent_module_with_other(self) -> None:
+        before = """
+            from django.dummy import other_mod, module
+
+            result = module.func()
+        """
+        after = """
+            from django.dummy import other_mod
             from django.better import dummy
 
             result = dummy.better_func()

@@ -198,7 +198,7 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
             and self.matches_import_scope(original_node)
         ):
             return updated_node.with_changes(
-                value=self.new_parent_name,
+                value=Name(self.new_parent_name),
                 attr=Name(self.new_name),
             )
         return super().leave_Attribute(original_node, updated_node)
