@@ -99,6 +99,7 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
         for import_alias in updated_node.names:
             if not self.old_name or import_alias.evaluated_name == self.old_name:
                 if import_alias.evaluated_alias is None:
+                    self.save_import_scope(original_node)
                     self.context.scratch[self.ctx_key_name_matcher] = m.Name(
                         self.old_name
                     )
@@ -116,7 +117,6 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
                         )
                     continue
             new_import_aliases.append(import_alias)
-        self.save_import_scope(original_node)
         if not new_import_aliases:
             # Nothing left in the import statement: remove it
             return RemoveFromParent()
@@ -137,6 +137,7 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
         new_import_aliases = []
         for import_alias in updated_node.names:
             if import_alias.evaluated_name == self.old_parent_name:
+                self.save_import_scope(original_node)
                 module_name_str = (
                     import_alias.evaluated_alias or import_alias.evaluated_name
                 )
@@ -148,7 +149,6 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
                     attr=Name(self.new_name),
                     value=Name(import_alias.evaluated_alias or self.new_parent_name),
                 )
-                self.save_import_scope(original_node)
                 if self.old_parent_module_parts != self.new_parent_module_parts:
                     # import statement needs updating
                     AddImportsVisitor.add_needed_import(
