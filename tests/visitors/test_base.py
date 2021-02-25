@@ -391,3 +391,16 @@ class TestModuleRenameTransformer(BaseVisitorTest):
             result = func()
         """
         self.assertCodemod(before, after)
+
+    def test_parent_module_substitution(self) -> None:
+        before = """
+            from django.dummy import module
+
+            result = module.func()
+        """
+        after = """
+            from django.dummy import other_module
+
+            result = other_module.func()
+        """
+        self.assertCodemod(before, after)
