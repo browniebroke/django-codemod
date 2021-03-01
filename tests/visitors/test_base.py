@@ -4,7 +4,7 @@ from parameterized import parameterized
 
 from django_codemod.visitors.base import (
     BaseFuncRenameTransformer,
-    BaseModuleRenameTransformer,
+    BaseRenameTransformer,
     module_matcher,
 )
 
@@ -368,7 +368,7 @@ class TestOtherModuleFuncRenameTransformer(BaseVisitorTest):
         self.assertCodemod(before, after)
 
 
-class OtherModuleRenameTransformer(BaseModuleRenameTransformer):
+class OtherModuleRenameTransformer(BaseRenameTransformer):
     """Simple transformer renaming function from same module."""
 
     rename_from = "django.dummy.module"

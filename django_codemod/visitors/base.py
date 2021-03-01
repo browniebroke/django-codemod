@@ -58,11 +58,11 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
         *self.old_parent_module_parts, self.old_parent_name, _ = (
             *self.old_module_parts,
             self.old_name,
-        ) = self.rename_from.split(".")
+        ) = self.old_all_parts = self.rename_from.split(".")
         *self.new_parent_module_parts, self.new_parent_name, _ = (
             *self.new_module_parts,
             self.new_name,
-        ) = self.rename_to.split(".")
+        ) = self.new_all_parts = self.rename_to.split(".")
         self.ctx_key_import_scope = f"{self.rename_from}-import_scope"
         self.ctx_key_name_matcher = f"{self.rename_from}-name_matcher"
         self.ctx_key_new_func = f"{self.rename_from}-new_func"
@@ -82,12 +82,20 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
         return (
             self._check_import_from_exact(original_node, updated_node)
             or self._check_import_from_parent(original_node, updated_node)
+            or self._check_import_from_child(updated_node)
             or updated_node
         )
 
     def _check_import_from_exact(
         self, original_node: ImportFrom, updated_node: ImportFrom
     ) -> Optional[Union[BaseSmallStatement, RemovalSentinel]]:
+        """
+        Check for when the thing to replace is imported exactly.
+
+        When `parent.module.the_thing` is transformed, detect such import:
+
+            from parent.module import the_thing
+        """
         # First, exit early if 'import *' is used
         if isinstance(updated_node.names, ImportStar):
             return None
@@ -127,6 +135,13 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
     def _check_import_from_parent(
         self, original_node: ImportFrom, updated_node: ImportFrom
     ) -> Optional[Union[BaseSmallStatement, RemovalSentinel]]:
+        """
+        Check for when the parent module of thing to replace is imported.
+
+        When `parent.module.the_thing` is transformed, detect such import:
+
+            from parent import module
+        """
         # First, exit early if 'import *' is used
         if isinstance(updated_node.names, ImportStar):
             return None
@@ -165,6 +180,32 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
         # Some imports are left, update the statement
         new_import_aliases = clean_new_import_aliases(new_import_aliases)
         return updated_node.with_changes(names=new_import_aliases)
+
+    def _check_import_from_child(
+        self, updated_node: ImportFrom
+    ) -> Optional[Union[BaseSmallStatement, RemovalSentinel]]:
+        """
+        Check import of a member of the module being codemodded.
+
+        When `parent.module.the_thing` is transformed, detect such import:
+
+            from parent.module.thing import something
+        """
+        # First, exit early if 'import *' is used
+        if isinstance(updated_node.names, ImportStar):
+            return None
+        # Check whether a member of the module is imported
+        if not import_from_matches(updated_node, self.old_all_parts):
+            return None
+        # Match, add import for all imported names and remove the existing import
+        for import_alias in updated_node.names:
+            AddImportsVisitor.add_needed_import(
+                context=self.context,
+                module=".".join(self.new_all_parts),
+                obj=import_alias.evaluated_name,
+                asname=import_alias.evaluated_alias,
+            )
+        return RemoveFromParent()
 
     def resolve_parent_node(self, node: CSTNode) -> CSTNode:
         parent_nodes = self.context.wrapper.resolve(ParentNodeProvider)  # type: ignore
@@ -230,9 +271,9 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
 
 
 def clean_new_import_aliases(
-    import_aliases: Sequence[ImportAlias],
+    import_aliases: List[ImportAlias],
 ) -> List[ImportAlias]:
-    """Tidy up the updated list of imports"""
+    """Clean up a list of import aliases."""
     # Sort them
     cleaned_import_aliases = sorted(import_aliases, key=lambda n: n.evaluated_name)
     # Remove any trailing commas
@@ -240,17 +281,6 @@ def clean_new_import_aliases(
     if last_name.comma != MaybeSentinel.DEFAULT:
         cleaned_import_aliases[-1] = last_name.with_changes(comma=MaybeSentinel.DEFAULT)
     return cleaned_import_aliases
-
-
-class BaseModuleRenameTransformer(BaseRenameTransformer, ABC):
-    """Base class to help rename or move a module."""
-
-    def __init__(self, context: CodemodContext) -> None:
-        super().__init__(context)
-        self.old_name = ""
-        self.old_module_parts = self.rename_from.split(".")
-        self.new_name = ""
-        self.new_module_parts = self.rename_to.split(".")
 
 
 class BaseFuncRenameTransformer(BaseRenameTransformer, ABC):
