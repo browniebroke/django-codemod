@@ -4,7 +4,7 @@ from parameterized import parameterized
 
 from django_codemod.visitors.base import (
     BaseFuncRenameTransformer,
-    BaseModuleRenameTransformer,
+    BaseRenameTransformer,
     module_matcher,
 )
 
@@ -31,7 +31,7 @@ from .base import BaseVisitorTest
 def test_module_matcher(parts, expected_matcher):
     matcher = module_matcher(parts)
 
-    # equality comparision doesn't work with matcher:
+    # equality comparison doesn't work with matcher:
     # compare their representation seems to work
     assert repr(matcher) == repr(expected_matcher)
 
@@ -60,6 +60,19 @@ class TestFuncRenameTransformer(BaseVisitorTest):
         """
         self.assertCodemod(before, after)
 
+    def test_parent_module(self) -> None:
+        before = """
+            from django.dummy import module
+
+            result = module.func()
+        """
+        after = """
+            from django.dummy import module
+
+            result = module.better_func()
+        """
+        self.assertCodemod(before, after)
+
     def test_reference_without_call(self) -> None:
         """Replace reference of the function even is it's not called."""
         before = """
@@ -71,6 +84,19 @@ class TestFuncRenameTransformer(BaseVisitorTest):
             from django.dummy.module import better_func
 
             new_func = better_func
+        """
+        self.assertCodemod(before, after)
+
+    def test_parent_reference_without_call(self) -> None:
+        before = """
+            from django.dummy import module
+
+            new_func = module.func
+        """
+        after = """
+            from django.dummy import module
+
+            new_func = module.better_func
         """
         self.assertCodemod(before, after)
 
@@ -274,6 +300,46 @@ class TestOtherModuleFuncRenameTransformer(BaseVisitorTest):
         """
         self.assertCodemod(before, after)
 
+    def test_parent_module(self) -> None:
+        before = """
+            from django.dummy import module
+
+            result = module.func()
+        """
+        after = """
+            from django.better import dummy
+
+            result = dummy.better_func()
+        """
+        self.assertCodemod(before, after)
+
+    def test_parent_module_with_other(self) -> None:
+        before = """
+            from django.dummy import other_mod, module
+
+            result = module.func()
+        """
+        after = """
+            from django.dummy import other_mod
+            from django.better import dummy
+
+            result = dummy.better_func()
+        """
+        self.assertCodemod(before, after)
+
+    def test_parent_module_import_alias(self) -> None:
+        before = """
+            from django.dummy import module as django_module
+
+            result = django_module.func()
+        """
+        after = """
+            from django.better import dummy as django_module
+
+            result = django_module.better_func()
+        """
+        self.assertCodemod(before, after)
+
     def test_already_imported(self) -> None:
         before = """
             from django.dummy.module import func
@@ -302,7 +368,7 @@ class TestOtherModuleFuncRenameTransformer(BaseVisitorTest):
         self.assertCodemod(before, after)
 
 
-class OtherModuleRenameTransformer(BaseModuleRenameTransformer):
+class OtherModuleRenameTransformer(BaseRenameTransformer):
     """Simple transformer renaming function from same module."""
 
     rename_from = "django.dummy.module"
@@ -323,5 +389,18 @@ class TestModuleRenameTransformer(BaseVisitorTest):
             from django.dummy.other_module import func
 
             result = func()
+        """
+        self.assertCodemod(before, after)
+
+    def test_parent_module_substitution(self) -> None:
+        before = """
+            from django.dummy import module
+
+            result = module.func()
+        """
+        after = """
+            from django.dummy import other_module
+
+            result = other_module.func()
         """
         self.assertCodemod(before, after)

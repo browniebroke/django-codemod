@@ -1,8 +1,8 @@
 from django_codemod.constants import DJANGO_1_10, DJANGO_2_0
-from django_codemod.visitors.base import BaseModuleRenameTransformer
+from django_codemod.visitors.base import BaseRenameTransformer
 
 
-class URLResolversTransformer(BaseModuleRenameTransformer):
+class URLResolversTransformer(BaseRenameTransformer):
     """Replace `django.core.urlresolvers` by `django.urls`."""
 
     deprecated_in = DJANGO_1_10
