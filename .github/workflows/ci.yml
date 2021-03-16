@@ -33,7 +33,7 @@ jobs:
         run: poetry install
       - name: Test with Pytest
         run: poetry run pytest --cov-report=xml
-      - uses: codecov/codecov-action@v1.2.2
+      - uses: codecov/codecov-action@v1.3.0
 
   e2e:
     # https://github.com/browniebroke/django-codemod/issues/302
