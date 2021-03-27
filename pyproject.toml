@@ -31,7 +31,7 @@ python = "^3.6"
 click = "<8"
 libcst = "<=0.3.17"
 pathspec = ">=0.6,<1"
-rich = "<10"
+rich = "<11"
 
 # Docs deps
 Sphinx = {version = "^3.3.0", optional = true}
