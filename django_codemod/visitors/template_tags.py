@@ -4,6 +4,7 @@ from libcst import (
     Assign,
     AssignTarget,
     Decorator,
+    FlattenSentinel,
     ImportFrom,
     ImportStar,
     Module,
@@ -125,7 +126,7 @@ class AssignmentTagTransformer(BaseDjCodemodTransformer):
 
     def leave_Decorator(
         self, original_node: Decorator, updated_node: Decorator
-    ) -> Union[Decorator, RemovalSentinel]:
+    ) -> Union[Decorator, FlattenSentinel[Decorator], RemovalSentinel]:
         """Update decorator call if all conditions are met."""
         if self.decorators_matcher and m.matches(updated_node, self.decorators_matcher):
             # If we have a decorator matcher, and it matches,

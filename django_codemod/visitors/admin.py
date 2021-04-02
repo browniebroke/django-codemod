@@ -7,6 +7,7 @@ from libcst import (
     BaseStatement,
     Call,
     ClassDef,
+    FlattenSentinel,
     FunctionDef,
     ImportFrom,
     ImportStar,
@@ -32,7 +33,9 @@ class InlineHasAddPermissionsTransformer(BaseDjCodemodTransformer):
 
     def leave_ImportFrom(
         self, original_node: ImportFrom, updated_node: ImportFrom
-    ) -> Union[BaseSmallStatement, RemovalSentinel]:
+    ) -> Union[
+        BaseSmallStatement, FlattenSentinel[BaseSmallStatement], RemovalSentinel
+    ]:
         if isinstance(updated_node.names, ImportStar):
             return super().leave_ImportFrom(original_node, updated_node)
         base_cls_matcher = []
@@ -94,7 +97,7 @@ class InlineHasAddPermissionsTransformer(BaseDjCodemodTransformer):
 
     def leave_ClassDef(
         self, original_node: ClassDef, updated_node: ClassDef
-    ) -> Union[BaseStatement, RemovalSentinel]:
+    ) -> Union[BaseStatement, FlattenSentinel[BaseStatement], RemovalSentinel]:
         self.context.scratch.pop(self.ctx_key_visiting_subclass, None)
         return super().leave_ClassDef(original_node, updated_node)
 
@@ -104,7 +107,7 @@ class InlineHasAddPermissionsTransformer(BaseDjCodemodTransformer):
 
     def leave_FunctionDef(
         self, original_node: FunctionDef, updated_node: FunctionDef
-    ) -> Union[BaseStatement, RemovalSentinel]:
+    ) -> Union[BaseStatement, FlattenSentinel[BaseStatement], RemovalSentinel]:
         if (
             self.is_visiting_subclass
             and m.matches(
