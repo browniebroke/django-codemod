@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v1.4.1 (2021-04-02)
+### Fix
+* Update type annotations ([`24f9093`](https://github.com/browniebroke/django-codemod/commit/24f9093673cc7241e77966d9cdbeca12b8f7b4f2))
+* **deps:** Update dependency libcst to <=0.3.18 ([`ca35714`](https://github.com/browniebroke/django-codemod/commit/ca35714da223c43e275061a0117f2769b974bc12))
+* **deps:** Update dependency rich to v10 ([`3841299`](https://github.com/browniebroke/django-codemod/commit/3841299fae4807edba97f2876a91ba9363f38d39))
+
 ## v1.4.0 (2021-03-02)
 ### Feature
 * Handle rename when parent module is imported ([#347](https://github.com/browniebroke/django-codemod/issues/347)) ([`26d22fe`](https://github.com/browniebroke/django-codemod/commit/26d22fef90654c8e730e302e7bdef1f4d2a9530c))
