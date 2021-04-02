@@ -7,6 +7,7 @@ from libcst import (
     BaseSmallStatement,
     BaseStatement,
     Call,
+    FlattenSentinel,
     FunctionDef,
     ImportFrom,
     ImportStar,
@@ -35,7 +36,9 @@ class ModelsPermalinkTransformer(BaseDjCodemodTransformer):
 
     def leave_ImportFrom(
         self, original_node: ImportFrom, updated_node: ImportFrom
-    ) -> Union[BaseSmallStatement, RemovalSentinel]:
+    ) -> Union[
+        BaseSmallStatement, FlattenSentinel[BaseSmallStatement], RemovalSentinel
+    ]:
         if isinstance(updated_node.names, ImportStar):
             return super().leave_ImportFrom(original_node, updated_node)
         if m.matches(
@@ -99,7 +102,7 @@ class ModelsPermalinkTransformer(BaseDjCodemodTransformer):
 
     def leave_FunctionDef(
         self, original_node: FunctionDef, updated_node: FunctionDef
-    ) -> Union[BaseStatement, RemovalSentinel]:
+    ) -> Union[BaseStatement, FlattenSentinel[BaseStatement], RemovalSentinel]:
         if self.visiting_permalink_method:
             for decorator in updated_node.decorators:
                 if m.matches(decorator, self.decorator_matcher):
@@ -122,7 +125,9 @@ class ModelsPermalinkTransformer(BaseDjCodemodTransformer):
 
     def leave_Return(
         self, original_node: Return, updated_node: Return
-    ) -> Union[BaseSmallStatement, RemovalSentinel]:
+    ) -> Union[
+        BaseSmallStatement, FlattenSentinel[BaseSmallStatement], RemovalSentinel
+    ]:
         if self.visiting_permalink_method and m.matches(
             updated_node.value, m.Tuple()  # type: ignore
         ):
