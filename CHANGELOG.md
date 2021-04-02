@@ -2,10 +2,6 @@
 
 <!--next-version-placeholder-->
 
-## v1.4.1 (2021-03-27)
-### Fix
-* **deps:** Update dependency rich to v10 ([`3841299`](https://github.com/browniebroke/django-codemod/commit/3841299fae4807edba97f2876a91ba9363f38d39))
-
 ## v1.4.0 (2021-03-02)
 ### Feature
 * Handle rename when parent module is imported ([#347](https://github.com/browniebroke/django-codemod/issues/347)) ([`26d22fe`](https://github.com/browniebroke/django-codemod/commit/26d22fef90654c8e730e302e7bdef1f4d2a9530c))
