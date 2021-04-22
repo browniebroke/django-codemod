@@ -82,10 +82,10 @@ class TestInlineHasAddPermissionsTransformer(BaseVisitorTest):
 
             class MyInlineInline({base_class}):
 
-                def has_add_permission(self, request, obj = None):
+                def has_add_permission(self, request, obj=None):
                     if somethings:
                         return False
-                    return super().has_add_permission(request, obj = obj)
+                    return super().has_add_permission(request, obj=obj)
         """
         self.assertCodemod(before, after)
 
@@ -114,10 +114,10 @@ class TestInlineHasAddPermissionsTransformer(BaseVisitorTest):
 
             class MyInlineInline(InlineMixin, {base_class}):
 
-                def has_add_permission(self, request, obj = None):
+                def has_add_permission(self, request, obj=None):
                     if somethings:
                         return False
-                    return super().has_add_permission(request, obj = obj)
+                    return super().has_add_permission(request, obj=obj)
         """
         self.assertCodemod(before, after)
 
@@ -146,10 +146,10 @@ class TestInlineHasAddPermissionsTransformer(BaseVisitorTest):
 
             class MyInlineInline({base_class}, OtherBase):
 
-                def has_add_permission(self, request, obj = None):
+                def has_add_permission(self, request, obj=None):
                     if somethings:
                         return False
-                    return super().has_add_permission(request, obj = obj)
+                    return super().has_add_permission(request, obj=obj)
         """
         self.assertCodemod(before, after)
 
@@ -182,10 +182,10 @@ class TestInlineHasAddPermissionsTransformer(BaseVisitorTest):
 
             class MyInlineInline({base_class}):
 
-                def has_add_permission(self, request, obj = None):
+                def has_add_permission(self, request, obj=None):
                     if somethings:
                         return False
-                    return super().has_add_permission(request, obj = obj)
+                    return super().has_add_permission(request, obj=obj)
 
 
             class MyAdmin(admin.ModelAdmin):

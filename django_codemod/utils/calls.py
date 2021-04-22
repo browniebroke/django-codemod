@@ -1,8 +1,8 @@
 from typing import Optional, Sequence
 
-from libcst import Arg, Call
+from libcst import Arg, Call, FunctionDef, Param
 from libcst import matchers as m
-from libcst import parse_expression
+from libcst import parse_expression, parse_statement
 
 
 def find_keyword_arg(args: Sequence[Arg], keyword_name: str) -> Optional[Arg]:
@@ -14,18 +14,25 @@ def find_keyword_arg(args: Sequence[Arg], keyword_name: str) -> Optional[Arg]:
     return None
 
 
-def make_kwarg(arg_str: str) -> Arg:
-    """Helper to add simple kwarg to a function call.
+def parse_arg(arg_str: str) -> Arg:
+    """Build a `Arg` instance based on its string representation.
 
-    By default, libCST adds some spaces around the equal sign:
-
-        func(name = value)
-
-    This helper builds it without spaces:
-
-        func(name=value)
+    Instantiating it from scratch is cumbersome, this helper generates a
+    function call with the given argument and extract it from the tree.
     """
     call_result = parse_expression(f"call({arg_str})")
     if isinstance(call_result, Call):
         return call_result.args[0]
     raise AssertionError(f"Unexpected type for: {call_result}")
+
+
+def parse_param(arg_str: str) -> Param:
+    """Build a `Param` instance based on its string representation.
+
+    Instantiating it from scratch is cumbersome, this helper generates a
+    function definition with the given param and extract it from the tree.
+    """
+    statement = parse_statement(f"def fun({arg_str}):...")
+    if isinstance(statement, FunctionDef):
+        return statement.params.params[0]
+    raise AssertionError(f"Unexpected type for: {statement}")
