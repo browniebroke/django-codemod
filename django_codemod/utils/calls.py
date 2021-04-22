@@ -28,4 +28,4 @@ def make_kwarg(arg_str: str) -> Arg:
     call_result = parse_expression(f"call({arg_str})")
     if isinstance(call_result, Call):
         return call_result.args[0]
-    raise RuntimeError(f"Unexpected type for: {call_result}")
+    raise AssertionError(f"Unexpected type for: {call_result}")
