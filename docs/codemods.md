@@ -90,3 +90,9 @@ Applied by passing the `--removed-in 4.0` or `--deprecated-in 3.0` option:
   to `re_path` for anything non-simple.
 - Replaces `django.utils.http.is_safe_url` by
   `django.utils.http.url_has_allowed_host_and_scheme`.
+
+Applied by passing the `--removed-in 4.0` or `--deprecated-in 3.1` option:
+
+- Replaces postgres' `JSONField` by the cross database equivalent field.
+- Replaces `NullBooleanField` by `BooleanField(null=True)`.
+- Add required `length` argument `django.utils.crypto.get_random_string` calls.
