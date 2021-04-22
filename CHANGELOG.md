@@ -2,6 +2,17 @@
 
 <!--next-version-placeholder-->
 
+## v1.5.0 (2021-04-22)
+### Feature
+* Handle deprecation for NullBooleanField ([`d2cb1c5`](https://github.com/browniebroke/django-codemod/commit/d2cb1c58e50f95a05be7f997f78310294a788d2d))
+
+### Fix
+* Avoid spaces around kwarg in FixedOffsetTransformer ([`52c5caf`](https://github.com/browniebroke/django-codemod/commit/52c5caf691ca3c2aa8d8c1c3dd1df3a2a18c7abb))
+* Avoid extra whitespaces in kwargs from OnDeleteTransformer ([`cc7b2b2`](https://github.com/browniebroke/django-codemod/commit/cc7b2b26231f94017a9380e158769ff28113ed24))
+
+### Documentation
+* Add new and missing codemods ([`679e6d5`](https://github.com/browniebroke/django-codemod/commit/679e6d583bc9f1b24aeb1f8130b47712c5e71ce3))
+
 ## v1.4.1 (2021-04-02)
 ### Fix
 * Update type annotations ([`24f9093`](https://github.com/browniebroke/django-codemod/commit/24f9093673cc7241e77966d9cdbeca12b8f7b4f2))
