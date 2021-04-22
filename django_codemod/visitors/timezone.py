@@ -1,6 +1,6 @@
 from typing import Sequence
 
-from libcst import Arg, Call, Name
+from libcst import Arg, Call, Integer, parse_expression
 from libcst.codemod.visitors import AddImportsVisitor
 
 from django_codemod.constants import DJANGO_2_2, DJANGO_3_1
@@ -23,9 +23,9 @@ class FixedOffsetTransformer(BaseFuncRenameTransformer):
             obj="timedelta",
         )
         offset_arg, *other_args = node.args
-        timedelta_call = Call(
-            func=Name("timedelta"),
-            args=(Arg(keyword=Name("minutes"), value=offset_arg.value),),
-        )
+        integer_value = offset_arg.value
+        if not isinstance(integer_value, Integer):
+            raise AssertionError(f"Unexpected type for: {integer_value}")
+        timedelta_call = parse_expression(f"timedelta(minutes={integer_value.value})")
         new_offset_arg = offset_arg.with_changes(value=timedelta_call)
         return (new_offset_arg, *other_args)
