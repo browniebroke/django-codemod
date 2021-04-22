@@ -18,7 +18,11 @@ from .http import (
     IsSafeUrlTransformer,
 )
 from .lru_cache import LRUCacheTransformer
-from .models import ModelsPermalinkTransformer, OnDeleteTransformer
+from .models import (
+    ModelsPermalinkTransformer,
+    NullBooleanFieldTransformer,
+    OnDeleteTransformer,
+)
 from .os_utils import AbsPathTransformer
 from .paginator import QuerySetPaginatorTransformer
 from .postgres_fields import (
@@ -60,6 +64,7 @@ __all__ = (
     "JSONModelFieldTransformer",
     "LRUCacheTransformer",
     "ModelsPermalinkTransformer",
+    "NullBooleanFieldTransformer",
     "OnDeleteTransformer",
     "QuerySetPaginatorTransformer",
     "RenderToResponseTransformer",
