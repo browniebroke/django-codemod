@@ -1,4 +1,4 @@
-from typing import Optional, Union
+from typing import Optional, Sequence, Union
 
 from libcst import (
     Arg,
@@ -20,9 +20,21 @@ from libcst import (
 from libcst import matchers as m
 from libcst.codemod.visitors import AddImportsVisitor
 
-from django_codemod.constants import DJANGO_1_9, DJANGO_1_11, DJANGO_2_0, DJANGO_2_1
+from django_codemod.constants import (
+    DJANGO_1_9,
+    DJANGO_1_11,
+    DJANGO_2_0,
+    DJANGO_2_1,
+    DJANGO_3_1,
+    DJANGO_4_0,
+)
 from django_codemod.utils.calls import find_keyword_arg
-from django_codemod.visitors.base import BaseDjCodemodTransformer, module_matcher
+from django_codemod.visitors.base import (
+    BaseDjCodemodTransformer,
+    BaseFuncRenameTransformer,
+    make_kwarg,
+    module_matcher,
+)
 
 
 class ModelsPermalinkTransformer(BaseDjCodemodTransformer):
@@ -190,3 +202,22 @@ class OnDeleteTransformer(BaseDjCodemodTransformer):
             )
             return updated_node.with_changes(args=updated_args)
         return super().leave_Call(original_node, updated_node)
+
+
+class NullBooleanFieldTransformer(BaseFuncRenameTransformer):
+    """Replace `NullBooleanField` by `BooleanField` with `null=True`."""
+
+    deprecated_in = DJANGO_3_1
+    removed_in = DJANGO_4_0
+
+    rename_from = "django.db.models.NullBooleanField"
+    rename_to = "django.db.models.BooleanField"
+
+    def update_call_args(self, node: Call) -> Sequence[Arg]:
+        return (
+            *node.args,
+            make_kwarg(
+                "null",
+                Name(value="True"),
+            ),
+        )

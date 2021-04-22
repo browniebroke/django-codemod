@@ -2,6 +2,7 @@ from parameterized import parameterized
 
 from django_codemod.visitors.models import (
     ModelsPermalinkTransformer,
+    NullBooleanFieldTransformer,
     OnDeleteTransformer,
 )
 from tests.visitors.base import BaseVisitorTest
@@ -342,5 +343,43 @@ class TestAvailableAttrsTransformer(BaseVisitorTest):
 
                 def get_name(self):
                     return 'World'
+        """
+        self.assertCodemod(before, after)
+
+
+class TestNullBooleanFieldTransformer(BaseVisitorTest):
+
+    transformer = NullBooleanFieldTransformer
+
+    def test_noop_models(self) -> None:
+        before = after = """
+            from django.db import models
+
+            class MyThing(models.Model):
+                is_active = models.BooleanField()
+        """
+        self.assertCodemod(before, after)
+
+    def test_noop_fields(self) -> None:
+        before = after = """
+            from django.db.models import BooleanField, Model
+
+            class MyThing(Model):
+                is_active = BooleanField()
+        """
+        self.assertCodemod(before, after)
+
+    def test_simple_substitution(self) -> None:
+        before = """
+            from django.db import models
+
+            class MyThing(models.Model):
+                is_active = models.NullBooleanField()
+        """
+        after = """
+            from django.db import models
+
+            class MyThing(models.Model):
+                is_active = models.BooleanField(null=True)
         """
         self.assertCodemod(before, after)
