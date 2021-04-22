@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.5.1 (2021-04-22)
+### Fix
+* Avoid extra spaces around kwargs in InlineHasAddPermissionsTransformer ([`32d6ebe`](https://github.com/browniebroke/django-codemod/commit/32d6ebe37cafaf6b24608cfa57526792379e2c68))
+
 ## v1.5.0 (2021-04-22)
 ### Feature
 * Handle deprecation for NullBooleanField ([`d2cb1c5`](https://github.com/browniebroke/django-codemod/commit/d2cb1c58e50f95a05be7f997f78310294a788d2d))
