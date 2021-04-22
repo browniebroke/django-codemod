@@ -21,7 +21,7 @@ class TestOnDeleteTransformer(BaseVisitorTest):
             from django.db import models
 
             class MyModel(models.Model):
-                user = models.ForeignKey('auth.User', on_delete = models.CASCADE)
+                user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
         """
         self.assertCodemod(before, after)
 
@@ -34,7 +34,7 @@ class TestOnDeleteTransformer(BaseVisitorTest):
             from django.db import models
 
             class MyModel(models.Model):
-                user = models.OneToOneField('auth.User', on_delete = models.CASCADE)
+                user = models.OneToOneField('auth.User', on_delete=models.CASCADE)
         """
         self.assertCodemod(before, after)
 
@@ -50,7 +50,7 @@ class TestOnDeleteTransformer(BaseVisitorTest):
                             (
                                 'model',
                                 models.OneToOneField(
-                                    to = 'random.Model', on_delete = models.CASCADE),
+                                    to='random.Model', on_delete=models.CASCADE),
                             ),
                         ],
                     )
@@ -66,7 +66,7 @@ class TestOnDeleteTransformer(BaseVisitorTest):
                             (
                                 'model',
                                 models.OneToOneField(
-                                    to = 'random.Model', on_delete = models.CASCADE),
+                                    to='random.Model', on_delete=models.CASCADE),
                             ),
                         ],
                     )
@@ -103,7 +103,7 @@ class TestOnDeleteTransformer(BaseVisitorTest):
                             blank=True,
                             to='random.Model',
                             null=True,
-                        on_delete = models.CASCADE),
+                        on_delete=models.CASCADE),
                     )
                 ]
         """
@@ -118,7 +118,7 @@ class TestOnDeleteTransformer(BaseVisitorTest):
         after = """
             from django.db import models
 
-            models.OneToOneField('model', on_delete = models.CASCADE)
+            models.OneToOneField('model', on_delete=models.CASCADE)
         """
         self.assertCodemod(before, after)
 
@@ -198,7 +198,7 @@ class TestOnDeleteTransformer(BaseVisitorTest):
                                 CustomModel.OneToOneField(
                                     'model.Location',
                                     auto_created=True,
-                                on_delete = models.CASCADE),
+                                on_delete=models.CASCADE),
                             ),
                         ],
                     )

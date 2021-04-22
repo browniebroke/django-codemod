@@ -195,9 +195,8 @@ class OnDeleteTransformer(BaseDjCodemodTransformer):
             )
             updated_args = (
                 *updated_node.args,
-                Arg(
-                    keyword=Name("on_delete"),
-                    value=Attribute(value=Name("models"), attr=Name("CASCADE")),
+                make_kwarg(
+                    "on_delete", Attribute(value=Name("models"), attr=Name("CASCADE"))
                 ),
             )
             return updated_node.with_changes(args=updated_args)
