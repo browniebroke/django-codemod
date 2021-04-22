@@ -27,11 +27,10 @@ from django_codemod.constants import (
     DJANGO_3_1,
     DJANGO_4_0,
 )
-from django_codemod.utils.calls import find_keyword_arg
+from django_codemod.utils.calls import find_keyword_arg, make_kwarg
 from django_codemod.visitors.base import (
     BaseDjCodemodTransformer,
     BaseFuncRenameTransformer,
-    make_kwarg,
     module_matcher,
 )
 
