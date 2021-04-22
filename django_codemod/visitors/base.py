@@ -18,7 +18,6 @@ from libcst import (
     RemoveFromParent,
 )
 from libcst import matchers as m
-from libcst import parse_expression
 from libcst.codemod import CodemodContext, ContextAwareTransformer
 from libcst.codemod.visitors import AddImportsVisitor
 from libcst.metadata import ParentNodeProvider, Scope, ScopeProvider
@@ -44,23 +43,6 @@ def module_matcher(
 def import_from_matches(node: ImportFrom, module_parts: Sequence[str]) -> bool:
     """Check if an `ImportFrom` node matches sequence of module parts."""
     return m.matches(node, m.ImportFrom(module=module_matcher(module_parts)))
-
-
-def make_kwarg(arg_str: str) -> Arg:
-    """Helper to add simple kwarg to a function call.
-
-    By default, libCST adds some spaces around the equal sign:
-
-        func(name = value)
-
-    This helper builds it without spaces:
-
-        func(name=value)
-    """
-    call_result = parse_expression(f"call({arg_str})")
-    if isinstance(call_result, Call):
-        return call_result.args[0]
-    raise RuntimeError(f"Unexpected type for: {call_result}")
 
 
 class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
