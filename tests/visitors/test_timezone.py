@@ -26,7 +26,7 @@ class TestFixedOffsetTransformer(BaseVisitorTest):
         after = """
             from datetime import timedelta, timezone
 
-            tz_info = timezone(offset=timedelta(minutes = 60))
+            tz_info = timezone(offset=timedelta(minutes=60))
         """
 
         self.assertCodemod(before, after)
@@ -41,7 +41,7 @@ class TestFixedOffsetTransformer(BaseVisitorTest):
         after = """
             from datetime import timedelta, timezone
 
-            tz_info = timezone(timedelta(minutes = 60))
+            tz_info = timezone(timedelta(minutes=60))
         """
 
         self.assertCodemod(before, after)
@@ -56,7 +56,7 @@ class TestFixedOffsetTransformer(BaseVisitorTest):
         after = """
             from datetime import timedelta, timezone
 
-            tz_info = timezone(offset=timedelta(minutes = 60), name="example")
+            tz_info = timezone(offset=timedelta(minutes=60), name="example")
         """
 
         self.assertCodemod(before, after)
@@ -71,7 +71,7 @@ class TestFixedOffsetTransformer(BaseVisitorTest):
         after = """
             from datetime import timedelta, timezone
 
-            tz_info = timezone(timedelta(minutes = 60), "example")
+            tz_info = timezone(timedelta(minutes=60), "example")
         """
 
         self.assertCodemod(before, after)
