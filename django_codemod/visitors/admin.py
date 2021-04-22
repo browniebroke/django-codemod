@@ -1,7 +1,6 @@
 from typing import Union
 
 from libcst import (
-    Arg,
     BaseExpression,
     BaseSmallStatement,
     BaseStatement,
@@ -12,13 +11,12 @@ from libcst import (
     ImportFrom,
     ImportStar,
     Module,
-    Name,
-    Param,
     RemovalSentinel,
 )
 from libcst import matchers as m
 
 from django_codemod.constants import DJANGO_2_1, DJANGO_3_0
+from django_codemod.utils.calls import parse_arg, parse_param
 from django_codemod.visitors.base import BaseDjCodemodTransformer, module_matcher
 
 
@@ -119,7 +117,7 @@ class InlineHasAddPermissionsTransformer(BaseDjCodemodTransformer):
             updated_params = old_params.with_changes(
                 params=(
                     *old_params.params,
-                    Param(name=Name("obj"), default=Name("None")),
+                    parse_param("obj=None"),
                 )
             )
             return updated_node.with_changes(params=updated_params)
@@ -141,7 +139,7 @@ class InlineHasAddPermissionsTransformer(BaseDjCodemodTransformer):
         ):
             updated_args = (
                 *updated_node.args,
-                Arg(keyword=Name("obj"), value=Name("obj")),
+                parse_arg("obj=obj"),
             )
             return updated_node.with_changes(args=updated_args)
         return super().leave_Call(original_node, updated_node)

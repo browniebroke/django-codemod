@@ -27,7 +27,7 @@ from django_codemod.constants import (
     DJANGO_3_1,
     DJANGO_4_0,
 )
-from django_codemod.utils.calls import find_keyword_arg, make_kwarg
+from django_codemod.utils.calls import find_keyword_arg, parse_arg
 from django_codemod.visitors.base import (
     BaseDjCodemodTransformer,
     BaseFuncRenameTransformer,
@@ -193,7 +193,7 @@ class OnDeleteTransformer(BaseDjCodemodTransformer):
             )
             updated_args = (
                 *updated_node.args,
-                make_kwarg("on_delete=models.CASCADE"),
+                parse_arg("on_delete=models.CASCADE"),
             )
             return updated_node.with_changes(args=updated_args)
         return super().leave_Call(original_node, updated_node)
@@ -211,5 +211,5 @@ class NullBooleanFieldTransformer(BaseFuncRenameTransformer):
     def update_call_args(self, node: Call) -> Sequence[Arg]:
         return (
             *node.args,
-            make_kwarg("null=True"),
+            parse_arg("null=True"),
         )
