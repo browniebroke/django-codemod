@@ -4,7 +4,6 @@ from typing import List, Optional, Sequence, Tuple, Union
 
 from libcst import (
     Arg,
-    AssignEqual,
     Attribute,
     BaseExpression,
     BaseSmallStatement,
@@ -17,9 +16,9 @@ from libcst import (
     Name,
     RemovalSentinel,
     RemoveFromParent,
-    SimpleWhitespace,
 )
 from libcst import matchers as m
+from libcst import parse_expression
 from libcst.codemod import CodemodContext, ContextAwareTransformer
 from libcst.codemod.visitors import AddImportsVisitor
 from libcst.metadata import ParentNodeProvider, Scope, ScopeProvider
@@ -47,7 +46,7 @@ def import_from_matches(node: ImportFrom, module_parts: Sequence[str]) -> bool:
     return m.matches(node, m.ImportFrom(module=module_matcher(module_parts)))
 
 
-def make_kwarg(name, value):
+def make_kwarg(arg_str: str) -> Arg:
     """Helper to add simple kwarg to a function call.
 
     By default, libCST adds some spaces around the equal sign:
@@ -58,20 +57,10 @@ def make_kwarg(name, value):
 
         func(name=value)
     """
-    return Arg(
-        value=value,
-        keyword=Name(
-            value=name,
-        ),
-        equal=AssignEqual(
-            whitespace_before=SimpleWhitespace(
-                value="",
-            ),
-            whitespace_after=SimpleWhitespace(
-                value="",
-            ),
-        ),
-    )
+    call_result = parse_expression(f"call({arg_str})")
+    if isinstance(call_result, Call):
+        return call_result.args[0]
+    raise RuntimeError(f"Unexpected type for: {call_result}")
 
 
 class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):

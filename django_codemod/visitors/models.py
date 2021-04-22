@@ -2,7 +2,6 @@ from typing import Optional, Sequence, Union
 
 from libcst import (
     Arg,
-    Attribute,
     BaseExpression,
     BaseSmallStatement,
     BaseStatement,
@@ -195,9 +194,7 @@ class OnDeleteTransformer(BaseDjCodemodTransformer):
             )
             updated_args = (
                 *updated_node.args,
-                make_kwarg(
-                    "on_delete", Attribute(value=Name("models"), attr=Name("CASCADE"))
-                ),
+                make_kwarg("on_delete=models.CASCADE"),
             )
             return updated_node.with_changes(args=updated_args)
         return super().leave_Call(original_node, updated_node)
@@ -215,8 +212,5 @@ class NullBooleanFieldTransformer(BaseFuncRenameTransformer):
     def update_call_args(self, node: Call) -> Sequence[Arg]:
         return (
             *node.args,
-            make_kwarg(
-                "null",
-                Name(value="True"),
-            ),
+            make_kwarg("null=True"),
         )
