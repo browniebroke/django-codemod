@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v1.5.2 (2021-05-04)
+### Fix
+* **deps:** Update dependency myst-parser to ^0.14.0 ([`0bbdc04`](https://github.com/browniebroke/django-codemod/commit/0bbdc04582dae9b6efd00ec79760c95ade14076c))
+
+### Documentation
+* Add DmytroLitvinov as a contributor ([#384](https://github.com/browniebroke/django-codemod/issues/384)) ([`a7314e8`](https://github.com/browniebroke/django-codemod/commit/a7314e8069eac49bb0cf9a0fa971421bffe9bd46))
+* Fix link to changelog on PyPI ([#383](https://github.com/browniebroke/django-codemod/issues/383)) ([`e5a2d1e`](https://github.com/browniebroke/django-codemod/commit/e5a2d1ea10e239a2b04289a118c5c794eea30a32))
+
 ## v1.5.1 (2021-04-22)
 ### Fix
 * Avoid extra spaces around kwargs in InlineHasAddPermissionsTransformer ([`32d6ebe`](https://github.com/browniebroke/django-codemod/commit/32d6ebe37cafaf6b24608cfa57526792379e2c68))
