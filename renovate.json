@@ -1,5 +1,5 @@
 {
-  "extends": ["github>browniebroke/renovate-configs"],
+  "extends": ["github>browniebroke/renovate-configs:python"],
   "packageRules": [
     {
       "packageNames": ["libcst"],
