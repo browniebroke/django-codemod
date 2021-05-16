@@ -203,8 +203,8 @@ def call_command(command_instance: BaseCodemodCommand, files: List[Path]):
         raise click.exceptions.Exit(1)
 
 
-@djcodemod.command()
-def list() -> None:
+@djcodemod.command("list")
+def list_() -> None:
     """Print all available codemodders as a table."""
     console = Console()
     table = Table(show_header=True, header_style="bold")
