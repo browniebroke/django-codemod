@@ -2,7 +2,7 @@ import inspect
 from collections import defaultdict
 from operator import attrgetter
 from pathlib import Path
-from typing import Callable, Dict, Generator, List, Tuple, Type
+from typing import Callable, Dict, Generator, List, Optional, Tuple, Type
 
 import click
 from libcst.codemod import CodemodContext, parallel_exec_transform_with_prettyprint
@@ -48,7 +48,7 @@ BY_NAME = {cls.__name__: cls for cls in iter_codemodders()}
 
 
 class CodemodChoice(click.Choice):
-    def get_metavar(self, param):
+    def get_metavar(self, param: click.Parameter) -> str:
         return "(see `djcodemod list`)"
 
 
@@ -61,17 +61,27 @@ class VersionParamType(click.ParamType):
         " e.g. '2.2' or '2.2.10'"
     )
 
-    def __init__(self, version_index) -> None:
-        self.valid_versions = version_index.keys()
+    def __init__(self, version_index: Dict[Tuple[int, int], List]) -> None:
+        self.valid_versions: List[Tuple[int, int]] = list(version_index.keys())
 
-    def convert(self, value, param, ctx):
+    def convert(
+        self,
+        value: str,
+        param: Optional[click.Parameter],
+        ctx: Optional[click.Context],
+    ) -> Tuple[int, int]:
         """Parse version to keep only major an minor digits."""
         try:
             return self._parse_unsafe(value, param, ctx)
         except ValueError:
             self.fail(f"{value!r} is not a valid version. {self.example}", param, ctx)
 
-    def _parse_unsafe(self, value, param, ctx):
+    def _parse_unsafe(
+        self,
+        value: str,
+        param: Optional[click.Parameter],
+        ctx: Optional[click.Context],
+    ) -> Tuple[int, int]:
         """Parse version and validate it's a supported one."""
         parsed_version = self._split_digits(value, param, ctx)
         if parsed_version not in self.valid_versions:
@@ -87,7 +97,12 @@ class VersionParamType(click.ParamType):
             )
         return parsed_version
 
-    def _split_digits(self, value, param, ctx):
+    def _split_digits(
+        self,
+        value: str,
+        param: Optional[click.Parameter],
+        ctx: Optional[click.Context],
+    ) -> Tuple[int, int]:
         """Split version into 2-tuple of digits, ignoring patch digit."""
         values_parts = tuple(int(v) for v in value.split("."))
         if len(values_parts) < 2:
@@ -97,7 +112,7 @@ class VersionParamType(click.ParamType):
                 ctx,
             )
         major, minor, *patches = values_parts
-        return (major, minor)
+        return major, minor
 
 
 @click.group()
