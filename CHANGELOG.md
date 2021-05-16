@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v1.5.4 (2021-05-16)
+### Fix
+* Issue with command shadowing built-in ([`6d96419`](https://github.com/browniebroke/django-codemod/commit/6d9641900824658615d2a5aeed53b568f8aff4ec))
+* Add a missing type hints in cli ([`8acdb08`](https://github.com/browniebroke/django-codemod/commit/8acdb08cdb37f3bb10c8caca47024d8f684cddb1))
+* Type checking error ([`9eda82a`](https://github.com/browniebroke/django-codemod/commit/9eda82acb1c7a3af4525751a4aec1a6006711eb1))
+* **deps:** Update dependency click to v8 ([`2402014`](https://github.com/browniebroke/django-codemod/commit/2402014acf9edae2c663a6f33117b72941ab7653))
+
 ## v1.5.3 (2021-05-13)
 ### Fix
 * **deps:** Update dependency libcst to <=0.3.19 ([`4a4d6b5`](https://github.com/browniebroke/django-codemod/commit/4a4d6b5afdde75e0f81d3ca526b77f0469870ef8))
