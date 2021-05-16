@@ -132,7 +132,7 @@ def djcodemod():
     "--codemod",
     "codemod",
     help="Choose a specific codemod to run. Can be repeated.",
-    type=CodemodChoice(BY_NAME.keys()),
+    type=CodemodChoice(list(BY_NAME.keys())),
     multiple=True,
 )
 def run(
