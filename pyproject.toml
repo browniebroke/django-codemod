@@ -57,10 +57,6 @@ pyupgrade = {version = "^2.7.4", python = "^3.6.1"}
 isort = "^5.6.4"
 mypy = "^0.812"
 
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
-
 [tool.semantic_release]
 branch = "main"
 version_toml = "pyproject.toml:tool.poetry.version"
@@ -80,3 +76,7 @@ exclude_lines = [
     "raise AssertionError",
     "raise NotImplementedError",
 ]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
