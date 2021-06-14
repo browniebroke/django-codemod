@@ -75,3 +75,11 @@ class TestFixedOffsetTransformer(BaseVisitorTest):
         """
 
         self.assertCodemod(before, after)
+
+    def test_issue_421(self) -> None:
+        before = after = """
+        from django.utils import timezone
+
+        now = timezone.now()
+        """
+        self.assertCodemod(before, after)

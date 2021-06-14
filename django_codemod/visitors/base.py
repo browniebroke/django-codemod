@@ -22,6 +22,8 @@ from libcst.codemod import CodemodContext, ContextAwareTransformer
 from libcst.codemod.visitors import AddImportsVisitor
 from libcst.metadata import ParentNodeProvider, Scope, ScopeProvider
 
+from django_codemod.feature_flags import REPLACE_PARENT_MODULE_IMPORTED
+
 
 class BaseDjCodemodTransformer(ContextAwareTransformer, ABC):
     deprecated_in: Tuple[int, int]
@@ -142,6 +144,8 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
 
             from parent import module
         """
+        if not REPLACE_PARENT_MODULE_IMPORTED:
+            return None
         # First, exit early if 'import *' is used
         if isinstance(updated_node.names, ImportStar):
             return None

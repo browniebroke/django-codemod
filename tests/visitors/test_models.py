@@ -1,3 +1,4 @@
+import pytest
 from parameterized import parameterized
 
 from django_codemod.visitors.models import (
@@ -369,6 +370,7 @@ class TestNullBooleanFieldTransformer(BaseVisitorTest):
         """
         self.assertCodemod(before, after)
 
+    @pytest.mark.usefixtures("parent_module_import_enabled")
     def test_simple_substitution(self) -> None:
         before = """
             from django.db import models
