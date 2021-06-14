@@ -60,6 +60,7 @@ class TestFuncRenameTransformer(BaseVisitorTest):
         """
         self.assertCodemod(before, after)
 
+    @pytest.mark.usefixtures("parent_module_import_enabled")
     def test_parent_module(self) -> None:
         before = """
             from django.dummy import module
@@ -87,6 +88,7 @@ class TestFuncRenameTransformer(BaseVisitorTest):
         """
         self.assertCodemod(before, after)
 
+    @pytest.mark.usefixtures("parent_module_import_enabled")
     def test_parent_reference_without_call(self) -> None:
         before = """
             from django.dummy import module
@@ -300,6 +302,7 @@ class TestOtherModuleFuncRenameTransformer(BaseVisitorTest):
         """
         self.assertCodemod(before, after)
 
+    @pytest.mark.usefixtures("parent_module_import_enabled")
     def test_parent_module(self) -> None:
         before = """
             from django.dummy import module
@@ -313,6 +316,7 @@ class TestOtherModuleFuncRenameTransformer(BaseVisitorTest):
         """
         self.assertCodemod(before, after)
 
+    @pytest.mark.usefixtures("parent_module_import_enabled")
     def test_parent_module_with_other(self) -> None:
         before = """
             from django.dummy import other_mod, module
@@ -327,6 +331,7 @@ class TestOtherModuleFuncRenameTransformer(BaseVisitorTest):
         """
         self.assertCodemod(before, after)
 
+    @pytest.mark.usefixtures("parent_module_import_enabled")
     def test_parent_module_import_alias(self) -> None:
         before = """
             from django.dummy import module as django_module
