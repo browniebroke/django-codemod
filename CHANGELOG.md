@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.5.6 (2021-06-17)
+### Fix
+* Disable rename parent module imported ([`b717fbb`](https://github.com/browniebroke/django-codemod/commit/b717fbbb79eb6d0a30e969cb9a2c7994d5d3e7b1))
+
 ## v1.5.5 (2021-06-13)
 ### Fix
 * **deps:** Update dependency myst-parser to ^0.15.0 ([`27d76a1`](https://github.com/browniebroke/django-codemod/commit/27d76a1374bd3f531507c8380b5894005510db2a))
