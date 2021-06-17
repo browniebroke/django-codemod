@@ -102,7 +102,7 @@ class ModelsPermalinkTransformer(BaseDjCodemodTransformer):
             return None
         if len(matchers_list) == 1:
             return matchers_list[0]
-        return m.OneOf(*(matcher for matcher in matchers_list))
+        return m.OneOf(*iter(matchers_list))
 
     def visit_FunctionDef(self, node: FunctionDef) -> Optional[bool]:
         for decorator in node.decorators:
