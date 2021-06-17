@@ -102,7 +102,7 @@ class ModelsPermalinkTransformer(BaseDjCodemodTransformer):
             return None
         if len(matchers_list) == 1:
             return matchers_list[0]
-        return m.OneOf(*[matcher for matcher in matchers_list])
+        return m.OneOf(*(matcher for matcher in matchers_list))
 
     def visit_FunctionDef(self, node: FunctionDef) -> Optional[bool]:
         for decorator in node.decorators:
@@ -145,7 +145,7 @@ class ModelsPermalinkTransformer(BaseDjCodemodTransformer):
             args = (
                 Arg(elem_0.value),
                 Arg(Name("None")),
-                *[Arg(el.value) for el in elem_1_3],
+                *(Arg(el.value) for el in elem_1_3),
             )
             return updated_node.with_changes(
                 value=Call(func=Name("reverse"), args=args)
