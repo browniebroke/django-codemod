@@ -339,9 +339,36 @@ class TestOtherModuleFuncRenameTransformer(BaseVisitorTest):
             result = django_module.func()
         """
         after = """
-            from django.better import dummy as django_module
+            from django.better import dummy as django_module_
 
-            result = django_module.better_func()
+            result = django_module_.better_func()
+        """
+        self.assertCodemod(before, after)
+
+    @pytest.mark.usefixtures("parent_module_import_enabled")
+    def test_parent_module_import_alias_other_usage(self) -> None:
+        before = """
+            from django.dummy import module as django_module
+
+            result = django_module.func()
+            result = django_module.other_func()
+        """
+        after = """
+            from django.dummy import module as django_module
+            from django.better import dummy as django_module_
+
+            result = django_module_.better_func()
+            result = django_module.other_func()
+        """
+        self.assertCodemod(before, after)
+
+    @pytest.mark.usefixtures("parent_module_import_enabled")
+    def test_parent_module_noop(self) -> None:
+        """Parent module imported, but other function used."""
+        before = after = """
+            from django.dummy import module
+
+            result = module.other_func()
         """
         self.assertCodemod(before, after)
 

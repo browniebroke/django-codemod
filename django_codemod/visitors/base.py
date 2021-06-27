@@ -19,7 +19,7 @@ from libcst import (
 )
 from libcst import matchers as m
 from libcst.codemod import CodemodContext, ContextAwareTransformer
-from libcst.codemod.visitors import AddImportsVisitor
+from libcst.codemod.visitors import AddImportsVisitor, RemoveImportsVisitor
 from libcst.metadata import ParentNodeProvider, Scope, ScopeProvider
 
 from django_codemod.feature_flags import REPLACE_PARENT_MODULE_IMPORTED
@@ -68,6 +68,8 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
         self.ctx_key_import_scope = f"{self.rename_from}-import_scope"
         self.ctx_key_name_matcher = f"{self.rename_from}-name_matcher"
         self.ctx_key_new_func = f"{self.rename_from}-new_func"
+        self.ctx_key_add_import_kwargs = f"{self.rename_from}-add_import_kwargs"
+        self.ctx_key_remove_import_kwargs = f"{self.rename_from}-remove_import_kwargs"
 
     @property
     def name_matcher(self):
@@ -76,6 +78,14 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
     @property
     def new_func(self):
         return self.context.scratch.get(self.ctx_key_new_func, None)
+
+    @property
+    def add_import_kwargs(self):
+        return self.context.scratch.get(self.ctx_key_add_import_kwargs, None)
+
+    @property
+    def remove_import_kwargs(self):
+        return self.context.scratch.get(self.ctx_key_remove_import_kwargs, None)
 
     def leave_ImportFrom(
         self, original_node: ImportFrom, updated_node: ImportFrom
@@ -152,8 +162,7 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
         # Check whether parent module is imported
         if not import_from_matches(updated_node, self.old_parent_module_parts):
             return None
-        # Match, update the node an return it
-        new_import_aliases = []
+        # Match, check imports and extract metadata
         for import_alias in updated_node.names:
             if import_alias.evaluated_name == self.old_parent_name:
                 self.save_import_scope(original_node)
@@ -164,26 +173,39 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
                     value=m.Name(module_name_str),
                     attr=m.Name(self.old_name),
                 )
+                new_as_name: Optional[str] = None
+                if import_alias.evaluated_alias:
+                    # The import alias would be the same before and after
+                    # Add a `_` to differentiate the old alias from the new one.
+                    new_as_name = new_name = f"{import_alias.evaluated_alias}_"
+                else:
+                    new_name = self.new_parent_name
                 self.context.scratch[self.ctx_key_new_func] = Attribute(
                     attr=Name(self.new_name),
-                    value=Name(import_alias.evaluated_alias or self.new_parent_name),
+                    value=Name(new_name),
                 )
                 if self.old_parent_module_parts != self.new_parent_module_parts:
-                    # import statement needs updating
-                    AddImportsVisitor.add_needed_import(
+                    # import statement might need updating: build arguments for
+                    # AddImportsVisitor and RemoveImportsVisitor to update imports
+                    add_import_module: Optional[str] = None
+                    if self.new_parent_module_parts:
+                        add_import_module = ".".join(self.new_parent_module_parts)
+                    self.context.scratch[self.ctx_key_add_import_kwargs] = dict(
                         context=self.context,
-                        module=".".join(self.new_parent_module_parts),
+                        module=add_import_module,
                         obj=self.new_parent_name,
+                        asname=new_as_name,
+                    )
+                    remove_import_module: Optional[str] = None
+                    if self.old_parent_module_parts:
+                        remove_import_module = ".".join(self.old_parent_module_parts)
+                    self.context.scratch[self.ctx_key_remove_import_kwargs] = dict(
+                        context=self.context,
+                        module=remove_import_module,
+                        obj=self.old_parent_name,
                         asname=import_alias.evaluated_alias,
                     )
-                    continue
-            new_import_aliases.append(import_alias)
-        if not new_import_aliases:
-            # Nothing left in the import statement: remove it
-            return RemoveFromParent()
-        # Some imports are left, update the statement
-        new_import_aliases = clean_new_import_aliases(new_import_aliases)
-        return updated_node.with_changes(names=new_import_aliases)
+        return updated_node
 
     def _check_import_from_child(
         self, updated_node: ImportFrom
@@ -227,6 +249,15 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
     def import_scope(self) -> Optional[Scope]:
         return self.context.scratch.get(self.ctx_key_import_scope, None)
 
+    def update_imports(self):
+        """Update import statements if a change is required."""
+        remove_import_kwargs = self.remove_import_kwargs
+        if remove_import_kwargs:
+            RemoveImportsVisitor.remove_unused_import(**remove_import_kwargs)
+        add_import_kwargs = self.add_import_kwargs
+        if add_import_kwargs:
+            AddImportsVisitor.add_needed_import(**add_import_kwargs)
+
     def leave_Name(self, original_node: Name, updated_node: Name) -> BaseExpression:
         """Rename reference to the imported name."""
         matcher = self.name_matcher
@@ -236,6 +267,7 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
             and not self.is_wrapped_in_call(original_node)
             and self.matches_import_scope(original_node)
         ):
+            self.update_imports()
             return updated_node.with_changes(value=self.new_name)
         return super().leave_Name(original_node, updated_node)
 
@@ -249,6 +281,7 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
             and not self.is_wrapped_in_call(original_node)
             and self.matches_import_scope(original_node)
         ):
+            self.update_imports()
             return updated_node.with_changes(
                 value=Name(self.new_parent_name),
                 attr=Name(self.new_name),
@@ -293,6 +326,7 @@ class BaseFuncRenameTransformer(BaseRenameTransformer, ABC):
     def leave_Call(self, original_node: Call, updated_node: Call) -> BaseExpression:
         matcher = self.name_matcher
         if m.matches(updated_node, m.Call(func=matcher)):
+            self.update_imports()
             return self.update_call(updated_node=updated_node)
         return super().leave_Call(original_node, updated_node)
 
