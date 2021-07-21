@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.5.7 (2021-07-21)
+### Fix
+* Rewrite parent module renaming logic ([`c550576`](https://github.com/browniebroke/django-codemod/commit/c5505764425e4e3eeae321bf74e3943d5967c73e))
+
 ## v1.5.6 (2021-06-17)
 ### Fix
 * Disable rename parent module imported ([`b717fbb`](https://github.com/browniebroke/django-codemod/commit/b717fbbb79eb6d0a30e969cb9a2c7994d5d3e7b1))
