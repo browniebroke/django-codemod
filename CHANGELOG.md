@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.5.8 (2021-08-13)
+### Fix
+* **deps:** Update dependency libcst to v0.3.20 ([`28bbdea`](https://github.com/browniebroke/django-codemod/commit/28bbdea3e4c2d4e80b21d5822a7ff790db8a2a05))
+
 ## v1.5.7 (2021-07-21)
 ### Fix
 * Rewrite parent module renaming logic ([`c550576`](https://github.com/browniebroke/django-codemod/commit/c5505764425e4e3eeae321bf74e3943d5967c73e))
