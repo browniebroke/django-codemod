@@ -30,6 +30,8 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - uses: abatilo/actions-poetry@v2.1.2
+        with:
+          poetry-version: 1.1.8
       - name: Install Dependencies
         run: poetry install
       - name: Test with Pytest
@@ -77,6 +79,8 @@ jobs:
         with:
           python-version: 3.8
       - uses: abatilo/actions-poetry@v2.1.2
+        with:
+          poetry-version: 1.1.8
       - name: Install Dependencies
         run: poetry install
       - name: ${{ matrix.linter.name }}
