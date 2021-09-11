@@ -69,6 +69,12 @@ Applied by passing the `--removed-in 3.1` or `--deprecated-in 2.2` option:
 - Replace the `FloatRangeField` model and form fields in
   `django.contrib.postgres` by `DecimalRangeField`.
 
+Applied by passing the `--removed-in 3.1` or `--deprecated-in 1.11` option:
+
+- Replace compatibility imports of `EmptyResultSet`
+  in `django.db.models.query`, `django.db.models.sql`, and
+  `django.db.models.sql.datastructures` by an import from `django.core.exceptions`.
+
 ## Removed in Django 4.0
 
 Applied by passing the `--removed-in 4.0` or `--deprecated-in 3.0` option:
