@@ -87,6 +87,12 @@ Applied by passing the `--removed-in 3.1` or `--deprecated-in 1.8` option:
 - Replace compatibility imports of `FieldDoesNotExist`
   in `django.db.models.fields` by import from `django.core.exceptions`.
 
+Applied by passing the `--removed-in 3.1` or `--deprecated-in 1.7` option:
+
+- Replace compatibility imports of `BaseContext`, `Context`,
+  `ContextPopException` and `RequestContext` in `django.template.base`
+  by import from `django.template.context`.
+
 ## Removed in Django 4.0
 
 Applied by passing the `--removed-in 4.0` or `--deprecated-in 3.0` option:
