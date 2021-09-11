@@ -1,6 +1,9 @@
 from parameterized import parameterized
 
-from django_codemod.visitors import InlineHasAddPermissionsTransformer
+from django_codemod.visitors import (
+    ActionCheckboxNameTransformer,
+    InlineHasAddPermissionsTransformer,
+)
 from tests.visitors.base import BaseVisitorTest
 
 
@@ -192,5 +195,19 @@ class TestInlineHasAddPermissionsTransformer(BaseVisitorTest):
 
                 def has_add_permission(self, request):
                     return False
+        """
+        self.assertCodemod(before, after)
+
+
+class TestActionCheckboxNameTransformer(BaseVisitorTest):
+
+    transformer = ActionCheckboxNameTransformer
+
+    def test_simple_substitution(self) -> None:
+        before = """
+            from django.contrib.admin import ACTION_CHECKBOX_NAME
+        """
+        after = """
+            from django.contrib.admin.helpers import ACTION_CHECKBOX_NAME
         """
         self.assertCodemod(before, after)

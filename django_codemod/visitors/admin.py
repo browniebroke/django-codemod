@@ -15,9 +15,13 @@ from libcst import (
 )
 from libcst import matchers as m
 
-from django_codemod.constants import DJANGO_2_1, DJANGO_3_0
+from django_codemod.constants import DJANGO_1_3, DJANGO_2_1, DJANGO_3_0, DJANGO_3_1
 from django_codemod.utils.calls import parse_arg, parse_param
-from django_codemod.visitors.base import BaseDjCodemodTransformer, module_matcher
+from django_codemod.visitors.base import (
+    BaseDjCodemodTransformer,
+    BaseRenameTransformer,
+    module_matcher,
+)
 
 
 class InlineHasAddPermissionsTransformer(BaseDjCodemodTransformer):
@@ -143,3 +147,12 @@ class InlineHasAddPermissionsTransformer(BaseDjCodemodTransformer):
             )
             return updated_node.with_changes(args=updated_args)
         return super().leave_Call(original_node, updated_node)
+
+
+class ActionCheckboxNameTransformer(BaseRenameTransformer):
+    """Replace `django.contrib.admin.ACTION_CHECKBOX_NAME` compatibility import"""
+
+    deprecated_in = DJANGO_1_3
+    removed_in = DJANGO_3_1
+    rename_from = "django.contrib.admin.ACTION_CHECKBOX_NAME"
+    rename_to = "django.contrib.admin.helpers.ACTION_CHECKBOX_NAME"
