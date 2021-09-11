@@ -73,13 +73,17 @@ Applied by passing the `--removed-in 3.1` or `--deprecated-in 1.11` option:
 
 - Replace compatibility imports of `EmptyResultSet`
   in `django.db.models.query`, `django.db.models.sql`, and
-  `django.db.models.sql.datastructures` by an import from `django.core.exceptions`.
+  `django.db.models.sql.datastructures` by import from `django.core.exceptions`.
+
+Applied by passing the `--removed-in 3.1` or `--deprecated-in 1.9` option:
+
+- Replace compatibility imports of `pretty_name`
+  in `django.forms.forms` by import from `django.forms.utils`.
 
 Applied by passing the `--removed-in 3.1` or `--deprecated-in 1.8` option:
 
 - Replace compatibility imports of `FieldDoesNotExist`
-  in `django.db.models.fields` by an import from
-  `django.core.exceptions`.
+  in `django.db.models.fields` by import from `django.core.exceptions`.
 
 ## Removed in Django 4.0
 
