@@ -1,4 +1,4 @@
-from .admin import InlineHasAddPermissionsTransformer
+from .admin import ActionCheckboxNameTransformer, InlineHasAddPermissionsTransformer
 from .core import URLResolversTransformer
 from .crypto import GetRandomStringTransformer
 from .decorators import AvailableAttrsTransformer, ContextDecoratorTransformer
@@ -58,6 +58,7 @@ from .urls import URLTransformer
 
 __all__ = (
     "AbsPathTransformer",
+    "ActionCheckboxNameTransformer",
     "AssignmentTagTransformer",
     "AvailableAttrsTransformer",
     "BaseContextTransformer",

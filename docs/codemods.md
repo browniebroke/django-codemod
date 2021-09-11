@@ -93,6 +93,11 @@ Applied by passing the `--removed-in 3.1` or `--deprecated-in 1.7` option:
   `ContextPopException` and `RequestContext` in `django.template.base`
   by import from `django.template.context`.
 
+Applied by passing the `--removed-in 3.1` or `--deprecated-in 1.3` option:
+
+- Replace compatibility imports of `ACTION_CHECKBOX_NAME` in
+  `django.contrib.admin` by import from `django.contrib.admin.helpers`.
+
 ## Removed in Django 4.0
 
 Applied by passing the `--removed-in 4.0` or `--deprecated-in 3.0` option:
