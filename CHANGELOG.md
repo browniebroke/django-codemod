@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+## v1.6.0 (2021-09-11)
+### Feature
+* Support for the admin's `ACTION_CHECKBOX_NAME` compatibility import removal ([`cad7e87`](https://github.com/browniebroke/django-codemod/commit/cad7e87de90ff7da30aca7338b2e010f0ed8e4f4))
+* Support for `BaseContext`, `Context`, `ContextPopException` and `RequestContext` compatibility imports removal ([`b3f58bd`](https://github.com/browniebroke/django-codemod/commit/b3f58bdd53f700835cd5771f1621c80c922c1d1e))
+* Support for `BoundField` compatibility import removal ([`c7250f5`](https://github.com/browniebroke/django-codemod/commit/c7250f5f17c5d85dc7e75d4e71f8dfa70e946c68))
+* Support for `pretty_name` compatibility import removal ([`0aca7d5`](https://github.com/browniebroke/django-codemod/commit/0aca7d5f473f4a2d281848e15386f0e1bf7b3e05))
+* Support for `FieldDoesNotExist` compatibility import removal ([`d047a4f`](https://github.com/browniebroke/django-codemod/commit/d047a4fdbf589902d87e5fa142ad4b35628d045e))
+* Support for `EmptyResultSet` compatibility imports removal ([`a80f9fc`](https://github.com/browniebroke/django-codemod/commit/a80f9fcead4030e7d3c578d5bd7c0d1b84c7084b))
+
 ## v1.5.8 (2021-08-13)
 ### Fix
 * **deps:** Update dependency libcst to v0.3.20 ([`28bbdea`](https://github.com/browniebroke/django-codemod/commit/28bbdea3e4c2d4e80b21d5822a7ff790db8a2a05))
