@@ -13,7 +13,7 @@ from .exceptions import (
     QueryEmptyResultSetTransformer,
     SqlEmptyResultSetTransformer,
 )
-from .forms import PrettyNameTransformer
+from .forms import BoundFieldTransformer, PrettyNameTransformer
 from .html import UnescapeEntitiesTransformer
 from .http import (
     CookieDateTransformer,
@@ -54,6 +54,7 @@ __all__ = (
     "AbsPathTransformer",
     "AssignmentTagTransformer",
     "AvailableAttrsTransformer",
+    "BoundFieldTransformer",
     "ContextDecoratorTransformer",
     "CookieDateTransformer",
     "DatastructuresEmptyResultSetTransformer",

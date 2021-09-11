@@ -79,6 +79,8 @@ Applied by passing the `--removed-in 3.1` or `--deprecated-in 1.9` option:
 
 - Replace compatibility imports of `pretty_name`
   in `django.forms.forms` by import from `django.forms.utils`.
+- Replace compatibility imports of `BoundField`
+  in `django.forms.forms` by import from `django.forms.boundfield`.
 
 Applied by passing the `--removed-in 3.1` or `--deprecated-in 1.8` option:
 
