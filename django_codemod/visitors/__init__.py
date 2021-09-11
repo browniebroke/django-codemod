@@ -13,6 +13,7 @@ from .exceptions import (
     QueryEmptyResultSetTransformer,
     SqlEmptyResultSetTransformer,
 )
+from .forms import PrettyNameTransformer
 from .html import UnescapeEntitiesTransformer
 from .http import (
     CookieDateTransformer,
@@ -89,4 +90,5 @@ __all__ = (
     "URLTransformer",
     "UnescapeEntitiesTransformer",
     "UnicodeCompatibleTransformer",
+    "PrettyNameTransformer",
 )
