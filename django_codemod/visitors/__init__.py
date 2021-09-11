@@ -9,6 +9,7 @@ from .encoding import (
 )
 from .exceptions import (
     DatastructuresEmptyResultSetTransformer,
+    FieldDoesNotExistTransformer,
     QueryEmptyResultSetTransformer,
     SqlEmptyResultSetTransformer,
 )
@@ -55,6 +56,7 @@ __all__ = (
     "ContextDecoratorTransformer",
     "CookieDateTransformer",
     "DatastructuresEmptyResultSetTransformer",
+    "FieldDoesNotExistTransformer",
     "FixedOffsetTransformer",
     "FloatRangeFormFieldTransformer",
     "FloatRangeModelFieldTransformer",

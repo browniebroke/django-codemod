@@ -1,5 +1,6 @@
 from django_codemod.visitors import (
     DatastructuresEmptyResultSetTransformer,
+    FieldDoesNotExistTransformer,
     QueryEmptyResultSetTransformer,
     SqlEmptyResultSetTransformer,
 )
@@ -56,5 +57,23 @@ class TestDatastructuresEmptyResultSetTransformer(BaseVisitorTest):
             from django.core.exceptions import EmptyResultSet
 
             EmptyResultSet()
+        """
+        self.assertCodemod(before, after)
+
+
+class TestFieldDoesNotExistTransformer(BaseVisitorTest):
+
+    transformer = FieldDoesNotExistTransformer
+
+    def test_simple_substitution(self) -> None:
+        before = """
+            from django.db.models.fields import FieldDoesNotExist
+
+            FieldDoesNotExist()
+        """
+        after = """
+            from django.core.exceptions import FieldDoesNotExist
+
+            FieldDoesNotExist()
         """
         self.assertCodemod(before, after)
