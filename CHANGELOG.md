@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.6.1 (2021-09-13)
+### Fix
+* **deps:** Update dependency sphinx-rtd-theme to v1 ([`6b0cc8c`](https://github.com/browniebroke/django-codemod/commit/6b0cc8c2aaf075468b0724c65c23af05abaf3568))
+
 ## v1.6.0 (2021-09-11)
 ### Feature
 * Support for the admin's `ACTION_CHECKBOX_NAME` compatibility import removal ([`cad7e87`](https://github.com/browniebroke/django-codemod/commit/cad7e87de90ff7da30aca7338b2e010f0ed8e4f4))
