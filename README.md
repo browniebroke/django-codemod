@@ -78,6 +78,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://github.com/drewbrew"><img src="https://avatars1.githubusercontent.com/u/7773256?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Drew Winstel</b></sub></a><br /><a href="#ideas-drewbrew" title="Ideas, Planning, & Feedback">🤔</a></td>
     <td align="center"><a href="https://DmytroLitvinov.com"><img src="https://avatars.githubusercontent.com/u/16066485?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Dmytro Litvinov</b></sub></a><br /><a href="https://github.com/browniebroke/django-codemod/commits?author=DmytroLitvinov" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://mzulqarnain1.github.io/"><img src="https://avatars.githubusercontent.com/u/23311265?v=4?s=80" width="80px;" alt=""/><br /><sub><b>M. Zulqarnain</b></sub></a><br /><a href="https://github.com/browniebroke/django-codemod/commits?author=mzulqarnain1" title="Documentation">📖</a></td>
   </tr>
 </table>
 
