@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v1.6.2 (2021-09-16)
+### Fix
+* Typo in installation.md ([#469](https://github.com/browniebroke/django-codemod/issues/469)) ([`9799f28`](https://github.com/browniebroke/django-codemod/commit/9799f28738b494177572e431895704161353359e))
+
+### Documentation
+* Add @mzulqarnain1 as a contributor ([`62b4a90`](https://github.com/browniebroke/django-codemod/commit/62b4a9078d809b697d1a039876a3204cd3dbbd38))
+
 ## v1.6.1 (2021-09-13)
 ### Fix
 * **deps:** Update dependency sphinx-rtd-theme to v1 ([`6b0cc8c`](https://github.com/browniebroke/django-codemod/commit/6b0cc8c2aaf075468b0724c65c23af05abaf3568))
