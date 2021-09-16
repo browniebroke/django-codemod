@@ -5,7 +5,7 @@
 Django Codemod requires Python 3.6 or above. The preferred way to install Django Codemod, is with [pipx]:
 
 ```shell
-$ pips install django-codemod
+$ pip install django-codemod
 ```
 
 It will install the latest stable release in an isolated virtual environment, hence not polluting your global Python with dependencies.
