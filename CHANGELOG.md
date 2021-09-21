@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.6.3 (2021-09-21)
+### Fix
+* **deps:** Update dependency libcst to v0.3.21 ([`3b596e1`](https://github.com/browniebroke/django-codemod/commit/3b596e1da0f3c93e180d16c7072af77e278089fb))
+
 ## v1.6.2 (2021-09-16)
 ### Fix
 * Typo in installation.md ([#469](https://github.com/browniebroke/django-codemod/issues/469)) ([`9799f28`](https://github.com/browniebroke/django-codemod/commit/9799f28738b494177572e431895704161353359e))
