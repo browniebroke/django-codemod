@@ -261,7 +261,7 @@ i18n = ["Babel (>=2.7)"]
 
 [[package]]
 name = "libcst"
-version = "0.3.22"
+version = "0.3.23"
 description = "A concrete syntax tree with AST-like properties for Python 3.5, 3.6, 3.7 and 3.8 programs."
 category = "main"
 optional = false
@@ -841,7 +841,7 @@ docs = ["myst-parser", "Sphinx", "sphinx-rtd-theme"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6"
-content-hash = "f561e8c119c48c0c90f489658f46216b3094c92cc6a3db511b45c6eeabf3d63f"
+content-hash = "88360af0f0ba32d504b1c3e838cef3c3adaf21893d73d34a33d59df74a5f5d80"
 
 [metadata.files]
 alabaster = [
@@ -985,8 +985,8 @@ jinja2 = [
     {file = "Jinja2-3.0.1.tar.gz", hash = "sha256:703f484b47a6af502e743c9122595cc812b0271f661722403114f71a79d0f5a4"},
 ]
 libcst = [
-    {file = "libcst-0.3.22-py3-none-any.whl", hash = "sha256:a277b1f240d41d564bda4f1d6a36682435e7bb17bf903567279ef255b0c89bc7"},
-    {file = "libcst-0.3.22.tar.gz", hash = "sha256:0dcfc4c050ec4474f3406e4f92862678eeca97a9a2ad62261ade01c1438bd7ce"},
+    {file = "libcst-0.3.23-py3-none-any.whl", hash = "sha256:2e1f77fbaaff93b889376c92f588b718edbdc21f956abbe27d10dfd1ff2d76c3"},
+    {file = "libcst-0.3.23.tar.gz", hash = "sha256:330f9082a309bad808e283e80845a843200303bb256690185b98ca458a62c4f8"},
 ]
 markdown-it-py = [
     {file = "markdown-it-py-1.1.0.tar.gz", hash = "sha256:36be6bb3ad987bfdb839f5ba78ddf094552ca38ccbd784ae4f74a4e1419fc6e3"},
