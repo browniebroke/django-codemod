@@ -40,7 +40,7 @@ class TestOnDeleteTransformer(BaseVisitorTest):
         self.assertCodemod(before, after)
 
     def test_multiple_kwargs_with_on_delete(self) -> None:
-        """ Should do nothing """
+        """Should do nothing"""
         before = """
             from django.db import models
 
@@ -124,7 +124,7 @@ class TestOnDeleteTransformer(BaseVisitorTest):
         self.assertCodemod(before, after)
 
     def test_positional_args_with_on_delete(self) -> None:
-        """ Should do nothing """
+        """Should do nothing"""
         before = """
             from django.db import models
 
