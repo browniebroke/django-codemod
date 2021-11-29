@@ -1,5 +1,5 @@
 tasks:
   - init: pip install poetry
-    command: poetry install
     env:
-      PIP_USER: false
+      PIP_USER: "false"
+    command: poetry install
