@@ -1,10 +1,9 @@
 ---
 name: New codemodder
 about: Suggest a new codemodder for Django
-title: ''
+title: ""
 labels: enhancement
-assignees: ''
-
+assignees: ""
 ---
 
 **Link to Django docs**
