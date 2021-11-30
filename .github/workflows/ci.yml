@@ -52,35 +52,6 @@ jobs:
       - name: Run e2e script
         run: ./tests/test_e2e.sh
 
-  lint:
-    name: Lint
-    strategy:
-      fail-fast: false
-      matrix:
-        linter:
-          - name: flake8
-            run: flake8
-          - name: black
-            run: black --check .
-          - name: pyupgrade
-            run: pyupgrade --py3-plus `find . -name "*.py"`
-          - name: isort
-            run: isort -c -v .
-          - name: mypy
-            run: mypy .
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: "3.9"
-      - uses: snok/install-poetry@v1
-      - name: Install Dependencies
-        run: poetry install
-      - name: ${{ matrix.linter.name }}
-        run: poetry run ${{ matrix.linter.run }}
-
   # Make sure commit messages follow the conventional commits convention:
   # https://www.conventionalcommits.org
   commitlint:
@@ -99,7 +70,6 @@ jobs:
     needs:
       - test
       - e2e
-      - lint
       - commitlint
 
     steps:
