@@ -12,6 +12,9 @@
   <a href="https://codecov.io/gh/browniebroke/django-codemod">
     <img src="https://img.shields.io/codecov/c/github/browniebroke/django-codemod.svg?logo=codecov&logoColor=fff&style=flat-square" alt="Test coverage percentage">
   </a>
+  <a href="https://results.pre-commit.ci/latest/github/browniebroke/django-codemod/main">
+    <img src="https://results.pre-commit.ci/badge/github/browniebroke/django-codemod/main.svg" alt="pre-commit.ci status">
+  </a>
 </p>
 <p align="center">
   <a href="https://python-poetry.org/">
