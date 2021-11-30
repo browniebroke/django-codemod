@@ -1,5 +1,6 @@
 tasks:
-  - init: pip install poetry
-    env:
-      PIP_USER: "false"
-    command: poetry install
+  - command: PIPUSER=false pip install poetry
+  - command: PIPUSER=false poetry install
+  - command: PIPUSER=false pip install pre-commit
+  - command: PIPUSER=false pre-commit install
+  - command: PIPUSER=false pre-commit install-hooks
