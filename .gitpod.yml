@@ -1,6 +1,8 @@
 tasks:
-  - command: PIPUSER=false pip install poetry
-  - command: PIPUSER=false poetry install
-  - command: PIPUSER=false pip install pre-commit
-  - command: PIPUSER=false pre-commit install
-  - command: PIPUSER=false pre-commit install-hooks
+  - command: |
+      pip install poetry
+      PIPUSER=false poetry install
+  - command: |
+      pip install pre-commit
+      pre-commit install
+      PIPUSER=false pre-commit install-hooks
