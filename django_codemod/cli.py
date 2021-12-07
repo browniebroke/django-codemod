@@ -64,7 +64,7 @@ class VersionParamType(click.ParamType):
     def __init__(self, version_index: Dict[Tuple[int, int], List]) -> None:
         self.valid_versions: List[Tuple[int, int]] = list(version_index.keys())
 
-    def convert(
+    def convert(  # type: ignore[return]
         self,
         value: str,
         param: Optional[click.Parameter],
@@ -74,7 +74,11 @@ class VersionParamType(click.ParamType):
         try:
             return self._parse_unsafe(value, param, ctx)
         except ValueError:
-            self.fail(f"{value!r} is not a valid version. {self.example}", param, ctx)
+            self.fail(
+                f"{value!r} is not a valid version. {self.example}",
+                param,
+                ctx,
+            )
 
     def _parse_unsafe(
         self,
