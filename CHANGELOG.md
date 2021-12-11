@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.6.6 (2021-12-11)
+### Fix
+* **deps:** Update dependency myst-parser to ^0.16.0 ([`8af7b0b`](https://github.com/browniebroke/django-codemod/commit/8af7b0bf9af0c8911b5a8773d450a70a8b24dc8e))
+
 ## v1.6.5 (2021-11-23)
 ### Fix
 * **deps:** Update dependency libcst to v0.3.23 ([`13bdaac`](https://github.com/browniebroke/django-codemod/commit/13bdaacafc62bf063ee4c2a1740279dd1c6baa22))
