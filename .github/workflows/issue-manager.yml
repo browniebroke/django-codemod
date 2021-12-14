@@ -1,21 +1,18 @@
-# Automatically close issues that have a keyword mark (an HTML comment)
-# in the last comment in the issue, by a group of predefined users, after a custom delay.
-# https://github.com/tiangolo/issue-manager
-
-# Default config:
-# <!-- issue-manager: answered -->
-# Wait 10 days and comment: "Assuming the original issue was solved, it will be automatically closed now"
-
-# Extra config:
-# '<!-- issue-manager: waiting -->'
-# Wait 10 days and comment: "Automatically closing. To re-open, please provide the additional information requested"
-
 name: Issue Manager
 
 on:
-  # Every day at midnight
   schedule:
     - cron: "0 0 * * *"
+  issue_comment:
+    types:
+      - created
+  issues:
+    types:
+      - labeled
+  pull_request_target:
+    types:
+      - labeled
+  workflow_dispatch:
 
 jobs:
   issue-manager:
@@ -24,15 +21,12 @@ jobs:
       - uses: tiangolo/issue-manager@0.4.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-
           config: >
             {
               "answered": {
-                "delay": 864000,
                 "message": "Assuming the original issue was solved, it will be automatically closed now."
               },
               "waiting": {
-                "delay": 864000,
                 "message": "Automatically closing. To re-open, please provide the additional information requested."
               }
             }
