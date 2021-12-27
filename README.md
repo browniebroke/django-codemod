@@ -61,6 +61,12 @@ Interested? Check out [the documentation](https://django-codemod.readthedocs.io)
 - This tool is best suited for Django sites, NOT for reusable Django applications. The project needs to target a single Django version, e.g. 3.1.x.
 - You do NOT need to install this tool as part of your project dependencies, it is a CLI tool, not a Django package to be installed in your site.
 
+### Similar tools
+
+[django-upgrade](https://github.com/adamchainz/django-upgrade) is a similar tool written by Adam Johnson. It's a reimplementation taking a different approach based only on standard library module.
+
+django-codemod is based on [libCST](https://libcst.readthedocs.io/) (Concrete Syntax Tree), and it's a limiting factor in terms of supported Python versions as well as its speed. By using standard library modules, django-upgrade is a lot faster and is able to support the latest Python, however it requires Python 3.8+.
+
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
