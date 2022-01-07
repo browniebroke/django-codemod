@@ -55,7 +55,7 @@ parameterized = "^0.8.0"
 flake8 = "^4.0.0"
 pyupgrade = {version = "^2.29.1", python = "^3.6.1"}
 isort = {version = "^5.10.1", python = "^3.6.1"}
-mypy = "^0.930"
+mypy = "^0.931"
 
 [tool.semantic_release]
 branch = "main"
