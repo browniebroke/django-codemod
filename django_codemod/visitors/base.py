@@ -7,6 +7,7 @@ from libcst import (
     Attribute,
     BaseExpression,
     BaseSmallStatement,
+    BatchableMetadataProvider,
     Call,
     CSTNode,
     ImportAlias,
@@ -16,13 +17,32 @@ from libcst import (
     Name,
     RemovalSentinel,
     RemoveFromParent,
+    Try,
 )
 from libcst import matchers as m
-from libcst.codemod import CodemodContext, ContextAwareTransformer
+from libcst.codemod import CodemodContext, ContextAwareTransformer, SkipFile
 from libcst.codemod.visitors import AddImportsVisitor, RemoveImportsVisitor
 from libcst.metadata import ParentNodeProvider, Scope, ScopeProvider
 
 from django_codemod.feature_flags import REPLACE_PARENT_MODULE_IMPORTED
+
+
+class IsTryImportProvider(BatchableMetadataProvider[bool]):
+    """
+    Marks ImportFrom nodes found inside a try block.
+    """
+    def __init__(self) -> None:
+        super().__init__()
+        self.try_level = 0
+
+    def visit_Try(self, node: Try) -> None:
+        self.try_level += 1
+
+    def leave_Try(self, node: Try) -> None:
+        self.try_level -= 1
+
+    def visit_ImportFrom(self, node: ImportFrom) -> None:
+        self.set_metadata(node, bool(self.try_level))
 
 
 class BaseDjCodemodTransformer(ContextAwareTransformer, ABC):
@@ -49,6 +69,8 @@ def import_from_matches(node: ImportFrom, module_parts: Sequence[str]) -> bool:
 
 class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
     """Base class to help rename or move a declaration."""
+
+    METADATA_DEPENDENCIES = (IsTryImportProvider, )
 
     rename_from: str
     rename_to: str
@@ -91,10 +113,11 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
         self, original_node: ImportFrom, updated_node: ImportFrom
     ) -> Union[BaseSmallStatement, RemovalSentinel]:
         """Update import statements for matching old module name."""
+
         return (
             self._check_import_from_exact(original_node, updated_node)
             or self._check_import_from_parent(original_node, updated_node)
-            or self._check_import_from_child(updated_node)
+            or self._check_import_from_child(original_node, updated_node)
             or updated_node
         )
 
@@ -114,6 +137,8 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
         # Check whether the exact symbol is imported
         if not import_from_matches(updated_node, self.old_module_parts):
             return None
+        if self.get_metadata(IsTryImportProvider, original_node):
+            raise SkipFile
         # Match, update the node an return it
         new_import_aliases = []
         for import_alias in updated_node.names:
@@ -162,6 +187,8 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
         # Check whether parent module is imported
         if not import_from_matches(updated_node, self.old_parent_module_parts):
             return None
+        if self.get_metadata(IsTryImportProvider, original_node):
+            raise SkipFile
         # Match, check imports and extract metadata
         for import_alias in updated_node.names:
             if import_alias.evaluated_name == self.old_parent_name:
@@ -208,7 +235,7 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
         return updated_node
 
     def _check_import_from_child(
-        self, updated_node: ImportFrom
+        self, original_node: ImportFrom, updated_node: ImportFrom
     ) -> Optional[Union[BaseSmallStatement, RemovalSentinel]]:
         """
         Check import of a member of the module being codemodded.
@@ -223,6 +250,8 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
         # Check whether a member of the module is imported
         if not import_from_matches(updated_node, self.old_all_parts):
             return None
+        if self.get_metadata(IsTryImportProvider, original_node):
+            raise SkipFile
         # Match, add import for all imported names and remove the existing import
         for import_alias in updated_node.names:
             AddImportsVisitor.add_needed_import(
@@ -260,6 +289,7 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
 
     def leave_Name(self, original_node: Name, updated_node: Name) -> BaseExpression:
         """Rename reference to the imported name."""
+
         matcher = self.name_matcher
         if (
             matcher

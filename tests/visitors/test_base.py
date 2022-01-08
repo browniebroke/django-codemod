@@ -1,4 +1,5 @@
 import pytest
+from libcst.codemod import SkipFile
 from libcst import matchers as m
 from parameterized import parameterized
 
@@ -59,6 +60,18 @@ class TestFuncRenameTransformer(BaseVisitorTest):
             result = better_func()
         """
         self.assertCodemod(before, after)
+
+    def test_avoid_try_import(self) -> None:
+        before = after = """
+            try:
+                from django.dummy.module import func
+            except:
+                from django.dummy.other_module import better_func as func
+
+            result = func()
+        """
+        with pytest.raises(SkipFile):
+            self.assertCodemod(before, after)
 
     @pytest.mark.usefixtures("parent_module_import_enabled")
     def test_parent_module(self) -> None:
@@ -423,6 +436,18 @@ class TestModuleRenameTransformer(BaseVisitorTest):
             result = func()
         """
         self.assertCodemod(before, after)
+
+    def test_avoid_try_import(self) -> None:
+        before = after = """
+            try:
+                from django.dummy.module import func
+            except:
+                from django.dummy.other_module import better_func as func
+
+            result = func()
+        """
+        with pytest.raises(SkipFile):
+            self.assertCodemod(before, after)
 
     def test_parent_module_substitution(self) -> None:
         before = """
