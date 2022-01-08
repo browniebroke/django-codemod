@@ -1,6 +1,6 @@
 import pytest
-from libcst.codemod import SkipFile
 from libcst import matchers as m
+from libcst.codemod import SkipFile
 from parameterized import parameterized
 
 from django_codemod.visitors.base import (
