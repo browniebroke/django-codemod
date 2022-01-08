@@ -31,6 +31,7 @@ class IsTryImportProvider(BatchableMetadataProvider[bool]):
     """
     Marks ImportFrom nodes found inside a try block.
     """
+
     def __init__(self) -> None:
         super().__init__()
         self.try_level = 0
@@ -70,7 +71,7 @@ def import_from_matches(node: ImportFrom, module_parts: Sequence[str]) -> bool:
 class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
     """Base class to help rename or move a declaration."""
 
-    METADATA_DEPENDENCIES = (IsTryImportProvider, )
+    METADATA_DEPENDENCIES = (IsTryImportProvider,)
 
     rename_from: str
     rename_to: str
