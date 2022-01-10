@@ -64,7 +64,7 @@ version_variable = "django_codemod/__init__.py:__version__"
 build_command = "pip install poetry && poetry build"
 
 [tool.pytest.ini_options]
-addopts = "-v -Wdefault --cov=django_codemod"
+addopts = "-v -Wdefault --cov=django_codemod --cov-report=term-missing:skip-covered --cov-branch"
 
 [tool.isort]
 profile = "black"
