@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v1.7.0 (2022-01-10)
+### Feature
+* Avoid imports in try blocks ([`f6c5159`](https://github.com/browniebroke/django-codemod/commit/f6c515965714677ce2a9deff2eef1bb2232d4acb))
+
+### Fix
+* **deps:** Update dependency rich to v11 ([`3541992`](https://github.com/browniebroke/django-codemod/commit/354199292140c80b3b79b3f3c5b25edc951ca7fb))
+
+### Documentation
+* Add a note about django-upgrade in the readme ([`6bdc36d`](https://github.com/browniebroke/django-codemod/commit/6bdc36de73a7a7d06827ba16a94f8c78d07d44a8))
+
 ## v1.6.6 (2021-12-11)
 ### Fix
 * **deps:** Update dependency myst-parser to ^0.16.0 ([`8af7b0b`](https://github.com/browniebroke/django-codemod/commit/8af7b0bf9af0c8911b5a8773d450a70a8b24dc8e))
