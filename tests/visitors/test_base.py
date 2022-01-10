@@ -61,18 +61,6 @@ class TestFuncRenameTransformer(BaseVisitorTest):
         """
         self.assertCodemod(before, after)
 
-    def test_avoid_try_import(self) -> None:
-        before = after = """
-            try:
-                from django.dummy.module import func
-            except:
-                from django.dummy.other_module import better_func as func
-
-            result = func()
-        """
-        with pytest.raises(SkipFile):
-            self.assertCodemod(before, after)
-
     @pytest.mark.usefixtures("parent_module_import_enabled")
     def test_parent_module(self) -> None:
         before = """
@@ -289,6 +277,18 @@ class TestFuncRenameTransformer(BaseVisitorTest):
             something(func="test")
         """
         self.assertCodemod(before, after)
+
+    def test_avoid_try_import(self) -> None:
+        before = after = """
+            try:
+                from django.dummy.module import func
+            except:
+                from django.dummy.other_module import better_func as func
+
+            result = func()
+        """
+        with pytest.raises(SkipFile):
+            self.assertCodemod(before, after)
 
 
 class OtherModuleFuncRenameTransformer(BaseFuncRenameTransformer):
