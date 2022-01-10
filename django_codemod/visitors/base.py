@@ -140,7 +140,7 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
             return None
         if self.get_metadata(IsTryImportProvider, original_node):
             raise SkipFile
-        # Match, update the node an return it
+        # Match, update the node and return it
         new_import_aliases = []
         for import_alias in updated_node.names:
             if not self.old_name or import_alias.evaluated_name == self.old_name:
@@ -332,7 +332,7 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
             # Can't resolve scope of node -> consider no match
             # Might be because of one of these reasons:
             # - It's the same name in another scope
-            # - It's a attribute with the same name
+            # - It's an attribute with the same name
             # - It's a keyword argument
             return False
         return scope == self.import_scope
