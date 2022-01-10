@@ -212,7 +212,7 @@ class TestFuncRenameTransformer(BaseVisitorTest):
         self.assertCodemod(before, after)
 
     def test_name_from_outer_scope(self) -> None:
-        """When import from outer scope has same name as function variable."""
+        """When import from outer scope has the same name as function variable."""
         before = """
             from django.dummy.module import func
 
@@ -289,6 +289,37 @@ class TestFuncRenameTransformer(BaseVisitorTest):
         """
         with pytest.raises(SkipFile):
             self.assertCodemod(before, after)
+
+    @pytest.mark.usefixtures("parent_module_import_enabled")
+    def test_avoid_try_import_parent(self) -> None:
+        before = after = """
+            try:
+                from django.dummy import module
+            except:
+                from django.dummy import other_module as module
+
+            result = module.func()
+        """
+        with pytest.raises(SkipFile):
+            self.assertCodemod(before, after)
+
+    @pytest.mark.usefixtures("parent_module_import_enabled")
+    def test_parent_import_star(self) -> None:
+        before = after = """
+            from django.dummy import *
+
+            result = module.func()
+        """
+        self.assertCodemod(before, after)
+
+    @pytest.mark.usefixtures("parent_module_import_enabled")
+    def test_parent_import_not_matches(self) -> None:
+        before = after = """
+            from django.ymmud import other_module
+
+            result = other_module.other_func()
+        """
+        self.assertCodemod(before, after)
 
 
 class OtherModuleFuncRenameTransformer(BaseFuncRenameTransformer):
