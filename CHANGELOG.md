@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.7.1 (2022-01-13)
+### Fix
+* **deps:** Update dependency libcst to v0.4.0 ([`a65e9aa`](https://github.com/browniebroke/django-codemod/commit/a65e9aaa2a2b89b0b9d386faea051eb3b841a407))
+
 ## v1.7.0 (2022-01-10)
 ### Feature
 * Avoid imports in try blocks ([`f6c5159`](https://github.com/browniebroke/django-codemod/commit/f6c515965714677ce2a9deff2eef1bb2232d4acb))
