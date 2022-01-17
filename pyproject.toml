@@ -64,11 +64,14 @@ version_variable = "django_codemod/__init__.py:__version__"
 build_command = "pip install poetry && poetry build"
 
 [tool.pytest.ini_options]
-addopts = "-v -Wdefault --cov=django_codemod --cov-report=term-missing:skip-covered --cov-branch"
+addopts = "-v -Wdefault --cov=django_codemod --cov-report=term-missing:skip-covered"
 
 [tool.isort]
 profile = "black"
 known_first_party = ["django_codemod", "tests"]
+
+[tool.coverage.run]
+branch = true
 
 [tool.coverage.report]
 exclude_lines = [
