@@ -27,7 +27,7 @@ packages = [
 djcodemod = "django_codemod.cli:djcodemod"
 
 [tool.poetry.dependencies]
-python = "^3.6"
+python = "^3.7"
 click = "<9"
 libcst = "==0.4.0"
 pathspec = ">=0.6,<1"
@@ -47,14 +47,14 @@ docs = [
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.1.2"
-black = {version = "^21.11b1", python = "^3.6.2"}
+black = "^21.11b1"
 pytest-cov = "^3.0.0"
 pytest-mock = "^3.3.1"
 tox = "^3.20.1"
 parameterized = "^0.8.0"
 flake8 = "^4.0.0"
-pyupgrade = {version = "^2.29.1", python = "^3.6.1"}
-isort = {version = "^5.10.1", python = "^3.6.1"}
+pyupgrade = "^2.29"
+isort = "^5.10"
 mypy = "^0.931"
 
 [tool.semantic_release]
