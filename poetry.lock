@@ -258,7 +258,7 @@ dev = ["black (==21.10b0)", "coverage (>=4.5.4)", "fixit (==0.1.1)", "flake8 (>=
 
 [[package]]
 name = "markdown-it-py"
-version = "2.0.0"
+version = "2.0.1"
 description = "Python port of markdown-it. Markdown parsing, done right!"
 category = "main"
 optional = true
@@ -516,6 +516,20 @@ pytest = ">=5.0"
 
 [package.extras]
 dev = ["pre-commit", "tox", "pytest-asyncio"]
+
+[[package]]
+name = "pytest-srcpaths"
+version = "1.2.1"
+description = "Add paths to sys.path"
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+pytest = ">=6.2.0"
+
+[package.extras]
+test = ["tox"]
 
 [[package]]
 name = "pytz"
@@ -837,7 +851,7 @@ docs = ["myst-parser", "Sphinx", "sphinx-rtd-theme"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "ed26d4da84be9345aeb520f4231926ff998627933019e2ffafb2e74f7f364b7b"
+content-hash = "d400463c14070945f4643bcce9d04127545f71e7002dbdb3422586498b462a86"
 
 [metadata.files]
 alabaster = [
@@ -996,8 +1010,8 @@ libcst = [
     {file = "libcst-0.4.0.tar.gz", hash = "sha256:cf126117b626fe7da6907ef5e6299fd249282c3db3b3a036895ee80679e1fd39"},
 ]
 markdown-it-py = [
-    {file = "markdown-it-py-2.0.0.tar.gz", hash = "sha256:c138a596f6c9988e0b5fa3299bc38ffa76c75076bc178e8dfac40a84343c7022"},
-    {file = "markdown_it_py-2.0.0-py3-none-any.whl", hash = "sha256:15cc69c5b7c493ba8603722b710e39ce3fab2961994179fb4fa1c99b070d2059"},
+    {file = "markdown-it-py-2.0.1.tar.gz", hash = "sha256:7b5c153ae1ab2cde00a33938bce68f3ad5d68fbe363f946de7d28555bed4e08a"},
+    {file = "markdown_it_py-2.0.1-py3-none-any.whl", hash = "sha256:31974138ca8cafbcb62213f4974b29571b940e78364584729233f59b8dfdb8bd"},
 ]
 markupsafe = [
     {file = "MarkupSafe-2.0.1-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:d8446c54dc28c01e5a2dbac5a25f071f6653e6e40f3a8818e8b45d790fe6ef53"},
@@ -1163,6 +1177,10 @@ pytest-cov = [
 pytest-mock = [
     {file = "pytest-mock-3.6.1.tar.gz", hash = "sha256:40217a058c52a63f1042f0784f62009e976ba824c418cced42e88d5f40ab0e62"},
     {file = "pytest_mock-3.6.1-py3-none-any.whl", hash = "sha256:30c2f2cc9759e76eee674b81ea28c9f0b94f8f0445a1b87762cadf774f0df7e3"},
+]
+pytest-srcpaths = [
+    {file = "pytest-srcpaths-1.2.1.tar.gz", hash = "sha256:78d71b9a2ece6839654421400c4ec78b6b1c1c101cdeda958acb08f1c6847216"},
+    {file = "pytest_srcpaths-1.2.1-py3-none-any.whl", hash = "sha256:222b68659e4bd401034b45b38b81f4103afb12807128460e19b6fb82b0e227e7"},
 ]
 pytz = [
     {file = "pytz-2021.3-py2.py3-none-any.whl", hash = "sha256:3672058bc3453457b622aab7a1c3bfd5ab0bdae451512f6cf25f64ed37f5b87c"},
