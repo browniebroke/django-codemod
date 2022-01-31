@@ -121,7 +121,7 @@ class TestURLTransformer(BaseVisitorTest):
     def test_grouped_path(self) -> None:
         """Check replacing pattern with groups."""
         uuid_re = "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
-        before = fr"""
+        before = rf"""
             from django.conf.urls import url
 
             urlpatterns = [
