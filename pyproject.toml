@@ -56,7 +56,6 @@ flake8 = "^4.0.0"
 pyupgrade = "^2.29"
 isort = "^5.10"
 mypy = "^0.931"
-pytest-srcpaths = "^1.2.1"
 
 [tool.semantic_release]
 branch = "main"
