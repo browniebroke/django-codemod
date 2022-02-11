@@ -34,9 +34,9 @@ pathspec = ">=0.6,<1"
 rich = "<12"
 
 # Docs deps
-Sphinx = {version = "^4.0.0", optional = true}
-sphinx-rtd-theme = {version = "^1.0.0", optional = true}
-myst-parser = {version = "^0.17.0", optional = true}
+Sphinx = { version = "^4.0", optional = true }
+sphinx-rtd-theme = { version = "^1.0", optional = true }
+myst-parser = { version = "^0.17.0", optional = true }
 
 [tool.poetry.extras]
 docs = [
