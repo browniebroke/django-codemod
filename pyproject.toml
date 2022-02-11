@@ -46,13 +46,13 @@ docs = [
 ]
 
 [tool.poetry.dev-dependencies]
-pytest = "^7.0.0"
+pytest = "^7.0"
 black = "^22.1"
-pytest-cov = "^3.0.0"
-pytest-mock = "^3.3.1"
-tox = "^3.20.1"
+pytest-cov = "^3.0"
+pytest-mock = "^3.3"
+tox = "^3.20"
 parameterized = "^0.8.0"
-flake8 = "^4.0.0"
+flake8 = "^4.0"
 pyupgrade = "^2.31"
 isort = "^5.10"
 mypy = "^0.931"
