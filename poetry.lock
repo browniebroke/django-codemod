@@ -577,6 +577,18 @@ typing-extensions = {version = ">=3.7.4,<5.0", markers = "python_version < \"3.8
 jupyter = ["ipywidgets (>=7.5.1,<8.0.0)"]
 
 [[package]]
+name = "rich-click"
+version = "1.0.0"
+description = "Format click help output nicely with rich"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[package.dependencies]
+click = "*"
+rich = "*"
+
+[[package]]
 name = "six"
 version = "1.16.0"
 description = "Python 2 and 3 compatibility utilities"
@@ -834,7 +846,7 @@ docs = ["myst-parser", "Sphinx", "sphinx-rtd-theme"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "38c83c7fd0070724682972f035b7752e3b2c4c36171b2ecb82e4e16833496742"
+content-hash = "6326a9368c6c13330b41deea97df68f8b86788c520ae3a9f660d2ee3161876cd"
 
 [metadata.files]
 alabaster = [
@@ -1201,6 +1213,10 @@ requests = [
 rich = [
     {file = "rich-11.2.0-py3-none-any.whl", hash = "sha256:d5f49ad91fb343efcae45a2b2df04a9755e863e50413623ab8c9e74f05aee52b"},
     {file = "rich-11.2.0.tar.gz", hash = "sha256:1a6266a5738115017bb64a66c59c717e7aa047b3ae49a011ede4abdeffc6536e"},
+]
+rich-click = [
+    {file = "rich-click-1.0.0.tar.gz", hash = "sha256:37773c4bdc9766c949f95876f346e5b08ae65b5691ba749a64e5d67fd607e8e9"},
+    {file = "rich_click-1.0.0-py3-none-any.whl", hash = "sha256:4c44e726d0f448bd5430f1d0075a3b6d150d2b51cd4260388afcd9eafff3f86f"},
 ]
 six = [
     {file = "six-1.16.0-py2.py3-none-any.whl", hash = "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"},

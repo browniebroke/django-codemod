@@ -4,7 +4,7 @@ from operator import attrgetter
 from pathlib import Path
 from typing import Callable, Dict, Generator, List, Optional, Tuple, Type
 
-import click
+import rich_click as click
 from libcst.codemod import CodemodContext, parallel_exec_transform_with_prettyprint
 from rich.console import Console
 from rich.markdown import Markdown

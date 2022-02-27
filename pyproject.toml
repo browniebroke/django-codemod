@@ -32,6 +32,7 @@ click = "<9"
 libcst = "==0.4.1"
 pathspec = ">=0.6,<1"
 rich = "<12"
+rich-click = ">=1.0"
 
 # Docs deps
 Sphinx = { version = "^4.0", optional = true }
