@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.9.0 (2022-02-27)
+### Feature
+* Integrate rich-click ([`2bcabc6`](https://github.com/browniebroke/django-codemod/commit/2bcabc658c5f550d3635304456503acfe76ad7fd))
+
 ## v1.8.2 (2022-02-11)
 ### Fix
 * **deps:** Update dependency myst-parser to ^0.17.0 ([`427c190`](https://github.com/browniebroke/django-codemod/commit/427c190025be59adbcfc36565b753829d5b36dd8))
