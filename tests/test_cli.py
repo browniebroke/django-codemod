@@ -32,7 +32,9 @@ def test_missing_argument(cli_runner):
     result = cli_runner.invoke(cli.djcodemod, ["run"])
 
     assert result.exit_code == 2
-    assert "Error: Missing argument 'SRC...'" in result.output
+    assert "Error" in result.output
+    assert "Missing argument" in result.output
+    assert "'SRC...'" in result.output
 
 
 def test_no_mods_selected(cli_runner):
@@ -74,7 +76,11 @@ def test_non_supported_version(cli_runner, option, version):
     result = cli_runner.invoke(cli.djcodemod, ["run", option, version, "."])
 
     assert result.exit_code == 2
-    assert f"'{version}' is not supported. Versions supported:" in result.output
+    assert (
+        f"Invalid value for '{option}': "
+        f"'{version}' is not supported." in result.output
+    )
+    assert "supported:" in result.output
 
 
 def test_invalid_version(cli_runner):
