@@ -247,8 +247,7 @@ def get_short_description(codemodder: Type[BaseDjCodemodTransformer]) -> str:
     if codemodder.__doc__ is None:
         return ""
     for line in codemodder.__doc__.split("\n"):
-        description = line.strip()
-        if description:
+        if description := line.strip():
             return description
     return ""
 
