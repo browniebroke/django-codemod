@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.9.1 (2022-03-11)
+### Fix
+* **deps:** Update dependency rich to v12 ([`765bc27`](https://github.com/browniebroke/django-codemod/commit/765bc2738723c726525dc55b670407c8012aa59e))
+
 ## v1.9.0 (2022-02-27)
 ### Feature
 * Integrate rich-click ([`2bcabc6`](https://github.com/browniebroke/django-codemod/commit/2bcabc658c5f550d3635304456503acfe76ad7fd))
