@@ -44,7 +44,7 @@ repos:
       - id: commitizen
         stages: [commit-msg]
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v0.941
+    rev: v0.942
     hooks:
       - id: mypy
   - repo: https://github.com/PyCQA/bandit
