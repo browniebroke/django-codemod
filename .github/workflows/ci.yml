@@ -64,7 +64,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - uses: wagoid/commitlint-github-action@v4.1.9
+      - uses: wagoid/commitlint-github-action@v4.1.10
 
   release:
     runs-on: ubuntu-latest
