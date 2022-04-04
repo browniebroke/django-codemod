@@ -27,11 +27,11 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
-      - name: Set up Python
-        uses: actions/setup-python@v3
+      - uses: snok/install-poetry@v1
+      - uses: actions/setup-python@v3
         with:
           python-version: ${{ matrix.python-version }}
-      - uses: snok/install-poetry@v1
+          cache: "poetry"
       - name: Install Dependencies
         run: poetry install
       - name: Test with Pytest
