@@ -47,16 +47,16 @@ docs = [
 ]
 
 [tool.poetry.dev-dependencies]
-pytest = "^7.0"
 black = "^22.1"
-pytest-cov = "^3.0"
-pytest-mock = "^3.3"
-tox = "^3.20"
-parameterized = "^0.8.0"
 flake8 = "^4.0"
-pyupgrade = "^2.31"
 isort = "^5.10"
 mypy = "^0.942"
+parameterized = "^0.8.0"
+pytest = "^7.0"
+pytest-cov = "^3.0"
+pytest-mock = "^3.3"
+pyupgrade = "^2.31"
+tox = "^3.20"
 
 [tool.semantic_release]
 branch = "main"

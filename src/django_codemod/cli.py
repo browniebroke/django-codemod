@@ -1,4 +1,5 @@
 import inspect
+import os
 from collections import defaultdict
 from operator import attrgetter
 from pathlib import Path
@@ -14,6 +15,8 @@ from django_codemod import visitors
 from django_codemod.commands import BaseCodemodCommand
 from django_codemod.path_utils import get_sources
 from django_codemod.visitors.base import BaseDjCodemodTransformer
+
+os.environ["LIBCST_PARSER_TYPE"] = "native"
 
 
 def index_codemodders(version_getter: Callable) -> Dict[Tuple[int, int], List]:
