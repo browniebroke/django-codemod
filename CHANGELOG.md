@@ -2,6 +2,11 @@
 
 <!--next-version-placeholder-->
 
+## v1.10.0 (2022-04-11)
+### Feature
+* Add support for Python 3.10 ([`92e9bcd`](https://github.com/browniebroke/django-codemod/commit/92e9bcdd5bcc7719ae4a4b1c2178d59a0afd60f2))
+* Use libCST's native parser ([`d16eb50`](https://github.com/browniebroke/django-codemod/commit/d16eb5040d4c534ec387b3c0ec3f562b73d8fd61))
+
 ## v1.9.1 (2022-03-11)
 ### Fix
 * **deps:** Update dependency rich to v12 ([`765bc27`](https://github.com/browniebroke/django-codemod/commit/765bc2738723c726525dc55b670407c8012aa59e))
