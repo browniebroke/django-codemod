@@ -27,12 +27,6 @@ def command_instance():
     return BaseCodemodCommand([], CodemodContext())
 
 
-def test_use_native_parser():
-    from libcst._parser.entrypoints import is_native
-
-    assert is_native() is True
-
-
 def test_missing_argument(cli_runner):
     """Should explain missing arguments."""
     result = cli_runner.invoke(cli.djcodemod, ["run"])
