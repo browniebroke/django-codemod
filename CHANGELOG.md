@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.10.1 (2022-04-14)
+### Fix
+* Revert to libCST old parser ([`3cb81f9`](https://github.com/browniebroke/django-codemod/commit/3cb81f9101cbeb8032912529e646f9a043553284))
+
 ## v1.10.0 (2022-04-11)
 ### Feature
 * Add support for Python 3.10 ([`92e9bcd`](https://github.com/browniebroke/django-codemod/commit/92e9bcdd5bcc7719ae4a4b1c2178d59a0afd60f2))
