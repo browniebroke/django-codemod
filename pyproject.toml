@@ -82,6 +82,17 @@ exclude_lines = [
     "raise NotImplementedError",
 ]
 
+[tool.mypy]
+# suppress errors about unsatisfied imports
+ignore_missing_imports = true
+
+no_implicit_optional = true
+
+# ensure all execution paths are returning
+warn_no_return = true
+
+show_error_codes = true
+
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
