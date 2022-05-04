@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.10.2 (2022-05-04)
+### Fix
+* **deps:** Update dependency libcst to v0.4.2 ([#587](https://github.com/browniebroke/django-codemod/issues/587)) ([`03fb985`](https://github.com/browniebroke/django-codemod/commit/03fb9859b3816504dce505d1e4d2e1d2664cf6b3))
+
 ## v1.10.1 (2022-04-14)
 ### Fix
 * Revert to libCST old parser ([`3cb81f9`](https://github.com/browniebroke/django-codemod/commit/3cb81f9101cbeb8032912529e646f9a043553284))
