@@ -65,7 +65,7 @@ Interested? Check out [the documentation](https://django-codemod.readthedocs.io)
 
 [django-upgrade](https://github.com/adamchainz/django-upgrade) is a similar tool written by Adam Johnson. It's a reimplementation taking a different approach based only on standard library module.
 
-django-codemod is based on [libCST](https://libcst.readthedocs.io/) (Concrete Syntax Tree), and it's a limiting factor in terms of supported Python versions as well as its speed. By using standard library modules, django-upgrade is a lot faster and is able to support the latest Python, however it requires Python 3.8+.
+django-codemod is based on [libCST](https://libcst.readthedocs.io/) (Concrete Syntax Tree) which is a limiting factor in terms of speed. By using standard library modules, django-upgrade is a lot faster and is able to support the latest Python, however it requires Python 3.8+.
 
 ## Contributors ✨
 
