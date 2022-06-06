@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v1.10.4 (2022-06-06)
+### Fix
+* **deps:** Revert PSR upgrade ([`3d56141`](https://github.com/browniebroke/django-codemod/commit/3d56141cdf66b1569470907965efba15b7aff029))
+
+### Documentation
+* Update note regarding libCST Python versions support ([#594](https://github.com/browniebroke/django-codemod/issues/594)) ([`f42734e`](https://github.com/browniebroke/django-codemod/commit/f42734eea6a7f02448693c2d7529dc5a9e3e65ae))
+
 ## v1.10.3 (2022-05-11)
 ### Fix
 * **deps:** Update dependency libcst to v0.4.3 ([`b08cb5b`](https://github.com/browniebroke/django-codemod/commit/b08cb5ba2b2e3e876ef07ab55c5b318fc1a02b27))
