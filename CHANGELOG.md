@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.10.5 (2022-06-10)
+### Fix
+* **deps:** Update dependency sphinx to v5 ([`57c0ea6`](https://github.com/browniebroke/django-codemod/commit/57c0ea660a326437c283349dd8d3d7c11861c171))
+
 ## v1.10.4 (2022-06-06)
 ### Fix
 * **deps:** Revert PSR upgrade ([`3d56141`](https://github.com/browniebroke/django-codemod/commit/3d56141cdf66b1569470907965efba15b7aff029))
