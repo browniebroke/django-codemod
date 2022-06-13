@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.10.6 (2022-06-13)
+### Fix
+* **deps:** Update dependency libcst to v0.4.4 ([`c0c0967`](https://github.com/browniebroke/django-codemod/commit/c0c09679b6e479bc92ca99b15068290f083c2af4))
+
 ## v1.10.5 (2022-06-10)
 ### Fix
 * **deps:** Update dependency sphinx to v5 ([`57c0ea6`](https://github.com/browniebroke/django-codemod/commit/57c0ea660a326437c283349dd8d3d7c11861c171))
