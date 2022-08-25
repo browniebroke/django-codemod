@@ -17,6 +17,7 @@ classifiers = [
 ]
 packages = [
     { include = "django_codemod", from = "src" },
+    { include = "tests", format = "sdist" },
 ]
 
 [tool.poetry.urls]
