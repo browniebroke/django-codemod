@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.11.0 (2022-08-31)
+### Feature
+* **packaging:** Add tests to sdist ([#655](https://github.com/browniebroke/django-codemod/issues/655)) ([`4fa7b33`](https://github.com/browniebroke/django-codemod/commit/4fa7b332567093e9767a0474b6769b5657950603))
+
 ## v1.10.9 (2022-07-12)
 ### Fix
 * **deps:** Update dependency libcst to v0.4.7 ([`746c16d`](https://github.com/browniebroke/django-codemod/commit/746c16de0555151b0b1125be3b43066a9623a7ec))
