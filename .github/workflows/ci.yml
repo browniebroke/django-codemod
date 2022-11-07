@@ -21,6 +21,7 @@ jobs:
           - "3.8"
           - "3.9"
           - "3.10"
+          - "3.11"
         os:
           - ubuntu-latest
           - windows-latest
@@ -32,6 +33,7 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
+          cache: 'poetry'
       - name: Install Dependencies
         run: poetry install
       - name: Test with Pytest
