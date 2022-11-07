@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.11.1 (2022-11-07)
+### Fix
+* Officially support Python 3.11 (no code changes were required) ([#696](https://github.com/browniebroke/django-codemod/issues/696)) ([`2295357`](https://github.com/browniebroke/django-codemod/commit/2295357842b7cb7d49393729786644a1704ca256))
+
 ## v1.11.0 (2022-08-31)
 ### Feature
 * **packaging:** Add tests to sdist ([#655](https://github.com/browniebroke/django-codemod/issues/655)) ([`4fa7b33`](https://github.com/browniebroke/django-codemod/commit/4fa7b332567093e9767a0474b6769b5657950603))
