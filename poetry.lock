@@ -26,7 +26,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 dev = ["cloudpickle", "coverage[toml] (>=5.0.2)", "furo", "hypothesis", "mypy", "pre-commit", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins", "six", "sphinx", "sphinx-notfound-page", "zope.interface"]
 docs = ["furo", "sphinx", "sphinx-notfound-page", "zope.interface"]
 tests = ["cloudpickle", "coverage[toml] (>=5.0.2)", "hypothesis", "mypy", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins", "six", "zope.interface"]
-tests_no_zope = ["cloudpickle", "coverage[toml] (>=5.0.2)", "hypothesis", "mypy", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins", "six"]
+tests-no-zope = ["cloudpickle", "coverage[toml] (>=5.0.2)", "hypothesis", "mypy", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins", "six"]
 
 [[package]]
 name = "babel"
@@ -56,7 +56,7 @@ optional = true
 python-versions = ">=3.5.0"
 
 [package.extras]
-unicode_backport = ["unicodedata2"]
+unicode-backport = ["unicodedata2"]
 
 [[package]]
 name = "click"
@@ -168,7 +168,7 @@ i18n = ["Babel (>=2.7)"]
 
 [[package]]
 name = "libcst"
-version = "0.4.7"
+version = "0.4.8"
 description = "A concrete syntax tree with AST-like properties for Python 3.5, 3.6, 3.7, 3.8, 3.9, and 3.10 programs."
 category = "main"
 optional = false
@@ -180,7 +180,7 @@ typing-extensions = ">=3.7.4.2"
 typing-inspect = ">=0.4.0"
 
 [package.extras]
-dev = ["black (==22.3.0)", "coverage (>=4.5.4)", "fixit (==0.1.1)", "flake8 (>=3.7.8)", "hypothesis (>=4.36.0)", "hypothesmith (>=0.0.4)", "jinja2 (==3.0.3)", "jupyter (>=1.0.0)", "maturin (>=0.8.3,<0.9)", "nbsphinx (>=0.4.2)", "prompt-toolkit (>=2.0.9)", "pyre-check (==0.9.9)", "setuptools-rust (>=0.12.1)", "setuptools-scm (>=6.0.1)", "slotscheck (>=0.7.1)", "sphinx-rtd-theme (>=0.4.3)", "ufmt (==1.3)", "usort (==1.0.0rc1)"]
+dev = ["Sphinx (>=5.1.1)", "black (==22.10.0)", "coverage (>=4.5.4)", "fixit (==0.1.1)", "flake8 (>=3.7.8,<5)", "hypothesis (>=4.36.0)", "hypothesmith (>=0.0.4)", "jinja2 (==3.1.2)", "jupyter (>=1.0.0)", "maturin (>=0.8.3,<0.14)", "nbsphinx (>=0.4.2)", "prompt-toolkit (>=2.0.9)", "pyre-check (==0.9.9)", "setuptools-rust (>=0.12.1)", "setuptools-scm (>=6.0.1)", "slotscheck (>=0.7.1)", "sphinx-rtd-theme (>=0.4.3)", "ufmt (==2.0.1)", "usort (==1.0.5)"]
 
 [[package]]
 name = "markdown-it-py"
@@ -196,7 +196,7 @@ typing_extensions = {version = ">=3.7.4", markers = "python_version < \"3.8\""}
 
 [package.extras]
 benchmarking = ["psutil", "pytest", "pytest-benchmark (>=3.2,<4.0)"]
-code_style = ["pre-commit (==2.6)"]
+code-style = ["pre-commit (==2.6)"]
 compare = ["commonmark (>=0.9.1,<0.10.0)", "markdown (>=3.3.6,<3.4.0)", "mistletoe (>=0.8.1,<0.9.0)", "mistune (>=2.0.2,<2.1.0)", "panflute (>=2.1.3,<2.2.0)"]
 linkify = ["linkify-it-py (>=1.0,<2.0)"]
 plugins = ["mdit-py-plugins"]
@@ -224,7 +224,7 @@ python-versions = "~=3.6"
 markdown-it-py = ">=1.0.0,<3.0.0"
 
 [package.extras]
-code_style = ["pre-commit (==2.6)"]
+code-style = ["pre-commit (==2.6)"]
 rtd = ["myst-parser (>=0.14.0,<0.15.0)", "sphinx-book-theme (>=0.1.0,<0.2.0)"]
 testing = ["coverage", "pytest (>=3.6,<4)", "pytest-cov", "pytest-regressions"]
 
@@ -262,7 +262,7 @@ sphinx = ">=4,<6"
 typing-extensions = "*"
 
 [package.extras]
-code_style = ["pre-commit (>=2.12,<3.0)"]
+code-style = ["pre-commit (>=2.12,<3.0)"]
 linkify = ["linkify-it-py (>=1.0,<2.0)"]
 rtd = ["ipython", "sphinx-book-theme", "sphinx-design", "sphinxcontrib.mermaid (>=0.7.1,<0.8.0)", "sphinxext-opengraph (>=0.6.3,<0.7.0)", "sphinxext-rediraffe (>=0.2.7,<0.3.0)"]
 testing = ["beautifulsoup4", "coverage[toml]", "pytest (>=6,<7)", "pytest-cov", "pytest-param-files (>=0.3.4,<0.4.0)", "pytest-regressions", "sphinx-pytest"]
@@ -422,7 +422,7 @@ urllib3 = ">=1.21.1,<1.27"
 
 [package.extras]
 socks = ["PySocks (>=1.5.6,!=1.5.7)"]
-use_chardet_on_py3 = ["chardet (>=3.0.2,<5)"]
+use-chardet-on-py3 = ["chardet (>=3.0.2,<5)"]
 
 [[package]]
 name = "rich"
@@ -642,7 +642,7 @@ docs = ["myst-parser", "Sphinx", "sphinx-rtd-theme"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "c15da38c7c2eb340c0c10abb7b02dc1c39f0cb152681557f10683b390da8b5ed"
+content-hash = "eab6b952bc5462212037752bd6d38d1a9000c470a928c6582a81e5517aa91c20"
 
 [metadata.files]
 alabaster = [
@@ -749,30 +749,36 @@ jinja2 = [
     {file = "Jinja2-3.1.2.tar.gz", hash = "sha256:31351a702a408a9e7595a8fc6150fc3f43bb6bf7e319770cbc0db9df9437e852"},
 ]
 libcst = [
-    {file = "libcst-0.4.7-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:dc6f8965b6ca68d47e11321772887d81fa6fd8ea86e6ef87434ca2147de10747"},
-    {file = "libcst-0.4.7-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:a8f47d809df59fcd83058b777b86a300154ee3a1f1b0523a398a67b5f8affd4c"},
-    {file = "libcst-0.4.7-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:c0d19de56aa733b4ef024527e3ce4896d4b0e9806889797f409ec24caa651a44"},
-    {file = "libcst-0.4.7-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:31da97bc986dc3f7a97f7d431fa911932aaf716d2f8bcda947fc964afd3b57cd"},
-    {file = "libcst-0.4.7-cp310-cp310-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:71b2e2c5e33e53669c20de0853cecfac1ffb8657ee727ab8527140f39049b820"},
-    {file = "libcst-0.4.7-cp310-cp310-win_amd64.whl", hash = "sha256:76fae68bd6b7ce069e267b3322c806b4305341cea78d161ae40e0ed641c8c660"},
-    {file = "libcst-0.4.7-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:bac76d69980bb3254f503f52128c256ef4d1bcbaabe4a17c3a9ebcd1fc0472c0"},
-    {file = "libcst-0.4.7-cp37-cp37m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:26f86535271eaefe84a99736875566a038449f92e1a2a61ea0b588d8359fbefd"},
-    {file = "libcst-0.4.7-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:617f7fa2610a8c86cf22d8d03416f25391383d05bd0ad1ca8ef68023ddd6b4f6"},
-    {file = "libcst-0.4.7-cp37-cp37m-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:c3637fffe476c5b4ee2225c6474b83382518f2c1b2fe4771039e06bdd7835a4a"},
-    {file = "libcst-0.4.7-cp37-cp37m-win_amd64.whl", hash = "sha256:f56565124c2541adee0634e411b2126b3f335306d19e91ed2bfe52efa698b219"},
-    {file = "libcst-0.4.7-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:0ca2771ff3cfdf1f148349f89fcae64afa365213ed5c2703a69a89319325d0c8"},
-    {file = "libcst-0.4.7-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:aa438131b7befc7e5a3cbadb5a7b1506305de5d62262ea0556add0152f40925e"},
-    {file = "libcst-0.4.7-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:8c6bd66a8be2ffad7b968d90dae86c62fd4739c0e011d71f3e76544a891ae743"},
-    {file = "libcst-0.4.7-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:214a9c4f4f90cd5b4bfa18e17877da4dd9a896821d9af9be86fa3effdc289b9b"},
-    {file = "libcst-0.4.7-cp38-cp38-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:27a37f2b459a8b51a41e260bd89c24ae41ab1d658f610c91650c79b1bbf27138"},
-    {file = "libcst-0.4.7-cp38-cp38-win_amd64.whl", hash = "sha256:2f6766391d90472f036b88a95251c87d498ab068c377724f212ab0cc20509a68"},
-    {file = "libcst-0.4.7-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:234293aa8681a3d47fef1716c5622797a81cbe85a9381fe023815468cfe20eed"},
-    {file = "libcst-0.4.7-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:fa618dc359663a0a097c633452b104c1ca93365da7a811e655c6944f6b323239"},
-    {file = "libcst-0.4.7-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:3569d9901c18940632414fb7a0943bffd326db9f726a9c041664926820857815"},
-    {file = "libcst-0.4.7-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:beb5347e46b419f782589da060e9300957e71d561aa5574309883b71f93c1dfe"},
-    {file = "libcst-0.4.7-cp39-cp39-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:1e541ccfeebda1ae5f005fc120a5bf3e8ac9ccfda405ec3efd3df54fc4688ac3"},
-    {file = "libcst-0.4.7-cp39-cp39-win_amd64.whl", hash = "sha256:3a2b7253cd2e3f0f8a3e23b5c2acb492811d865ef36e0816091c925f32b713d2"},
-    {file = "libcst-0.4.7.tar.gz", hash = "sha256:95c52c2130531f6e726a3b077442cfd486975435fecf3db8224d43fba7b85099"},
+    {file = "libcst-0.4.8-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:746b77765b474a204a6731549e729f59c03c320c6598f921f7abfc3739f527dd"},
+    {file = "libcst-0.4.8-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:d6953868d322dc910c3ece684d84f115374efc4cc4db90fcd1e190c8e510b6fd"},
+    {file = "libcst-0.4.8-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:654e3c30a61e4e5b56419ba8d91b390cf249d3fe2e078e998dc098b37a9a44ff"},
+    {file = "libcst-0.4.8-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:158b87957266bc06c233572c6d3618dc97195634aa7915bd3c60a99c6db055af"},
+    {file = "libcst-0.4.8-cp310-cp310-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:ab565d18d7a240ae0ee7cadb6c0c61428d2cab08fa37f694ddfd2a9b0dbb0c27"},
+    {file = "libcst-0.4.8-cp310-cp310-win_amd64.whl", hash = "sha256:52480aa81bab4c69f0137851449233bc877157e4b03cd133e9bc76b711dd88a4"},
+    {file = "libcst-0.4.8-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:9f0051d880786415b451417fc3f5213bf9cadd1481c9954424f17360235cd9b8"},
+    {file = "libcst-0.4.8-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:82efc055abfca97889aad68c3d147a5f7fe51fcd20f30612750f1ffe3d28e30f"},
+    {file = "libcst-0.4.8-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:ce5ce73ddc40274a97197550faf6a92f8f9ff2ae308525fc4bc7762fc7fccdf5"},
+    {file = "libcst-0.4.8-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:9021f06b92f892df8f89956ae6d673fcab3189b92c75858e279e90a3561d4059"},
+    {file = "libcst-0.4.8-cp311-cp311-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:bfd0a749824fc4a318963a2a8a24fb2e2d71e2f3a9496ed830735559a4da4e32"},
+    {file = "libcst-0.4.8-cp311-cp311-win_amd64.whl", hash = "sha256:0eeb6def276a9fc65aad50855693a9dd85375ecdee4759f9335edd0c81a370ac"},
+    {file = "libcst-0.4.8-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:090c96a56825602ed28c1cbc8f4086ce4d57c8ac8d8f64b0ff393f6d2320a5aa"},
+    {file = "libcst-0.4.8-cp37-cp37m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:4ea22e64235a9209000de06117f9e22efe7e421c4d73fa21ff98415d21c8078a"},
+    {file = "libcst-0.4.8-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:2d82cac80e73e933b101f5b9d7d17def3c550c44365c578fb51012707835f4a2"},
+    {file = "libcst-0.4.8-cp37-cp37m-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:c7e8aa3dcf09d3affc7f087985beed7973771e8b6e31bdf7df98802215a34818"},
+    {file = "libcst-0.4.8-cp37-cp37m-win_amd64.whl", hash = "sha256:5530190dd8cbb2fa0de1dab831d7fe12a084ff9ea88c223b3d2360d08ac9cbd1"},
+    {file = "libcst-0.4.8-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:257de16df0bb0e7a12085f1cb6187bcbef720fafd4f2a4422085d0559cc4fe91"},
+    {file = "libcst-0.4.8-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:8bb8dcb52115faa4fbf434657f25a4315da3e3c6241df2fff4b5371b93970eef"},
+    {file = "libcst-0.4.8-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:d7deb26ee15c71880aea7813cfc6222c1b3446c593db92696912cf5be98eddda"},
+    {file = "libcst-0.4.8-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:58c0d28c3c580886f71286f3e008d0640ed96b3b7c369164bb20836ec00d6245"},
+    {file = "libcst-0.4.8-cp38-cp38-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:df35caf419777bbed655a38d5b551cd84e479a717308fccf2646ae46c4b7da2b"},
+    {file = "libcst-0.4.8-cp38-cp38-win_amd64.whl", hash = "sha256:48dfc758f403cd5e2edd1f6c027b1f269ba62b5a3d537cbe2aee8e2b5dc2d102"},
+    {file = "libcst-0.4.8-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:cc0250f72ee3d482f7d32b909e95c0190be983edbee4f68e26bd1959e564fba3"},
+    {file = "libcst-0.4.8-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:b187129567c11a0c722f746b4907ef7c076de7f1089c4f5c64ab5709ccb8c671"},
+    {file = "libcst-0.4.8-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:d885776029ccde3c7ab7d27c34247824a17c3d68278f5da6fed1b8ca0a561dce"},
+    {file = "libcst-0.4.8-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:4bbb02252be243a64fdf2a65381357ca5599d483594901ae21dba27649566e8d"},
+    {file = "libcst-0.4.8-cp39-cp39-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:d6c7e2af3e398c7a35fd6549e5a6a7bfefcf08e898cd6a01b2a1286a7e31955f"},
+    {file = "libcst-0.4.8-cp39-cp39-win_amd64.whl", hash = "sha256:0a4f8ee298106df6700cb7072e62fb159f9e69892d35c365efe0415df5da4ba9"},
+    {file = "libcst-0.4.8.tar.gz", hash = "sha256:9c60bc726f6e6f9f05addeaf1a4f4cf27c2efc02bb2b4b0338b09f9dab8a8d65"},
 ]
 markdown-it-py = [
     {file = "markdown-it-py-2.1.0.tar.gz", hash = "sha256:cf7e59fed14b5ae17c0006eff14a2d9a00ed5f3a846148153899a0224e2c07da"},
