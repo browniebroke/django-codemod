@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.11.2 (2022-11-10)
+### Fix
+* **deps:** Update dependency libcst to v0.4.8 ([#699](https://github.com/browniebroke/django-codemod/issues/699)) ([`1fe101e`](https://github.com/browniebroke/django-codemod/commit/1fe101e748df879c1fc27546c4187b42c7923a0e))
+
 ## v1.11.1 (2022-11-07)
 ### Fix
 * Officially support Python 3.11 (no code changes were required) ([#696](https://github.com/browniebroke/django-codemod/issues/696)) ([`2295357`](https://github.com/browniebroke/django-codemod/commit/2295357842b7cb7d49393729786644a1704ca256))
