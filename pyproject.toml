@@ -35,23 +35,19 @@ pathspec = ">=0.6,<1"
 rich = "<13"
 rich-click = ">=1.0"
 
-# Docs deps
-Sphinx = { version = "^5.0", optional = true }
-sphinx-rtd-theme = { version = "^1.0", optional = true }
-myst-parser = { version = "^0.18.0", optional = true }
-
-[tool.poetry.extras]
-docs = [
-    "myst-parser",
-    "sphinx",
-    "sphinx-rtd-theme",
-]
-
 [tool.poetry.dev-dependencies]
 parameterized = "^0.8.0"
 pytest = "^7.0"
 pytest-cov = "^4.0"
 pytest-mock = "^3.3"
+
+[tool.poetry.group.docs]
+optional = true
+
+[tool.poetry.group.docs.dependencies]
+myst-parser = ">=0.16"
+sphinx = ">=4.0"
+sphinx-rtd-theme = ">=1.0"
 
 [tool.semantic_release]
 branch = "main"
