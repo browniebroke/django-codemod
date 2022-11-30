@@ -22,6 +22,11 @@ repos:
       - id: detect-private-key
       - id: end-of-file-fixer
       - id: trailing-whitespace
+  - repo: https://github.com/python-poetry/poetry
+    rev: 1.2.2
+    hooks:
+      - id: poetry-check
+      - id: poetry-lock
   - repo: https://github.com/pre-commit/mirrors-prettier
     rev: v3.0.0-alpha.4
     hooks:
