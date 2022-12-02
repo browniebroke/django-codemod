@@ -23,6 +23,8 @@ packages = [
 [tool.poetry.urls]
 "Bug Tracker" = "https://github.com/browniebroke/django-codemod/issues"
 "Changelog" = "https://django-codemod.readthedocs.io/en/stable/changelog.html"
+"Twitter" = "https://twitter.com/_BrunoAlla"
+"Mastodon" = "https://fosstodon.org/@browniebroke"
 
 [tool.poetry.scripts]
 djcodemod = "django_codemod.cli:djcodemod"
