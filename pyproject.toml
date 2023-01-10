@@ -34,7 +34,7 @@ python = "^3.7"
 click = "<9"
 libcst = "==0.4.9"
 pathspec = ">=0.6,<1"
-rich = "<14"
+rich = ">=10"
 rich-click = ">=1.0"
 
 [tool.poetry.dev-dependencies]
