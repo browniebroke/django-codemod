@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v1.11.4 (2023-01-10)
+### Fix
+* **deps:** Update dependency rich to v13 ([#732](https://github.com/browniebroke/django-codemod/issues/732)) ([`ca39c0e`](https://github.com/browniebroke/django-codemod/commit/ca39c0ed95786617af61070d216d6c404d856710))
+
+### Documentation
+* Replace docs extra by Poetry group ([#708](https://github.com/browniebroke/django-codemod/issues/708)) ([`4c74c5d`](https://github.com/browniebroke/django-codemod/commit/4c74c5d32e929da2767ec7666e37a624653c8191))
+
 ## v1.11.3 (2022-11-11)
 ### Fix
 * **deps:** Update dependency libcst to v0.4.9 ([#701](https://github.com/browniebroke/django-codemod/issues/701)) ([`e2e443a`](https://github.com/browniebroke/django-codemod/commit/e2e443ad9e3951de97274e47a44c4ad83aac445e))

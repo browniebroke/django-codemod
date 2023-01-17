@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-codemod"
-version = "1.11.3"
+version = "1.11.4"
 description = "A command line tool to automatically fix Django deprecations."
 authors = ["Bruno Alla <alla.brunoo@gmail.com>"]
 license = "MIT"
@@ -34,7 +34,7 @@ python = "^3.7"
 click = "<9"
 libcst = "==0.4.9"
 pathspec = ">=0.6,<1"
-rich = "<13"
+rich = ">=10"
 rich-click = ">=1.0"
 
 [tool.poetry.dev-dependencies]

@@ -12,6 +12,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: browniebroke/hacktoberfest-labeler-action@v2.2.0
+      - uses: browniebroke/hacktoberfest-labeler-action@v2.3.0
         with:
           github_token: ${{ secrets.CPR_GITHUB_TOKEN }}
