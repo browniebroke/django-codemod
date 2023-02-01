@@ -9,7 +9,6 @@ from tests.visitors.base import BaseVisitorTest
 
 
 class TestUGetTextTransformer(BaseVisitorTest):
-
     transformer = UGetTextTransformer
 
     def test_simple_substitution(self) -> None:
@@ -56,7 +55,6 @@ class TestUGetTextTransformer(BaseVisitorTest):
 
 
 class TestUGetTextLazyTransformer(BaseVisitorTest):
-
     transformer = UGetTextLazyTransformer
 
     def test_simple_substitution(self) -> None:
@@ -75,7 +73,6 @@ class TestUGetTextLazyTransformer(BaseVisitorTest):
 
 
 class TestUGetTextNoopTransformer(BaseVisitorTest):
-
     transformer = UGetTextNoopTransformer
 
     def test_noop(self) -> None:
@@ -111,7 +108,6 @@ class TestUGetTextNoopTransformer(BaseVisitorTest):
 
 
 class TestUNGetTextTransformer(BaseVisitorTest):
-
     transformer = UNGetTextTransformer
 
     def test_simple_substitution(self) -> None:
@@ -130,7 +126,6 @@ class TestUNGetTextTransformer(BaseVisitorTest):
 
 
 class TestUNGetTextLazyTransformer(BaseVisitorTest):
-
     transformer = UNGetTextLazyTransformer
 
     def test_simple_substitution(self) -> None:

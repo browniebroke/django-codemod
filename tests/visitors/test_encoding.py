@@ -7,7 +7,6 @@ from tests.visitors.base import BaseVisitorTest
 
 
 class TestForceTextTransformer(BaseVisitorTest):
-
     transformer = ForceTextTransformer
 
     def test_simple_substitution(self) -> None:
@@ -25,7 +24,6 @@ class TestForceTextTransformer(BaseVisitorTest):
 
 
 class TestSmartTextTransformer(BaseVisitorTest):
-
     transformer = SmartTextTransformer
 
     def test_simple_substitution(self) -> None:
@@ -44,7 +42,6 @@ class TestSmartTextTransformer(BaseVisitorTest):
 
 
 class TestUnicodeCompatibleTransformer(BaseVisitorTest):
-
     transformer = UnicodeCompatibleTransformer
 
     def test_simple_substitution(self) -> None:

@@ -3,7 +3,6 @@ from tests.visitors.base import BaseVisitorTest
 
 
 class TestURLResolversTransformer(BaseVisitorTest):
-
     transformer = URLResolversTransformer
 
     def test_simple_substitution(self) -> None:

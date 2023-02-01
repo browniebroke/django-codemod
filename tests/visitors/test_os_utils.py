@@ -3,7 +3,6 @@ from tests.visitors.base import BaseVisitorTest
 
 
 class TestAbsPathTransformer(BaseVisitorTest):
-
     transformer = AbsPathTransformer
 
     def test_simple_substitution(self) -> None:

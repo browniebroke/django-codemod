@@ -3,7 +3,6 @@ from tests.visitors.base import BaseVisitorTest
 
 
 class TestFixedOffsetTransformer(BaseVisitorTest):
-
     transformer = FixedOffsetTransformer
 
     def test_noop(self) -> None:

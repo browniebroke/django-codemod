@@ -3,7 +3,6 @@ from tests.visitors.base import BaseVisitorTest
 
 
 class TestUnescapeEntitiesTransformer(BaseVisitorTest):
-
     transformer = UnescapeEntitiesTransformer
 
     def test_simple_substitution(self) -> None:

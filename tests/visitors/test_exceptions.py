@@ -8,7 +8,6 @@ from tests.visitors.base import BaseVisitorTest
 
 
 class TestQueryEmptyResultSetTransformer(BaseVisitorTest):
-
     transformer = QueryEmptyResultSetTransformer
 
     def test_simple_substitution(self) -> None:
@@ -26,7 +25,6 @@ class TestQueryEmptyResultSetTransformer(BaseVisitorTest):
 
 
 class TestSqlEmptyResultSetTransformer(BaseVisitorTest):
-
     transformer = SqlEmptyResultSetTransformer
 
     def test_simple_substitution(self) -> None:
@@ -44,7 +42,6 @@ class TestSqlEmptyResultSetTransformer(BaseVisitorTest):
 
 
 class TestDatastructuresEmptyResultSetTransformer(BaseVisitorTest):
-
     transformer = DatastructuresEmptyResultSetTransformer
 
     def test_simple_substitution(self) -> None:
@@ -62,7 +59,6 @@ class TestDatastructuresEmptyResultSetTransformer(BaseVisitorTest):
 
 
 class TestFieldDoesNotExistTransformer(BaseVisitorTest):
-
     transformer = FieldDoesNotExistTransformer
 
     def test_simple_substitution(self) -> None:

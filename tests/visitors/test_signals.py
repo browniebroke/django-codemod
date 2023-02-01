@@ -5,7 +5,6 @@ from tests.visitors.base import BaseVisitorTest
 
 
 class TestSignalDisconnectWeakTransformer(BaseVisitorTest):
-
     transformer = SignalDisconnectWeakTransformer
     DJANGO_SIGNAL_NAMES = [
         "pre_init",

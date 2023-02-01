@@ -8,7 +8,6 @@ from tests.visitors.base import BaseVisitorTest
 
 
 class TestInlineHasAddPermissionsTransformer(BaseVisitorTest):
-
     transformer = InlineHasAddPermissionsTransformer
 
     @parameterized.expand(
@@ -200,7 +199,6 @@ class TestInlineHasAddPermissionsTransformer(BaseVisitorTest):
 
 
 class TestActionCheckboxNameTransformer(BaseVisitorTest):
-
     transformer = ActionCheckboxNameTransformer
 
     def test_simple_substitution(self) -> None:

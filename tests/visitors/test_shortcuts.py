@@ -3,7 +3,6 @@ from tests.visitors.base import BaseVisitorTest
 
 
 class TestRenderToResponseTransformer(BaseVisitorTest):
-
     transformer = RenderToResponseTransformer
 
     def test_simple_substitution(self) -> None:
