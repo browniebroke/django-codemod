@@ -45,7 +45,6 @@ class SameModuleFuncRenameTransformer(BaseFuncRenameTransformer):
 
 
 class TestFuncRenameTransformer(BaseVisitorTest):
-
     transformer = SameModuleFuncRenameTransformer
 
     def test_simple_substitution(self) -> None:
@@ -330,7 +329,6 @@ class OtherModuleFuncRenameTransformer(BaseFuncRenameTransformer):
 
 
 class TestOtherModuleFuncRenameTransformer(BaseVisitorTest):
-
     transformer = OtherModuleFuncRenameTransformer
 
     def test_simple_substitution(self) -> None:
@@ -452,7 +450,6 @@ class OtherModuleRenameTransformer(BaseRenameTransformer):
 
 
 class TestModuleRenameTransformer(BaseVisitorTest):
-
     transformer = OtherModuleRenameTransformer
 
     def test_simple_substitution(self) -> None:

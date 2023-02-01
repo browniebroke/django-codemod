@@ -6,7 +6,6 @@ from tests.visitors.base import BaseVisitorTest
 
 
 class TestContextDecoratorTransformer(BaseVisitorTest):
-
     transformer = ContextDecoratorTransformer
 
     def test_simple_substitution(self) -> None:
@@ -38,7 +37,6 @@ class TestContextDecoratorTransformer(BaseVisitorTest):
 
 
 class TestAvailableAttrsTransformer(BaseVisitorTest):
-
     transformer = AvailableAttrsTransformer
 
     def test_simple_substitution(self) -> None:

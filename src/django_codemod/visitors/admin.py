@@ -60,7 +60,6 @@ class InlineHasAddPermissionsTransformer(BaseDjCodemodTransformer):
         ):
             for imported_name in updated_node.names:
                 if m.matches(imported_name, m.ImportAlias(name=m.Name("admin"))):
-
                     base_cls_matcher.extend(
                         [
                             m.Arg(

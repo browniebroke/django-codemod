@@ -8,7 +8,6 @@ from tests.visitors.base import BaseVisitorTest
 
 
 class TestBaseContextTransformer(BaseVisitorTest):
-
     transformer = BaseContextTransformer
 
     def test_simple_substitution(self) -> None:
@@ -26,7 +25,6 @@ class TestBaseContextTransformer(BaseVisitorTest):
 
 
 class TestContextTransformer(BaseVisitorTest):
-
     transformer = ContextTransformer
 
     def test_simple_substitution(self) -> None:
@@ -44,7 +42,6 @@ class TestContextTransformer(BaseVisitorTest):
 
 
 class TestRequestContextTransformer(BaseVisitorTest):
-
     transformer = RequestContextTransformer
 
     def test_simple_substitution(self) -> None:
@@ -62,7 +59,6 @@ class TestRequestContextTransformer(BaseVisitorTest):
 
 
 class TestContextPopExceptionTransformer(BaseVisitorTest):
-
     transformer = ContextPopExceptionTransformer
 
     def test_simple_substitution(self) -> None:
