@@ -3,7 +3,6 @@ from tests.visitors.base import BaseVisitorTest
 
 
 class TestURLTransformer(BaseVisitorTest):
-
     transformer = URLTransformer
 
     def test_noop(self) -> None:

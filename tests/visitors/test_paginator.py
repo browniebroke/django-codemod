@@ -3,7 +3,6 @@ from tests.visitors.base import BaseVisitorTest
 
 
 class TestQuerySetPaginatorTransformer(BaseVisitorTest):
-
     transformer = QuerySetPaginatorTransformer
 
     def test_noop(self) -> None:

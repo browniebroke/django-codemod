@@ -3,7 +3,6 @@ from tests.visitors.base import BaseVisitorTest
 
 
 class TestPrettyNameTransformer(BaseVisitorTest):
-
     transformer = PrettyNameTransformer
 
     def test_simple_substitution(self) -> None:
@@ -21,7 +20,6 @@ class TestPrettyNameTransformer(BaseVisitorTest):
 
 
 class TestBoundFieldTransformer(BaseVisitorTest):
-
     transformer = BoundFieldTransformer
 
     def test_simple_substitution(self) -> None:

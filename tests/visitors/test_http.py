@@ -13,7 +13,6 @@ from tests.visitors.base import BaseVisitorTest
 
 
 class TestHttpUrlQuoteTransformer(BaseVisitorTest):
-
     transformer = HttpUrlQuoteTransformer
 
     def test_simple_substitution(self) -> None:
@@ -31,7 +30,6 @@ class TestHttpUrlQuoteTransformer(BaseVisitorTest):
 
 
 class TestHttpUrlQuotePlusTransformer(BaseVisitorTest):
-
     transformer = HttpUrlQuotePlusTransformer
 
     def test_simple_substitution(self) -> None:
@@ -49,7 +47,6 @@ class TestHttpUrlQuotePlusTransformer(BaseVisitorTest):
 
 
 class TestHttpUrlUnQuoteTransformer(BaseVisitorTest):
-
     transformer = HttpUrlUnQuoteTransformer
 
     def test_simple_substitution(self) -> None:
@@ -67,7 +64,6 @@ class TestHttpUrlUnQuoteTransformer(BaseVisitorTest):
 
 
 class TestHttpUrlUnQuotePlusTransformer(BaseVisitorTest):
-
     transformer = HttpUrlUnQuotePlusTransformer
 
     def test_simple_substitution(self) -> None:
@@ -85,7 +81,6 @@ class TestHttpUrlUnQuotePlusTransformer(BaseVisitorTest):
 
 
 class TestIsSafeUrlTransformer(BaseVisitorTest):
-
     transformer = IsSafeUrlTransformer
 
     def test_simple_substitution(self) -> None:
@@ -103,7 +98,6 @@ class TestIsSafeUrlTransformer(BaseVisitorTest):
 
 
 class TestHttpRequestXReadLinesTransformer(BaseVisitorTest):
-
     transformer = HttpRequestXReadLinesTransformer
 
     def test_noop_wrong_name(self) -> None:

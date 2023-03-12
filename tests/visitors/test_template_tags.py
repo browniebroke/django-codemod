@@ -5,7 +5,6 @@ from tests.visitors.base import BaseVisitorTest
 
 
 class TestAssignmentTagTransformer(BaseVisitorTest):
-
     transformer = AssignmentTagTransformer
 
     def test_noop(self) -> None:

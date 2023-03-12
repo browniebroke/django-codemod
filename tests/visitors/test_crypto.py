@@ -3,7 +3,6 @@ from tests.visitors.base import BaseVisitorTest
 
 
 class TestGetRandomStringTransformer(BaseVisitorTest):
-
     transformer = GetRandomStringTransformer
 
     def test_noop_1(self) -> None:

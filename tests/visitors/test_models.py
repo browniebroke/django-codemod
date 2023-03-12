@@ -10,7 +10,6 @@ from tests.visitors.base import BaseVisitorTest
 
 
 class TestOnDeleteTransformer(BaseVisitorTest):
-
     transformer = OnDeleteTransformer
 
     def test_foreign_key(self) -> None:
@@ -209,7 +208,6 @@ class TestOnDeleteTransformer(BaseVisitorTest):
 
 
 class TestAvailableAttrsTransformer(BaseVisitorTest):
-
     transformer = ModelsPermalinkTransformer
 
     @parameterized.expand(
@@ -349,7 +347,6 @@ class TestAvailableAttrsTransformer(BaseVisitorTest):
 
 
 class TestNullBooleanFieldTransformer(BaseVisitorTest):
-
     transformer = NullBooleanFieldTransformer
 
     def test_noop_models(self) -> None:
