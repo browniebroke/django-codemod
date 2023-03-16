@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.11.6 (2023-03-16)
+### Fix
+* **deps:** Update dependency rich-click to v1.6.1 ([#760](https://github.com/browniebroke/django-codemod/issues/760)) ([`535ae80`](https://github.com/browniebroke/django-codemod/commit/535ae807d8693e3992e101879d79e6530f0f035e))
+
 ## v1.11.5 (2023-03-16)
 ### Fix
 * **deps:** Update dependency pathspec to v0.11.1 ([`bf98f59`](https://github.com/browniebroke/django-codemod/commit/bf98f59748dfe57b95c73812a45ea5de482da5b3))
