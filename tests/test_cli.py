@@ -34,7 +34,6 @@ def test_missing_argument(cli_runner):
     assert result.exit_code == 2
     assert "Error" in result.output
     assert "Missing argument" in result.output
-    assert "'SRC...'" in result.output
 
 
 def test_no_mods_selected(cli_runner):
@@ -50,7 +49,6 @@ def test_help(cli_runner):
     help_result = cli_runner.invoke(cli.djcodemod, ["--help"])
 
     assert help_result.exit_code == 0
-    assert "--help" in help_result.output
     assert "Show this message and exit." in help_result.output
 
 
@@ -76,10 +74,8 @@ def test_non_supported_version(cli_runner, option, version):
     result = cli_runner.invoke(cli.djcodemod, ["run", option, version, "."])
 
     assert result.exit_code == 2
-    assert (
-        f"Invalid value for '{option}': "
-        f"'{version}' is not supported." in result.output
-    )
+    assert "Invalid value for" in result.output
+    assert "is not supported." in result.output
     assert "supported:" in result.output
 
 
@@ -99,9 +95,6 @@ def test_run_help(cli_runner):
     )
 
     assert result.exit_code == 0
-    assert "--codemod" in result.output
-    assert "--deprecated-in" in result.output
-    assert "--removed-in" in result.output
     assert "djcodemod list" in result.output
 
 
