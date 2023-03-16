@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v1.11.5 (2023-03-16)
+### Fix
+* **deps:** Update dependency pathspec to v0.11.1 ([`bf98f59`](https://github.com/browniebroke/django-codemod/commit/bf98f59748dfe57b95c73812a45ea5de482da5b3))
+
+### Documentation
+* Update badge for CI workflow ([#739](https://github.com/browniebroke/django-codemod/issues/739)) ([`fa6e0bd`](https://github.com/browniebroke/django-codemod/commit/fa6e0bd959fdc1a4bd8f318efcca2d40999528c4))
+
 ## v1.11.4 (2023-01-10)
 ### Fix
 * **deps:** Update dependency rich to v13 ([#732](https://github.com/browniebroke/django-codemod/issues/732)) ([`ca39c0e`](https://github.com/browniebroke/django-codemod/commit/ca39c0ed95786617af61070d216d6c404d856710))
