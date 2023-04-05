@@ -73,10 +73,8 @@ jobs:
   release:
     runs-on: ubuntu-latest
     environment: release
-    if: github.ref == 'refs/heads/main'
     needs:
       - test
-      - e2e
       - commitlint
 
     steps:
@@ -84,14 +82,14 @@ jobs:
         with:
           fetch-depth: 0
 
-      # Run semantic release:
-      # - Update CHANGELOG.md
-      # - Update version in code
-      # - Create git tag
-      # - Create GitHub release
-      # - Publish to PyPI
-      - name: Python Semantic Release
+      - name: Release
         uses: relekang/python-semantic-release@v7.33.2
+        if: github.ref_name == 'main'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           pypi_token: ${{ secrets.PYPI_TOKEN }}
+      - name: Test release
+        uses: relekang/python-semantic-release@v7.33.2
+        if: github.ref_name != 'main'
+        with:
+          additional_options: --noop
