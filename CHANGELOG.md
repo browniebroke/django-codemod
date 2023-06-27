@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v2.0.0 (2023-06-27)
+
+### Feature
+
+* Drop support for Python 3.7 ([`ba9e6c0`](https://github.com/browniebroke/django-codemod/commit/ba9e6c0b4a23c29ff0cbb6a606dcb209025570f0))
+
+### Breaking
+
+* Drop support for Python 3.7 as it reached EOL on June 27, 2023. More infos: https://devguide.python.org/versions/ ([`ba9e6c0`](https://github.com/browniebroke/django-codemod/commit/ba9e6c0b4a23c29ff0cbb6a606dcb209025570f0))
+
 ## v1.11.7 (2023-03-27)
 ### Fix
 * **deps:** Update dependency rich to v13.3.3 ([`3251dcc`](https://github.com/browniebroke/django-codemod/commit/3251dcc9aed94747d7769c4ae864621cc6dc9e6c))
