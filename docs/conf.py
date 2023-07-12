@@ -104,9 +104,6 @@ html_static_path = ["_static"]
 # Favicon
 html_favicon = "_static/img/favicon.ico"
 
-# Customise title to avoid repeating the project name
-html_title = f"v{version}"
-
 
 # -- Options for HTMLHelp output ---------------------------------------
 
