@@ -83,13 +83,13 @@ jobs:
           ref: ${{ github.head_ref || github.ref_name }}
 
       - name: Release
-        uses: relekang/python-semantic-release@v8.0.1
+        uses: relekang/python-semantic-release@v8.0.2
         if: github.ref_name == 'main'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           pypi_token: ${{ secrets.PYPI_TOKEN }}
       - name: Test release
-        uses: relekang/python-semantic-release@v8.0.1
+        uses: relekang/python-semantic-release@v8.0.2
         if: github.ref_name != 'main'
         with:
           root_options: --noop
