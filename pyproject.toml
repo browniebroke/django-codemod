@@ -57,6 +57,15 @@ version_toml = ["pyproject.toml:tool.poetry.version"]
 version_variable = "src/django_codemod/__init__.py:__version__"
 build_command = "pip install poetry && poetry build"
 
+[tool.semantic_release.changelog]
+exclude_commit_patterns = [
+    "chore*",
+    "ci*",
+]
+
+[tool.semantic_release.changelog.environment]
+keep_trailing_newline = true
+
 [tool.pytest.ini_options]
 addopts = "-v -Wdefault --cov=django_codemod --cov-report=term-missing:skip-covered"
 pythonpath = ["src"]

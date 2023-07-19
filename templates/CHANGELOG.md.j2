@@ -1,0 +1,22 @@
+# CHANGELOG
+
+{%- for version, release in context.history.released.items() %}
+{%- if version.as_tag() > "v1.0.0" %}
+
+## {{ version.as_tag() }} ({{ release.tagged_date.strftime("%Y-%m-%d") }})
+
+{%- for category, commits in release["elements"].items() %}
+{# Category title: Breaking, Fix, Documentation #}
+### {{ category | capitalize }}
+{# List actual changes in the category #}
+{%- for commit in commits %}
+- {{ commit.descriptions[0] | capitalize }} ([`{{ commit.short_hash }}`]({{ commit.hexsha | commit_hash_url }}))
+{%- endfor %}{# for commit #}
+
+{%- endfor %}{# for category, commits #}
+
+{%- endif %}{# if version.as_tag() #}
+
+{%- endfor %}{# for version, release #}
+
+{% include ".changelog-old.md" %}{# include old changelog at the end -#}
