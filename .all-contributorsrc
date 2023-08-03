@@ -3,9 +3,7 @@
   "projectOwner": "browniebroke",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "files": [
-    "README.md"
-  ],
+  "files": ["README.md"],
   "imageSize": 80,
   "commit": true,
   "commitConvention": "angular",
@@ -15,95 +13,70 @@
       "name": "Bruno Alla",
       "avatar_url": "https://avatars1.githubusercontent.com/u/861044?v=4",
       "profile": "https://browniebroke.com",
-      "contributions": [
-        "code",
-        "doc",
-        "ideas"
-      ]
+      "contributions": ["code", "doc", "ideas"]
     },
     {
       "login": "akx",
       "name": "Aarni Koskela",
       "avatar_url": "https://avatars2.githubusercontent.com/u/58669?v=4",
       "profile": "https://akx.github.io/",
-      "contributions": [
-        "code",
-        "ideas",
-        "test"
-      ]
+      "contributions": ["code", "ideas", "test"]
     },
     {
       "login": "adamchainz",
       "name": "Adam Johnson",
       "avatar_url": "https://avatars2.githubusercontent.com/u/857609?v=4",
       "profile": "https://adamj.eu/",
-      "contributions": [
-        "doc"
-      ]
+      "contributions": ["doc"]
     },
     {
       "login": "sobolevn",
       "name": "Nikita Sobolev",
       "avatar_url": "https://avatars1.githubusercontent.com/u/4660275?v=4",
       "profile": "https://sobolevn.me",
-      "contributions": [
-        "doc"
-      ]
+      "contributions": ["doc"]
     },
     {
       "login": "cvanderkolk",
       "name": "Chris VanderKolk",
       "avatar_url": "https://avatars3.githubusercontent.com/u/21158438?v=4",
       "profile": "http://www.zapier.com",
-      "contributions": [
-        "code"
-      ]
+      "contributions": ["code"]
     },
     {
       "login": "jayvdb",
       "name": "John Vandenberg",
       "avatar_url": "https://avatars1.githubusercontent.com/u/15092?v=4",
       "profile": "https://ghuser.io/jayvdb",
-      "contributions": [
-        "bug",
-        "code"
-      ]
+      "contributions": ["bug", "code"]
     },
     {
       "login": "iamshnoo",
       "name": "Anjishnu",
       "avatar_url": "https://avatars1.githubusercontent.com/u/45921510?v=4",
       "profile": "https://iamshnoo.github.io/blog/",
-      "contributions": [
-        "infra"
-      ]
+      "contributions": ["infra"]
     },
     {
       "login": "drewbrew",
       "name": "Drew Winstel",
       "avatar_url": "https://avatars1.githubusercontent.com/u/7773256?v=4",
       "profile": "https://github.com/drewbrew",
-      "contributions": [
-        "ideas"
-      ]
+      "contributions": ["ideas"]
     },
     {
       "login": "DmytroLitvinov",
       "name": "Dmytro Litvinov",
       "avatar_url": "https://avatars.githubusercontent.com/u/16066485?v=4",
       "profile": "https://DmytroLitvinov.com",
-      "contributions": [
-        "doc"
-      ]
+      "contributions": ["doc"]
     },
     {
       "login": "mzulqarnain1",
       "name": "M. Zulqarnain",
       "avatar_url": "https://avatars.githubusercontent.com/u/23311265?v=4",
       "profile": "https://mzulqarnain1.github.io/",
-      "contributions": [
-        "doc"
-      ]
+      "contributions": ["doc"]
     }
   ],
   "contributorsPerLine": 7,
