@@ -208,9 +208,11 @@ class SingleLine:
 
 
 class MultiLine1:
-    """This is the title.
+    """
+    This is the title.
 
-    This is more details."""
+    This is more details.
+    """
 
 
 class MultiLine2:

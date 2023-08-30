@@ -1,8 +1,7 @@
 from typing import Optional, Sequence
 
-from libcst import Arg, Call, FunctionDef, Param
+from libcst import Arg, Call, FunctionDef, Param, parse_expression, parse_statement
 from libcst import matchers as m
-from libcst import parse_expression, parse_statement
 
 
 def find_keyword_arg(args: Sequence[Arg], keyword_name: str) -> Optional[Arg]:
@@ -15,7 +14,8 @@ def find_keyword_arg(args: Sequence[Arg], keyword_name: str) -> Optional[Arg]:
 
 
 def parse_arg(arg_str: str) -> Arg:
-    """Build a `Arg` instance based on its string representation.
+    """
+    Build a `Arg` instance based on its string representation.
 
     Instantiating it from scratch is cumbersome, this helper generates a
     function call with the given argument and extract it from the tree.
@@ -27,7 +27,8 @@ def parse_arg(arg_str: str) -> Arg:
 
 
 def parse_param(arg_str: str) -> Param:
-    """Build a `Param` instance based on its string representation.
+    """
+    Build a `Param` instance based on its string representation.
 
     Instantiating it from scratch is cumbersome, this helper generates a
     function definition with the given param and extract it from the tree.

@@ -8,7 +8,7 @@ from django_codemod.visitors.base import BaseFuncRenameTransformer
 
 
 class GetRandomStringTransformer(BaseFuncRenameTransformer):
-    """Update lengthless uses of get_random_string()"""
+    """Update lengthless uses of get_random_string()."""
 
     deprecated_in = DJANGO_3_1
     removed_in = DJANGO_4_0

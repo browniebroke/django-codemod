@@ -35,9 +35,10 @@ class SignalDisconnectWeakTransformer(BaseDjCodemodTransformer):
         return self.context.scratch.get(self.ctx_key_call_matchers, [])
 
     def add_disconnect_call_matcher(self, call_matcher: m.Call) -> None:
-        self.context.scratch[
-            self.ctx_key_call_matchers
-        ] = self.disconnect_call_matchers + [call_matcher]
+        self.context.scratch[self.ctx_key_call_matchers] = [
+            *self.disconnect_call_matchers,
+            call_matcher,
+        ]
 
     def leave_Module(self, original_node: Module, updated_node: Module) -> Module:
         """Clear context when leaving module."""
@@ -81,7 +82,7 @@ class SignalDisconnectWeakTransformer(BaseDjCodemodTransformer):
             should_change = False
             last_comma = MaybeSentinel.DEFAULT
             # Keep all arguments except the one with the keyword `weak` (if present)
-            for index, arg in enumerate(updated_node.args):
+            for _index, arg in enumerate(updated_node.args):
                 if m.matches(arg, m.Arg(keyword=m.Name("weak"))):
                     # An argument with the keyword `weak` was found
                     # -> we need to rewrite the statement

@@ -28,9 +28,7 @@ from django_codemod.feature_flags import REPLACE_PARENT_MODULE_IMPORTED
 
 
 class IsTryImportProvider(BatchableMetadataProvider[bool]):
-    """
-    Marks ImportFrom nodes found inside a try block.
-    """
+    """Marks ImportFrom nodes found inside a try block."""
 
     def __init__(self) -> None:
         super().__init__()
@@ -114,7 +112,6 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
         self, original_node: ImportFrom, updated_node: ImportFrom
     ) -> Union[BaseSmallStatement, RemovalSentinel]:
         """Update import statements for matching old module name."""
-
         return (
             self._check_import_from_exact(original_node, updated_node)
             or self._check_import_from_parent(original_node, updated_node)
@@ -218,21 +215,21 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
                     add_import_module: Optional[str] = None
                     if self.new_parent_module_parts:
                         add_import_module = ".".join(self.new_parent_module_parts)
-                    self.context.scratch[self.ctx_key_add_import_kwargs] = dict(
-                        context=self.context,
-                        module=add_import_module,
-                        obj=self.new_parent_name,
-                        asname=new_as_name,
-                    )
+                    self.context.scratch[self.ctx_key_add_import_kwargs] = {
+                        "context": self.context,
+                        "module": add_import_module,
+                        "obj": self.new_parent_name,
+                        "asname": new_as_name,
+                    }
                     remove_import_module: Optional[str] = None
                     if self.old_parent_module_parts:
                         remove_import_module = ".".join(self.old_parent_module_parts)
-                    self.context.scratch[self.ctx_key_remove_import_kwargs] = dict(
-                        context=self.context,
-                        module=remove_import_module,
-                        obj=self.old_parent_name,
-                        asname=import_alias.evaluated_alias,
-                    )
+                    self.context.scratch[self.ctx_key_remove_import_kwargs] = {
+                        "context": self.context,
+                        "module": remove_import_module,
+                        "obj": self.old_parent_name,
+                        "asname": import_alias.evaluated_alias,
+                    }
         return updated_node
 
     def _check_import_from_child(
@@ -290,7 +287,6 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
 
     def leave_Name(self, original_node: Name, updated_node: Name) -> BaseExpression:
         """Rename reference to the imported name."""
-
         matcher = self.name_matcher
         if (
             matcher
