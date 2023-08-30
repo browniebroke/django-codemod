@@ -1,6 +1,6 @@
 # See https://pre-commit.com for more information
 # See https://pre-commit.com/hooks.html for more hooks
-exclude: "CHANGELOG.md"
+exclude: "CHANGELOG.md|.all-contributorsrc"
 default_stages: [commit]
 
 ci:
@@ -31,15 +31,11 @@ repos:
     hooks:
       - id: prettier
         args: ["--tab-width", "2"]
-  - repo: https://github.com/asottile/pyupgrade
-    rev: v3.10.1
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.0.286
     hooks:
-      - id: pyupgrade
-        args: [--py38-plus]
-  - repo: https://github.com/PyCQA/isort
-    rev: 5.12.0
-    hooks:
-      - id: isort
+      - id: ruff
+        args: [--fix, --exit-non-zero-on-fix]
   - repo: https://github.com/psf/black
     rev: 23.7.0
     hooks:
@@ -48,10 +44,6 @@ repos:
     rev: v2.2.5
     hooks:
       - id: codespell
-  - repo: https://github.com/PyCQA/flake8
-    rev: 6.1.0
-    hooks:
-      - id: flake8
   - repo: https://github.com/commitizen-tools/commitizen
     rev: v3.7.0
     hooks:
@@ -61,8 +53,3 @@ repos:
     rev: v1.5.1
     hooks:
       - id: mypy
-  - repo: https://github.com/PyCQA/bandit
-    rev: 1.7.5
-    hooks:
-      - id: bandit
-        args: [-x, tests]
