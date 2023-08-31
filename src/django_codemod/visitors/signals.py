@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import ClassVar, List, Optional
 
 from libcst import BaseExpression, Call, ImportFrom, ImportStar, MaybeSentinel, Module
 from libcst import matchers as m
@@ -15,7 +15,7 @@ class SignalDisconnectWeakTransformer(BaseDjCodemodTransformer):
 
     ctx_key_prefix = "SignalDisconnectWeakTransformer"
     ctx_key_call_matchers = f"{ctx_key_prefix}-call_matchers"
-    builtin_signals = [
+    builtin_signals: ClassVar[List[str]] = [
         "pre_init",
         "post_init",
         "pre_save",

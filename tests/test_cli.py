@@ -198,18 +198,18 @@ class NoDocString:
 
 
 class EmptyDocString:
-    """"""
+    """"""  # noqa D419
 
     pass
 
 
 class SingleLine:
-    """This is the description."""
+    """The description."""
 
 
 class MultiLine1:
     """
-    This is the title.
+    Some title.
 
     This is more details.
     """
@@ -228,8 +228,8 @@ class MultiLine2:
     [
         (NoDocString, ""),
         (EmptyDocString, ""),
-        (SingleLine, "This is the description."),
-        (MultiLine1, "This is the title."),
+        (SingleLine, "The description."),
+        (MultiLine1, "Some title."),
         (MultiLine2, "Another title."),
     ],
 )

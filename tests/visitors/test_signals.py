@@ -1,3 +1,7 @@
+from __future__ import annotations
+
+from typing import ClassVar
+
 from parameterized import parameterized
 
 from django_codemod.visitors import SignalDisconnectWeakTransformer
@@ -6,7 +10,7 @@ from tests.visitors.base import BaseVisitorTest
 
 class TestSignalDisconnectWeakTransformer(BaseVisitorTest):
     transformer = SignalDisconnectWeakTransformer
-    DJANGO_SIGNAL_NAMES = [
+    DJANGO_SIGNAL_NAMES: ClassVar[list[str]] = [
         "pre_init",
         "post_init",
         "pre_save",

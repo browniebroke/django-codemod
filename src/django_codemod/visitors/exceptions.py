@@ -21,10 +21,7 @@ class SqlEmptyResultSetTransformer(BaseRenameTransformer):
 
 
 class DatastructuresEmptyResultSetTransformer(BaseRenameTransformer):
-    """
-    Replace `django.db.models.sql.datastructures.EmptyResultSet` compatibility
-    import.
-    """
+    """Replace `django.db.models.sql.datastructures.EmptyResultSet` import."""
 
     deprecated_in = DJANGO_1_11
     removed_in = DJANGO_3_1
