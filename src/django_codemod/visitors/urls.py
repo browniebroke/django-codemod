@@ -92,9 +92,9 @@ class URLTransformer(BaseFuncRenameTransformer):
         group_name, group_regex = group.split(">", 1)
         try:
             converter = REGEX_TO_CONVERTER[group_regex]
-        except KeyError:
-            raise PatternNotSupported("No converter found")
-        return prefix + f"<{converter}:{group_name}>", left_to_parse
+        except KeyError as exc:
+            raise PatternNotSupported("No converter found") from exc
+        return f"{prefix}<{converter}:{group_name}>", left_to_parse
 
     @staticmethod
     def check_route(route: str) -> None:

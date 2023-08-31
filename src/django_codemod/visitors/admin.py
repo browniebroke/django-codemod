@@ -149,7 +149,7 @@ class InlineHasAddPermissionsTransformer(BaseDjCodemodTransformer):
 
 
 class ActionCheckboxNameTransformer(BaseRenameTransformer):
-    """Replace `django.contrib.admin.ACTION_CHECKBOX_NAME` compatibility import"""
+    """Replace `django.contrib.admin.ACTION_CHECKBOX_NAME` compatibility import."""
 
     deprecated_in = DJANGO_1_3
     removed_in = DJANGO_3_1

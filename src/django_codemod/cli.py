@@ -193,8 +193,8 @@ def call_command(command_instance: BaseCodemodCommand, files: List[Path]):
             command_instance,
             files,  # type: ignore
         )
-    except KeyboardInterrupt:
-        raise click.Abort("Interrupted!")
+    except KeyboardInterrupt as exc:
+        raise click.Abort("Interrupted!") from exc
 
     # fancy summary a-la libCST
     total = result.successes + result.skips + result.failures
@@ -247,8 +247,7 @@ def get_short_description(codemodder: Type[BaseDjCodemodTransformer]) -> str:
     if codemodder.__doc__ is None:
         return ""
     for line in codemodder.__doc__.split("\n"):
-        description = line.strip()
-        if description:
+        if description := line.strip():
             return description
     return ""
 

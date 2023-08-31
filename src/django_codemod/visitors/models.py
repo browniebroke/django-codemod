@@ -153,18 +153,18 @@ class ModelsPermalinkTransformer(BaseDjCodemodTransformer):
         return super().leave_Return(original_node, updated_node)
 
 
-def is_foreign_key(node: Call) -> bool:
+def _is_foreign_key(node: Call) -> bool:
     return m.matches(node, m.Call(func=m.Attribute(attr=m.Name(value="ForeignKey"))))
 
 
-def is_one_to_one_field(node: Call) -> bool:
+def _is_one_to_one_field(node: Call) -> bool:
     return m.matches(
         node,
         m.Call(func=m.Attribute(attr=m.Name(value="OneToOneField"))),
     )
 
 
-def has_on_delete(node: Call) -> bool:
+def _has_on_delete(node: Call) -> bool:
     # if on_delete exists in any kwarg we return True
     if find_keyword_arg(node.args, "on_delete"):
         return True
@@ -184,8 +184,8 @@ class OnDeleteTransformer(BaseDjCodemodTransformer):
 
     def leave_Call(self, original_node: Call, updated_node: Call) -> BaseExpression:
         if (
-            is_one_to_one_field(original_node) or is_foreign_key(original_node)
-        ) and not has_on_delete(original_node):
+            _is_one_to_one_field(original_node) or _is_foreign_key(original_node)
+        ) and not _has_on_delete(original_node):
             AddImportsVisitor.add_needed_import(
                 context=self.context,
                 module="django.db",

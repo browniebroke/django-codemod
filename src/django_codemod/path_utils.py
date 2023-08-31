@@ -1,4 +1,5 @@
-"""Some utilities to deal with files.
+"""
+Some utilities to deal with files.
 
 Inspired or taken from black:
 https://github.com/psf/black
@@ -10,7 +11,8 @@ from pathspec import PathSpec
 
 
 def get_sources(src: Iterable[str]) -> List[Path]:
-    """Return a list of sources to codemod.
+    """
+    Return a list of sources to codemod.
 
     Based on a list of paths or files, recursively find python source files,
     ignoring the ones according to `.gitignore`.
@@ -31,7 +33,8 @@ def get_sources(src: Iterable[str]) -> List[Path]:
 
 
 def find_project_root(sources: Iterable[str]) -> Path:
-    """Return a directory containing .git, .hg, or pyproject.toml.
+    """
+    Return a directory containing .git, .hg, or pyproject.toml.
 
     That directory will be a common parent of all files and directories
     passed in `sources`.
@@ -83,7 +86,8 @@ def gen_python_files(
     root: Path,
     gitignore: PathSpec,
 ) -> Iterator[Path]:
-    """Generate all files under `paths`.
+    """
+    Generate all files under `paths`.
 
     Files listed in .gitignore are not considered.
     """
