@@ -278,11 +278,9 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
 
     def update_imports(self):
         """Update import statements if a change is required."""
-        remove_import_kwargs = self.remove_import_kwargs
-        if remove_import_kwargs:
+        if remove_import_kwargs := self.remove_import_kwargs:
             RemoveImportsVisitor.remove_unused_import(**remove_import_kwargs)
-        add_import_kwargs = self.add_import_kwargs
-        if add_import_kwargs:
+        if add_import_kwargs := self.add_import_kwargs:
             AddImportsVisitor.add_needed_import(**add_import_kwargs)
 
     def leave_Name(self, original_node: Name, updated_node: Name) -> BaseExpression:

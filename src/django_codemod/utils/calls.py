@@ -7,10 +7,7 @@ from libcst import matchers as m
 def find_keyword_arg(args: Sequence[Arg], keyword_name: str) -> Optional[Arg]:
     """Find a kwarg among a sequence of arguments."""
     matcher = m.Arg(keyword=m.Name(keyword_name))
-    for arg in args:
-        if m.matches(arg, matcher):
-            return arg
-    return None
+    return next((arg for arg in args if m.matches(arg, matcher)), None)
 
 
 def parse_arg(arg_str: str) -> Arg:

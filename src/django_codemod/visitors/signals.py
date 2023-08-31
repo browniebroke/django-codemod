@@ -82,7 +82,7 @@ class SignalDisconnectWeakTransformer(BaseDjCodemodTransformer):
             should_change = False
             last_comma = MaybeSentinel.DEFAULT
             # Keep all arguments except the one with the keyword `weak` (if present)
-            for _index, arg in enumerate(updated_node.args):
+            for arg in updated_node.args:
                 if m.matches(arg, m.Arg(keyword=m.Name("weak"))):
                     # An argument with the keyword `weak` was found
                     # -> we need to rewrite the statement
