@@ -84,14 +84,14 @@ jobs:
 
       # Do a dry run of PSR
       - name: Test release
-        uses: relekang/python-semantic-release@v8.0.8
+        uses: relekang/python-semantic-release@v8.1.1
         if: github.ref_name != 'main'
         with:
           root_options: --noop
 
       # On main branch: actual PSR + upload to PyPI & GitHub
       - name: Release
-        uses: relekang/python-semantic-release@v8.0.8
+        uses: relekang/python-semantic-release@v8.1.1
         id: release
         if: github.ref_name == 'main'
         with:
