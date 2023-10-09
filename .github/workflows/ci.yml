@@ -70,11 +70,16 @@ jobs:
       - uses: wagoid/commitlint-github-action@v5.4.3
 
   release:
-    runs-on: ubuntu-latest
-    environment: release
     needs:
       - test
       - commitlint
+
+    runs-on: ubuntu-latest
+    environment: release
+    concurrency: release
+    permissions:
+      id-token: write
+      contents: write
 
     steps:
       - uses: actions/checkout@v4
@@ -100,8 +105,6 @@ jobs:
       - name: Publish package distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         if: steps.release.outputs.released == 'true'
-        with:
-          password: ${{ secrets.PYPI_TOKEN }}
 
       - name: Publish package distributions to GitHub Releases
         uses: python-semantic-release/upload-to-gh-release@main
