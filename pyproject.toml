@@ -55,7 +55,9 @@ furo = ">=2023.5.20"
 [tool.semantic_release]
 branch = "main"
 version_toml = ["pyproject.toml:tool.poetry.version"]
-version_variable = "src/django_codemod/__init__.py:__version__"
+version_variables = [
+    "src/django_codemod/__init__.py:__version__",
+]
 build_command = "pip install poetry && poetry build"
 
 [tool.semantic_release.changelog]
