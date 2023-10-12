@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v2.1.4 (2023-10-12)
+
+### Fix
+
+- Update dependency rich-click to v1.7.0 ([`28d2ead`](https://github.com/browniebroke/django-codemod/commit/28d2ead763217f4cc6d128f087dd66a669f8cef3))
+
 ## v2.1.3 (2023-10-06)
 
 ### Fix
