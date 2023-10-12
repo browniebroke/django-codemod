@@ -783,21 +783,22 @@ jupyter = ["ipywidgets (>=7.5.1,<9)"]
 
 [[package]]
 name = "rich-click"
-version = "1.6.1"
+version = "1.7.0"
 description = "Format click help output nicely with rich"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "rich-click-1.6.1.tar.gz", hash = "sha256:f8ff96693ec6e261d1544e9f7d9a5811c5ef5d74c8adb4978430fc0dac16777e"},
-    {file = "rich_click-1.6.1-py3-none-any.whl", hash = "sha256:0fcf4d1a09029d79322dd814ab0b2e66ac183633037561881d45abae8a161d95"},
+    {file = "rich-click-1.7.0.tar.gz", hash = "sha256:ab34e5d9f7733c4e6072f4de79eb3b35ac9ae78e692ea8a543f3b2828b30fee4"},
+    {file = "rich_click-1.7.0-py3-none-any.whl", hash = "sha256:093f50400135bad749a00c4cc0cfa4591b3c58a9438685abfa7314ee7b63d3bc"},
 ]
 
 [package.dependencies]
 click = ">=7"
 rich = ">=10.7.0"
+typing-extensions = "*"
 
 [package.extras]
-dev = ["pre-commit"]
+dev = ["flake8", "flake8-docstrings", "mypy", "packaging", "pre-commit", "pytest", "pytest-cov", "types-setuptools"]
 
 [[package]]
 name = "snowballstemmer"
