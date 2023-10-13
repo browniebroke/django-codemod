@@ -38,6 +38,14 @@
   </a>
 </p>
 
+---
+
+**Documentation**: <a href="https://django-codemod.readthedocs.io" target="_blank">https://django-codemod.readthedocs.io</a>
+
+**Source Code**: <a href="https://github.com/browniebroke/django-codemod" target="_blank">https://github.com/browniebroke/django-codemod </a>
+
+---
+
 A tool to help upgrade Django projects to newer version of the framework by automatically fixing deprecations.
 
 ## The problem
