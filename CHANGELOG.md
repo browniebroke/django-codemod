@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v2.1.6 (2023-11-15)
+
+### Fix
+
+- Update dependency rich to v13.7.0 ([`55ddce6`](https://github.com/browniebroke/django-codemod/commit/55ddce6c22d786def8f5a4664e65fbaf65b463a3))
+
 ## v2.1.5 (2023-11-01)
 
 ### Fix
