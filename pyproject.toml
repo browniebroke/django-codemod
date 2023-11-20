@@ -53,7 +53,6 @@ sphinx = ">=4.0"
 furo = ">=2023.5.20"
 
 [tool.semantic_release]
-branch = "main"
 version_toml = ["pyproject.toml:tool.poetry.version"]
 version_variables = [
     "src/django_codemod/__init__.py:__version__",
@@ -68,6 +67,13 @@ exclude_commit_patterns = [
 
 [tool.semantic_release.changelog.environment]
 keep_trailing_newline = true
+
+[tool.semantic_release.branches.main]
+match = "main"
+
+[tool.semantic_release.branches.noop]
+match = "(?!main$)"
+prerelease = true
 
 [tool.pytest.ini_options]
 addopts = "-v -Wdefault --cov=django_codemod --cov-report=term-missing:skip-covered"
