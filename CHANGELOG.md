@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v2.1.8 (2023-12-11)
+
+### Fix
+
+- Update dependency pathspec to v0.12.1 ([`c8a0638`](https://github.com/browniebroke/django-codemod/commit/c8a0638d99ba0e29d903f9561a5d0bef9fdf2b83))
+
 ## v2.1.7 (2023-12-03)
 
 ### Fix
