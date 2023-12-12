@@ -11,7 +11,9 @@ class TestFloatRangeModelFieldTransformer(BaseVisitorTest):
 
     def test_noop(self) -> None:
         """Test when nothing should change."""
-        before = after = """
+        before = (
+            after
+        ) = """
             from django.contrib.postgres.fields import DecimalRangeField
 
             some_range = DecimalRangeField()
@@ -40,7 +42,9 @@ class TestFloatRangeFormFieldTransformer(BaseVisitorTest):
 
     def test_noop(self) -> None:
         """Test when nothing should change."""
-        before = after = """
+        before = (
+            after
+        ) = """
             from django.contrib.postgres.forms import DecimalRangeField
 
             some_range = DecimalRangeField()
@@ -69,7 +73,9 @@ class TestJSONModelFieldTransformer(BaseVisitorTest):
 
     def test_noop(self) -> None:
         """Test when nothing should change."""
-        before = after = """
+        before = (
+            after
+        ) = """
             from django.db.models import JSONField
 
             field = JSONField()

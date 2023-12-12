@@ -102,7 +102,9 @@ class TestHttpRequestXReadLinesTransformer(BaseVisitorTest):
 
     def test_noop_wrong_name(self) -> None:
         """Don't replace calls for name other than `request` or `req`."""
-        before = after = """
+        before = (
+            after
+        ) = """
             for line in r.xreadlines():
                 print(line)
         """
@@ -110,7 +112,9 @@ class TestHttpRequestXReadLinesTransformer(BaseVisitorTest):
 
     def test_noop_function_call(self) -> None:
         """Don't replace calls for name other than `request` or `req`."""
-        before = after = """
+        before = (
+            after
+        ) = """
             for line in xreadlines(r):
                 print(line)
         """
@@ -169,7 +173,9 @@ class TestCookieDateTransformer(BaseVisitorTest):
     transformer = CookieDateTransformer
 
     def test_noop(self):
-        before = after = """
+        before = (
+            after
+        ) = """
             from django.utils.http import http_date
 
             http_date(12345)

@@ -278,7 +278,9 @@ class TestFuncRenameTransformer(BaseVisitorTest):
         self.assertCodemod(before, after)
 
     def test_avoid_try_import(self) -> None:
-        before = after = """
+        before = (
+            after
+        ) = """
             try:
                 from django.dummy.module import func
             except:
@@ -291,7 +293,9 @@ class TestFuncRenameTransformer(BaseVisitorTest):
 
     @pytest.mark.usefixtures("parent_module_import_enabled")
     def test_avoid_try_import_parent(self) -> None:
-        before = after = """
+        before = (
+            after
+        ) = """
             try:
                 from django.dummy import module
             except:
@@ -304,7 +308,9 @@ class TestFuncRenameTransformer(BaseVisitorTest):
 
     @pytest.mark.usefixtures("parent_module_import_enabled")
     def test_parent_import_star(self) -> None:
-        before = after = """
+        before = (
+            after
+        ) = """
             from django.dummy import *
 
             result = module.func()
@@ -313,7 +319,9 @@ class TestFuncRenameTransformer(BaseVisitorTest):
 
     @pytest.mark.usefixtures("parent_module_import_enabled")
     def test_parent_import_not_matches(self) -> None:
-        before = after = """
+        before = (
+            after
+        ) = """
             from django.ymmud import other_module
 
             result = other_module.other_func()
@@ -407,7 +415,9 @@ class TestOtherModuleFuncRenameTransformer(BaseVisitorTest):
     @pytest.mark.usefixtures("parent_module_import_enabled")
     def test_parent_module_noop(self) -> None:
         """Parent module imported, but other function used."""
-        before = after = """
+        before = (
+            after
+        ) = """
             from django.dummy import module
 
             result = module.other_func()
@@ -466,7 +476,9 @@ class TestModuleRenameTransformer(BaseVisitorTest):
         self.assertCodemod(before, after)
 
     def test_avoid_try_import(self) -> None:
-        before = after = """
+        before = (
+            after
+        ) = """
             try:
                 from django.dummy.module import func
             except:
