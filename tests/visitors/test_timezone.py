@@ -7,7 +7,9 @@ class TestFixedOffsetTransformer(BaseVisitorTest):
 
     def test_noop(self) -> None:
         """Test when nothing should change."""
-        before = after = """
+        before = (
+            after
+        ) = """
             from datetime import timedelta, timezone
 
             timezone(offset=timedelta(minutes=60))
@@ -76,7 +78,9 @@ class TestFixedOffsetTransformer(BaseVisitorTest):
         self.assertCodemod(before, after)
 
     def test_issue_421(self) -> None:
-        before = after = """
+        before = (
+            after
+        ) = """
         from django.utils import timezone
 
         now = timezone.now()

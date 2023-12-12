@@ -24,7 +24,9 @@ class TestSignalDisconnectWeakTransformer(BaseVisitorTest):
 
     @parameterized.expand(DJANGO_SIGNAL_NAMES)
     def test_noop(self, signal_name):
-        before = after = f"""
+        before = (
+            after
+        ) = f"""
             from django.db.models.signals import {signal_name}
 
             {signal_name}.disconnect(
@@ -38,7 +40,9 @@ class TestSignalDisconnectWeakTransformer(BaseVisitorTest):
 
     @parameterized.expand(DJANGO_SIGNAL_NAMES)
     def test_noop_import_star(self, signal_name):
-        before = after = f"""
+        before = (
+            after
+        ) = f"""
             from django.db.models.signals import *
 
             {signal_name}.disconnect(receiver=some_handler, sender=MyModel, weak=True)

@@ -9,7 +9,9 @@ class TestAssignmentTagTransformer(BaseVisitorTest):
 
     def test_noop(self) -> None:
         """Test when nothing should change."""
-        before = after = """
+        before = (
+            after
+        ) = """
             from django import template
 
             register = template.Library()
@@ -30,7 +32,9 @@ class TestAssignmentTagTransformer(BaseVisitorTest):
     )
     def test_noop_not_imported(self, import_line: str) -> None:
         """Test when import is missing."""
-        before = after = f"""
+        before = (
+            after
+        ) = f"""
             {import_line}
 
             @register.assignment_tag
@@ -42,7 +46,9 @@ class TestAssignmentTagTransformer(BaseVisitorTest):
 
     def test_noop_import_star(self) -> None:
         """Test when imported as star import."""
-        before = after = """
+        before = (
+            after
+        ) = """
             from django import *
 
             register = template.Library()
@@ -132,7 +138,9 @@ class TestAssignmentTagTransformer(BaseVisitorTest):
 
     def test_noop_content_star_import(self) -> None:
         """Test when Library class is imported as star import."""
-        before = after = """
+        before = (
+            after
+        ) = """
             from django.template import *
 
             register = Library()
