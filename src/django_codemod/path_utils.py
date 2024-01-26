@@ -4,6 +4,7 @@ Some utilities to deal with files.
 Inspired or taken from black:
 https://github.com/psf/black
 """
+
 from pathlib import Path
 from typing import Iterable, Iterator, List, Optional, Set
 

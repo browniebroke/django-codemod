@@ -1,4 +1,5 @@
 """Module to implement base functionality."""
+
 from abc import ABC
 from typing import List, Optional, Sequence, Tuple, Union
 
