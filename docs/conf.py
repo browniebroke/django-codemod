@@ -22,7 +22,7 @@ import sys
 
 sys.path.insert(0, os.path.abspath(".."))
 
-import django_codemod  # noqa E402 isort:skip
+import django_codemod  # E402 isort:skip
 
 # -- General configuration ---------------------------------------------
 
