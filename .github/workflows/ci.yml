@@ -40,6 +40,8 @@ jobs:
         run: poetry run pytest --cov-report=xml
         shell: bash
       - uses: codecov/codecov-action@v4.0.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
 
   e2e:
     # https://github.com/browniebroke/django-codemod/issues/302
