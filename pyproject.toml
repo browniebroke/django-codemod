@@ -48,9 +48,9 @@ pytest-mock = "^3.3"
 optional = true
 
 [tool.poetry.group.docs.dependencies]
-myst-parser = ">=0.16"
-sphinx = ">=4.0"
-furo = ">=2023.5.20"
+myst-parser = { version = ">=0.16", python = ">=3.11" }
+sphinx = { version = ">=4.0", python = ">=3.11" }
+furo = { version = ">=2023.5.20", python = ">=3.11" }
 
 [tool.semantic_release]
 version_toml = ["pyproject.toml:tool.poetry.version"]
