@@ -4,6 +4,10 @@
     {
       "packageNames": ["libcst"],
       "allowedVersions": "<=0.3.13 || >0.3.16"
+    },
+    {
+      "packageNames": ["rich"],
+      "semanticCommitType": "chore"
     }
   ]
 }
