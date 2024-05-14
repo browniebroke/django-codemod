@@ -6,7 +6,7 @@
       "allowedVersions": "<=0.3.13 || >0.3.16"
     },
     {
-      "packageNames": ["rich"],
+      "packageNames": ["rich", "rich-click"],
       "semanticCommitType": "chore"
     }
   ]
