@@ -218,9 +218,7 @@ class TestAvailableAttrsTransformer(BaseVisitorTest):
     )
     def test_noop_import_star(self, import_str: str) -> None:
         """Should not try to replace if import star is used."""
-        before = (
-            after
-        ) = f"""
+        before = after = f"""
             {import_str}
 
             class MyModel(models.Model):
@@ -352,9 +350,7 @@ class TestNullBooleanFieldTransformer(BaseVisitorTest):
     transformer = NullBooleanFieldTransformer
 
     def test_noop_models(self) -> None:
-        before = (
-            after
-        ) = """
+        before = after = """
             from django.db import models
 
             class MyThing(models.Model):
@@ -363,9 +359,7 @@ class TestNullBooleanFieldTransformer(BaseVisitorTest):
         self.assertCodemod(before, after)
 
     def test_noop_fields(self) -> None:
-        before = (
-            after
-        ) = """
+        before = after = """
             from django.db.models import BooleanField, Model
 
             class MyThing(Model):

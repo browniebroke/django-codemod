@@ -139,7 +139,8 @@ class ModelsPermalinkTransformer(BaseDjCodemodTransformer):
         BaseSmallStatement, FlattenSentinel[BaseSmallStatement], RemovalSentinel
     ]:
         if self.visiting_permalink_method and m.matches(
-            updated_node.value, m.Tuple()  # type: ignore
+            updated_node.value,
+            m.Tuple(),  # type: ignore
         ):
             elem_0, *elem_1_3 = updated_node.value.elements[:3]  # type: ignore
             args = (

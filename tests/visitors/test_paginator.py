@@ -7,9 +7,7 @@ class TestQuerySetPaginatorTransformer(BaseVisitorTest):
 
     def test_noop(self) -> None:
         """Test when nothing should change."""
-        before = (
-            after
-        ) = """
+        before = after = """
             from django.core.paginator import Paginator
 
             paginator_instance = Paginator([], 5)
