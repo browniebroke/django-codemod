@@ -20,7 +20,7 @@
   <a href="https://python-poetry.org/">
     <img src="https://img.shields.io/endpoint?url=https://python-poetry.org/badge/v0.json" alt="Poetry">
   </a>
-  <a href="https://github.com/ambv/black">
+  <a href="https://github.com/astral-sh/ruff">
     <img src="https://img.shields.io/badge/code%20style-black-000000.svg?amp;style=flat-square" alt="black">
   </a>
   <a href="https://github.com/pre-commit/pre-commit">
