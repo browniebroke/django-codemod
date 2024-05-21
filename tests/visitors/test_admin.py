@@ -19,9 +19,7 @@ class TestInlineHasAddPermissionsTransformer(BaseVisitorTest):
         ]
     )
     def test_noop_import_star(self, import_line: str, base_class: str) -> None:
-        before = (
-            after
-        ) = f"""
+        before = after = f"""
             {import_line}
 
             class MyInlineInline(InlineMixin, {base_class}):
@@ -35,9 +33,7 @@ class TestInlineHasAddPermissionsTransformer(BaseVisitorTest):
 
     def test_model_admin_base_class(self) -> None:
         """Doesn't modify if base class doesn't match."""
-        before = (
-            after
-        ) = """
+        before = after = """
             from django.contrib import admin
 
             class MyAdmin(admin.ModelAdmin):
@@ -51,9 +47,7 @@ class TestInlineHasAddPermissionsTransformer(BaseVisitorTest):
 
     def test_no_base_class(self) -> None:
         """Doesn't modify if there is no base class."""
-        before = (
-            after
-        ) = """
+        before = after = """
             from django.contrib import admin
 
             class MyCustomStuff:
