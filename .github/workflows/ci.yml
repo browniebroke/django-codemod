@@ -29,9 +29,9 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
-      - uses: snok/install-poetry@v1.3.4
       - uses: actions/setup-python@v5
         with:
+          cache: poetry
           python-version: ${{ matrix.python-version }}
       - name: Install Dependencies
         run: poetry install
@@ -49,9 +49,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Install poetry
+        run: pipx install poetry
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
+          cache: poetry
           python-version: "3.9"
       - name: Install Dependencies
         run: |
