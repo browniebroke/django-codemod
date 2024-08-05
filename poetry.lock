@@ -524,22 +524,22 @@ files = [
 
 [[package]]
 name = "myst-parser"
-version = "3.0.1"
+version = "4.0.0"
 description = "An extended [CommonMark](https://spec.commonmark.org/) compliant parser,"
 optional = false
-python-versions = ">=3.8"
+python-versions = ">=3.10"
 files = [
-    {file = "myst_parser-3.0.1-py3-none-any.whl", hash = "sha256:6457aaa33a5d474aca678b8ead9b3dc298e89c68e67012e73146ea6fd54babf1"},
-    {file = "myst_parser-3.0.1.tar.gz", hash = "sha256:88f0cb406cb363b077d176b51c476f62d60604d68a8dcdf4832e080441301a87"},
+    {file = "myst_parser-4.0.0-py3-none-any.whl", hash = "sha256:b9317997552424448c6096c2558872fdb6f81d3ecb3a40ce84a7518798f3f28d"},
+    {file = "myst_parser-4.0.0.tar.gz", hash = "sha256:851c9dfb44e36e56d15d05e72f02b80da21a9e0d07cba96baf5e2d476bb91531"},
 ]
 
 [package.dependencies]
-docutils = ">=0.18,<0.22"
+docutils = ">=0.19,<0.22"
 jinja2 = "*"
 markdown-it-py = ">=3.0,<4.0"
-mdit-py-plugins = ">=0.4,<1.0"
+mdit-py-plugins = ">=0.4.1,<1.0"
 pyyaml = "*"
-sphinx = ">=6,<8"
+sphinx = ">=7,<9"
 
 [package.extras]
 code-style = ["pre-commit (>=3.0,<4.0)"]
