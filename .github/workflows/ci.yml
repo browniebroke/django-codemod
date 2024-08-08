@@ -108,7 +108,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Attest build build provenance
+      - name: Attest build provenance
         uses: actions/attest-build-provenance@v1
         if: steps.release.outputs.released == 'true'
         with:
