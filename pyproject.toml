@@ -61,8 +61,9 @@ build_command = "pip install poetry && poetry build"
 
 [tool.semantic_release.changelog]
 exclude_commit_patterns = [
-    "chore*",
-    "ci*",
+    "chore.*",
+    "ci.*",
+    "Merge pull request .*",
 ]
 
 [tool.semantic_release.changelog.environment]
