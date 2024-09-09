@@ -22,6 +22,10 @@ repos:
       - id: detect-private-key
       - id: end-of-file-fixer
       - id: trailing-whitespace
+  - repo: https://github.com/tox-dev/pyproject-fmt
+    rev: "2.2.3"
+    hooks:
+      - id: pyproject-fmt
   - repo: https://github.com/python-poetry/poetry
     rev: 1.8.3
     hooks:
