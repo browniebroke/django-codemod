@@ -1,5 +1,4 @@
 from collections.abc import Sequence
-from typing import Tuple
 
 from libcst import Arg, BaseExpression, Call, Name, SimpleString
 from libcst import matchers as m
@@ -86,7 +85,7 @@ class URLTransformer(BaseFuncRenameTransformer):
         return route
 
     @staticmethod
-    def parse_next_group(left_to_parse: str) -> Tuple[str, str]:
+    def parse_next_group(left_to_parse: str) -> tuple[str, str]:
         """Extract captured group info."""
         prefix, rest = left_to_parse.split("(?P<", 1)
         group, left_to_parse = rest.split(")", 1)

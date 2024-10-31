@@ -1,5 +1,4 @@
 from abc import ABC
-from typing import List, Type
 
 import libcst as cst
 from libcst.codemod import (
@@ -12,7 +11,7 @@ from libcst.codemod import (
 class BaseCodemodCommand(VisitorBasedCodemodCommand, ABC):
     """Base class for our commands."""
 
-    transformers: List[Type[ContextAwareTransformer]]
+    transformers: list[type[ContextAwareTransformer]]
 
     def __init__(self, transformers, context: CodemodContext) -> None:
         self.transformers = transformers

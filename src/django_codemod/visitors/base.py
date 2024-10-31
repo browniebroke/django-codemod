@@ -2,7 +2,7 @@
 
 from abc import ABC
 from collections.abc import Sequence
-from typing import List, Optional, Tuple, Union
+from typing import Optional, Union
 
 from libcst import (
     Arg,
@@ -47,8 +47,8 @@ class IsTryImportProvider(BatchableMetadataProvider[bool]):
 
 
 class BaseDjCodemodTransformer(ContextAwareTransformer, ABC):
-    deprecated_in: Tuple[int, int]
-    removed_in: Tuple[int, int]
+    deprecated_in: tuple[int, int]
+    removed_in: tuple[int, int]
 
 
 def module_matcher(
@@ -335,8 +335,8 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
 
 
 def clean_new_import_aliases(
-    import_aliases: List[ImportAlias],
-) -> List[ImportAlias]:
+    import_aliases: list[ImportAlias],
+) -> list[ImportAlias]:
     """Clean up a list of import aliases."""
     # Sort them
     cleaned_import_aliases = sorted(import_aliases, key=lambda n: n.evaluated_name)

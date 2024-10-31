@@ -7,12 +7,12 @@ https://github.com/psf/black
 
 from collections.abc import Iterable, Iterator
 from pathlib import Path
-from typing import List, Optional, Set
+from typing import Optional
 
 from pathspec import PathSpec
 
 
-def get_sources(src: Iterable[str]) -> List[Path]:
+def get_sources(src: Iterable[str]) -> list[Path]:
     """
     Return a list of sources to codemod.
 
@@ -21,7 +21,7 @@ def get_sources(src: Iterable[str]) -> List[Path]:
     """
     root = find_project_root(src)
     gitignore = get_gitignore(root)
-    sources: Set[Path] = set()
+    sources: set[Path] = set()
     for s in src:
         p = Path(s)
         paths: Iterable[Path] = []
@@ -76,7 +76,7 @@ def find_project_root(sources: Iterable[str]) -> Path:
 def get_gitignore(root: Path) -> PathSpec:
     """Return a PathSpec matching gitignore content if present."""
     gitignore = root / ".gitignore"
-    lines: List[str] = []
+    lines: list[str] = []
     if gitignore.is_file():
         with gitignore.open() as gf:
             lines = gf.readlines()
