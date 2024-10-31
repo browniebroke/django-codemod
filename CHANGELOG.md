@@ -1,74 +1,80 @@
 # CHANGELOG
 
+## v2.2.0 (2024-10-31)
+
+### Features
+
+- Drop support for python 3.8 (#1200) ([`513eb8a`](https://github.com/browniebroke/django-codemod/commit/513eb8af6dabe6bbac20670d818001f7088b2f85))
+
 ## v2.1.11 (2024-05-07)
 
-### Fix
+### Bug fixes
 
 - Update dependency rich-click to v1.8.1 ([`dd3dfc1`](https://github.com/browniebroke/django-codemod/commit/dd3dfc1d8bc9ee103c4cdb32a33b84e695bd1713))
 
 ## v2.1.10 (2024-04-30)
 
-### Fix
+### Bug fixes
 
 - Update dependency rich-click to v1.8.0 ([`5e9f218`](https://github.com/browniebroke/django-codemod/commit/5e9f2183019ac100ee05f68e66be79773e8d502a))
 
 ## v2.1.9 (2024-01-05)
 
-### Fix
+### Bug fixes
 
 - Update dependency rich-click to v1.7.3 ([`24667d0`](https://github.com/browniebroke/django-codemod/commit/24667d05faa018baa2796e19849d1da70526c026))
 
 ## v2.1.8 (2023-12-11)
 
-### Fix
+### Bug fixes
 
 - Update dependency pathspec to v0.12.1 ([`c8a0638`](https://github.com/browniebroke/django-codemod/commit/c8a0638d99ba0e29d903f9561a5d0bef9fdf2b83))
 
 ## v2.1.7 (2023-12-03)
 
-### Fix
+### Bug fixes
 
 - Update dependency rich-click to v1.7.2 ([`169f550`](https://github.com/browniebroke/django-codemod/commit/169f550fa64bb4ac3438d512a539655c3bf39132))
 
 ## v2.1.6 (2023-11-15)
 
-### Fix
+### Bug fixes
 
 - Update dependency rich to v13.7.0 ([`55ddce6`](https://github.com/browniebroke/django-codemod/commit/55ddce6c22d786def8f5a4664e65fbaf65b463a3))
 
 ## v2.1.5 (2023-11-01)
 
-### Fix
+### Bug fixes
 
 - Update dependency rich-click to v1.7.1 ([`86111c9`](https://github.com/browniebroke/django-codemod/commit/86111c99543a304dc03e4a584ec28d9f36fd900b))
 
 ## v2.1.4 (2023-10-12)
 
-### Fix
+### Bug fixes
 
 - Update dependency rich-click to v1.7.0 ([`28d2ead`](https://github.com/browniebroke/django-codemod/commit/28d2ead763217f4cc6d128f087dd66a669f8cef3))
 
 ## v2.1.3 (2023-10-06)
 
-### Fix
+### Bug fixes
 
 - Update dependency libcst to v1.1.0 ([`ea0d388`](https://github.com/browniebroke/django-codemod/commit/ea0d3887e2ca99497d372f1c718c60dda68de3b7))
 
 ## v2.1.2 (2023-09-30)
 
-### Fix
+### Bug fixes
 
 - Update dependency rich to v13.6.0 ([`5f2a0b9`](https://github.com/browniebroke/django-codemod/commit/5f2a0b9c8f1ff2fc87faa3a86c2e28681e35b976))
 
 ## v2.1.1 (2023-09-17)
 
-### Fix
+### Bug fixes
 
 - Update dependency rich to v13.5.3 ([`3077d7b`](https://github.com/browniebroke/django-codemod/commit/3077d7ba82c2e3b17032de3d8d20bbec9033bae8))
 
 ## v2.1.0 (2023-08-07)
 
-### Feature
+### Features
 
 - Add official support for python 3.12 (#866) ([`a89a502`](https://github.com/browniebroke/django-codemod/commit/a89a502beb2b1b222acf1057dc0709d0747adca9))
 
