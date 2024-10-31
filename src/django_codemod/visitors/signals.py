@@ -1,4 +1,4 @@
-from typing import ClassVar, List, Optional
+from typing import ClassVar, Optional
 
 from libcst import BaseExpression, Call, ImportFrom, ImportStar, MaybeSentinel, Module
 from libcst import matchers as m
@@ -15,7 +15,7 @@ class SignalDisconnectWeakTransformer(BaseDjCodemodTransformer):
 
     ctx_key_prefix = "SignalDisconnectWeakTransformer"
     ctx_key_call_matchers = f"{ctx_key_prefix}-call_matchers"
-    builtin_signals: ClassVar[List[str]] = [
+    builtin_signals: ClassVar[list[str]] = [
         "pre_init",
         "post_init",
         "pre_save",
@@ -31,7 +31,7 @@ class SignalDisconnectWeakTransformer(BaseDjCodemodTransformer):
     )
 
     @property
-    def disconnect_call_matchers(self) -> List[m.Call]:
+    def disconnect_call_matchers(self) -> list[m.Call]:
         return self.context.scratch.get(self.ctx_key_call_matchers, [])
 
     def add_disconnect_call_matcher(self, call_matcher: m.Call) -> None:

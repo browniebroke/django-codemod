@@ -1,8 +1,9 @@
 import inspect
 from collections import defaultdict
+from collections.abc import Generator
 from operator import attrgetter
 from pathlib import Path
-from typing import Callable, Dict, Generator, List, Optional, Tuple, Type
+from typing import Callable, Optional
 
 import rich_click as click
 from libcst.codemod import CodemodContext, parallel_exec_transform_with_prettyprint
@@ -16,7 +17,7 @@ from django_codemod.path_utils import get_sources
 from django_codemod.visitors.base import BaseDjCodemodTransformer
 
 
-def index_codemodders(version_getter: Callable) -> Dict[Tuple[int, int], List]:
+def index_codemodders(version_getter: Callable) -> dict[tuple[int, int], list]:
     """
     Index codemodders by version.
 
@@ -29,7 +30,7 @@ def index_codemodders(version_getter: Callable) -> Dict[Tuple[int, int], List]:
     return dict(codemodders_index)
 
 
-def iter_codemodders() -> Generator[Type[BaseDjCodemodTransformer], None, None]:
+def iter_codemodders() -> Generator[type[BaseDjCodemodTransformer], None, None]:
     """Iterator of all the codemodders classes."""
     for object_name in dir(visitors):
         try:
@@ -61,15 +62,15 @@ class VersionParamType(click.ParamType):
         " e.g. '2.2' or '2.2.10'"
     )
 
-    def __init__(self, version_index: Dict[Tuple[int, int], List]) -> None:
-        self.valid_versions: List[Tuple[int, int]] = list(version_index.keys())
+    def __init__(self, version_index: dict[tuple[int, int], list]) -> None:
+        self.valid_versions: list[tuple[int, int]] = list(version_index.keys())
 
     def convert(  # type: ignore[return]
         self,
         value: str,
         param: Optional[click.Parameter],
         ctx: Optional[click.Context],
-    ) -> Tuple[int, int]:
+    ) -> tuple[int, int]:
         """Parse version to keep only major an minor digits."""
         try:
             return self._parse_unsafe(value, param, ctx)
@@ -85,7 +86,7 @@ class VersionParamType(click.ParamType):
         value: str,
         param: Optional[click.Parameter],
         ctx: Optional[click.Context],
-    ) -> Tuple[int, int]:
+    ) -> tuple[int, int]:
         """Parse version and validate it's a supported one."""
         parsed_version = self._split_digits(value, param, ctx)
         if parsed_version not in self.valid_versions:
@@ -106,7 +107,7 @@ class VersionParamType(click.ParamType):
         value: str,
         param: Optional[click.Parameter],
         ctx: Optional[click.Context],
-    ) -> Tuple[int, int]:
+    ) -> tuple[int, int]:
         """Split version into 2-tuple of digits, ignoring patch digit."""
         values_parts = tuple(int(v) for v in value.split("."))
         if len(values_parts) < 2:
@@ -155,10 +156,10 @@ def djcodemod():
     multiple=True,
 )
 def run(
-    removed_in: List[Tuple[int, int]],
-    deprecated_in: List[Tuple[int, int]],
-    codemod: List[str],
-    src: Tuple[str, ...],
+    removed_in: list[tuple[int, int]],
+    deprecated_in: list[tuple[int, int]],
+    codemod: list[str],
+    src: tuple[str, ...],
 ) -> None:
     """
     Automatically fixes deprecations removed Django deprecations.
@@ -185,7 +186,7 @@ def run(
     call_command(command_instance, files)
 
 
-def call_command(command_instance: BaseCodemodCommand, files: List[Path]):
+def call_command(command_instance: BaseCodemodCommand, files: list[Path]):
     """Call libCST with our customized command."""
     try:
         # Super simplified call
@@ -228,7 +229,7 @@ def list_() -> None:
     console.print(table)
 
 
-def generate_rows() -> Generator[Tuple[str, str, str, str], None, None]:
+def generate_rows() -> Generator[tuple[str, str, str, str], None, None]:
     """Build up the rows for the table of codemodders."""
     codemodders_list = sorted(
         iter_codemodders(), key=lambda obj: (obj.deprecated_in, obj.removed_in)
@@ -242,7 +243,7 @@ def generate_rows() -> Generator[Tuple[str, str, str, str], None, None]:
         )
 
 
-def get_short_description(codemodder: Type[BaseDjCodemodTransformer]) -> str:
+def get_short_description(codemodder: type[BaseDjCodemodTransformer]) -> str:
     """Get a one line description of the codemodder from its docstring."""
     if codemodder.__doc__ is None:
         return ""
@@ -252,6 +253,6 @@ def get_short_description(codemodder: Type[BaseDjCodemodTransformer]) -> str:
     return ""
 
 
-def version_str(version_parts: Tuple[int, int]) -> str:
+def version_str(version_parts: tuple[int, int]) -> str:
     """Format the version tuple as string."""
     return ".".join(str(d) for d in version_parts)

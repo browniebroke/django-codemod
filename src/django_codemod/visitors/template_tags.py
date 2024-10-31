@@ -1,4 +1,5 @@
-from typing import Generator, Optional, Sequence, Union
+from collections.abc import Generator, Sequence
+from typing import Optional, Union
 
 from libcst import (
     Assign,

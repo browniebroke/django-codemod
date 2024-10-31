@@ -1,4 +1,5 @@
-from typing import Optional, Sequence
+from collections.abc import Sequence
+from typing import Optional
 
 from libcst import Arg, Call, FunctionDef, Param, parse_expression, parse_statement
 from libcst import matchers as m
