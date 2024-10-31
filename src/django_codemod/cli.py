@@ -1,8 +1,9 @@
 import inspect
 from collections import defaultdict
+from collections.abc import Generator
 from operator import attrgetter
 from pathlib import Path
-from typing import Callable, Dict, Generator, List, Optional, Tuple, Type
+from typing import Callable, Dict, List, Optional, Tuple, Type
 
 import rich_click as click
 from libcst.codemod import CodemodContext, parallel_exec_transform_with_prettyprint

@@ -1,4 +1,5 @@
-from typing import Sequence, Tuple
+from collections.abc import Sequence
+from typing import Tuple
 
 from libcst import Arg, BaseExpression, Call, Name, SimpleString
 from libcst import matchers as m

@@ -5,8 +5,9 @@ Inspired or taken from black:
 https://github.com/psf/black
 """
 
+from collections.abc import Iterable, Iterator
 from pathlib import Path
-from typing import Iterable, Iterator, List, Optional, Set
+from typing import List, Optional, Set
 
 from pathspec import PathSpec
 

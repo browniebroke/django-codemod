@@ -1,7 +1,8 @@
 """Module to implement base functionality."""
 
 from abc import ABC
-from typing import List, Optional, Sequence, Tuple, Union
+from collections.abc import Sequence
+from typing import List, Optional, Tuple, Union
 
 from libcst import (
     Arg,
