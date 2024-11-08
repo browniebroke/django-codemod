@@ -90,7 +90,11 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          ref: ${{ github.head_ref || github.ref_name }}
+          ref: ${{ github.sha }}
+
+      - name: Checkout commit for release
+        run: |
+          git checkout -B ${{ github.ref_name }} ${{ github.sha }}
 
       # Do a dry run of PSR
       - name: Test release
@@ -122,3 +126,4 @@ jobs:
         if: steps.release.outputs.released == 'true'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ steps.release.outputs.tag }}
