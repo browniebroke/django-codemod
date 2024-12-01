@@ -800,23 +800,23 @@ jupyter = ["ipywidgets (>=7.5.1,<9)"]
 
 [[package]]
 name = "rich-click"
-version = "1.8.4"
+version = "1.8.5"
 description = "Format click help output nicely with rich"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "rich_click-1.8.4-py3-none-any.whl", hash = "sha256:2d2841b3cebe610d5682baa1194beaf78ab00c4fa31931533261b5eba2ee80b7"},
-    {file = "rich_click-1.8.4.tar.gz", hash = "sha256:0f49471f04439269d0e66a6f43120f52d11d594869a2a0be600cfb12eb0616b9"},
+    {file = "rich_click-1.8.5-py3-none-any.whl", hash = "sha256:0fab7bb5b66c15da17c210b4104277cd45f3653a7322e0098820a169880baee0"},
+    {file = "rich_click-1.8.5.tar.gz", hash = "sha256:a3eebe81da1c9da3c32f3810017c79bd687ff1b3fa35bfc9d8a3338797f1d1a1"},
 ]
 
 [package.dependencies]
 click = ">=7"
 rich = ">=10.7"
-typing-extensions = ">=4"
+typing_extensions = ">=4"
 
 [package.extras]
 dev = ["mypy", "packaging", "pre-commit", "pytest", "pytest-cov", "rich-codex", "ruff", "types-setuptools"]
-docs = ["markdown-include", "mkdocs", "mkdocs-glightbox", "mkdocs-material-extensions", "mkdocs-material[imaging] (>=9.5.18,<9.6.0)", "mkdocs-rss-plugin", "mkdocstrings[python]", "rich-codex"]
+docs = ["markdown_include", "mkdocs", "mkdocs-glightbox", "mkdocs-material-extensions", "mkdocs-material[imaging] (>=9.5.18,<9.6.0)", "mkdocs-rss-plugin", "mkdocstrings[python]", "rich-codex"]
 
 [[package]]
 name = "snowballstemmer"
