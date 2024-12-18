@@ -40,7 +40,7 @@ jobs:
       - name: Test with Pytest
         run: poetry run pytest --cov-report=xml
         shell: bash
-      - uses: codecov/codecov-action@v5.1.1
+      - uses: codecov/codecov-action@v5.1.2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
