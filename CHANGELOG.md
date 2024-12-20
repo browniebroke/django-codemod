@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v2.3.0 (2024-12-20)
+
+### Features
+
+- Migrate migrate packaging to uv (#1244) ([`d9e26bd`](https://github.com/browniebroke/django-codemod/commit/d9e26bdbba8089ceaf9e221851ede75cb345683e))
+
 ## v2.2.2 (2024-11-19)
 
 ### Bug fixes

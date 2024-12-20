@@ -133,7 +133,7 @@ name = "click"
 version = "8.1.7"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama", marker = "platform_system == 'Windows'" },
+    { name = "colorama", marker = "sys_platform == 'win32'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/96/d3/f04c7bfcf5c1862a2a5b845c6b2b360488cf47af55dfa79c98f6a6bf98b5/click-8.1.7.tar.gz", hash = "sha256:ca9853ad459e787e2192211578cc907e7594e294c7ccc834310722b41b9ca6de", size = 336121 }
 wheels = [
@@ -225,7 +225,7 @@ toml = [
 
 [[package]]
 name = "django-codemod"
-version = "2.2.2"
+version = "2.3.0"
 source = { editable = "." }
 dependencies = [
     { name = "click" },
@@ -254,20 +254,20 @@ requires-dist = [
     { name = "libcst", specifier = "==1.5.1" },
     { name = "pathspec", specifier = ">=0.6,<1" },
     { name = "rich", specifier = ">=10" },
-    { name = "rich-click", specifier = ">=1.0" },
+    { name = "rich-click", specifier = ">=1" },
 ]
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "parameterized", specifier = ">=0.9.0,<1.0.0" },
-    { name = "pytest", specifier = ">=8.0.0,<9.0.0" },
-    { name = "pytest-cov", specifier = ">=6.0.0,<7.0.0" },
-    { name = "pytest-mock", specifier = ">=3.3,<4.0" },
+    { name = "parameterized", specifier = ">=0.9,<1" },
+    { name = "pytest", specifier = ">=8,<9" },
+    { name = "pytest-cov", specifier = ">=6,<7" },
+    { name = "pytest-mock", specifier = ">=3.3,<4" },
 ]
 docs = [
     { name = "furo", marker = "python_full_version >= '3.11'", specifier = ">=2023.5.20" },
     { name = "myst-parser", marker = "python_full_version >= '3.11'", specifier = ">=0.16" },
-    { name = "sphinx", marker = "python_full_version >= '3.11'", specifier = ">=4.0" },
+    { name = "sphinx", marker = "python_full_version >= '3.11'", specifier = ">=4" },
 ]
 
 [[package]]
