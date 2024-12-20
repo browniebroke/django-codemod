@@ -1,7 +1,7 @@
 # See https://pre-commit.com for more information
 # See https://pre-commit.com/hooks.html for more hooks
 exclude: "CHANGELOG.md|.all-contributorsrc"
-default_stages: [commit]
+default_stages: [pre-commit]
 
 ci:
   autofix_commit_msg: "chore(pre-commit.ci): auto fixes"
@@ -26,10 +26,10 @@ repos:
     rev: "v2.5.0"
     hooks:
       - id: pyproject-fmt
-  - repo: https://github.com/python-poetry/poetry
-    rev: 1.8.5
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.5.11
     hooks:
-      - id: poetry-check
+      - id: uv-lock
   - repo: https://github.com/pre-commit/mirrors-prettier
     rev: v3.1.0
     hooks:

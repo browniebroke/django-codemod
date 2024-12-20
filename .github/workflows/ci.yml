@@ -28,17 +28,13 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
-      - name: Install poetry
-        run: pipx install poetry
       - uses: actions/setup-python@v5
         with:
-          cache: poetry
           python-version: ${{ matrix.python-version }}
-      - name: Install Dependencies
-        run: poetry install
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync --no-python-downloads
         shell: bash
-      - name: Test with Pytest
-        run: poetry run pytest --cov-report=xml
+      - run: uv run pytest --cov-report=xml
         shell: bash
       - uses: codecov/codecov-action@v5.1.2
         with:
@@ -50,8 +46,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           cache: pip
           python-version: "3.9"

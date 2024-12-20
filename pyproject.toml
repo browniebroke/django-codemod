@@ -1,60 +1,6 @@
 [build-system]
-build-backend = "poetry.core.masonry.api"
-requires = [ "poetry-core>=1" ]
-
-[tool.poetry]
-name = "django-codemod"
-version = "2.2.2"
-description = "A command line tool to automatically fix Django deprecations."
-authors = [ "Bruno Alla <alla.brunoo@gmail.com>" ]
-license = "MIT"
-readme = "README.md"
-keywords = [ "django", "codemod", "libCST" ]
-repository = "https://github.com/browniebroke/django-codemod"
-documentation = "https://django-codemod.readthedocs.io"
-classifiers = [
-  "Development Status :: 5 - Production/Stable",
-  "Intended Audience :: Developers",
-  "Natural Language :: English",
-  "Operating System :: OS Independent",
-  "Topic :: Software Development :: Libraries",
-  "Programming Language :: Python :: 3.12",
-]
-packages = [
-  { include = "django_codemod", from = "src" },
-  { include = "tests", format = "sdist" },
-]
-
-[tool.poetry.urls]
-"Bug Tracker" = "https://github.com/browniebroke/django-codemod/issues"
-"Changelog" = "https://django-codemod.readthedocs.io/en/stable/changelog.html"
-"Twitter" = "https://twitter.com/_BrunoAlla"
-"Mastodon" = "https://fosstodon.org/@browniebroke"
-
-[tool.poetry.scripts]
-djcodemod = "django_codemod.cli:djcodemod"
-
-[tool.poetry.dependencies]
-python = "^3.9"
-click = "<9"
-libcst = "==1.5.1"
-pathspec = ">=0.6,<1"
-rich = ">=10"
-rich-click = ">=1.0"
-
-[tool.poetry.dev-dependencies]
-parameterized = "^0.9.0"
-pytest = "^8.0.0"
-pytest-cov = "^6.0.0"
-pytest-mock = "^3.3"
-
-[tool.poetry.group.docs]
-optional = true
-
-[tool.poetry.group.docs.dependencies]
-myst-parser = { version = ">=0.16", python = ">=3.11" }
-sphinx = { version = ">=4.0", python = ">=3.11" }
-furo = { version = ">=2023.5.20", python = ">=3.11" }
+build-backend = "setuptools.build_meta"
+requires = [ "setuptools" ]
 
 [tool.ruff]
 target-version = "py39"
@@ -120,11 +66,16 @@ warn_no_return = true
 show_error_codes = true
 
 [tool.semantic_release]
-version_toml = [ "pyproject.toml:tool.poetry.version" ]
+version_toml = [ "pyproject.toml:project.version" ]
 version_variables = [
   "src/django_codemod/__init__.py:__version__",
 ]
-build_command = "pip install poetry && poetry build"
+build_command = """
+pip install uv
+uv lock
+git add uv.lock
+uv build
+"""
 
 [tool.semantic_release.changelog]
 exclude_commit_patterns = [
@@ -142,3 +93,58 @@ match = "main"
 [tool.semantic_release.branches.noop]
 match = "(?!main$)"
 prerelease = true
+
+[dependency-groups]
+dev = [
+    "parameterized<1.0.0,>=0.9.0",
+    "pytest<9.0.0,>=8.0.0",
+    "pytest-cov<7.0.0,>=6.0.0",
+    "pytest-mock<4.0,>=3.3",
+]
+docs = [
+    "myst-parser>=0.16; python_version >= \"3.11\"",
+    "sphinx>=4.0; python_version >= \"3.11\"",
+    "furo>=2023.5.20; python_version >= \"3.11\"",
+]
+
+[project]
+authors = [
+    {name = "Bruno Alla", email = "alla.brunoo@gmail.com"},
+]
+license = {text = "MIT"}
+requires-python = ">=3.9"
+dependencies = [
+    "click<9",
+    "libcst==1.5.1",
+    "pathspec<1,>=0.6",
+    "rich>=10",
+    "rich-click>=1.0",
+]
+name = "django-codemod"
+version = "2.2.2"
+description = "A command line tool to automatically fix Django deprecations."
+readme = "README.md"
+keywords = [
+    "django",
+    "codemod",
+    "libCST",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries",
+    "Programming Language :: Python :: 3.12",
+]
+
+[project.urls]
+"Bug Tracker" = "https://github.com/browniebroke/django-codemod/issues"
+Changelog = "https://django-codemod.readthedocs.io/en/stable/changelog.html"
+Twitter = "https://twitter.com/_BrunoAlla"
+Mastodon = "https://fosstodon.org/@browniebroke"
+repository = "https://github.com/browniebroke/django-codemod"
+documentation = "https://django-codemod.readthedocs.io"
+
+[project.scripts]
+djcodemod = "django_codemod.cli:djcodemod"
