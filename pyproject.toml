@@ -2,6 +2,63 @@
 build-backend = "setuptools.build_meta"
 requires = [ "setuptools" ]
 
+[project]
+name = "django-codemod"
+version = "2.2.2"
+description = "A command line tool to automatically fix Django deprecations."
+readme = "README.md"
+keywords = [
+  "codemod",
+  "django",
+  "libCST",
+]
+license = { text = "MIT" }
+authors = [
+  { name = "Bruno Alla", email = "alla.brunoo@gmail.com" },
+]
+requires-python = ">=3.9"
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Developers",
+  "Natural Language :: English",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Software Development :: Libraries",
+]
+
+dependencies = [
+  "click<9",
+  "libcst==1.5.1",
+  "pathspec>=0.6,<1",
+  "rich>=10",
+  "rich-click>=1",
+]
+urls."Bug Tracker" = "https://github.com/browniebroke/django-codemod/issues"
+urls.Changelog = "https://django-codemod.readthedocs.io/en/stable/changelog.html"
+urls.documentation = "https://django-codemod.readthedocs.io"
+urls.Mastodon = "https://fosstodon.org/@browniebroke"
+urls.repository = "https://github.com/browniebroke/django-codemod"
+urls.Twitter = "https://twitter.com/_BrunoAlla"
+scripts.djcodemod = "django_codemod.cli:djcodemod"
+
+[dependency-groups]
+dev = [
+  "parameterized>=0.9,<1",
+  "pytest>=8,<9",
+  "pytest-cov>=6,<7",
+  "pytest-mock>=3.3,<4",
+]
+docs = [
+  "furo>=2023.5.20; python_version>='3.11'",
+  "myst-parser>=0.16; python_version>='3.11'",
+  "sphinx>=4; python_version>='3.11'",
+]
+
 [tool.ruff]
 target-version = "py39"
 line-length = 88
@@ -93,58 +150,3 @@ match = "main"
 [tool.semantic_release.branches.noop]
 match = "(?!main$)"
 prerelease = true
-
-[dependency-groups]
-dev = [
-    "parameterized<1.0.0,>=0.9.0",
-    "pytest<9.0.0,>=8.0.0",
-    "pytest-cov<7.0.0,>=6.0.0",
-    "pytest-mock<4.0,>=3.3",
-]
-docs = [
-    "myst-parser>=0.16; python_version >= \"3.11\"",
-    "sphinx>=4.0; python_version >= \"3.11\"",
-    "furo>=2023.5.20; python_version >= \"3.11\"",
-]
-
-[project]
-authors = [
-    {name = "Bruno Alla", email = "alla.brunoo@gmail.com"},
-]
-license = {text = "MIT"}
-requires-python = ">=3.9"
-dependencies = [
-    "click<9",
-    "libcst==1.5.1",
-    "pathspec<1,>=0.6",
-    "rich>=10",
-    "rich-click>=1.0",
-]
-name = "django-codemod"
-version = "2.2.2"
-description = "A command line tool to automatically fix Django deprecations."
-readme = "README.md"
-keywords = [
-    "django",
-    "codemod",
-    "libCST",
-]
-classifiers = [
-    "Development Status :: 5 - Production/Stable",
-    "Intended Audience :: Developers",
-    "Natural Language :: English",
-    "Operating System :: OS Independent",
-    "Topic :: Software Development :: Libraries",
-    "Programming Language :: Python :: 3.12",
-]
-
-[project.urls]
-"Bug Tracker" = "https://github.com/browniebroke/django-codemod/issues"
-Changelog = "https://django-codemod.readthedocs.io/en/stable/changelog.html"
-Twitter = "https://twitter.com/_BrunoAlla"
-Mastodon = "https://fosstodon.org/@browniebroke"
-repository = "https://github.com/browniebroke/django-codemod"
-documentation = "https://django-codemod.readthedocs.io"
-
-[project.scripts]
-djcodemod = "django_codemod.cli:djcodemod"
