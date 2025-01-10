@@ -95,8 +95,7 @@ class VersionParamType(click.ParamType):
                 for version_tuple in sorted(self.valid_versions)
             )
             self.fail(
-                f"{value!r} is not supported. "
-                f"Versions supported: {supported_versions}",
+                f"{value!r} is not supported. Versions supported: {supported_versions}",
                 param,
                 ctx,
             )
