@@ -1,28 +1,34 @@
 # CHANGELOG
 
+## v2.3.3 (2025-05-29)
+
+### Bug fixes
+
+- Update dependency libcst to v1.8.0 ([`fd4c151`](https://github.com/browniebroke/django-codemod/commit/fd4c15101f4564af508bac2a744b3bb6e7c55b4e))
+
 ## v2.3.2 (2025-04-06)
 
 ### Bug fixes
 
-- Update dependency libcst to v1.7.0 (#1313) ([`3a5a818`](https://github.com/browniebroke/django-codemod/commit/3a5a818a1d8267852ef63777f4e41fac537be49e))
+- Update dependency libcst to v1.7.0 ([`3a5a818`](https://github.com/browniebroke/django-codemod/commit/3a5a818a1d8267852ef63777f4e41fac537be49e))
 
 ## v2.3.1 (2025-01-11)
 
 ### Bug fixes
 
-- Update dependency libcst to v1.6.0 (#1255) ([`9a25265`](https://github.com/browniebroke/django-codemod/commit/9a2526565569e491d13d7b92b8a0615d6439c956))
+- Update dependency libcst to v1.6.0 ([`9a25265`](https://github.com/browniebroke/django-codemod/commit/9a2526565569e491d13d7b92b8a0615d6439c956))
 
 ## v2.3.0 (2024-12-20)
 
 ### Features
 
-- Migrate migrate packaging to uv (#1244) ([`d9e26bd`](https://github.com/browniebroke/django-codemod/commit/d9e26bdbba8089ceaf9e221851ede75cb345683e))
+- Migrate migrate packaging to uv ([`d9e26bd`](https://github.com/browniebroke/django-codemod/commit/d9e26bdbba8089ceaf9e221851ede75cb345683e))
 
 ## v2.2.2 (2024-11-19)
 
 ### Bug fixes
 
-- Update dependency libcst to v1.5.1 (#1218) ([`92bb796`](https://github.com/browniebroke/django-codemod/commit/92bb79652d63777f67e9ec346ec33e22c0cfabbe))
+- Update dependency libcst to v1.5.1 ([`92bb796`](https://github.com/browniebroke/django-codemod/commit/92bb79652d63777f67e9ec346ec33e22c0cfabbe))
 
 ## v2.2.1 (2024-10-31)
 
@@ -34,7 +40,7 @@
 
 ### Features
 
-- Drop support for python 3.8 (#1200) ([`513eb8a`](https://github.com/browniebroke/django-codemod/commit/513eb8af6dabe6bbac20670d818001f7088b2f85))
+- Drop support for python 3.8 ([`513eb8a`](https://github.com/browniebroke/django-codemod/commit/513eb8af6dabe6bbac20670d818001f7088b2f85))
 
 ## v2.1.11 (2024-05-07)
 
@@ -106,11 +112,14 @@
 
 ### Features
 
-- Add official support for python 3.12 (#866) ([`a89a502`](https://github.com/browniebroke/django-codemod/commit/a89a502beb2b1b222acf1057dc0709d0747adca9))
+- Add official support for python 3.12 ([`a89a502`](https://github.com/browniebroke/django-codemod/commit/a89a502beb2b1b222acf1057dc0709d0747adca9))
 
 ### Documentation
 
-- Switch to furo theme (#838) ([`e53bafd`](https://github.com/browniebroke/django-codemod/commit/e53bafd2e1b9ac598193d03c5f22e0da9d00f412))
+- Switch to furo theme ([`e53bafd`](https://github.com/browniebroke/django-codemod/commit/e53bafd2e1b9ac598193d03c5f22e0da9d00f412))
+- Switch to furo theme ([`e53bafd`](https://github.com/browniebroke/django-codemod/commit/e53bafd2e1b9ac598193d03c5f22e0da9d00f412))
+- Customise light & dark theme logos ([`e53bafd`](https://github.com/browniebroke/django-codemod/commit/e53bafd2e1b9ac598193d03c5f22e0da9d00f412))
+- Remove custom title ([`e53bafd`](https://github.com/browniebroke/django-codemod/commit/e53bafd2e1b9ac598193d03c5f22e0da9d00f412))
 
 ## v2.0.0 (2023-06-27)
 

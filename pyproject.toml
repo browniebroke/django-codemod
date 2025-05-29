@@ -4,7 +4,7 @@ requires = [ "setuptools" ]
 
 [project]
 name = "django-codemod"
-version = "2.3.2"
+version = "2.3.3"
 description = "A command line tool to automatically fix Django deprecations."
 readme = "README.md"
 keywords = [
