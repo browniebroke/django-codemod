@@ -219,7 +219,7 @@ toml = [
 
 [[package]]
 name = "django-codemod"
-version = "2.3.3"
+version = "2.3.4"
 source = { editable = "." }
 dependencies = [
     { name = "click" },
