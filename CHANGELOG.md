@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v2.3.5 (2025-06-14)
+
+### Bug fixes
+
+- Update dependency libcst to v1.8.2 ([`dbd7f48`](https://github.com/browniebroke/django-codemod/commit/dbd7f48b32671d9675bc79f92b8d8af849b9a5e2))
+
 ## v2.3.4 (2025-06-10)
 
 ### Bug fixes
