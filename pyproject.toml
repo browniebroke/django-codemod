@@ -32,7 +32,7 @@ classifiers = [
 ]
 
 dependencies = [
-  "click<9",
+  "click<8.2",
   "libcst==1.8.2",
   "pathspec>=0.6,<1",
   "rich>=10",
