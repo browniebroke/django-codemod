@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v2.3.6 (2025-08-25)
+
+### Bug fixes
+
+- Use spdx expression for license ([`60bf1c9`](https://github.com/browniebroke/django-codemod/commit/60bf1c9a5c84976b68d8683d6706268c0a1a0c96))
+
 ## v2.3.5 (2025-06-14)
 
 ### Bug fixes
