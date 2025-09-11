@@ -115,7 +115,7 @@ class VersionParamType(click.ParamType):
                 param,
                 ctx,
             )
-        major, minor, *patches = values_parts
+        major, minor, *_patches = values_parts
         return major, minor
 
 
