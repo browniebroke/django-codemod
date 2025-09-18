@@ -1,11 +1,10 @@
 from collections.abc import Sequence
-from typing import Optional
 
 from libcst import Arg, Call, FunctionDef, Param, parse_expression, parse_statement
 from libcst import matchers as m
 
 
-def find_keyword_arg(args: Sequence[Arg], keyword_name: str) -> Optional[Arg]:
+def find_keyword_arg(args: Sequence[Arg], keyword_name: str) -> Arg | None:
     """Find a kwarg among a sequence of arguments."""
     matcher = m.Arg(keyword=m.Name(keyword_name))
     return next((arg for arg in args if m.matches(arg, matcher)), None)

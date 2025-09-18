@@ -1,9 +1,8 @@
 import inspect
 from collections import defaultdict
-from collections.abc import Generator
+from collections.abc import Callable, Generator
 from operator import attrgetter
 from pathlib import Path
-from typing import Callable, Optional
 
 import rich_click as click
 from libcst.codemod import CodemodContext, parallel_exec_transform_with_prettyprint
@@ -68,8 +67,8 @@ class VersionParamType(click.ParamType):
     def convert(  # type: ignore[return]
         self,
         value: str,
-        param: Optional[click.Parameter],
-        ctx: Optional[click.Context],
+        param: click.Parameter | None,
+        ctx: click.Context | None,
     ) -> tuple[int, int]:
         """Parse version to keep only major an minor digits."""
         try:
@@ -84,8 +83,8 @@ class VersionParamType(click.ParamType):
     def _parse_unsafe(
         self,
         value: str,
-        param: Optional[click.Parameter],
-        ctx: Optional[click.Context],
+        param: click.Parameter | None,
+        ctx: click.Context | None,
     ) -> tuple[int, int]:
         """Parse version and validate it's a supported one."""
         parsed_version = self._split_digits(value, param, ctx)
@@ -104,8 +103,8 @@ class VersionParamType(click.ParamType):
     def _split_digits(
         self,
         value: str,
-        param: Optional[click.Parameter],
-        ctx: Optional[click.Context],
+        param: click.Parameter | None,
+        ctx: click.Context | None,
     ) -> tuple[int, int]:
         """Split version into 2-tuple of digits, ignoring patch digit."""
         values_parts = tuple(int(v) for v in value.split("."))

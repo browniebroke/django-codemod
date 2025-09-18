@@ -1,5 +1,4 @@
 from collections.abc import Generator, Sequence
-from typing import Optional, Union
 
 from libcst import (
     Assign,
@@ -29,11 +28,11 @@ class AssignmentTagTransformer(BaseDjCodemodTransformer):
     ctx_key_decorator_matcher = f"{ctx_key_prefix}-decorator_matcher"
 
     @property
-    def library_call_matcher(self) -> Optional[m.Call]:
+    def library_call_matcher(self) -> m.Call | None:
         return self.context.scratch.get(self.ctx_key_library_call_matcher, None)
 
     @property
-    def decorators_matcher(self) -> Optional[m.BaseMatcherNode]:
+    def decorators_matcher(self) -> m.BaseMatcherNode | None:
         return self.context.scratch.get(self.ctx_key_decorator_matcher, None)
 
     def leave_Module(self, original_node: Module, updated_node: Module) -> Module:
@@ -42,7 +41,7 @@ class AssignmentTagTransformer(BaseDjCodemodTransformer):
         self.context.scratch.pop(self.ctx_key_decorator_matcher, None)
         return super().leave_Module(original_node, updated_node)
 
-    def visit_ImportFrom(self, node: ImportFrom) -> Optional[bool]:
+    def visit_ImportFrom(self, node: ImportFrom) -> bool | None:
         """Record whether an interesting import is detected."""
         import_matcher = (
             # django.template
@@ -54,7 +53,7 @@ class AssignmentTagTransformer(BaseDjCodemodTransformer):
             self.context.scratch[self.ctx_key_library_call_matcher] = import_matcher
         return None
 
-    def _template_import_matcher(self, node: ImportFrom) -> Optional[m.Call]:
+    def _template_import_matcher(self, node: ImportFrom) -> m.Call | None:
         """Return matcher if django.template is imported."""
         imported_name_str = self._get_imported_name(node, "django.template")
         if not imported_name_str:
@@ -66,7 +65,7 @@ class AssignmentTagTransformer(BaseDjCodemodTransformer):
             )
         )
 
-    def _library_import_matcher(self, node: ImportFrom) -> Optional[m.Call]:
+    def _library_import_matcher(self, node: ImportFrom) -> m.Call | None:
         """Return matcher if django.template.Library is imported."""
         imported_name_str = self._get_imported_name(node, "django.template.Library")
         if not imported_name_str:
@@ -75,7 +74,7 @@ class AssignmentTagTransformer(BaseDjCodemodTransformer):
         return m.Call(func=m.Name(imported_name_str))
 
     @staticmethod
-    def _get_imported_name(node: ImportFrom, import_path: str) -> Optional[str]:
+    def _get_imported_name(node: ImportFrom, import_path: str) -> str | None:
         """Resolve the imported name if present."""
         if isinstance(node.names, ImportStar):
             return None
@@ -92,7 +91,7 @@ class AssignmentTagTransformer(BaseDjCodemodTransformer):
                 return imported_name_str
         return None
 
-    def visit_Assign(self, node: Assign) -> Optional[bool]:
+    def visit_Assign(self, node: Assign) -> bool | None:
         """Record variable name the `Library()` call is assigned to."""
         if self.library_call_matcher and m.matches(
             node,
@@ -127,7 +126,7 @@ class AssignmentTagTransformer(BaseDjCodemodTransformer):
 
     def leave_Decorator(
         self, original_node: Decorator, updated_node: Decorator
-    ) -> Union[Decorator, FlattenSentinel[Decorator], RemovalSentinel]:
+    ) -> Decorator | FlattenSentinel[Decorator] | RemovalSentinel:
         """Update decorator call if all conditions are met."""
         if self.decorators_matcher and m.matches(updated_node, self.decorators_matcher):
             # If we have a decorator matcher, and it matches,
