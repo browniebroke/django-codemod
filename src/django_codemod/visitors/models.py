@@ -1,5 +1,4 @@
 from collections.abc import Sequence
-from typing import Optional, Union
 
 from libcst import (
     Arg,
@@ -47,9 +46,7 @@ class ModelsPermalinkTransformer(BaseDjCodemodTransformer):
 
     def leave_ImportFrom(
         self, original_node: ImportFrom, updated_node: ImportFrom
-    ) -> Union[
-        BaseSmallStatement, FlattenSentinel[BaseSmallStatement], RemovalSentinel
-    ]:
+    ) -> BaseSmallStatement | FlattenSentinel[BaseSmallStatement] | RemovalSentinel:
         if isinstance(updated_node.names, ImportStar):
             return super().leave_ImportFrom(original_node, updated_node)
         if m.matches(
@@ -105,7 +102,7 @@ class ModelsPermalinkTransformer(BaseDjCodemodTransformer):
             return matchers_list[0]
         return m.OneOf(*iter(matchers_list))
 
-    def visit_FunctionDef(self, node: FunctionDef) -> Optional[bool]:
+    def visit_FunctionDef(self, node: FunctionDef) -> bool | None:
         for decorator in node.decorators:
             if m.matches(decorator, self.decorator_matcher):
                 self.context.scratch[self.ctx_key_inside_method] = True
@@ -113,7 +110,7 @@ class ModelsPermalinkTransformer(BaseDjCodemodTransformer):
 
     def leave_FunctionDef(
         self, original_node: FunctionDef, updated_node: FunctionDef
-    ) -> Union[BaseStatement, FlattenSentinel[BaseStatement], RemovalSentinel]:
+    ) -> BaseStatement | FlattenSentinel[BaseStatement] | RemovalSentinel:
         if self.visiting_permalink_method:
             for decorator in updated_node.decorators:
                 if m.matches(decorator, self.decorator_matcher):
@@ -136,9 +133,7 @@ class ModelsPermalinkTransformer(BaseDjCodemodTransformer):
 
     def leave_Return(
         self, original_node: Return, updated_node: Return
-    ) -> Union[
-        BaseSmallStatement, FlattenSentinel[BaseSmallStatement], RemovalSentinel
-    ]:
+    ) -> BaseSmallStatement | FlattenSentinel[BaseSmallStatement] | RemovalSentinel:
         if self.visiting_permalink_method and m.matches(
             updated_node.value,
             m.Tuple(),  # type: ignore

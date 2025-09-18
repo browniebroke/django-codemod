@@ -1,4 +1,4 @@
-from typing import ClassVar, Optional
+from typing import ClassVar
 
 from libcst import BaseExpression, Call, ImportFrom, ImportStar, MaybeSentinel, Module
 from libcst import matchers as m
@@ -45,7 +45,7 @@ class SignalDisconnectWeakTransformer(BaseDjCodemodTransformer):
         self.context.scratch.pop(self.ctx_key_call_matchers, None)
         return super().leave_Module(original_node, updated_node)
 
-    def visit_ImportFrom(self, node: ImportFrom) -> Optional[bool]:
+    def visit_ImportFrom(self, node: ImportFrom) -> bool | None:
         """Set the `Call` matcher depending on which signals are imported.."""
         if not import_from_matches(
             node, ["django", "db", "models", "signals"]

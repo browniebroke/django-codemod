@@ -2,7 +2,6 @@
 
 from abc import ABC
 from collections.abc import Sequence
-from typing import Optional, Union
 
 from libcst import (
     Arg,
@@ -53,7 +52,7 @@ class BaseDjCodemodTransformer(ContextAwareTransformer, ABC):
 
 def module_matcher(
     import_parts: Sequence[str],
-) -> Union[m.Attribute, m.Name]:
+) -> m.Attribute | m.Name:
     """Build matcher for a module given sequence of import parts."""
     # If only one element, it is just a Name
     if len(import_parts) == 1:
@@ -112,7 +111,7 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
 
     def leave_ImportFrom(
         self, original_node: ImportFrom, updated_node: ImportFrom
-    ) -> Union[BaseSmallStatement, RemovalSentinel]:
+    ) -> BaseSmallStatement | RemovalSentinel:
         """Update import statements for matching old module name."""
         return (
             self._check_import_from_exact(original_node, updated_node)
@@ -123,7 +122,7 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
 
     def _check_import_from_exact(
         self, original_node: ImportFrom, updated_node: ImportFrom
-    ) -> Optional[Union[BaseSmallStatement, RemovalSentinel]]:
+    ) -> BaseSmallStatement | RemovalSentinel | None:
         """
         Check for when the thing to replace is imported exactly.
 
@@ -171,7 +170,7 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
 
     def _check_import_from_parent(
         self, original_node: ImportFrom, updated_node: ImportFrom
-    ) -> Optional[Union[BaseSmallStatement, RemovalSentinel]]:
+    ) -> BaseSmallStatement | RemovalSentinel | None:
         """
         Check for when the parent module of thing to replace is imported.
 
@@ -200,7 +199,7 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
                     value=m.Name(module_name_str),
                     attr=m.Name(self.old_name),
                 )
-                new_as_name: Optional[str] = None
+                new_as_name: str | None = None
                 if import_alias.evaluated_alias:
                     # The import alias would be the same before and after
                     # Add a `_` to differentiate the old alias from the new one.
@@ -214,7 +213,7 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
                 if self.old_parent_module_parts != self.new_parent_module_parts:
                     # import statement might need updating: build arguments for
                     # AddImportsVisitor and RemoveImportsVisitor to update imports
-                    add_import_module: Optional[str] = None
+                    add_import_module: str | None = None
                     if self.new_parent_module_parts:
                         add_import_module = ".".join(self.new_parent_module_parts)
                     self.context.scratch[self.ctx_key_add_import_kwargs] = {
@@ -223,7 +222,7 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
                         "obj": self.new_parent_name,
                         "asname": new_as_name,
                     }
-                    remove_import_module: Optional[str] = None
+                    remove_import_module: str | None = None
                     if self.old_parent_module_parts:
                         remove_import_module = ".".join(self.old_parent_module_parts)
                     self.context.scratch[self.ctx_key_remove_import_kwargs] = {
@@ -236,7 +235,7 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
 
     def _check_import_from_child(
         self, original_node: ImportFrom, updated_node: ImportFrom
-    ) -> Optional[Union[BaseSmallStatement, RemovalSentinel]]:
+    ) -> BaseSmallStatement | RemovalSentinel | None:
         """
         Check import of a member of the module being codemodded.
 
@@ -275,7 +274,7 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
         self.context.scratch[self.ctx_key_import_scope] = scope
 
     @property
-    def import_scope(self) -> Optional[Scope]:
+    def import_scope(self) -> Scope | None:
         return self.context.scratch.get(self.ctx_key_import_scope, None)
 
     def update_imports(self):

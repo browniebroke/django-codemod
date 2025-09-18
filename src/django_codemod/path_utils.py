@@ -7,7 +7,6 @@ https://github.com/psf/black
 
 from collections.abc import Iterable, Iterator
 from pathlib import Path
-from typing import Optional
 
 from pathspec import PathSpec
 
@@ -113,7 +112,7 @@ def gen_python_files(
             yield child
 
 
-def normalize_path(path: Path, root: Path) -> Optional[str]:
+def normalize_path(path: Path, root: Path) -> str | None:
     """Normalize `path`. May return `None` if `path` was ignored."""
     try:
         abspath = path if path.is_absolute() else Path.cwd() / path
