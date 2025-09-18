@@ -95,6 +95,9 @@ lint.per-file-ignores."tests/**/*" = [
 ]
 lint.isort.known-first-party = [ "django_codemod", "tests" ]
 
+[tool.pyproject-fmt]
+max_supported_python = "3.14"
+
 [tool.pytest.ini_options]
 addopts = "-v -Wdefault --cov=django_codemod --cov-report=term-missing:skip-covered"
 pythonpath = [ "src" ]
