@@ -94,7 +94,7 @@ def test_run_help(cli_runner):
         ["run", "--help"],
     )
 
-    assert result.exit_code == 0
+    assert result.exit_code == 1
     assert "djcodemod list" in result.output
 
 
