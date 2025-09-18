@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## v2.4.0 (2025-09-18)
+
+### Bug fixes
+
+- Update dependency click to <8.3 ([`2b20e6e`](https://github.com/browniebroke/django-codemod/commit/2b20e6e658da3098ddc21990549fea56de9e9065))
+
+### Features
+
+- Add support for python 3.14 ([`6fd1dbf`](https://github.com/browniebroke/django-codemod/commit/6fd1dbf9fc1db0d2924a3c0e25d4c5d7fe36772c))
+- Drop support for python 3.9 ([`ed1ba2a`](https://github.com/browniebroke/django-codemod/commit/ed1ba2a5960a8587ea57b263b44d61375ad96654))
+
 ## v2.3.7 (2025-09-09)
 
 ### Bug fixes
