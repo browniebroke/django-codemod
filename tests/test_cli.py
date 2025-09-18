@@ -95,7 +95,7 @@ def test_run_help(cli_runner):
     )
 
     assert result.exit_code == 1
-    assert "djcodemod list" in result.output
+    assert "Automatically fixes deprecations" in result.output
 
 
 @pytest.mark.parametrize(
