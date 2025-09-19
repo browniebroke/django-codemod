@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v2.4.1 (2025-09-19)
+
+### Bug fixes
+
+- Update dependency click to <8.4 ([`168d7b1`](https://github.com/browniebroke/django-codemod/commit/168d7b1192ba19174639bf6008337e0060e67db5))
+
 ## v2.4.0 (2025-09-18)
 
 ### Bug fixes
