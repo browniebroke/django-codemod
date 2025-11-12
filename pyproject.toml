@@ -49,7 +49,7 @@ scripts.djcodemod = "django_codemod.cli:djcodemod"
 [dependency-groups]
 dev = [
   "parameterized>=0.9,<1",
-  "pytest>=8,<9",
+  "pytest>=9,<10",
   "pytest-cov>=7,<8",
   "pytest-mock>=3.3,<4",
 ]
