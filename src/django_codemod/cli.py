@@ -48,7 +48,7 @@ BY_NAME = {cls.__name__: cls for cls in iter_codemodders()}
 
 
 class CodemodChoice(click.Choice):
-    def get_metavar(self, param: click.Parameter) -> str:
+    def get_metavar(self, *args, **kwargs) -> str:
         return "(see `djcodemod list`)"
 
 
