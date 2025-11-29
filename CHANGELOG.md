@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v2.4.4 (2025-11-29)
+
+### Bug fixes
+
+- Update signature for codemodchoice.get_metavar ([`6afda14`](https://github.com/browniebroke/django-codemod/commit/6afda145116f8614246f936a05b915e3c9852c9a))
+
 ## v2.4.3 (2025-11-04)
 
 ### Bug fixes
