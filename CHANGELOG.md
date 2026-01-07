@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## v2.4.5 (2026-01-07)
+
+### Bug fixes
+
+- Update dependency pathspec to v1 ([`ceeaa47`](https://github.com/browniebroke/django-codemod/commit/ceeaa472b7ef4d9701c5390594212e9eed8a1209))
+- Update dependency pathspec to v1 ([`ceeaa47`](https://github.com/browniebroke/django-codemod/commit/ceeaa472b7ef4d9701c5390594212e9eed8a1209))
+
 ## v2.4.4 (2025-11-29)
 
 ### Bug fixes
