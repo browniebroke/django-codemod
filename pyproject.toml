@@ -34,7 +34,7 @@ classifiers = [
 dependencies = [
   "click<8.4",
   "libcst==1.8.6",
-  "pathspec>=1,<2",
+  "pathspec>=0.6,<2",
   "rich>=10",
   "rich-click>=1",
 ]
