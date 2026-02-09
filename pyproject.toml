@@ -30,7 +30,6 @@ classifiers = [
   "Programming Language :: Python :: 3.14",
   "Topic :: Software Development :: Libraries",
 ]
-
 dependencies = [
   "click<8.4",
   "libcst==1.8.6",
@@ -61,7 +60,6 @@ docs = [
 
 [tool.ruff]
 line-length = 88
-
 lint.select = [
   "B",   # flake8-bugbear
   "C4",  # flake8-comprehensions
@@ -99,29 +97,24 @@ lint.isort.known-first-party = [ "django_codemod", "tests" ]
 [tool.pyproject-fmt]
 max_supported_python = "3.14"
 
-[tool.pytest.ini_options]
-addopts = "-v -Wdefault --cov=django_codemod --cov-report=term-missing:skip-covered"
-pythonpath = [ "src" ]
+[tool.pytest]
+ini_options.addopts = "-v -Wdefault --cov=django_codemod --cov-report=term-missing:skip-covered"
+ini_options.pythonpath = [ "src" ]
 
-[tool.coverage.report]
-exclude_lines = [
+[tool.coverage]
+report.exclude_lines = [
   "pragma: no cover",
   "raise AssertionError",
   "raise NotImplementedError",
 ]
-
-[tool.coverage.run]
-branch = true
+run.branch = true
 
 [tool.mypy]
 # suppress errors about unsatisfied imports
 ignore_missing_imports = true
-
 no_implicit_optional = true
-
 # ensure all execution paths are returning
 warn_no_return = true
-
 show_error_codes = true
 
 [tool.semantic_release]
@@ -135,19 +128,12 @@ uv lock
 git add uv.lock
 uv build
 """
-
-[tool.semantic_release.branches.main]
-match = "main"
-
-[tool.semantic_release.branches.noop]
-match = "(?!main$)"
-prerelease = true
-[tool.semantic_release.changelog]
-exclude_commit_patterns = [
+branches.main.match = "main"
+branches.noop.match = "(?!main$)"
+branches.noop.prerelease = true
+changelog.exclude_commit_patterns = [
   "chore.*",
   "ci.*",
   "Merge pull request .*",
 ]
-
-[tool.semantic_release.changelog.environment]
-keep_trailing_newline = true
+changelog.environment.keep_trailing_newline = true
