@@ -99,7 +99,7 @@ max_supported_python = "3.14"
 
 [tool.pytest]
 minversion = "9.0"
-addopts = ["-v", "-Wdefault", "--cov=django_codemod", "--cov-report=term-missing:skip-covered"]
+addopts = [ "-v", "-Wdefault", "--cov=django_codemod", "--cov-report=term-missing:skip-covered" ]
 pythonpath = [ "src" ]
 
 [tool.coverage]
