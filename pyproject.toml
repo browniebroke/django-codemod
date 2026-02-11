@@ -98,8 +98,8 @@ lint.isort.known-first-party = [ "django_codemod", "tests" ]
 max_supported_python = "3.14"
 
 [tool.pytest]
-ini_options.addopts = "-v -Wdefault --cov=django_codemod --cov-report=term-missing:skip-covered"
-ini_options.pythonpath = [ "src" ]
+addopts = "-v -Wdefault --cov=django_codemod --cov-report=term-missing:skip-covered"
+pythonpath = [ "src" ]
 
 [tool.coverage]
 run.branch = true
