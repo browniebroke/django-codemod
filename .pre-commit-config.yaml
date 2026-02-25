@@ -46,7 +46,7 @@ repos:
     hooks:
       - id: codespell
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v4.13.8
+    rev: v4.13.9
     hooks:
       - id: commitizen
         stages: [commit-msg]
