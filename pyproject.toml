@@ -97,6 +97,14 @@ lint.isort.known-first-party = [ "django_codemod", "tests" ]
 [tool.pyproject-fmt]
 max_supported_python = "3.14"
 
+[tool.mypy]
+# suppress errors about unsatisfied imports
+ignore_missing_imports = true
+no_implicit_optional = true
+# ensure all execution paths are returning
+warn_no_return = true
+show_error_codes = true
+
 [tool.pytest]
 minversion = "9.0"
 addopts = [ "-v", "-Wdefault", "--cov=django_codemod", "--cov-report=term-missing:skip-covered" ]
@@ -109,14 +117,6 @@ report.exclude_lines = [
   "raise AssertionError",
   "raise NotImplementedError",
 ]
-
-[tool.mypy]
-# suppress errors about unsatisfied imports
-ignore_missing_imports = true
-no_implicit_optional = true
-# ensure all execution paths are returning
-warn_no_return = true
-show_error_codes = true
 
 [tool.semantic_release]
 version_toml = [ "pyproject.toml:project.version" ]
