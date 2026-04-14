@@ -66,7 +66,7 @@ Ready to contribute? Here's how to set yourself up for local development.
    $ uv run pytest
    ```
 
-6. Linting is done through [prek](https://prek.j178.dev/). Provided you have the tool installed globally, you can run them all as one-off:
+6. Linting is done through [prek](https://prek.j178.dev/). Provided you have the tool installed globally, you can run them all as a one-off:
 
    ```shell
    $ prek run -a
