@@ -57,6 +57,8 @@ class URLTransformer(BaseFuncRenameTransformer):
             raise PatternNotSupported()
         # Extract the URL pattern from the first argument
         pattern = first_arg.value.evaluated_value
+        if not isinstance(pattern, str):
+            raise PatternNotSupported()
         # If we reach this point, we might be able to use `path()`
         call = self.build_path_call(pattern, other_args)
         AddImportsVisitor.add_needed_import(

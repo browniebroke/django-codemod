@@ -38,7 +38,7 @@ class IsTryImportProvider(BatchableMetadataProvider[bool]):
     def visit_Try(self, node: Try) -> None:
         self.try_level += 1
 
-    def leave_Try(self, node: Try) -> None:
+    def leave_Try(self, original_node: Try) -> None:
         self.try_level -= 1
 
     def visit_ImportFrom(self, node: ImportFrom) -> None:
@@ -267,7 +267,7 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
 
     def resolve_scope(self, node: CSTNode) -> Scope:
         scopes_map = self.context.wrapper.resolve(ScopeProvider)  # type: ignore
-        return scopes_map[node]  # type: ignore
+        return scopes_map[node]
 
     def save_import_scope(self, import_from: ImportFrom) -> None:
         scope = self.resolve_scope(import_from)

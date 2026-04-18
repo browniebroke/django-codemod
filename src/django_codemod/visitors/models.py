@@ -134,9 +134,13 @@ class ModelsPermalinkTransformer(BaseDjCodemodTransformer):
     def leave_Return(
         self, original_node: Return, updated_node: Return
     ) -> BaseSmallStatement | FlattenSentinel[BaseSmallStatement] | RemovalSentinel:
-        if self.visiting_permalink_method and m.matches(
-            updated_node.value,
-            m.Tuple(),  # type: ignore
+        if (
+            self.visiting_permalink_method
+            and updated_node.value is not None
+            and m.matches(
+                updated_node.value,
+                m.Tuple(),
+            )
         ):
             elem_0, *elem_1_3 = updated_node.value.elements[:3]  # type: ignore
             args = (

@@ -2,6 +2,7 @@ from pathlib import Path
 
 import click
 import pytest
+from click.exceptions import Exit
 from click.testing import CliRunner
 from libcst.codemod import CodemodContext, ParallelTransformResult
 
@@ -131,7 +132,7 @@ def test_call_command_success(command_instance, mocker):
         successes=1, failures=0, warnings=0, skips=0
     )
 
-    result = cli.call_command(command_instance, ".")
+    result = cli.call_command(command_instance, [Path(".")])
 
     assert result is None
 
@@ -145,8 +146,8 @@ def test_call_command_failure(command_instance, mocker):
         successes=0, failures=1, warnings=0, skips=0
     )
 
-    with pytest.raises(click.exceptions.Exit):
-        cli.call_command(command_instance, ".")
+    with pytest.raises(Exit):
+        cli.call_command(command_instance, [Path(".")])
 
 
 @pytest.mark.usefixtures("get_sources_mocked")
@@ -160,7 +161,7 @@ def test_call_command_interrupted(command_instance, mocker):
     )
 
     with pytest.raises(click.Abort):
-        cli.call_command(command_instance, ".")
+        cli.call_command(command_instance, [Path(".")])
 
 
 def _verify_mapping(mapping, version_attr):

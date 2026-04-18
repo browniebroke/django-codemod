@@ -5,6 +5,7 @@ from operator import attrgetter
 from pathlib import Path
 
 import rich_click as click
+from click.exceptions import Exit
 from libcst.codemod import CodemodContext, parallel_exec_transform_with_prettyprint
 from rich.console import Console
 from rich.markdown import Markdown
@@ -203,7 +204,7 @@ def call_command(command_instance: BaseCodemodCommand, files: list[Path]):
     click.echo(f" - Failed to codemod {result.failures} files.")
     click.echo(f" - {result.warnings} warnings were generated.")
     if result.failures > 0:
-        raise click.exceptions.Exit(1)
+        raise Exit(1)
 
 
 @djcodemod.command("list")
