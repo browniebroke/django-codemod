@@ -2,6 +2,7 @@ from pathlib import Path
 
 import click
 import pytest
+from click.exceptions import Exit
 from click.testing import CliRunner
 from libcst.codemod import CodemodContext, ParallelTransformResult
 
@@ -145,7 +146,7 @@ def test_call_command_failure(command_instance, mocker):
         successes=0, failures=1, warnings=0, skips=0
     )
 
-    with pytest.raises(SystemExit):
+    with pytest.raises(Exit):
         cli.call_command(command_instance, [Path(".")])
 
 
