@@ -203,7 +203,7 @@ def call_command(command_instance: BaseCodemodCommand, files: list[Path]):
     click.echo(f" - Failed to codemod {result.failures} files.")
     click.echo(f" - {result.warnings} warnings were generated.")
     if result.failures > 0:
-        raise click.exceptions.Exit(1)
+        raise SystemExit(1)
 
 
 @djcodemod.command("list")

@@ -145,7 +145,7 @@ def test_call_command_failure(command_instance, mocker):
         successes=0, failures=1, warnings=0, skips=0
     )
 
-    with pytest.raises(click.exceptions.Exit):
+    with pytest.raises(SystemExit):
         cli.call_command(command_instance, [Path(".")])
 
 

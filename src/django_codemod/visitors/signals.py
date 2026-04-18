@@ -89,7 +89,7 @@ class SignalDisconnectWeakTransformer(BaseDjCodemodTransformer):
                     should_change = True
                 else:
                     updated_args.append(arg)
-                last_comma = arg.comma  # type: ignore
+                last_comma = arg.comma
             if should_change:
                 # Make sure the end of line is formatted as initially
                 updated_args[-1] = updated_args[-1].with_changes(comma=last_comma)
