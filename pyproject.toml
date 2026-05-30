@@ -102,8 +102,8 @@ max_supported_python = "3.14"
 terminal.error-on-warning = true
 
 [tool.pytest]
-minversion = "9.0"
 addopts = [ "-v", "-Wdefault", "--cov=django_codemod", "--cov-report=term-missing:skip-covered" ]
+minversion = "9.0"
 pythonpath = [ "src" ]
 
 [tool.coverage]
@@ -115,10 +115,10 @@ report.exclude_lines = [
 ]
 
 [tool.semantic_release]
-version_toml = [ "pyproject.toml:project.version" ]
 version_variables = [
   "src/django_codemod/__init__.py:__version__",
 ]
+version_toml = [ "pyproject.toml:project.version" ]
 build_command = """
 pip install uv
 uv lock
@@ -128,9 +128,9 @@ uv build
 branches.main.match = "main"
 branches.noop.match = "(?!main$)"
 branches.noop.prerelease = true
+changelog.environment.keep_trailing_newline = true
 changelog.exclude_commit_patterns = [
   "chore.*",
   "ci.*",
   "Merge pull request .*",
 ]
-changelog.environment.keep_trailing_newline = true
