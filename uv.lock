@@ -274,7 +274,7 @@ toml = [
 
 [[package]]
 name = "django-codemod"
-version = "2.4.7"
+version = "2.5.0"
 source = { editable = "." }
 dependencies = [
     { name = "click" },
@@ -302,7 +302,7 @@ docs = [
 [package.metadata]
 requires-dist = [
     { name = "click", specifier = "<8.5" },
-    { name = "libcst", specifier = "==1.9.0" },
+    { name = "libcst", specifier = "==1.9" },
     { name = "pathspec", specifier = ">=0.6,<2" },
     { name = "rich", specifier = ">=10" },
     { name = "rich-click", specifier = ">=1" },

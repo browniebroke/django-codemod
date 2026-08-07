@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v2.5.0 (2026-08-07)
+
+### Features
+
+- Add support for python 3.15 ([`bdd4516`](https://github.com/browniebroke/django-codemod/commit/bdd4516b9d803ec8b223ecc8abb1254548443887))
+
 ## v2.4.7 (2026-07-30)
 
 ### Bug fixes
