@@ -267,7 +267,10 @@ class BaseRenameTransformer(BaseDjCodemodTransformer, ABC):
 
     def resolve_scope(self, node: CSTNode) -> Scope:
         scopes_map = self.context.wrapper.resolve(ScopeProvider)  # type: ignore
-        return scopes_map[node]
+        scope = scopes_map[node]
+        if scope is None:
+            raise KeyError(f"Scope not found for node {node}")
+        return scope
 
     def save_import_scope(self, import_from: ImportFrom) -> None:
         scope = self.resolve_scope(import_from)
