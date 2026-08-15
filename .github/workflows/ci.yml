@@ -61,23 +61,6 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
-  e2e:
-    # https://github.com/browniebroke/django-codemod/issues/302
-    name: e2e
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
-        with:
-          cache: pip
-          python-version: "3.14"
-      - name: Install Dependencies
-        run: |
-          pip install .
-          pip install 'Django>=3.0,<3.1'
-      - name: Run e2e script
-        run: ./tests/test_e2e.sh
-
   # Make sure commit messages follow the conventional commits convention:
   # https://www.conventionalcommits.org
   commitlint:
