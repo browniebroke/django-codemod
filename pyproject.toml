@@ -32,7 +32,7 @@ classifiers = [
   "Topic :: Software Development :: Libraries",
 ]
 dependencies = [
-  "click<8.5",
+  "click<8.6",
   "libcst==1.9",
   "pathspec>=0.6,<2",
   "rich>=10",
