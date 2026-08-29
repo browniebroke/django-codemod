@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v2.5.1 (2026-08-29)
+
+### Bug fixes
+
+- Update dependency click to <8.6 ([`4adec05`](https://github.com/browniebroke/django-codemod/commit/4adec05cba6bd8d50b3249928c28d0febbf72946))
+
 ## v2.5.0 (2026-08-07)
 
 ### Features
