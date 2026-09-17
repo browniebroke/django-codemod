@@ -27,7 +27,7 @@ repos:
     hooks:
       - id: pyproject-fmt
   - repo: https://github.com/astral-sh/uv-pre-commit
-    rev: 0.12.12
+    rev: 0.12.15
     hooks:
       - id: uv-lock
   - repo: https://github.com/pre-commit/mirrors-prettier
@@ -36,7 +36,7 @@ repos:
       - id: prettier
         args: ["--tab-width", "2"]
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.16.6
+    rev: v0.16.8
     hooks:
       - id: ruff
         args: [--fix, --exit-non-zero-on-fix]
@@ -46,7 +46,7 @@ repos:
     hooks:
       - id: codespell
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v4.18.0
+    rev: v4.18.1
     hooks:
       - id: commitizen
         stages: [commit-msg]
