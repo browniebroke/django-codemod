@@ -5,13 +5,13 @@ Inspired or taken from black:
 https://github.com/psf/black
 """
 
-from collections.abc import Iterable, Iterator
+from collections.abc import Collection, Iterable, Iterator
 from pathlib import Path
 
 from pathspec import PathSpec
 
 
-def get_sources(src: Iterable[str]) -> list[Path]:
+def get_sources(src: Collection[str]) -> list[Path]:
     """
     Return a list of sources to codemod.
 
@@ -33,7 +33,7 @@ def get_sources(src: Iterable[str]) -> list[Path]:
     return sorted(sources)
 
 
-def find_project_root(sources: Iterable[str]) -> Path:
+def find_project_root(sources: Collection[str]) -> Path:
     """
     Return a directory containing .git, .hg, or pyproject.toml.
 
