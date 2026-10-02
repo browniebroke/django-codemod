@@ -10,8 +10,11 @@ on:
 jobs:
   hacktoberfest:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
 
     steps:
       - uses: browniebroke/hacktoberfest-labeler-action@2f6920da8cd6b34672115c707ae90f441bf1592a # v2
         with:
-          github_token: ${{ secrets.CPR_GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
