@@ -15,6 +15,7 @@ from libcst import (
     RemovalSentinel,
     RemoveFromParent,
     Return,
+    SimpleString,
 )
 from libcst import matchers as m
 from libcst.codemod.visitors import AddImportsVisitor
@@ -24,6 +25,7 @@ from django_codemod.constants import (
     DJANGO_1_11,
     DJANGO_2_0,
     DJANGO_2_1,
+    DJANGO_3_0,
     DJANGO_3_1,
     DJANGO_4_0,
 )
@@ -213,4 +215,34 @@ class NullBooleanFieldTransformer(BaseFuncRenameTransformer):
         return (
             *node.args,
             parse_arg("null=True"),
+        )
+
+
+class QuerySetDateFieldTransformer(BaseDjCodemodTransformer):
+    """Pass literal field names positionally to `earliest()` and `latest()`."""
+
+    deprecated_in = DJANGO_2_0
+    removed_in = DJANGO_3_0
+
+    def leave_Call(self, original_node: Call, updated_node: Call) -> BaseExpression:
+        if not m.matches(
+            updated_node.func,
+            m.Attribute(attr=m.Name("earliest") | m.Name("latest")),
+        ):
+            return updated_node
+        if len(updated_node.args) != 1:
+            return updated_node
+        arg = updated_node.args[0]
+        if arg.keyword is None or arg.keyword.value != "field_name":
+            return updated_node
+        if not isinstance(arg.value, SimpleString) or not isinstance(
+            arg.value.evaluated_value, str
+        ):
+            self.warn(
+                "Cannot safely rewrite non-literal field_name in earliest()/latest(); "
+                "review this call manually."
+            )
+            return updated_node
+        return updated_node.with_changes(
+            args=[arg.with_changes(keyword=None, equal=MaybeSentinel.DEFAULT)]
         )

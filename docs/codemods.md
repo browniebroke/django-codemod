@@ -46,6 +46,12 @@ Applied by passing the `--removed-in 3.0` or `--deprecated-in 2.0` option:
   `contextlib.ContextDecorator`.
 - Replace `django.utils.decorators.available_attrs()` by its return
   value `functools.WRAPPER_ASSIGNMENTS`.
+- Pass literal string `field_name` arguments to `earliest()` and `latest()`
+  positionally, e.g. `qs.latest(field_name="pub_date")` becomes
+  `qs.latest("pub_date")`. This recognizes method calls by name, as queryset
+  receiver types are not inferred. Non-literal values (including `None`) are
+  left unchanged with a warning for manual review; Django treats `None` as
+  an omitted field name, so simply moving it would change behavior.
 - Replace `HttpRequest.xreadlines()` by iterating over the request.
 
   This codemodder is quite conservative and will only replace function

@@ -5,6 +5,7 @@ from django_codemod.visitors.models import (
     ModelsPermalinkTransformer,
     NullBooleanFieldTransformer,
     OnDeleteTransformer,
+    QuerySetDateFieldTransformer,
 )
 from tests.visitors.base import BaseVisitorTest
 
@@ -382,3 +383,53 @@ class TestNullBooleanFieldTransformer(BaseVisitorTest):
                 is_active = models.BooleanField(null=True)
         """
         self.assertCodemod(before, after)
+
+
+class TestQuerySetDateFieldTransformer(BaseVisitorTest):
+    transformer = QuerySetDateFieldTransformer
+
+    @parameterized.expand([("earliest",), ("latest",)])
+    def test_literal_field(self, method):
+        self.assertCodemod(
+            f"result = Article.objects.{method}(field_name='pub_date')",
+            f"result = Article.objects.{method}('pub_date')",
+        )
+
+    def test_chained_multiline_call(self):
+        self.assertCodemod(
+            """
+            result = Article.objects.filter(published=True).latest(
+                field_name = "pub_date",  # Keep the field comment.
+            )
+            """,
+            """
+            result = Article.objects.filter(published=True).latest(
+                "pub_date",  # Keep the field comment.
+            )
+            """,
+        )
+
+    @parameterized.expand(
+        [
+            ("qs.latest()",),
+            ("qs.earliest('pub_date')",),
+            ("qs.in_bulk(field_name='slug')",),
+            ("latest(field_name='pub_date')",),
+            ("qs.latest(**kwargs)",),
+            ("qs.latest('pub_date', field_name='created')",),
+        ]
+    )
+    def test_other_calls_unchanged(self, source):
+        self.assertCodemod(source, source)
+
+    @parameterized.expand([("None",), ("field",), ("get_field()",), ("b'pub_date'",)])
+    def test_non_literal_requires_review(self, value):
+        source = f"qs.latest(field_name={value})"
+        self.assertCodemod(
+            source,
+            source,
+            expected_warnings=[
+                "Cannot safely rewrite non-literal field_name in earliest()/latest(); "
+                "review this call manually."
+            ],
+        )
