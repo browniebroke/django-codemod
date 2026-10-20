@@ -462,6 +462,8 @@ class TestQuerySetDateFieldTransformer(BaseVisitorTest):
             (" # Before.\n    = # After.\n    ",),
             ("=\n    # On its own line.\n    ",),
             ("=\n    ",),
+            ("= \\\n    ",),
+            (" \\\n    =",),
         ]
     )
     def test_multiline_keyword_requires_review(self, equal):

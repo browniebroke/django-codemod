@@ -14,11 +14,11 @@ from libcst import (
     ImportStar,
     MaybeSentinel,
     Name,
-    ParenthesizedWhitespace,
     RemovalSentinel,
     RemoveFromParent,
     Return,
     SimpleString,
+    SimpleWhitespace,
 )
 from libcst import matchers as m
 from libcst.codemod.visitors import AddImportsVisitor
@@ -247,8 +247,15 @@ class QuerySetDateFieldTransformer(BaseDjCodemodTransformer):
         if len(updated_node.args) != 1:
             return updated_node
         if isinstance(arg.equal, AssignEqual) and (
-            isinstance(arg.equal.whitespace_before, ParenthesizedWhitespace)
-            or isinstance(arg.equal.whitespace_after, ParenthesizedWhitespace)
+            any(
+                not isinstance(whitespace, SimpleWhitespace)
+                or "\n" in whitespace.value
+                or "\r" in whitespace.value
+                for whitespace in (
+                    arg.equal.whitespace_before,
+                    arg.equal.whitespace_after,
+                )
+            )
         ):
             self.warn(
                 "Cannot safely rewrite field_name with comments or line breaks "
