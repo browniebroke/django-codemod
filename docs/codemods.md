@@ -52,6 +52,9 @@ Applied by passing the `--removed-in 3.0` or `--deprecated-in 2.0` option:
   receiver types are not inferred. Non-literal values (including `None`) are
   left unchanged with a warning for manual review; Django treats `None` as
   an omitted field name, so simply moving it would change behavior.
+  Adjacent string literals are also supported. Calls with comments or line
+  breaks around the keyword's `=` are left unchanged with a warning to avoid
+  losing those comments or formatting.
 - Replace `HttpRequest.xreadlines()` by iterating over the request.
 
   This codemodder is quite conservative and will only replace function

@@ -422,14 +422,55 @@ class TestQuerySetDateFieldTransformer(BaseVisitorTest):
     def test_other_calls_unchanged(self, source):
         self.assertCodemod(source, source)
 
-    @parameterized.expand([("None",), ("field",), ("get_field()",), ("b'pub_date'",)])
-    def test_non_literal_requires_review(self, value):
-        source = f"qs.latest(field_name={value})"
+    @parameterized.expand(
+        [
+            (extra_args, value)
+            for extra_args in ("", "'other', ", "**kwargs, ")
+            for value in (
+                "None",
+                "field",
+                "get_field()",
+                "b'pub_date'",
+                "f'{field}'",
+                "'pub_' f'{field}'",
+                "b'pub_' b'date'",
+            )
+        ]
+    )
+    def test_non_literal_requires_review(self, extra_args, value):
+        source = f"qs.latest({extra_args}field_name={value})"
         self.assertCodemod(
             source,
             source,
             expected_warnings=[
                 "Cannot safely rewrite non-literal field_name in earliest()/latest(); "
                 "review this call manually."
+            ],
+        )
+
+    @parameterized.expand([("earliest",), ("latest",)])
+    def test_adjacent_literal_strings(self, method):
+        self.assertCodemod(
+            f"qs.{method}(field_name=('pub_' 'date'))",
+            f"qs.{method}(('pub_' 'date'))",
+        )
+
+    @parameterized.expand(
+        [
+            (" # Before the equals.\n    =",),
+            ("= # After the equals.\n    ",),
+            (" # Before.\n    = # After.\n    ",),
+            ("=\n    # On its own line.\n    ",),
+            ("=\n    ",),
+        ]
+    )
+    def test_multiline_keyword_requires_review(self, equal):
+        source = f"qs.latest(field_name{equal}'pub_date')"
+        self.assertCodemod(
+            source,
+            source,
+            expected_warnings=[
+                "Cannot safely rewrite field_name with comments or line breaks "
+                "around '=' in earliest()/latest(); review this call manually."
             ],
         )

@@ -2,16 +2,19 @@ from collections.abc import Sequence
 
 from libcst import (
     Arg,
+    AssignEqual,
     BaseExpression,
     BaseSmallStatement,
     BaseStatement,
     Call,
+    ConcatenatedString,
     FlattenSentinel,
     FunctionDef,
     ImportFrom,
     ImportStar,
     MaybeSentinel,
     Name,
+    ParenthesizedWhitespace,
     RemovalSentinel,
     RemoveFromParent,
     Return,
@@ -230,17 +233,26 @@ class QuerySetDateFieldTransformer(BaseDjCodemodTransformer):
             m.Attribute(attr=m.Name("earliest") | m.Name("latest")),
         ):
             return updated_node
-        if len(updated_node.args) != 1:
+        arg = find_keyword_arg(updated_node.args, "field_name")
+        if arg is None:
             return updated_node
-        arg = updated_node.args[0]
-        if arg.keyword is None or arg.keyword.value != "field_name":
-            return updated_node
-        if not isinstance(arg.value, SimpleString) or not isinstance(
-            arg.value.evaluated_value, str
-        ):
+        if not isinstance(
+            arg.value, (SimpleString, ConcatenatedString)
+        ) or not isinstance(arg.value.evaluated_value, str):
             self.warn(
                 "Cannot safely rewrite non-literal field_name in earliest()/latest(); "
                 "review this call manually."
+            )
+            return updated_node
+        if len(updated_node.args) != 1:
+            return updated_node
+        if isinstance(arg.equal, AssignEqual) and (
+            isinstance(arg.equal.whitespace_before, ParenthesizedWhitespace)
+            or isinstance(arg.equal.whitespace_after, ParenthesizedWhitespace)
+        ):
+            self.warn(
+                "Cannot safely rewrite field_name with comments or line breaks "
+                "around '=' in earliest()/latest(); review this call manually."
             )
             return updated_node
         return updated_node.with_changes(
