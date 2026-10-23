@@ -29,6 +29,7 @@ from .models import (
     ModelsPermalinkTransformer,
     NullBooleanFieldTransformer,
     OnDeleteTransformer,
+    QuerySetDateFieldTransformer,
 )
 from .os_utils import AbsPathTransformer
 from .paginator import QuerySetPaginatorTransformer
@@ -88,6 +89,7 @@ __all__ = (
     "OnDeleteTransformer",
     "PrettyNameTransformer",
     "QueryEmptyResultSetTransformer",
+    "QuerySetDateFieldTransformer",
     "QuerySetPaginatorTransformer",
     "RenderToResponseTransformer",
     "RequestContextTransformer",
