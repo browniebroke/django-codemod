@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v2.6.0 (2026-11-06)
+
+### Features
+
+- Migrate `field_name` arguments for `queryset`'s `earliest()` and `latest()` ([`fe49ff0`](https://github.com/browniebroke/django-codemod/commit/fe49ff00821d9844fcacbb6d7e94cb7fee16c64d))
+
 ## v2.5.1 (2026-08-29)
 
 ### Bug fixes
