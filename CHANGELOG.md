@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v3.0.0 (2026-11-07)
+
+### Features
+
+- Drop support for python 3.10 ([`edd29e8`](https://github.com/browniebroke/django-codemod/commit/edd29e865d3aca68b0e9aa8f999ab45f362f8a33))
+
 ## v2.6.0 (2026-11-06)
 
 ### Features
