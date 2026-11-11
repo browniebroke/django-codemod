@@ -9,7 +9,7 @@ class BaseVisitorTest(CodemodTest):
 
     transformer: type[BaseDjCodemodTransformer]
 
-    def TRANSFORM(  # ty: ignore[invalid-attribute-override]
+    def TRANSFORM(  # ty: ignore[incompatible-attribute-override]
         self, context: CodemodContext
     ) -> BaseCodemodCommand:
         """Create a command for the transformer under test."""
