@@ -182,6 +182,9 @@ def run(
     click.echo(f"Running codemods: {', '.join(m.__name__ for m in codemodders_list)}")
     command_instance = BaseCodemodCommand(codemodders_list, CodemodContext())
     files = get_sources(src)
+    if not files:
+        click.echo("No Python files found in the given paths.")
+        raise Exit(1)
     call_command(command_instance, files)
 
 

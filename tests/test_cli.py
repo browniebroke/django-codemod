@@ -45,6 +45,20 @@ def test_no_mods_selected(cli_runner):
     assert "No codemods were selected" in result.output
 
 
+def test_no_python_files_found(cli_runner):
+    """Should exit cleanly when no Python files are found."""
+    with cli_runner.isolated_filesystem():
+        Path("notes.txt").write_text("hello")
+
+        result = cli_runner.invoke(
+            cli.djcodemod, ["run", "--removed-in", "4.0", "notes.txt"]
+        )
+
+    assert result.exit_code == 1
+    assert "No Python files found" in result.output
+    assert "Must have at least one job" not in result.output
+
+
 def test_help(cli_runner):
     """The --help option should be available."""
     help_result = cli_runner.invoke(cli.djcodemod, ["--help"])
